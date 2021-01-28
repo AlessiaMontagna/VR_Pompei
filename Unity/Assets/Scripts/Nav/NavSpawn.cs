@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NavSpawn : MonoBehaviour
 {
+    [SerializeField] private string _type;
     // Start is called before the first frame update
     void Start(){}
+    public string GetType(){return _type;}
 }
