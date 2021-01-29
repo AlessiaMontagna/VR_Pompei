@@ -31,16 +31,14 @@ public class NavSpawner : MonoBehaviour
 
     void Start()
     {
-        // PREFABS check
+        // check PREFABS lists
         if(_schiavoPrefabs.Count <= 0 || _mercantePrefabs.Count <= 0 || _nobilePrefabs.Count <= 0 || _guardPrefabs.Count <= 0 || /*_dogPrefabs.Count <= 0 || */_birdPrefabs.Count <= 0) Debug.LogError("AT LEAST 1 PREFAB PER TYPE MUST BE DEFINED");
         // get SPAWNS
         foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "Spawn")){_spawns.Add(item.transform.position);}
         // spawn guards in STOPS
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "GuardStop"))
-            SpawnAgent(false, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Stop", item.transform.position, item.transform.rotation, null, null);
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "GuardStop")){SpawnAgent(false, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Stop", item.transform.position, item.transform.rotation, null, null);}
         // spawn mercante in STOPS
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "MercanteStop"))
-            SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "MercanteStop")){SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);}
         // spawn groups in STOPS
         foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "PeopleGroup"))
         {
@@ -56,16 +54,16 @@ public class NavSpawner : MonoBehaviour
                 else SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Talk", position, Quaternion.identity, null, item.gameObject);
             }
         }
-        // TARGETS
+        // TARGETS 
         foreach (var item in GameObject.FindObjectsOfType<NavTarget>().Where(i => i != null))
         {
-            if(_targets.TryGetValue(item.GetComponent<NavSpawn>().GetType(), out var path)) path.Add(item.transform.position);
-            else _targets.Add(item.GetComponent<NavSpawn>().GetType(), new List<Vector3>{item.transform.position});
+            if(_targets.TryGetValue(item.GetComponent<NavTarget>().GetType(), out var path)) path.Add(item.transform.position);
+            else _targets.Add(item.GetComponent<NavTarget>().GetType(), new List<Vector3>{item.transform.position});
         }
         // SET agents total numbers
         if(_nPeople < 0 || _nPeople > _peopleMax) _nPeople = Random.Range(7, _peopleMax+1);
         if(_nGuards < 0 || _nGuards > _guardsMax) _nGuards = Random.Range(2, _guardsMax+1);
-        //if(_nDogs < 0 || _nDogs > _dogsMax) _nDogs = Random.Range(1, _dogsMax+1);
+        if(_nDogs < 0 || _nDogs > _dogsMax) _nDogs = Random.Range(1, _dogsMax+1);
         if(_nBirds < 0 || _nBirds > _dogsMax) _nBirds = Random.Range(1, _birdsMax+1);
     }
 
