@@ -34,31 +34,38 @@ public class NavSpawner : MonoBehaviour
         // check PREFABS lists
         if(_schiavoPrefabs.Count <= 0 || _mercantePrefabs.Count <= 0 || _nobilePrefabs.Count <= 0 || _guardPrefabs.Count <= 0 || /*_dogPrefabs.Count <= 0 || */_birdPrefabs.Count <= 0) Debug.LogError("AT LEAST 1 PREFAB PER TYPE MUST BE DEFINED");
         // get SPAWNS
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "Spawn")){_spawns.Add(item.transform.position);}
-        // spawn guards in STOPS
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "GuardStop")){SpawnAgent(false, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Stop", item.transform.position, item.transform.rotation, null, null);}
-        // spawn mercante in STOPS
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "MercanteStop")){SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);}
-        // spawn groups in STOPS
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetType() == "PeopleGroup"))
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "Spawn")){_spawns.Add(item.transform.position);}
+        // STOPS guards 
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "GuardStop")){SpawnAgent(false, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Stop", item.transform.position, item.transform.rotation, null, null);}
+        // STOPS mercanti
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "MercanteStop")){SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);}
+        // STOPS balcony
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "BalconyStop"))
+        {
+            if(Random.Range(0f, 1f) < 0.3f){SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Stop", item.transform.position, item.transform.rotation, null, null);}
+            else{SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);}
+        }
+        // STOPS groups
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "GroupStop"))
         {
             // create group
             int count = Random.Range(2, 5);
-            float sum = 360f;
             for (int i = 0; i < count; i++)
             {
-                Vector3 position; // position = center + rotation angle * forward direction * radius
-                do{position = item.transform.position + Quaternion.AngleAxis(i*Random.Range(25f, sum/(float)count), Vector3.up) * Vector3.forward * Random.Range(1f, 1.1f);}
+                Vector3 position;
+                do{var random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.transform.position + new Vector3(random.x, 0, random.y);}
                 while(!UnityEngine.AI.NavMesh.SamplePosition(position, out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas));
-                if(Random.Range(0f, 1f) < 0.3f) SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Talk", position, Quaternion.identity, null, item.gameObject);
-                else SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Talk", position, Quaternion.identity, null, item.gameObject);
+                GameObject agent;
+                if(Random.Range(0f, 1f) < 0.3f) agent = SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Talk", position,  Quaternion.identity, null, item.gameObject);
+                else agent = SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Talk", position, Quaternion.identity, null, item.gameObject);
+                agent.transform.rotation = Quaternion.LookRotation(item.transform.position-agent.transform.position, Vector3.up);
             }
         }
         // TARGETS 
         foreach (var item in GameObject.FindObjectsOfType<NavTarget>().Where(i => i != null))
         {
-            if(_targets.TryGetValue(item.GetComponent<NavTarget>().GetType(), out var path)) path.Add(item.transform.position);
-            else _targets.Add(item.GetComponent<NavTarget>().GetType(), new List<Vector3>{item.transform.position});
+            if(_targets.TryGetValue(item.GetComponent<NavTarget>().GetRole(), out var path)) path.Add(item.transform.position);
+            else _targets.Add(item.GetComponent<NavTarget>().GetRole(), new List<Vector3>{item.transform.position});
         }
         // SET agents total numbers
         if(_nPeople < 0 || _nPeople > _peopleMax) _nPeople = Random.Range(7, _peopleMax+1);

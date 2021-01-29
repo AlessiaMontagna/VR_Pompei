@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NavTarget : MonoBehaviour
 {
-    [SerializeField] private string _type;
+    [SerializeField] private string _role;
     // Start is called before the first frame update
     void Start(){}
-    public string GetType(){return _type;}
+    public string GetRole(){return _role;}
 }
