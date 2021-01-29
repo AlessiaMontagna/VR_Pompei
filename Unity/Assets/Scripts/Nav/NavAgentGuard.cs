@@ -10,8 +10,8 @@ public class NavAgentGuard : MonoBehaviour
     private Animator _animator;
 
     private List<Vector3> _targets = new List<Vector3>();
-    protected enum Behaviours{Stop, Talk, Move, Path, Interact}
-    private Behaviours behaviour = Behaviours.Stop;
+    protected enum Behaviours{Idle, Talk, Move, Path, Interact}
+    private Behaviours behaviour = Behaviours.Idle;
 
     void Start()
     {
@@ -26,30 +26,21 @@ public class NavAgentGuard : MonoBehaviour
         bool b = bools[Random.Range(0, bools.Count)];
         switch (behaviour)
         {
-            case Behaviours.Stop: // do nothing
+            case Behaviours.Idle: // idle
                 break;
             case Behaviours.Talk:
-                _animator.SetBool("WalkState", false);
-                _animator.SetBool("TalkState", true);
-                _animator.SetInteger("TalkAnimation", Random.Range(0, 2));
                 break;
             case Behaviours.Move: // reaches a position and destroys itself
-                _animator.SetBool("WalkState", true);
-                _animator.SetBool("TalkState", false);
                 if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.walkSpeed)_animator.SetBool("Run", false);
                 else if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.runSpeed)_animator.SetBool("Run", true);
                 _navAgent.SetDestination(_targets[Random.Range(0, _targets.Count)], b, true);
                 break;
             case Behaviours.Path: // follows the path
-                _animator.SetBool("WalkState", true);
-                _animator.SetBool("TalkState", false);
                 if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.walkSpeed)_animator.SetBool("Run", false);
                 else if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.runSpeed)_animator.SetBool("Run", true);
                 _navAgent.SetDestination(_targets[Random.Range(0, _targets.Count)], b, false);
                 break;
             case Behaviours.Interact: // interacts with the user and goes back to the previous state
-                _animator.SetBool("WalkState", false);
-                _animator.SetBool("TalkState", true);
                 _navAgent.ResetState();
                 break;
             default: throw new System.ArgumentOutOfRangeException();
@@ -71,8 +62,8 @@ public class NavAgentGuard : MonoBehaviour
     {
         switch (b)
         {
-            case "Stop":
-                behaviour = Behaviours.Stop;
+            case "Idle":
+                behaviour = Behaviours.Idle;
                 break;
             case "Talk":
                 behaviour = Behaviours.Talk;
@@ -84,7 +75,7 @@ public class NavAgentGuard : MonoBehaviour
                 behaviour = Behaviours.Path;
                 break;
             case "Interact":
-                behaviour = Behaviours.Path;
+                behaviour = Behaviours.Interact;
                 break;
             default: throw new System.ArgumentOutOfRangeException();
         }

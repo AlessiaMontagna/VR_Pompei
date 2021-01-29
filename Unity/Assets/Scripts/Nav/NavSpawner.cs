@@ -35,15 +35,21 @@ public class NavSpawner : MonoBehaviour
         if(_schiavoPrefabs.Count <= 0 || _mercantePrefabs.Count <= 0 || _nobilePrefabs.Count <= 0 || _guardPrefabs.Count <= 0 || /*_dogPrefabs.Count <= 0 || */_birdPrefabs.Count <= 0) Debug.LogError("AT LEAST 1 PREFAB PER TYPE MUST BE DEFINED");
         // get SPAWNS
         foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "Spawn")){_spawns.Add(item.transform.position);}
-        // STOPS guards 
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "GuardStop")){SpawnAgent(false, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Stop", item.transform.position, item.transform.rotation, null, null);}
-        // STOPS mercanti
-        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "MercanteStop")){SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);}
-        // STOPS balcony
+        // get TARGETS 
+        foreach (var item in GameObject.FindObjectsOfType<NavTarget>().Where(i => i != null))
+        {
+            if(_targets.TryGetValue(item.GetComponent<NavTarget>().GetRole(), out var path)) path.Add(item.transform.position);
+            else _targets.Add(item.GetComponent<NavTarget>().GetRole(), new List<Vector3>{item.transform.position});
+        }
+        // spawn STOPS guards 
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "GuardStop")){SpawnAgent(false, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Idle", item.transform.position, item.transform.rotation, null, null);}
+        // spawn STOPS mercanti
+        foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "MercanteStop")){SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Idle", item.transform.position, item.transform.rotation, null, null);}
+        // spawn STOPS balcony
         foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "BalconyStop"))
         {
-            if(Random.Range(0f, 1f) < 0.3f){SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Stop", item.transform.position, item.transform.rotation, null, null);}
-            else{SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Stop", item.transform.position, item.transform.rotation, null, null);}
+            if(Random.Range(0f, 1f) < 0.3f){SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Idle", item.transform.position, item.transform.rotation, null, null);}
+            else{SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Idle", item.transform.position, item.transform.rotation, null, null);}
         }
         // STOPS groups
         foreach (var item in GameObject.FindObjectsOfType<NavSpawn>().Where(i => i != null && i.GetComponent<NavSpawn>().GetRole() == "GroupStop"))
@@ -61,12 +67,6 @@ public class NavSpawner : MonoBehaviour
                 agent.transform.rotation = Quaternion.LookRotation(item.transform.position-agent.transform.position, Vector3.up);
             }
         }
-        // TARGETS 
-        foreach (var item in GameObject.FindObjectsOfType<NavTarget>().Where(i => i != null))
-        {
-            if(_targets.TryGetValue(item.GetComponent<NavTarget>().GetRole(), out var path)) path.Add(item.transform.position);
-            else _targets.Add(item.GetComponent<NavTarget>().GetRole(), new List<Vector3>{item.transform.position});
-        }
         // SET agents total numbers
         if(_nPeople < 0 || _nPeople > _peopleMax) _nPeople = Random.Range(7, _peopleMax+1);
         if(_nGuards < 0 || _nGuards > _guardsMax) _nGuards = Random.Range(2, _guardsMax+1);
@@ -77,7 +77,11 @@ public class NavSpawner : MonoBehaviour
     void Update()
     {
         // SPAWN agents if there are less then defined in Start()
-        while(_nGuards > _guards){SpawnAgent(true, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Path", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, _targets.ElementAt(Random.Range(0, _targets.Count)).Value, null);}
+        var guard = _guardPrefabs[Random.Range(0, _guardPrefabs.Count)];
+        var spawn = _spawns[Random.Range(0, _spawns.Count)];
+        var target = _targets.ElementAt(Random.Range(0, _targets.Count)).Value;
+        while(_nGuards > _guards){SpawnAgent(true, guard, "NavAgentGuard", "Path", spawn, Quaternion.identity, target, null);}
+        //while(_nGuards > _guards){SpawnAgent(true, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Path", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, _targets.ElementAt(Random.Range(0, _targets.Count)).Value, null);}
         while(_nPeople > _people)
         {
             // to spawn people must choose from schiavi mercanti e 
