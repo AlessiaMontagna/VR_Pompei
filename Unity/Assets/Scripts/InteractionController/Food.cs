@@ -1,25 +1,33 @@
-﻿using System.Collections;
+﻿using NUnit.Framework.Internal;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Food : MonoBehaviour
 {
-    [SerializeField] private Color highlightColor;
-    [SerializeField] private Transform mele;
-    void Start()
+    [SerializeField] private string foodType;
+    [SerializeField] private FoodManager foodmanager;
+    [SerializeField] private Text dialogueText;
+    public void getFood(GameObject caller)
     {
-        highlightColor = new Color(0.3962264f, 0.3962264f, 0.3962264f, 1);
-        gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        
-    }
-    // Start is called before the first frame update
-    public void getFood()
-    {
-        Destroy(gameObject);
-        for( int i = 0; i < mele.childCount; i++)
+        if(foodmanager.getCounter(foodType) < foodmanager.getMax(foodType))
         {
-            mele.GetChild(i).GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject);
+            foodmanager.addCounter(foodType);
+            foodmanager.CheckMissionComplete();
         }
-        
+        else
+        {
+            StartCoroutine(startDialogue());
+            //TODO: Play audio tizio
+        }
+    }
+
+    private IEnumerator startDialogue()
+    {
+        dialogueText.text = "Non posso prendere più cose";
+        yield return new WaitForSeconds(2);
+        dialogueText.text = "";
     }
 }

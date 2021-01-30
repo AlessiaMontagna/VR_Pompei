@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+[RequireComponent(typeof(Food))]
 public class FoodInteractive : Interattivo
 {
     [SerializeField] private Food food;
@@ -20,7 +20,7 @@ public class FoodInteractive : Interattivo
     
     public override void Interact(GameObject caller)
     {
-        food.getFood();
+        food.getFood(caller);
     }
 
     public override void UITextOn()

@@ -55,6 +55,5 @@ public class Schiavo : MonoBehaviour
         player.transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
         player.transform.rotation = gameObject.transform.rotation;
         Destroy(gameObject);
-
     }
 }
