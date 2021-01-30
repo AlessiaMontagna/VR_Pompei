@@ -14,7 +14,7 @@ public class NavSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> _birdPrefabs = new List<GameObject>();
     [SerializeField] private int _nGuards;
     [SerializeField] private int _nPeople;
-    [SerializeField] private int _nDogs = 0;
+    [SerializeField] private int _nDogs;
     [SerializeField] private int _nBirds;
 
     private int _people = 0;
@@ -77,19 +77,14 @@ public class NavSpawner : MonoBehaviour
     void Update()
     {
         // SPAWN agents if there are less then defined in Start()
-        var guard = _guardPrefabs[Random.Range(0, _guardPrefabs.Count)];
-        var spawn = _spawns[Random.Range(0, _spawns.Count)];
-        var target = _targets.ElementAt(Random.Range(0, _targets.Count)).Value;
-        while(_nGuards > _guards){SpawnAgent(true, guard, "NavAgentGuard", "Path", spawn, Quaternion.identity, target, null);}
-        //while(_nGuards > _guards){SpawnAgent(true, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Path", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, _targets.ElementAt(Random.Range(0, _targets.Count)).Value, null);}
+        while(_nGuards > _guards){SpawnAgent(true, _guardPrefabs[Random.Range(0, _guardPrefabs.Count)], "NavAgentGuard", "Path", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, _targets.ElementAt(Random.Range(0, _targets.Count)).Value, null);}
         while(_nPeople > _people)
         {
-            // to spawn people must choose from schiavi mercanti e 
             _targets.TryGetValue("Target", out var targets);
             float random = Random.Range(0f, 1f);
-            if(random < 0.2f) SpawnAgent(false, _schiavoPrefabs[Random.Range(0, _schiavoPrefabs.Count)], "NavAgentSchiavo", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);
-            else if(random < 0.4f) SpawnAgent(false, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);
-            else SpawnAgent(false, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);
+            if(random < 0.2f) SpawnAgent(true, _schiavoPrefabs[Random.Range(0, _schiavoPrefabs.Count)], "NavAgentSchiavo", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);
+            else if(random < 0.4f) SpawnAgent(true, _mercantePrefabs[Random.Range(0, _mercantePrefabs.Count)], "NavAgentMercante", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);
+            else SpawnAgent(true, _nobilePrefabs[Random.Range(0, _nobilePrefabs.Count)], "NavAgentNobile", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);
         }
         while(_nDogs > _dogs){_targets.TryGetValue("Target", out var targets);SpawnAgent(true, _dogPrefabs[Random.Range(0, _dogPrefabs.Count)], "NavAgentDog", "Move", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);}
         while(_nBirds > _birds){_targets.TryGetValue("Target", out var targets);SpawnAgent(true, _birdPrefabs[Random.Range(0, _birdPrefabs.Count)], "NavAgentBird", "Path", _spawns[Random.Range(0,_spawns.Count)], Quaternion.identity, targets, null);}
