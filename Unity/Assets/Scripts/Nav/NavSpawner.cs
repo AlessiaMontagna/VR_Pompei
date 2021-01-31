@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum Characters{Guard, Schiavo, Mercante, Patrizio, Patrizia};
+
 public class NavSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _guardPrefabs = new List<GameObject>();
