@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class NavAgent<T>
+public class NavAgent
 {
-    private GameObject _owner;
-    private FiniteStateMachine<T> _stateMachine;
+    private Npc _owner;
+    private FiniteStateMachine<Npc> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
 
     public readonly float walkSpeed = 1.5f;
@@ -17,10 +17,10 @@ public class NavAgent<T>
 
     private List<Vector3> _targets = new List<Vector3>();
 
-    public NavAgent(GameObject owner, FiniteStateMachine<T> stateMachine)
+    public NavAgent(Npc owner)
     {
         _owner = owner;
-        _stateMachine = stateMachine;
+        _stateMachine = new FiniteStateMachine<Npc>(_owner);
         _navMeshAgent = _owner.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         // Settings
@@ -94,7 +94,7 @@ public class NavAgent<T>
 
     private void DestroyOwner()
     {
-        GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.GetComponent<MonoBehaviour>().GetType().ToString());
+        GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.GetCharacter());
         GameObject.Destroy(_owner);
     }
 }

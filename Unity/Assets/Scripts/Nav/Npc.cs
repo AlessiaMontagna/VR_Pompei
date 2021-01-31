@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+public enum Characters{Guard, Schiavo, Mercante, Patrizio, Patrizia};
 
-public class NavAgentPatrizio : MonoBehaviour
+public class Npc : MonoBehaviour
 {
-    private NavAgent<NavAgentPatrizio> _navAgent;
+    private NavAgent _navAgent;
     private Animator _animator;
+    private Characters character;
 
     void Awake()
     {
-        _navAgent = new NavAgent<NavAgentPatrizio>(gameObject, new FiniteStateMachine<NavAgentPatrizio>(gameObject));
+        _navAgent = new NavAgent(this);
         //_animator = gameObject.GetComponent<Animator>();
     }
 
@@ -31,6 +33,10 @@ public class NavAgentPatrizio : MonoBehaviour
         //else if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.runSpeed)_animator.SetBool("Run", true);
         _navAgent.Tik();
     }
+
+    public void SetCharacter(Characters c) => character = c;
+
+    public Characters GetCharacter(){return character;}
 
     public void SetState(string statename) => _navAgent.SetState(statename);
 

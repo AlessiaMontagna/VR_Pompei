@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class FiniteStateMachine<T>
 {
-    private GameObject _owner;
+    private Npc _owner;
     private State _currentState;
     private State _previousState;
     private Dictionary<string, List<Transition>> _transitions = new Dictionary<string, List<Transition>>();
     private List<Transition> _currentTransitions = new List<Transition>();
 
-    public FiniteStateMachine(GameObject owner){_owner = owner;}
+    public FiniteStateMachine(Npc owner){_owner = owner;}
 
     public void Tik()
     {
@@ -69,11 +69,11 @@ public class State
 {
     private string _name;
     public string Name => _name;
-    private GameObject _owner;
+    private Npc _owner;
     public Action Enter { get; }
     public Action Tik { get; }
     public Action Exit { get; }
-    public State(string name, GameObject owner, Action enter, Action tik, Action exit)
+    public State(string name, Npc owner, Action enter, Action tik, Action exit)
     {
         _name = name;
         _owner = owner;
