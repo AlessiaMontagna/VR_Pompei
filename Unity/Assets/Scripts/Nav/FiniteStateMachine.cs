@@ -24,6 +24,7 @@ public class FiniteStateMachine<T>
     public void SetState(State state)
     {
         if(state == _currentState) return;
+        //Debug.Log($"{_owner.GetComponent<MonoBehaviour>().GetType().ToString()} switching from {_currentState?.Name} to {state.Name}");
         _previousState = _currentState;
         _currentState?.Exit();
         _currentState = state;
@@ -47,14 +48,8 @@ public class FiniteStateMachine<T>
 
     private State GetNextState()
     {
-        if(_currentTransitions == null)
-            Debug.LogError($"Current State {_currentState.Name} has NO transitions");
-
-        foreach (Transition transition in _currentTransitions)
-        {
-            if (transition.Condition())
-                return transition.NextState;
-        }
+        if(_currentTransitions == null) Debug.LogError($"Current State {_currentState.Name} has NO transitions");
+        foreach (Transition transition in _currentTransitions){if(transition.Condition())return transition.NextState;}
         return null;
     }
 }

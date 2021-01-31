@@ -45,7 +45,7 @@ public class NavSpawner : MonoBehaviour
                 if(_paths.TryGetValue(role, out var list)) list.Add(new Vector3(item.transform.position.x, 0, item.transform.position.z));
                 else _paths.Add(role, new List<Vector3>{new Vector3(item.transform.position.x, 0, item.transform.position.z)});
             }
-        }
+        }/*
         // spawn STOPS guards
         if(!_stops.TryGetValue("GuardStop", out var stops)) Debug.LogError("GUARD STOPS MISSING IN SPAWN LIST");
         else foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, _guardPrefabs.ElementAt(Random.Range(0, _guardPrefabs.Count)), "NavAgentGuard", "Idle", item.position, item.rotation, null);}
@@ -75,7 +75,7 @@ public class NavSpawner : MonoBehaviour
                 if(Random.Range(0f, 1f) < 0.3f) agent = SpawnAgent(false, _mercantePrefabs.ElementAt(Random.Range(0, _mercantePrefabs.Count)), "NavAgentMercante", "Talk", position,  rotation, null);
                 else agent = SpawnAgent(false, _nobilePrefabs.ElementAt(Random.Range(0, _nobilePrefabs.Count)), "NavAgentNobile", "Talk", position, rotation, null);
             }
-        }
+        }*/
         // SET agents total numbers
         if(_nPeople < 0 || _nPeople > MAXPEOPLE) _nPeople = Random.Range(7, MAXPEOPLE+1);
         if(_nGuards < 0 || _nGuards > MAXGUARDS) _nGuards = Random.Range(2, MAXGUARDS+1);
