@@ -13,13 +13,17 @@ public class NavSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> _mercantePrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _patrizioPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _patriziaPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _birdsPrefabs = new List<GameObject>();
     [SerializeField] private int _nGuards;
     [SerializeField] private int _nPeople;
+    [SerializeField] private int _nFlocks;
     
     private int _people = 0;
     private int _guards = 0;
-    private readonly int MAXPEOPLE = 15;
-    private readonly int MAXGUARDS = 7;
+
+    readonly int MAXPEOPLE = 15;
+    readonly int MAXGUARDS = 7;
+    readonly int MAXFLOCKS = 10;
 
     private Dictionary<Characters, List<GameObject>> _prefabs = new Dictionary<Characters, List<GameObject>>();
     private Dictionary<string, List<Transform>> _stops = new Dictionary<string, List<Transform>>();
@@ -50,14 +54,11 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // spawn STOPS guards
-        if(!_stops.TryGetValue("GuardStop", out var stops) || !_prefabs.TryGetValue(Characters.Guard, out var prefabs))Debug.LogError("GUARD PREFAB OR STOPS ERROR");
-        else foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guard, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue("GuardStop", out var stops) && _prefabs.TryGetValue(Characters.Guard, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guard, "Idle", item.position, item.rotation, null);}
         // spawn STOPS mercanti
-        if(!_stops.TryGetValue("MercanteStop", out stops) || !_prefabs.TryGetValue(Characters.Mercante, out prefabs))Debug.LogError("MERCANTI PREFAB OR STOPS ERROR");
-        else foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue("MercanteStop", out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);}
         // spawn STOPS balcony
-        if(!_stops.TryGetValue("BalconyStop", out stops)) Debug.LogError("BALCONY PREFAB OR STOPS ERROR");
-        else foreach (var item in stops.Where(i => i != null))
+        if(_stops.TryGetValue("BalconyStop", out stops)) foreach (var item in stops.Where(i => i != null))
         {
             // TODO: POSE
             Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guard || character == Characters.Schiavo);
@@ -65,8 +66,7 @@ public class NavSpawner : MonoBehaviour
             SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Idle", item.position, item.rotation, null);
         }
         // STOPS groups
-        if(!_stops.TryGetValue("GroupStop", out stops)) Debug.LogError("GROUP STOPS MISSING IN SPAWN LIST");
-        else foreach (var item in stops.Where(i => i != null))
+        if(_stops.TryGetValue("GroupStop", out stops)) foreach (var item in stops.Where(i => i != null))
         {
             Vector3 position;
             Quaternion rotation;
@@ -83,7 +83,26 @@ public class NavSpawner : MonoBehaviour
         }
         // SET agents total numbers
         if(_nPeople < 0 || _nPeople > MAXPEOPLE) _nPeople = Random.Range(7, MAXPEOPLE+1);
-        if(_nGuards < 0 || _nGuards > MAXGUARDS) _nGuards = Random.Range(2, MAXGUARDS+1);
+        if(_nGuards < 0 || _nGuards > MAXGUARDS) _nGuards = Random.Range(3, MAXGUARDS+1);
+        if(_nFlocks < 0 || _nFlocks > MAXFLOCKS) _nFlocks = Random.Range(4, MAXFLOCKS+1);
+        for (int i = 0; i < _nFlocks; i++)
+        {
+            int nSeagulls = Random.Range(1, MAXFLOCKS+1)-1;
+            var prefab = _birdsPrefabs.ElementAt(Random.Range(0, _birdsPrefabs.Count));
+
+            GameObject home = new GameObject("flockofbirds");
+            home.transform.parent = gameObject.transform;
+
+            GameObject flyingTarget = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            flyingTarget.transform.parent = home.transform;
+            
+            for (int j = 0; j < nSeagulls; j++)
+            {
+                GameObject seagull = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                seagull.transform.parent = home.transform;
+                seagull.GetComponent<RandomFlyer>().SetFlyingTarget(flyingTarget.transform);
+            }
+        }
     }
 
     void Update()

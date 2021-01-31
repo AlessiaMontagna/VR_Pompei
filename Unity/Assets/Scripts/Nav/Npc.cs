@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Npc : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
+    
     private NavAgent _navAgent;
     private Animator _animator;
     private Characters character;

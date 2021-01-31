@@ -30,9 +30,9 @@ public class NavAgent
 
         // Basic states
         State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
-        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
         State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationPath();}, () => {});
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationMove();}, () => {});
+        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {Talk();}, () => {});
         State interact = AddState("Interact", () => {/*TODO:*/}, () => {/*TODO:*/}, () => {_stateMachine.ResetState();});
 
         // Basic transitions
@@ -73,7 +73,7 @@ public class NavAgent
     private void NextDestinationMove()
     {
         if(!DestinationReached())return;
-        if(_targets.Count == 0){DestroyOwner();return;}
+        if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.GetCharacter());GameObject.Destroy(_owner);;return;}
         Vector3 _destination;
         if(_targets.Count == 1)_destination = _targets.First();
         else _destination = _targets.ElementAt(Random.Range(0, _targets.Count-1));
@@ -85,16 +85,30 @@ public class NavAgent
 
     private void NextDestinationPath()
     {
-        if(_targets.Count == 0)Debug.LogError("NO PATH DEFINED");
+        if(_targets.Count == 0)Debug.LogError("PATH IS UNDEFINED");
         if(!DestinationReached())return;
         if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
-    private void DestroyOwner()
-    {
-        GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.GetCharacter());
-        GameObject.Destroy(_owner);
+    public void Talk()
+    {/*
+        int index = Random.Range(1,4);
+        if (!audioSource.isPlaying)
+        {
+            switch (caller.tag)
+            {
+                case "Player_Nobile":
+                    //Audio nobili: prendi negli asset la stringa corrispondente a "Nobile_NobileM + (index)"
+                    audioSource.clip = Resources.Load<AudioClip>("Talking/Nobile_NobileM" + index.ToString()); 
+                    audioSource.Play();
+                    break;
+                case "Player_Schiavo":
+                    // AUdio schiavo: prendi negli asset la stringa corrispondente a "Schiavo_NobileM + (index)"
+                    audioSource.clip = Resources.Load<AudioClip>("Talking/Schiavo_NobileM" + index.ToString());
+                    break;
+            }
+        }*/
     }
 }
