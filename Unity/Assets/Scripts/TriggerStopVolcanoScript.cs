@@ -4,29 +4,27 @@ using UnityEngine;
 
 public class TriggerStopVolcanoScript : MonoBehaviour
 {
-    LapilSpawnerScript lapilSpawner;
-    public GameObject player;
+    public LapilSpawnerScript lapils;
+    public GameObject player;    
     Collider player_collider;
-    // Start is called before the first frame update
-    void Start()
-    {
-        lapilSpawner = GameObject.FindGameObjectWithTag("TriggerStartVolcano").GetComponent<LapilSpawnerScript>();
-        if(player != null)
-            player_collider = player.gameObject.GetComponent<Collider>();
-        else
-            return;
-    }
+    private bool stop = false;
 
-    // Update is called once per frame
     void OnTriggerEnter(Collider other) 
     {
-        if(other == player_collider)
+        if(other.gameObject == player && stop == false)
         {
-            Debug.Log("Entered the Trigger");
-            lapilSpawner.kill_player(player);
+            Debug.Log("Player entered the Trigger: STOP Lapills!!!");
+            stop = true;
+            Debug.Log("Stopping lappils...");
+            lapils.kill_player(player);
         }
         else
             return;
         
+    }
+
+    public bool getState()
+    {
+        return stop;
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ImpactAudioScript : MonoBehaviour
 {
+    public ParticleSystem crater;
+    public ParticleSystem lapillus;
     public AudioClip ImpactAudio;
     AudioSource audio;
-    public bool AlreadyPlayed = false;
+    public bool AlreadyPlayed = false;    
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +24,11 @@ public class ImpactAudioScript : MonoBehaviour
             audio.PlayOneShot(ImpactAudio);
             AlreadyPlayed = true;
         }
+    }
+
+    public void StopParticles()
+    {
+        crater.Stop();
+        lapillus.Stop();
     }
 }

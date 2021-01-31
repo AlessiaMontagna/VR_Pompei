@@ -13,6 +13,11 @@ public class ProjectileMoveScript : MonoBehaviour
 
     private Rigidbody rb;
 
+    public float GetSpeed()
+    {
+        return Speed;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,15 +42,22 @@ public class ProjectileMoveScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) 
     {
-        Speed = 0;
+        Speed = 0;   
+        
+             
 
-        ContactPoint contact = collision.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        ContactPoint contact = collision.contacts[0]; //Quaternion.identity
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.up);//, contact.point);
         Vector3 pos = contact.point;
 
         if(Impactprefab != null)
         {
             var impactVFX = Instantiate(Impactprefab, pos, rot) as GameObject;
+            //Check if lapil hit the floor
+            if(collision.gameObject.tag != "Floor")
+            {            
+                impactVFX.GetComponent<ImpactAudioScript>().StopParticles();
+            }
             Destroy (impactVFX, 5);
         }
 

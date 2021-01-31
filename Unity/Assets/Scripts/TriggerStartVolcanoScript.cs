@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class TriggerStartVolcanoScript : MonoBehaviour
 {
-    LapilSpawnerScript lapilSpawner;
+    public LapilSpawnerScript lapils;    
+    public TriggerStopVolcanoScript trig_stop;
     public GameObject player;
-    Collider player_collider;
-    // Start is called before the first frame update
-    void Start()
-    {
-        lapilSpawner = GameObject.FindGameObjectWithTag("TriggerStartVolcano").GetComponent<LapilSpawnerScript>();
-        if(player != null)
-            player_collider = player.gameObject.GetComponent<Collider>();
-        else
-            return;
-    }
-
-    // Update is called once per frame
+    Collider pcol;
+    public bool first_time = false;
+    
     void OnTriggerEnter(Collider other) 
-    {
-        if(other == player_collider)
+    {        
+        if(other.gameObject == player && !first_time)
         {
-            Debug.Log("Entered the Trigger");
-            lapilSpawner.routineStarter(0);
+            Debug.Log("Player entered the Trigger: START Lapills");
+            first_time = true;                      
         }
         else
-            return;
-        
+            return;        
     }
+
+    private void Update() 
+    {
+        if(trig_stop.getState() == false && first_time == true && lapils.running == false) //finchè non tocco il trigger di fine, continuo coi lapilli
+        {            
+            StartCoroutine(lapils.Rain());            
+        }
+    }    
 }

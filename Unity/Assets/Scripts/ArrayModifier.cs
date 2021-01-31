@@ -7,6 +7,7 @@ public class ArrayModifier : MonoBehaviour
     public int CountX;
     public int CountY;
     public GameObject TheObject;
+    
     void OnValidate()
     {
         Apply();
@@ -25,6 +26,7 @@ public class ArrayModifier : MonoBehaviour
                 UnityEditor.EditorApplication.delayCall += () =>
                 {
                     DestroyImmediate(t.gameObject);
+                    return;
                 };
             }
         }

@@ -5,47 +5,46 @@ using UnityEngine;
 public class LapilSpawnerScript : MonoBehaviour
 {
     public GameObject prefab;
-    //public GameObject character;
-    float offset = 50.0f; 
+    public GameObject character;
+    public LevelChangerScript level;
+    float offset = 50.0f;
+    public bool running = false;
+    public float min = 0.0f;
+    public float max = 3.0f;
 
-IEnumerator Rain() 
-{
-    yield return new WaitForSeconds(Random.Range(0,3));
+public IEnumerator Rain() 
+{   
+    running = true;
+    Debug.Log("Coroutine Started.");
     Vector3 position = new Vector3(Random.Range(transform.position.x-offset, transform.position.x+offset), 0, Random.Range(transform.position.z-offset, transform.position.z+offset));
-    Instantiate(prefab, position, Quaternion.identity);
-    var timer = 5f;
-    while (timer>0f)
-    {
-        timer -= 1 * Time.deltaTime;                          
-    }
-    Destroy(prefab);
-    routineStarter(0);
+    var prefabVFX = Instantiate(prefab, position, Quaternion.identity);
+    Destroy(prefabVFX, 5);
+    yield return new WaitForSeconds(Random.Range(min, max));  
+    running = false;
+    Debug.Log("Coroutine finished.");
 }
 
-public void routineStarter(int code)
+public void LoadFinalScene()
 {
-    if(code == 1)
+    if(level != null)
     {
-        Update();
-    }        
-    else
+        level.FadeToNextLevel();
+    } else
     {
-        StartCoroutine("Rain");  
+        Debug.Log("Level error");
+        return;
     }
-        
+    //SceneLoader.Load(SceneLoader.Scene.ScenaFinale);
 }
 
 public void kill_player(GameObject player)
 {
     Debug.Log("Killing player!!!");
     Vector3 position = player.transform.position;
-    Instantiate(prefab, position, Quaternion.identity);
-    routineStarter(1);
-}
-
-void Update() 
-{
-    
+    var prefabVFX = Instantiate(prefab, position, Quaternion.identity);
+    Destroy(prefabVFX, 5);
+    Debug.Log("Loading Scene...");
+    LoadFinalScene();
 }
 
 }
