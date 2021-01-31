@@ -1,8 +1,6 @@
-﻿/*
-    This instanciates a NavAgent object to use as base Agent for NPCs
-*/
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NavAgent<T>
@@ -13,13 +11,12 @@ public class NavAgent<T>
 
     public readonly float walkSpeed = 1.5f;
     public readonly float runSpeed = 3f;
-    public readonly float distanceToStop = 3f;
+    public readonly float distanceToStop = 2f;
 
     private Dictionary<string, State> _states = new Dictionary<string, State>();
 
-    private Vector3 _destination = default(Vector3);
-    private bool _run;
-    private bool _destroy = false;
+    private List<Vector3> _targets = new List<Vector3>();
+    private Vector3 _destination;
 
     public NavAgent(GameObject owner, FiniteStateMachine<T> stateMachine)
     {
@@ -33,15 +30,18 @@ public class NavAgent<T>
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
-        State move = AddState("Move", () => {}, () => {GoToDestination();}, () => {});
-        State stop = AddState("Stop", () => {_navMeshAgent.isStopped = true;}, () => {if(DestinationIsValid() && _destroy)DestroyOwner();else _destination = default(Vector3);}, () => {_navMeshAgent.isStopped = false;});
+        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
+        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
+        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {if(DestinationReached())NextDestination();}, () => {});
+        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {if(DestinationReached()){NextDestination();}},() => {});
+        State interact = AddState("Interact", () => {/*TODO:*/}, () => {/*TODO:*/}, () => {_stateMachine.ResetState();});
 
         // Basic transitions
-        _stateMachine.AddTransition(move, stop, () => StopAgent());
-        _stateMachine.AddTransition(stop, move, () => !StopAgent());
+        _stateMachine.AddTransition(talk, idle, () => Random.Range(0f, 1f) < 0.6f);
+        _stateMachine.AddTransition(idle, talk, () => Random.Range(0f, 1f) < 0.4f);
 
         // START STATE
-        SetState("Stop");
+        SetState("Idle");
     }
 
     public void Tik() => _stateMachine.Tik();
@@ -56,9 +56,11 @@ public class NavAgent<T>
 
     public void AddTransition(State from, State to, System.Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
-    public List<string> GetStates(){return new List<string>(_states.Keys);}
+    public List<string> GetAllStates(){return new List<string>(_states.Keys);}
 
     public State GetState(string name){if(_states.TryGetValue(name, out State state))return state;return null;}
+
+    public State GetCurrentState(){return _stateMachine.GetCurrentState();}
 
     public void SetState(string statename)
     {
@@ -66,29 +68,15 @@ public class NavAgent<T>
         else Debug.LogError($"Wrong state setup: {statename}");
     }
 
-    public void ResetState() => _stateMachine.ResetState();
+    public bool DestinationReached(){return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance}
 
-    public bool StopAgent(){return Vector3.Distance(_destination, _navMeshAgent.transform.position) <= distanceToStop;}
-
-    public void SetDestination(Vector3 target, bool run, bool destroy)
+    public void NextDestination()
     {
-        if(!UnityEngine.AI.NavMesh.SamplePosition(target, out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas)) return;
-        if(_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance && _navMeshAgent.velocity.sqrMagnitude <= 0f)
-        {
-            _destination = target;
-            _run = run;
-            _destroy = destroy;
-        }
-    }
-
-    public bool DestinationIsValid(){return !_destination.Equals(default(Vector3));}
-
-    public void GoToDestination()
-    {
-        if(!DestinationIsValid()) return;
-        //Debug.Log($"Moving to {_destination}");
-        if(_run) _navMeshAgent.speed = runSpeed;
+        if(_targets.Count == 0){DestroyOwner();return;}
+        if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
+        _destination = _targets.ElementAt(Random.Range(0, _targets.Count));
+        _targets.Remove(_destination);
         _navMeshAgent.SetDestination(_destination);
     }
 

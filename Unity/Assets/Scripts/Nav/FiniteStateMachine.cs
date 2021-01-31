@@ -17,16 +17,13 @@ public class FiniteStateMachine<T>
     public void Tik()
     {
         State nextState = GetNextState();
-        if(nextState != null)
-            SetState(nextState);
-        if(_currentState != null)
-            _currentState.Tik();
+        if(nextState != null) SetState(nextState);
+        if(_currentState != null) _currentState.Tik();
     }
 
     public void SetState(State state)
     {
         if(state == _currentState) return;
-        //Debug.Log($"Switching from {_currentState?.Name} state to {state.Name} state");
         _previousState = _currentState;
         _currentState?.Exit();
         _currentState = state;

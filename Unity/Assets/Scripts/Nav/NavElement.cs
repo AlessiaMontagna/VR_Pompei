@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NavSpawn : MonoBehaviour
+public class NavElement : MonoBehaviour
 {
     [SerializeField] private string _role;
     // Start is called before the first frame update
