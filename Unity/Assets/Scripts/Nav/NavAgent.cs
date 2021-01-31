@@ -9,8 +9,8 @@ public class NavAgent<T>
     private FiniteStateMachine<T> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
 
-    public readonly float walkSpeed = 15f;
-    public readonly float runSpeed = 30f;
+    public readonly float walkSpeed = 1.5f;
+    public readonly float runSpeed = 3f;
     public readonly float distanceToStop = 2f;
 
     private Dictionary<string, State> _states = new Dictionary<string, State>();
@@ -72,7 +72,6 @@ public class NavAgent<T>
     
     private void NextDestinationMove()
     {
-        Debug.Log($"Reached: {DestinationReached()}; Remaining destinations: {_targets.Count}");
         if(!DestinationReached())return;
         if(_targets.Count == 0){DestroyOwner();return;}
         Vector3 _destination;
