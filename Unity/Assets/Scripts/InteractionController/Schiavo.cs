@@ -8,7 +8,8 @@ public class Schiavo : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Text dialogueText;
-
+    [SerializeField] private GameObject fpc2;
+    [SerializeField] private GameObject nobile;
 
     public void Talk(bool _switch, GameObject caller)
     {
@@ -42,7 +43,6 @@ public class Schiavo : MonoBehaviour
     private IEnumerator StartDialogue(AudioSource playerAudio, GameObject player)
     {
         player.GetComponent<FirstPersonController>().enabled = false;
-
         dialogueText.text = "Schiavo: Buongiorno mio padrone, ha qualche richiesta da farmi?";
         audioSource.clip = Resources.Load<AudioClip>("Talking/SchiavoToNobile");
         audioSource.Play();
@@ -52,8 +52,10 @@ public class Schiavo : MonoBehaviour
         playerAudio.Play();
         yield return new WaitForSeconds(playerAudio.clip.length);
         dialogueText.text = "";
-        player.transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
-        player.transform.rotation = gameObject.transform.rotation;
+        player.SetActive(false);
+        fpc2.SetActive(true);
+        GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
         Destroy(gameObject);
+        
     }
 }
