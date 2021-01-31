@@ -9,8 +9,8 @@ public class NavAgent<T>
     private FiniteStateMachine<T> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
 
-    public readonly float walkSpeed = 1.5f;
-    public readonly float runSpeed = 3f;
+    public readonly float walkSpeed = 15f;
+    public readonly float runSpeed = 30f;
     public readonly float distanceToStop = 2f;
 
     private Dictionary<string, State> _states = new Dictionary<string, State>();
@@ -68,7 +68,7 @@ public class NavAgent<T>
 
     public void SetTargets(List<Vector3> targets){_targets = new List<Vector3>(targets);}
 
-    public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
+    public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f) && Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
     
     private void NextDestinationMove()
     {
