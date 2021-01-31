@@ -11,11 +11,20 @@ public class NavAgentMercante : MonoBehaviour
 
     private List<Vector3> _targets = new List<Vector3>();
 
-    void Start()
+    void Awake()
     {
         _navAgent = new NavAgent<NavAgentMercante>(gameObject, new FiniteStateMachine<NavAgentMercante>(gameObject));
         _animator = gameObject.GetComponent<Animator>();
-        OverrideStatesAndTransitions();
+    }
+
+    void Start()
+    {
+        // here add/override states and transitions();
+        /*
+        State interact = _navAgent.AddState("Interact", () => {}, () => {}, () => {});
+        _navAgent.AddTransition(_navAgent.GetState("Talk"), interact, () => Random.Range(0f, 1f) < 0.1f);
+        _navAgent.AddTransition(interact, _navAgent.GetState("Talk"), () => Random.Range(0f, 1f) < 0.6f);
+        */
     }
 
     void Update()
@@ -23,13 +32,6 @@ public class NavAgentMercante : MonoBehaviour
         //if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.walkSpeed)_animator.SetBool("Run", false);
         //else if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.runSpeed)_animator.SetBool("Run", true);
         _navAgent.Tik();
-    }
-
-    private void OverrideStatesAndTransitions()
-    {
-        State interact = _navAgent.AddState("Interact", () => {}, () => {}, () => {});
-        _navAgent.AddTransition(_navAgent.GetState("Talk"), interact, () => Random.Range(0f, 1f) < 0.1f);
-        _navAgent.AddTransition(interact, _navAgent.GetState("Talk"), () => Random.Range(0f, 1f) < 0.6f);
     }
 
     public void SetState(string statename){_navAgent.SetState(statename);}

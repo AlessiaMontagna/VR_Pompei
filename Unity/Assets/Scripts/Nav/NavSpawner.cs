@@ -97,38 +97,38 @@ public class NavSpawner : MonoBehaviour
         while(_nBirds > _birds){SpawnAgent(true, _birdPrefabs.ElementAt(Random.Range(0, _birdPrefabs.Count)), "NavAgentBird", "Path", _spawns.ElementAt(Random.Range(0, _spawns.Count)), Quaternion.identity, _paths.ElementAt(Random.Range(0, _paths.Count)).Value);}
     }
 
-    private GameObject SpawnAgent(bool count, GameObject prefab, string role, string behaviour, Vector3 position, Quaternion rotation, List<Vector3> targets)
+    private GameObject SpawnAgent(bool count, GameObject prefab, string role, string state, Vector3 position, Quaternion rotation, List<Vector3> targets)
     {
         GameObject agent = Instantiate(prefab, position, rotation);
         switch (role)
         {
             case "NavAgentSchiavo":
                 agent.AddComponent<NavAgentSchiavo>();
-                agent.GetComponent<NavAgentSchiavo>().SetState(behaviour);
+                agent.GetComponent<NavAgentSchiavo>().SetState(state);
                 if(targets != null)agent.GetComponent<NavAgentSchiavo>().SetTargets(targets);
                 if(count)_people++;
                 break;
             case "NavAgentMercante":
                 agent.AddComponent<NavAgentMercante>();
-                agent.GetComponent<NavAgentMercante>().SetState(behaviour);
+                agent.GetComponent<NavAgentMercante>().SetState(state);
                 if(targets != null)agent.GetComponent<NavAgentMercante>().SetTargets(targets);
                 if(count)_people++;
                 break;
             case "NavAgentNobile":
                 agent.AddComponent<NavAgentNobile>();
-                agent.GetComponent<NavAgentNobile>().SetState(behaviour);
+                agent.GetComponent<NavAgentNobile>().SetState(state);
                 if(targets != null)agent.GetComponent<NavAgentNobile>().SetTargets(targets);
                 if(count)_people++;
                 break;
             case "NavAgentGuard":
                 agent.AddComponent<NavAgentGuard>();
-                agent.GetComponent<NavAgentGuard>().SetState(behaviour);
+                agent.GetComponent<NavAgentGuard>().SetState(state);
                 if(targets != null)agent.GetComponent<NavAgentGuard>().SetTargets(targets);
                 if(count)_guards++;
                 break;
             case "NavAgentBird":
                 agent.AddComponent<NavAgentBird>();
-                agent.GetComponent<NavAgentBird>().SetState(behaviour);
+                agent.GetComponent<NavAgentBird>().SetState(state);
                 if(targets != null)agent.GetComponent<NavAgentBird>().SetTargets(targets);
                 if(count)_birds++;
                 break;

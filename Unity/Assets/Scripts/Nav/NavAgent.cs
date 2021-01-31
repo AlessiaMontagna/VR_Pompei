@@ -30,6 +30,7 @@ public class NavAgent<T>
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
+        State destroy = AddState("Destroy", () => {DestroyOwner();}, () => {}, () => {});
         State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
         State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {if(DestinationReached())NextDestination();}, () => {});
@@ -37,8 +38,12 @@ public class NavAgent<T>
         State interact = AddState("Interact", () => {/*TODO:*/}, () => {/*TODO:*/}, () => {_stateMachine.ResetState();});
 
         // Basic transitions
-        _stateMachine.AddTransition(talk, idle, () => Random.Range(0f, 1f) < 0.6f);
-        _stateMachine.AddTransition(idle, talk, () => Random.Range(0f, 1f) < 0.4f);
+        _stateMachine.AddTransition(destroy, idle, () => false);
+        _stateMachine.AddTransition(idle, destroy, () => false);
+        _stateMachine.AddTransition(talk, destroy, () => false);
+        _stateMachine.AddTransition(path, destroy, () => DestinationReached() && _targets.Count == 0);
+        _stateMachine.AddTransition(move, destroy, () => DestinationReached() && _targets.Count == 0);
+        _stateMachine.AddTransition(interact, destroy, () => false);
 
         // START STATE
         SetState("Idle");
@@ -68,11 +73,11 @@ public class NavAgent<T>
         else Debug.LogError($"Wrong state setup: {statename}");
     }
 
-    public bool DestinationReached(){return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance}
+    public bool DestinationReached(){return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
 
     public void NextDestination()
     {
-        if(_targets.Count == 0){DestroyOwner();return;}
+        if(_targets.Count == 0){return;}
         if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
         _destination = _targets.ElementAt(Random.Range(0, _targets.Count));
