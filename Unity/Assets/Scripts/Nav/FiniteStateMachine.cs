@@ -38,7 +38,7 @@ public class FiniteStateMachine<T>
 
     public void AddTransition(State fromState, State toState, Func<bool> transitionCondition)
     {
-        if (_transitions.TryGetValue(fromState.Name, out var stateTransitions) == false)
+        if (!_transitions.TryGetValue(fromState.Name, out var stateTransitions))
         {
             stateTransitions = new List<Transition>();
             _transitions[fromState.Name] = stateTransitions;
