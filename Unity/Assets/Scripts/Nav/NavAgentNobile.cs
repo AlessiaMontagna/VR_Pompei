@@ -9,12 +9,10 @@ public class NavAgentNobile : MonoBehaviour
     private NavAgent<NavAgentNobile> _navAgent;
     private Animator _animator;
 
-    private List<Vector3> _targets = new List<Vector3>();
-
     void Awake()
     {
         _navAgent = new NavAgent<NavAgentNobile>(gameObject, new FiniteStateMachine<NavAgentNobile>(gameObject));
-        _animator = gameObject.GetComponent<Animator>();
+        //_animator = gameObject.GetComponent<Animator>();
     }
 
     void Start()
@@ -34,7 +32,7 @@ public class NavAgentNobile : MonoBehaviour
         _navAgent.Tik();
     }
 
-    public void SetState(string statename){_navAgent.SetState(statename);}
+    public void SetState(string statename) => _navAgent.SetState(statename);
 
-    public void SetTargets(List<Vector3> targets){_targets = new List<Vector3>(targets);}
+    public void SetTargets(List<Vector3> targets) => _navAgent.SetTargets(targets);
 }
