@@ -16,7 +16,7 @@ public class RandomFlyer : MonoBehaviour
 
     private float _idleSpeed = 10f, _turnSpeed = 80f, _switchSeconds = 3f, _idleRatio = 0.3f, changeTarget = 0f, changeAnim = 0f, timeSinceTarget = 0f, timeSinceAnim = 0f, prevAnim, currentAnim = 0f;
     private float prevSpeed, speed, zturn, prevz, _turnSpeedBackup, distanceFromBase, distanceFromTarget;
-    private Vector2 _animSpeedMinMax = new Vector2(0.5f, 2f), _moveSpeedMinMax = new Vector2(10f, 20f), _changeAnimEveryFromTo = new Vector2(2f, 4f), _changeTargetEveryFromTo = new Vector2(3f, 8f), _radiusMinMax = new Vector2(30, 160), _yMinMax = new Vector2(10, 40);
+    private Vector2 _animSpeedMinMax = new Vector2(0.5f, 2f), _moveSpeedMinMax = new Vector2(10f, 20f), _changeAnimEveryFromTo = new Vector2(2f, 4f), _changeTargetEveryFromTo = new Vector2(3f, 8f), _radiusMinMax = new Vector2(20, 60), _yMinMax = new Vector2(10, 40);
     private Vector3 _rotateTarget, _position, _direction, _velocity, _randomizedBase;
     private Quaternion _lookRotation;
 
@@ -178,5 +178,5 @@ public class RandomFlyer : MonoBehaviour
         return newDir.normalized;
     }
 
-    public void SetFlyingTarget(Transform target){_flyingTarget = target;}
+    public void SetFlyingTarget(GameObject target){_flyingTarget = target.transform;}
 }

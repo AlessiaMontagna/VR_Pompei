@@ -17,18 +17,19 @@ public class NavSpawner : MonoBehaviour
     [SerializeField] private int _nGuards;
     [SerializeField] private int _nPeople;
     [SerializeField] private int _nFlocks;
-    
+
     private int _people = 0;
     private int _guards = 0;
 
     readonly int MAXPEOPLE = 15;
-    readonly int MAXGUARDS = 7;
-    readonly int MAXFLOCKS = 10;
+    readonly int MAXGUARDS = 8;
+    readonly int MAXFLOCKS = 8;
+    readonly int MAXBIRDSPERFLOCK = 5;
 
     private Dictionary<Characters, List<GameObject>> _prefabs = new Dictionary<Characters, List<GameObject>>();
-    private Dictionary<string, List<Transform>> _stops = new Dictionary<string, List<Transform>>();
-    private Dictionary<string, List<Vector3>> _paths = new Dictionary<string, List<Vector3>>();
-    private List<Vector3> _spawns = new List<Vector3>();
+    private Dictionary<NavSubroles, List<Transform>> _stops = new Dictionary<NavSubroles, List<Transform>>();
+    private Dictionary<NavSubroles, List<Vector3>> _paths = new Dictionary<NavSubroles, List<Vector3>>();
+    private Dictionary<NavSubroles, List<Transform>> _spawns = new Dictionary<NavSubroles, List<Transform>>();
 
     void Start()
     {
@@ -40,25 +41,30 @@ public class NavSpawner : MonoBehaviour
         // get STOPS PATHS and SPAWNS
         foreach (var item in GameObject.FindObjectsOfType<NavElement>().Where(i => i != null))
         {
-            var role = item.GetComponent<NavElement>().GetRole();
-            if(role.Contains("Spawn")) _spawns.Add(new Vector3(item.transform.position.x, 0, item.transform.position.z));
-            else if(role.Contains("Stop"))
+            var component = item.GetComponent<NavElement>();
+            switch (component.GetRole())
             {
-                if(_stops.TryGetValue(role, out var list)) list.Add(item.transform);
-                else _stops.Add(role, new List<Transform>{item.transform});
-            }
-            else if(role.Contains("Path"))
-            {
-                if(_paths.TryGetValue(role, out var list)) list.Add(new Vector3(item.transform.position.x, 0, item.transform.position.z));
-                else _paths.Add(role, new List<Vector3>{new Vector3(item.transform.position.x, 0, item.transform.position.z)});
+                case NavRoles.Spawn:
+                    if(_spawns.TryGetValue(component.GetSubrole(), out var tlist)) tlist.Add(item.transform);
+                    else _spawns.Add(component.GetSubrole(), new List<Transform>{item.transform});
+                    break;
+                case NavRoles.Stop:
+                    if(_stops.TryGetValue(component.GetSubrole(), out tlist)) tlist.Add(item.transform);
+                    else _stops.Add(component.GetSubrole(), new List<Transform>{item.transform});
+                    break;
+                case NavRoles.Path:
+                    if(_paths.TryGetValue(component.GetSubrole(), out var vlist)) vlist.Add(new Vector3(item.transform.position.x, 0, item.transform.position.z));
+                    else _paths.Add(component.GetSubrole(), new List<Vector3>{new Vector3(item.transform.position.x, 0, item.transform.position.z)});
+                    break;
+                default: throw new System.ArgumentOutOfRangeException();
             }
         }
         // spawn STOPS guards
-        if(_stops.TryGetValue("GuardStop", out var stops) && _prefabs.TryGetValue(Characters.Guard, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guard, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Guard, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guard, "Idle", item.position, item.rotation, null);}
         // spawn STOPS mercanti
-        if(_stops.TryGetValue("MercanteStop", out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);}
         // spawn STOPS balcony
-        if(_stops.TryGetValue("BalconyStop", out stops)) foreach (var item in stops.Where(i => i != null))
+        if(_stops.TryGetValue(NavSubroles.BalconyStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
             // TODO: POSE
             Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guard || character == Characters.Schiavo);
@@ -66,7 +72,7 @@ public class NavSpawner : MonoBehaviour
             SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Idle", item.position, item.rotation, null);
         }
         // STOPS groups
-        if(_stops.TryGetValue("GroupStop", out stops)) foreach (var item in stops.Where(i => i != null))
+        if(_stops.TryGetValue(NavSubroles.GroupStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
             Vector3 position;
             Quaternion rotation;
@@ -82,25 +88,24 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // SET agents total numbers
-        if(_nPeople < 0 || _nPeople > MAXPEOPLE) _nPeople = Random.Range(7, MAXPEOPLE+1);
-        if(_nGuards < 0 || _nGuards > MAXGUARDS) _nGuards = Random.Range(3, MAXGUARDS+1);
-        if(_nFlocks < 0 || _nFlocks > MAXFLOCKS) _nFlocks = Random.Range(4, MAXFLOCKS+1);
-        for (int i = 0; i < _nFlocks; i++)
+        if(_nPeople < 0 || _nPeople > MAXPEOPLE) _nPeople = Random.Range(10, MAXPEOPLE+1);
+        if(_nGuards < 0 || _nGuards > MAXGUARDS) _nGuards = Random.Range(5, MAXGUARDS+1);
+        if(_nFlocks < 0 || _nFlocks > MAXFLOCKS) _nFlocks = Random.Range(5, MAXFLOCKS+1);
+        int flocksToSpawn = _nFlocks;
+        if(_spawns.TryGetValue(NavSubroles.FlocksSpawn, out var spawns)) foreach (var item in spawns.Where(i => i != null))
         {
-            int nSeagulls = Random.Range(1, MAXFLOCKS+1)-1;
+            if(flocksToSpawn <= 0) break;
+            int nFlocks = Random.Range(1, flocksToSpawn);
+            flocksToSpawn -= nFlocks;
             var prefab = _birdsPrefabs.ElementAt(Random.Range(0, _birdsPrefabs.Count));
-
-            GameObject home = new GameObject("flockofbirds");
-            home.transform.parent = gameObject.transform;
-
-            GameObject flyingTarget = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            flyingTarget.transform.parent = home.transform;
-            
-            for (int j = 0; j < nSeagulls; j++)
+            GameObject flockFlyingTarget = Instantiate(prefab, item.transform.position, Quaternion.identity);
+            flockFlyingTarget.transform.parent = item.transform;
+            int nBirds = Random.Range(5, MAXBIRDSPERFLOCK);
+            for (int j = 0; j < nBirds; j++)
             {
-                GameObject seagull = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                seagull.transform.parent = home.transform;
-                seagull.GetComponent<RandomFlyer>().SetFlyingTarget(flyingTarget.transform);
+                GameObject bird = Instantiate(prefab, item.transform.position + Random.insideUnitSphere * 5, Quaternion.identity);
+                bird.transform.parent = item.transform;
+                bird.GetComponent<RandomFlyer>().SetFlyingTarget(flockFlyingTarget);
             }
         }
     }
@@ -112,10 +117,11 @@ public class NavSpawner : MonoBehaviour
         while(_nPeople > _people)
         {
             var targets = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;
-            targets.Add(_spawns.ElementAt(Random.Range(0, _spawns.Count)));
+            if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("PREFABS ERROR");
+            targets.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).position);
             Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guard);
             if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
-            SpawnAgent(true, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", _spawns.ElementAt(Random.Range(0, _spawns.Count)), Quaternion.identity, targets);
+            SpawnAgent(true, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawns.ElementAt(Random.Range(0, spawns.Count)).position, Quaternion.identity, targets);
         }
     }
 
