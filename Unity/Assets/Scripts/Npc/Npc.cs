@@ -95,7 +95,7 @@ public class Npc : MonoBehaviour
     public void StartTalking()
     {
         if(_audioSource.isPlaying || _nAudioFiles <= 0) return;
-        int index = Random.Range(1, _nAudioFiles);
+        int index = Random.Range(0, _nAudioFiles)+1;
         Debug.Log($"Playing {Globals.player.ToString() + "_" + _character.ToString() + index + "_" + _voce} audio of {_nAudioFiles}");
         _audioSource.clip = Resources.Load<AudioClip>("Talking/" + Globals.player.ToString() + "_" + _character.ToString() + index + "_" + _voce);
         _audioSource.Play();
