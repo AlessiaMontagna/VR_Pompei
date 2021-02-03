@@ -105,6 +105,7 @@ public class Npc : MonoBehaviour
     private IEnumerator Subtitles(int i)
     {
         Globals.someoneIsTalking = true;
+        Debug.Log($"sottotitoli {FindObjectOfType<sottotitoli>()}; text FindObjectOfType<Sottotitoli>().GetComponent<Text>(); audiosubmanager {FindObjectOfType<AudioSubManager>()}");
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(i, _character);
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
