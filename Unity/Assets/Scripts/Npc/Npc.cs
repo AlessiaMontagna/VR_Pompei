@@ -51,16 +51,20 @@ public class Npc : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         var files = Resources.LoadAll<AudioClip>("Talking").Where(i => i.name.Contains(Globals.player.ToString() + "_" + _character.ToString())).ToList();
-        var n = 0;
+        var count = _vociMaschili.Count;
+        if(count < _vociFemminili.Count) count = _vociFemminili.Count;
+        var voci = _vociMaschili;
+        if(_character == Characters.NobileF)voci = _vociFemminili;
         do
         {
-            if(n>5){Debug.LogError("Corrupted audio files");break;}
-            if(_character == Characters.NobileF)_voce = _vociFemminili.ElementAt(Random.Range(0, _vociFemminili.Count));
-            else _voce = _vociMaschili.ElementAt(Random.Range(0, _vociMaschili.Count));
+            if(count <= 0){string s = "";foreach (var item in files){s += item.name+"; ";}Debug.LogError($"Audio files not found for {Globals.player.ToString()}_{_character.ToString()} audios of {_voce}: {s}");break;}
+            _voce = voci.ElementAt(Random.Range(0, voci.Count));
+            voci.Remove(_voce);
+            Debug.Log($"Searching for {Globals.player.ToString()}_{_character.ToString()} audios of {_voce}");
             _nAudioFiles = files.Where(i => i.name.Contains(_voce)).ToList().Count;
-            n++;
+            count--;
         }while(_nAudioFiles <= 0);
-        //Debug.Log($"Found {_nAudioFiles} audios for {Globals.player.ToString() + "_" + _character.ToString()} + {_voce}");
+        Debug.Log($"Found {_nAudioFiles} audios for {Globals.player.ToString()}_{_character.ToString()} of {_voce}");
         var collider = GetComponent<CapsuleCollider>();
         if(collider.center.y < 0.8f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         if(collider.height < 1.6f || collider.height > 1.8f)collider.height = 1.7f;
@@ -102,6 +106,7 @@ public class Npc : MonoBehaviour
     private IEnumerator Subtitles(int i)
     {
         Globals.someoneIsTalking = true;
+        Debug.Log($"{FindObjectOfType<sottotitoli>()}");
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(i, _character);
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
