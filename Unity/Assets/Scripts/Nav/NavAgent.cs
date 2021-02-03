@@ -8,13 +8,13 @@ public class NavAgent
     private Npc _owner;
     private FiniteStateMachine<Npc> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
+    private bool _interaction = false;
 
     public readonly float walkSpeed = 1.5f;
     public readonly float runSpeed = 3f;
     public readonly float distanceToStop = 2f;
 
     private Dictionary<string, State> _states = new Dictionary<string, State>();
-
     private List<Vector3> _targets = new List<Vector3>();
 
     public NavAgent(Npc owner)
@@ -33,14 +33,14 @@ public class NavAgent
         State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationPath();}, () => {});
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationMove();}, () => {});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {Talk();}, () => {});
-        State interact = AddState("Interact", () => {/*TODO:*/}, () => {/*TODO:*/}, () => {_stateMachine.ResetState();});
+        State interact = AddState("Interact", () => {StartTalking();}, () => {/*TODO:*/}, () => {_stateMachine.ResetState();});
 
         // Basic transitions
-        _stateMachine.AddTransition(idle, interact, () => false);
-        _stateMachine.AddTransition(talk, interact, () => false);
-        _stateMachine.AddTransition(path, interact, () => false);
-        _stateMachine.AddTransition(move, interact, () => false);
-        _stateMachine.AddTransition(interact, idle, () => false);
+        _stateMachine.AddTransition(idle, interact, () => _interaction);
+        _stateMachine.AddTransition(talk, interact, () => _interaction);
+        _stateMachine.AddTransition(path, interact, () => _interaction);
+        _stateMachine.AddTransition(move, interact, () => _interaction);
+        _stateMachine.AddTransition(interact, idle, () => !_interaction);
 
         // START STATE
         SetState("Idle");
@@ -92,23 +92,9 @@ public class NavAgent
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
-    public void Talk()
-    {/*
-        int index = Random.Range(1,4);
-        if (!audioSource.isPlaying)
-        {
-            switch (caller.tag)
-            {
-                case "Player_Nobile":
-                    //Audio nobili: prendi negli asset la stringa corrispondente a "Nobile_NobileM + (index)"
-                    audioSource.clip = Resources.Load<AudioClip>("Talking/Nobile_NobileM" + index.ToString()); 
-                    audioSource.Play();
-                    break;
-                case "Player_Schiavo":
-                    // AUdio schiavo: prendi negli asset la stringa corrispondente a "Schiavo_NobileM + (index)"
-                    audioSource.clip = Resources.Load<AudioClip>("Talking/Schiavo_NobileM" + index.ToString());
-                    break;
-            }
-        }*/
-    }
+    public void Interactive(bool i){_interaction = i;}
+
+    public void Talk(){}
+
+    public void StartTalking() => _owner.StartTalking();
 }

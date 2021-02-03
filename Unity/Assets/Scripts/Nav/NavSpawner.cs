@@ -4,8 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum Characters{Guard, Schiavo, Mercante, Patrizio, Patrizia};
-
 public class NavSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _guardPrefabs = new List<GameObject>();
@@ -33,11 +31,11 @@ public class NavSpawner : MonoBehaviour
 
     void Start()
     {
-        _prefabs.Add(Characters.Guard, _guardPrefabs);
+        _prefabs.Add(Characters.Guardia, _guardPrefabs);
         _prefabs.Add(Characters.Schiavo, _schiavoPrefabs);
         _prefabs.Add(Characters.Mercante, _mercantePrefabs);
-        _prefabs.Add(Characters.Patrizio, _patrizioPrefabs);
-        _prefabs.Add(Characters.Patrizia, _patriziaPrefabs);
+        _prefabs.Add(Characters.NobileM, _patrizioPrefabs);
+        _prefabs.Add(Characters.NobileF, _patriziaPrefabs);
         // get STOPS PATHS and SPAWNS
         foreach (var item in GameObject.FindObjectsOfType<NavElement>().Where(i => i != null))
         {
@@ -60,14 +58,14 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // spawn STOPS guards
-        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Guard, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guard, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Guardia, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item.position, item.rotation, null);}
         // spawn STOPS mercanti
         if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);}
         // spawn STOPS balcony
         if(_stops.TryGetValue(NavSubroles.BalconyStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
             // TODO: POSE
-            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guard || character == Characters.Schiavo);
+            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Schiavo);
             if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
             SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Idle", item.position, item.rotation, null);
         }
@@ -82,7 +80,7 @@ public class NavSpawner : MonoBehaviour
                 do{var random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.position + new Vector3(random.x, 0, random.y);}
                 while(!UnityEngine.AI.NavMesh.SamplePosition(position, out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas));
                 rotation = Quaternion.LookRotation(item.position-position, Vector3.up);
-                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guard || character == Characters.Schiavo);
+                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Schiavo);
                 if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
                 SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", position, rotation, null);
             }
@@ -113,13 +111,13 @@ public class NavSpawner : MonoBehaviour
     void Update()
     {
         // SPAWN agents if there are less then defined in Start()
-        while(_nGuards > _guards){var path = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;if(!_prefabs.TryGetValue(Characters.Guard, out var prefabs))Debug.LogError("PREFABS ERROR");SpawnAgent(true, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guard, "Path", path.ElementAt(Random.Range(0, path.Count)), Quaternion.identity, path);}
+        while(_nGuards > _guards){var path = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;if(!_prefabs.TryGetValue(Characters.Guardia, out var prefabs))Debug.LogError("PREFABS ERROR");SpawnAgent(true, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Path", path.ElementAt(Random.Range(0, path.Count)), Quaternion.identity, path);}
         while(_nPeople > _people)
         {
             var targets = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;
             if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("PREFABS ERROR");
             targets.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).position);
-            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guard);
+            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia);
             if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
             SpawnAgent(true, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawns.ElementAt(Random.Range(0, spawns.Count)).position, Quaternion.identity, targets);
         }
@@ -129,7 +127,7 @@ public class NavSpawner : MonoBehaviour
     {
         GameObject agent = Instantiate(prefab, position, rotation);
         agent.transform.parent = gameObject.transform;
-        if(count){if(character == Characters.Guard){_guards++;}else{_people++;}}
+        if(count){if(character == Characters.Guardia){_guards++;}else{_people++;}}
         var component = agent.AddComponent<Npc>();
         component.SetCharacter(character);
         component.SetState(state);
@@ -137,5 +135,5 @@ public class NavSpawner : MonoBehaviour
         return agent;
     }
 
-    public void DestroyedAgent(Characters character){if(character == Characters.Guard){_guards++;}else{_people++;}}
+    public void DestroyedAgent(Characters character){if(character == Characters.Guardia){_guards++;}else{_people++;}}
 }
