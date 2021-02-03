@@ -60,11 +60,10 @@ public class Npc : MonoBehaviour
             if(count <= 0){string s = "";foreach (var item in files){s += item.name+"; ";}Debug.LogError($"Audio files not found for {Globals.player.ToString()}_{_character.ToString()} audios of {_voce}: {s}");break;}
             _voce = voci.ElementAt(Random.Range(0, voci.Count));
             voci.Remove(_voce);
-            Debug.Log($"Searching for {Globals.player.ToString()}_{_character.ToString()} audios of {_voce}");
             _nAudioFiles = files.Where(i => i.name.Contains(_voce)).ToList().Count;
             count--;
         }while(_nAudioFiles <= 0);
-        Debug.Log($"Found {_nAudioFiles} audios for {Globals.player.ToString()}_{_character.ToString()} of {_voce}");
+        //Debug.Log($"Found {_nAudioFiles} audios for {Globals.player.ToString()}_{_character.ToString()} of {_voce}");
         var collider = GetComponent<CapsuleCollider>();
         if(collider.center.y < 0.8f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         if(collider.height < 1.6f || collider.height > 1.8f)collider.height = 1.7f;
@@ -95,9 +94,9 @@ public class Npc : MonoBehaviour
 
     public void StartTalking()
     {
-        Debug.Log($"available audios: {_nAudioFiles}");
         if(_audioSource.isPlaying || _nAudioFiles <= 0) return;
         int index = Random.Range(1, _nAudioFiles);
+        Debug.Log($"Riproducing {Globals.player.ToString() + "_" + _character.ToString() + index + "_" + _voce} audio of {_nAudioFiles}");
         _audioSource.clip = Resources.Load<AudioClip>("Talking/" + Globals.player.ToString() + "_" + _character.ToString() + index + "_" + _voce);
         _audioSource.Play();
         StartCoroutine(Subtitles(index));
@@ -106,7 +105,6 @@ public class Npc : MonoBehaviour
     private IEnumerator Subtitles(int i)
     {
         Globals.someoneIsTalking = true;
-        Debug.Log($"{FindObjectOfType<sottotitoli>()}");
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(i, _character);
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
