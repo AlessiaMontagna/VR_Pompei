@@ -39,7 +39,7 @@ public class InteractionManager : MonoBehaviour
 
         Ray ray = new Ray(_rayOrigin, _fpsCameraT.forward);
         RaycastHit hit;
-
+        if(Globals.someoneIsTalking) return;
         if (Physics.Raycast(ray, out hit, _interactionDistance))
         {
             //Check if is interactable
