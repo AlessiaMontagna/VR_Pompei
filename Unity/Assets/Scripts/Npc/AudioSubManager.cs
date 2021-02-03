@@ -26,6 +26,11 @@ public class AudioSubManager : MonoBehaviour
     private List<string> _subNobileMercante = new List<string>{"Ciao, come va?"};
     private List<string> _subNobileNobileM = new List<string>{"Ciao, come va?"};
     private List<string> _subNobileNobileF = new List<string>{"Ciao, come va?"};
+    
+    private List<string> _ConversazioneNobileSchiavo = new List<string> { "Va bene, capo",
+                                            "Buongiorno mio padrone, vorrei sapere che cosa vuole da me",
+                                            "Vai al macellum",
+                                            "A prendere del pesce" };
 
     private Dictionary<string, List<string>> _subtitles = new Dictionary<string, List<string>>();
 
@@ -48,6 +53,8 @@ public class AudioSubManager : MonoBehaviour
         _subtitles.Add(Players.Nobile.ToString()+Characters.Mercante.ToString(), _subNobileMercante);
         _subtitles.Add(Players.Nobile.ToString()+Characters.NobileM.ToString(), _subNobileNobileM);
         _subtitles.Add(Players.Nobile.ToString()+Characters.NobileF.ToString(), _subNobileNobileF);
+
+        _subtitles.Add(Players.Nobile.ToString() + Characters.MySchiavo.ToString(), _ConversazioneNobileSchiavo);
     }
 
     public string GetSubs(int index, Characters type)

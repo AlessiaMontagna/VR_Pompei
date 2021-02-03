@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Characters{Guardia, Schiavo, Mercante, NobileM, NobileF};
+public enum Characters{Guardia, Schiavo, MySchiavo, Mercante, NobileM, NobileF};
 public enum Players{Schiavo, Mercante, Nobile};
 
 public static class Globals
