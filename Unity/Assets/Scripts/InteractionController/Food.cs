@@ -9,7 +9,7 @@ public class Food : MonoBehaviour
     [SerializeField] private string foodType;
     [SerializeField] private FoodManager foodmanager;
     [SerializeField] private Text dialogueText;
-    public void getFood(GameObject caller)
+    public void getFood()
     {
         if(foodmanager.getCounter(foodType) < foodmanager.getMax(foodType))
         {

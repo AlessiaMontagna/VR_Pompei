@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Schiavo))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(CapsuleCollider))]
+
 public class MySchiavoInteractable : Interattivo
 {
+    private Amico Mission1;
     private Schiavo character;
-    [SerializeField] private Text talk;
-    [SerializeField] private RawImage _eButton;
-    [SerializeField] private Amico Mission1;
+    private Text talk;
+    private RawImage _eButton;
     private bool _switch = false;
     public bool _isTalking = false;
     void Start()
     {
+        Mission1 = FindObjectOfType<Amico>();
         Mission1.Mission1Complete += Mission_1_unlocked;
         talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();

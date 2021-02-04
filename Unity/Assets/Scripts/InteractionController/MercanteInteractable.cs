@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Mercante))]
+[RequireComponent(typeof(AudioSource))]
+
 public class MercanteInteractable : Interattivo
 {
     private Mercante character;
     [SerializeField] private Text talk;
     [SerializeField] private RawImage _eButton;
+    public bool isTalking = false;
 
 
     void Start()
@@ -23,8 +26,11 @@ public class MercanteInteractable : Interattivo
     }
     public override void UITextOn()
     {
-        talk.enabled = true;
-        _eButton.enabled = true;
+        if (!isTalking)
+        {
+            talk.enabled = true;
+            _eButton.enabled = true;
+        }
     }
 
     public override void UITextOff()

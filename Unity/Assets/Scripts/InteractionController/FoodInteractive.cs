@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(Food))]
-public class FoodInteractive : Interattivo
+public class FoodInteractive : ObjectInteractable
 {
     [SerializeField] private Food food;
     [SerializeField] private Text pick;
@@ -18,9 +18,10 @@ public class FoodInteractive : Interattivo
         GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
     }
     
-    public override void Interact(GameObject caller)
+    public override void Interact()
     {
-        food.getFood(caller);
+        food.getFood();
+        UITextOff();
     }
 
     public override void UITextOn()

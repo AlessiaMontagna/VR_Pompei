@@ -5,9 +5,8 @@ using UnityEngine.UI;
 public class AmicoInteractable : Interattivo
 {
     private Amico character;
-    [SerializeField] private Text talk;
-    [SerializeField] private RawImage _eButton;
-    public bool isTalking = false;
+    private Text talk;
+    private RawImage _eButton;
 
     void Start()
     {
@@ -21,11 +20,9 @@ public class AmicoInteractable : Interattivo
     }
     public override void UITextOn()
     {
-        if (!isTalking)
-        {
-            _eButton.enabled = true;
-            talk.enabled = true;
-        }
+        _eButton.enabled = true;
+        talk.enabled = true;
+        
     }
 
     public override void UITextOff()

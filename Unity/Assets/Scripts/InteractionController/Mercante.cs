@@ -2,62 +2,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+enum FoodType {Frutta, Pane, Pesce};
+
 
 public class Mercante : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private GameObject food;
-    [SerializeField] private Text _dialogueText;
-    [SerializeField] private string _foodType;
-    //BancarellaTrigger b;
-    System.Random rnd;
-    private int index;
+    [SerializeField] private FoodType _foodType;
+
+    private Transform food;
+    private AudioSubManager _subtitles;
+    private Text _dialogueText;
+    private AudioSource audioSource;
     private bool unlockFood = true;
     private string path;
+    private int index;
+    private MercanteInteractable mercante;
     
     private void Start()
     {
-        rnd = new System.Random();
+        mercante = GetComponent<MercanteInteractable>();
+        if(_foodType == FoodType.Frutta)
+        {
+            index = 0;
+            Debug.Log(_foodType.ToString());
+            food = FindObjectOfType<Frutta>().GetComponent<Transform>();
+
+        }else if(_foodType == FoodType.Pane)
+        {
+            index = 1;
+            food = FindObjectOfType<Pane>().GetComponent<Transform>();
+            Debug.Log("indice pane" + index);
+        }
+        else if(_foodType == FoodType.Pesce)
+        {
+            food = FindObjectOfType<Pesce>().GetComponent<Transform>();
+            index = 2;
+            Debug.Log("indice pesce" + index);
+
+        }
+        
+        _subtitles = FindObjectOfType<AudioSubManager>();
+        _dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        audioSource = GetComponent<AudioSource>();
     }
     public void Talk(GameObject caller)
     {
-        index = rnd.Next(1, 4);
         if (!audioSource.isPlaying)
         {
-            switch (caller.tag)
+            path = Globals.player.ToString() + "_Mercante" + "_" + _foodType.ToString();
+            Debug.Log(path);
+            audioSource.clip = Resources.Load<AudioClip>("Talking/" + path);
+            if (audioSource.clip == null)
             {
-                case "Player_Nobile":
-                    path = "Nobile_Mercante" + index + "_" + _foodType;
-                    audioSource.clip = Resources.Load<AudioClip>("Talking/" + path);
-                    audioSource.Play();
-                    break;
-                case "Player_Schiavo":
-                    path = "Schiavo_Mercante" + "_" + _foodType;
-                    audioSource.clip = Resources.Load<AudioClip>("Talking/" + path);
-                   
-                    //b.index = 1;
-                    if (unlockFood)
-                    {
-                        for (int i = 0; i < food.transform.childCount; i++)
-                        {
-                            food.transform.GetChild(i).GetComponent<BoxCollider>().enabled = true;
-                        }
-                        unlockFood = false;
-                    }
-                    audioSource.Play();
-                    break;
+                Debug.LogError("Non ci sono file audio nel path specificato");
+                return;
             }
-
-            StartCoroutine(StartDialogue(audioSource.clip, path));
+            audioSource.Play();
+            if(unlockFood && Globals.player == Players.Schiavo)
+            {
+                for (int i = 0; i < food.childCount; i++)
+                    food.GetChild(i).GetComponent<BoxCollider>().enabled = true;
+                unlockFood = false;
+            }
+            StartCoroutine(Sottotitoli());
         }
     }
-
-    private IEnumerator StartDialogue(AudioClip clip, string path)
+    private IEnumerator Sottotitoli()
     {
-        //_dialogueText.text = Resources.Load<Text>("Talking_Text/" + path).text;
-        //yield return new WaitForSeconds(clip.length);
-        _dialogueText.text = "Ottima frutta oggi";
-        yield return new WaitForSeconds(2);
+        mercante.isTalking = true;
+        _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
+        Debug.Log(_dialogueText.text);
+        yield return new WaitForSeconds(audioSource.clip.length);
+        mercante.isTalking = false;
         _dialogueText.text = "";
     }
+
+    
 }

@@ -1,31 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
-
 public class Schiavo : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private Text dialogueText;
     [SerializeField] private GameObject fpc2;
     [SerializeField] private GameObject nobile;
-
+    private AudioSubManager _sottotitoli;
+    
+    private AudioSource audioSource;
+    private Text dialogueText;
+    private int index = 0;
+    private string path;
+    private void Start()
+    {
+        _sottotitoli = FindObjectOfType<AudioSubManager>();
+        audioSource = GetComponent<AudioSource>();
+        dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+    }
     public void Talk(bool _switch, GameObject caller)
     {
+        Globals.someoneIsTalking = true;
         if (!audioSource.isPlaying)
         {
+            GetComponent<MySchiavoInteractable>()._isTalking = true;
             if (_switch)
             {
-                GetComponent<MySchiavoInteractable>()._isTalking = true;
+                index = 1;
                 AudioSource playerAudio = caller.GetComponents<AudioSource>()[1];
-                StartCoroutine(StartDialogue(playerAudio, caller));
-
+                StartCoroutine(Subtitles(caller, playerAudio));
             }
             else
             {
-                GetComponent<MySchiavoInteractable>()._isTalking = true;
-                audioSource.clip = Resources.Load<AudioClip>("Talking/SchiavoStaticDialogue");
+                audioSource.clip = Resources.Load<AudioClip>("Talking/Nobile_Schiavo" + index.ToString());
                 audioSource.Play();
                 StartCoroutine(StaticDialogue(audioSource.clip));
             }
@@ -33,29 +42,46 @@ public class Schiavo : MonoBehaviour
             
     }
 
+    private IEnumerator Subtitles(GameObject player, AudioSource playerAudio)
+    {
+        player.GetComponent<FirstPersonController>().enabled = false;
+        player.GetComponent<InteractionManager>().enabled = false;
+        GetComponent<MySchiavoInteractable>().UITextOff();
+        path = "Talking/Nobile_Schiavo";
+        audioSource.clip = Resources.Load<AudioClip>(path + index.ToString());
+        audioSource.Play();
+        dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        index++;
+        yield return new WaitForSeconds(audioSource.clip.length);
+        playerAudio.clip = Resources.Load<AudioClip>(path + index.ToString());
+        playerAudio.Play();
+        dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        index++;
+        yield return new WaitForSeconds((playerAudio.clip.length) / 2);
+        dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        index++;
+        yield return new WaitForSeconds((playerAudio.clip.length) / 2);
+        dialogueText.text = "";
+        Switch(player);
+        Globals.someoneIsTalking = false;
+        //chiama animazione swoosh
+        //GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
+    }
+    public void Switch(GameObject player)
+    {
+        Destroy(gameObject);
+        player.SetActive(false);
+        fpc2.SetActive(true);
+        Globals.player = Players.Schiavo;
+    }
+
     private IEnumerator StaticDialogue(AudioClip clip)
     {
-        dialogueText.text = "Si capo";
+        dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
         yield return new WaitForSeconds(clip.length);
         dialogueText.text = "";
         GetComponent<MySchiavoInteractable>()._isTalking = false;
+        Globals.someoneIsTalking = false;
     }
-    private IEnumerator StartDialogue(AudioSource playerAudio, GameObject player)
-    {
-        player.GetComponent<FirstPersonController>().enabled = false;
-        dialogueText.text = "Schiavo: Buongiorno mio padrone, ha qualche richiesta da farmi?";
-        audioSource.clip = Resources.Load<AudioClip>("Talking/SchiavoToNobile");
-        audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
-        dialogueText.text = "Nobile: Vai al macellum a prendermi del pesce";
-        playerAudio.clip = Resources.Load<AudioClip>("Talking/NobileToSchiavo");
-        playerAudio.Play();
-        yield return new WaitForSeconds(playerAudio.clip.length);
-        dialogueText.text = "";
-        player.SetActive(false);
-        fpc2.SetActive(true);
-        GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
-        Destroy(gameObject);
-        
-    }
+    
 }

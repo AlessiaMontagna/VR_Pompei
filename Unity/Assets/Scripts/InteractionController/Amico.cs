@@ -9,11 +9,12 @@ public class Amico : MonoBehaviour
     public Action Mission1Complete;
     [SerializeField] private AudioSource audioSource;
     private int index = 0;
-    [SerializeField] private Text dialogueText;
-    private bool _talkState;
-
+    private AudioSubManager _subtitles;
+    private Text dialogueText;
     private void Start()
     {
+        dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        _subtitles = FindObjectOfType<AudioSubManager>();
         audioSource = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
@@ -27,27 +28,27 @@ public class Amico : MonoBehaviour
 
     public void Talk(GameObject caller)
     {
-        if (!audioSource.isPlaying)
+        Globals.someoneIsTalking = true;
+        if (Globals.player == Players.Schiavo)
         {
-            audioSource.clip = Resources.Load<AudioClip>("Talking/Amico" + index);
-            audioSource.Play();
-            StartCoroutine(Subtitles());
-            if (Mission1Complete != null && index == 0)
-            {
-                Mission1Complete();
-                index = 1;
-            }
+            index = UnityEngine.Random.Range(0, 3);
         }
-
+        audioSource.clip = Resources.Load<AudioClip>("Talking/" + Globals.player.ToString() + "_Amico" + index);
+        audioSource.Play();
+        if (Globals.player == Players.Nobile && Mission1Complete != null && index == 0)
+        {
+            Mission1Complete();
+            index = 1;
+        }
+        StartCoroutine(Subtitles());
     }
 
     private IEnumerator Subtitles()
     {
-        GetComponent<AmicoInteractable>().isTalking = true;
-        dialogueText.text = "Ciao amico stasera veniamo a cena da te";
+        dialogueText.text = _subtitles.GetSubs(index, Characters.Amico);
         yield return new WaitForSeconds(audioSource.clip.length);
-        GetComponent<AmicoInteractable>().isTalking = false;
         dialogueText.text = "";
+        Globals.someoneIsTalking = false;
 
     }
 }

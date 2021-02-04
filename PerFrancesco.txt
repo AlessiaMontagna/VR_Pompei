@@ -1,0 +1,69 @@
+AudioSubManager:
+ 
+ private List<string> _ConversazioneNobileAmico = new List<string> { "Buongiorno Caius. Come accordato, ci vediamo stasera a cena.", "Hai chiesto al tuo servo di prendere qualcosa da mangiare stasera?"};
+private List<string> _ConversazioneSchiavoAmico = new List<string> { "Vai a comprare il cibo al mercato.", "Cosa fai ancora quì? Fai ciò che ti ha detto il tuo padrone", "Scegli bene il cibo che devi prendere, servo"};
+
+Questo nello start
+_subtitles.Add(Players.Nobile.ToString() + Characters.Amico.ToString(), _ConversazioneNobileAmico);
+_subtitles.Add(Players.Schiavo.ToString() + Characters.Amico.ToString(), _ConversazioneSchiavoAmico);
+
+
+Classe Amico:
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Amico : MonoBehaviour
+{
+    public Action Mission1Complete;
+    [SerializeField] private AudioSource audioSource;
+    private int index = 0;
+    private AudioSubManager _subtitles;
+    private Text dialogueText;
+    private void Start()
+    {
+        dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        _subtitles = FindObjectOfType<AudioSubManager>();
+        audioSource = GetComponent<AudioSource>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player_Nobile")
+        {
+            audioSource.clip = Resources.Load<AudioClip>("Talking/Nobile_Mercante1");
+            audioSource.Play();
+        }
+    }
+
+    public void Talk(GameObject caller)
+    {
+        if(Globals.player == Players.Schiavo)
+        {
+            index = UnityEngine.Random.Range(0, 3);
+        }
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = Resources.Load<AudioClip>("Talking/" + Globals.player.ToString() + "_Amico" +  index);
+            audioSource.Play();
+            StartCoroutine(Subtitles());
+            if (Globals.player == Players.Nobile && Mission1Complete != null && index == 0)
+            {
+                Mission1Complete();
+                index = 1;
+            }
+        }
+
+    }
+
+    private IEnumerator Subtitles()
+    {
+        GetComponent<AmicoInteractable>().isTalking = true;
+        dialogueText.text = _subtitles.GetSubs(index, Characters.Amico);
+        yield return new WaitForSeconds(audioSource.clip.length);
+        GetComponent<AmicoInteractable>().isTalking = false;
+        dialogueText.text = "";
+
+    }
+}
