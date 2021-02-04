@@ -145,12 +145,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729432993619757}
   - component: {fileID: 7025729432993619756}
+  - component: {fileID: 8271890285463556128}
   m_Layer: 0
   m_Name: GroupStop (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729432993619757
 Transform:
@@ -180,6 +181,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &8271890285463556128
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729432993619758}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729433024301945
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,12 +953,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433301522326}
   - component: {fileID: 7025729433301522325}
+  - component: {fileID: 8973855548333841394}
   m_Layer: 0
   m_Name: GroupStop (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729433301522326
 Transform:
@@ -971,6 +989,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &8973855548333841394
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729433301522327}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729433405341878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,12 +1379,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433718211315}
   - component: {fileID: 7025729433718211314}
+  - component: {fileID: 4323993160889225149}
   m_Layer: 0
   m_Name: GroupStop (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729433718211315
 Transform:
@@ -1380,6 +1415,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &4323993160889225149
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729433718211308}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729433794427578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,12 +1628,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433931508705}
   - component: {fileID: 7025729433931508704}
+  - component: {fileID: 7052016405625973760}
   m_Layer: 0
   m_Name: GroupStop (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729433931508705
 Transform:
@@ -1612,6 +1664,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &7052016405625973760
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729433931508706}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729433961046793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,12 +2049,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434173027789}
   - component: {fileID: 7025729434173027788}
+  - component: {fileID: 8223145367725582517}
   m_Layer: 0
   m_Name: GroupStop (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729434173027789
 Transform:
@@ -2016,6 +2085,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &8223145367725582517
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729434173027790}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729434195403380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,12 +2654,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434643742331}
   - component: {fileID: 7025729434643742330}
+  - component: {fileID: 8609193583129914917}
   m_Layer: 0
   m_Name: GroupStop (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729434643742331
 Transform:
@@ -2604,6 +2690,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &8609193583129914917
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729434643742324}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729434676210790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,12 +2855,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434804171164}
   - component: {fileID: 7025729434804171235}
+  - component: {fileID: 1463037808873952940}
   m_Layer: 0
   m_Name: GroupStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729434804171164
 Transform:
@@ -2796,6 +2899,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &1463037808873952940
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729434804171165}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729434809107431
 GameObject:
   m_ObjectHideFlags: 0
@@ -2896,12 +3015,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434817627682}
   - component: {fileID: 7025729434817627681}
+  - component: {fileID: 2330219626680888462}
   m_Layer: 0
   m_Name: GroupStop (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729434817627682
 Transform:
@@ -2931,6 +3051,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &2330219626680888462
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729434817627683}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729434833867306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,12 +3167,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434849334849}
   - component: {fileID: 7025729434849334848}
+  - component: {fileID: 4758578231504738781}
   m_Layer: 0
   m_Name: GroupStop (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7025729434849334849
 Transform:
@@ -3066,6 +3203,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
+--- !u!208 &4758578231504738781
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025729434849334850}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7025729434885977588
 GameObject:
   m_ObjectHideFlags: 0
