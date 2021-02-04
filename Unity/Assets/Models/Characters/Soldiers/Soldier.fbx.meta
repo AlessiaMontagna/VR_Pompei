@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -4485881400430384070
-    second: Armature|idle_1
+    second: Idle
   - first:
       74: -2004776400613781340
     second: Armature|push_back
@@ -20,10 +20,16 @@ ModelImporter:
     second: Armature|walk
   - first:
       74: 511389365063832151
-    second: Armature|walk_start
+    second: Walking_start
   - first:
       74: 5733829252212566869
-    second: Armature|walk_stop
+    second: Walking_stop
+  - first:
+      74: -1250308563666316836
+    second: Push
+  - first:
+      74: -1610863427237328480
+    second: Walking
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -135,7 +141,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|idle_1
+      name: Idle
       takeName: Armature|idle_1
       internalID: 0
       firstFrame: 0
@@ -164,7 +170,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|push_back
+      name: Push
       takeName: Armature|push_back
       internalID: 0
       firstFrame: 0
@@ -193,7 +199,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|walk
+      name: Walking
       takeName: Armature|walk_3
       internalID: 0
       firstFrame: 1
@@ -222,7 +228,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|walk_start
+      name: Walking_start
       takeName: Armature|walk_start
       internalID: 0
       firstFrame: 0
@@ -251,7 +257,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|walk_stop
+      name: Walking_stop
       takeName: Armature|walk_stop
       internalID: 0
       firstFrame: 0
@@ -316,7 +322,9 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 978eadb76b0ac40dfba1966ce981457b
+  - ec9d6f28f0b9b4e369815b3dda946ad1
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

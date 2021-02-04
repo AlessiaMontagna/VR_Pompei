@@ -1,22 +1,12 @@
 fileFormatVersion: 2
-guid: ca06b6e1a70fa154492fec644101e3b4
+guid: aa4c441625361466fb259b51f62d1912
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Dress_Guardia
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Skin_Guardia
-    second: {fileID: 2100000, guid: 44cab1916727ad348aa7b34b81a2e2a3, type: 2}
+    second: StartWalking
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -45,20 +35,20 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: StartWalking
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 88
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
@@ -110,14 +100,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - f90bf000500e01b49811db4529d3b7b2
-  - a806f6a3546cf4c19b29494399a58d54
-  - aa4c441625361466fb259b51f62d1912
-  - a0da9d28f68ef4d648be369932fb9771
-  - 74bf032d45c43406aa59ac97d939e863
-  - f5bc9c0ceb6964041b35934ac560bb49
-  - ed4b6738e8a2bc149870831da925c81d
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -886,11 +869,12 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ca06b6e1a70fa154492fec644101e3b4,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   additionalBone: 0
   userData: 
   assetBundleName: 
