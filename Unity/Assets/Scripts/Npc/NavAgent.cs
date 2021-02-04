@@ -6,6 +6,7 @@ using UnityEngine;
 public class NavAgent
 {
     private Npc _owner;
+    private Animator _animator;
     private FiniteStateMachine<Npc> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     public bool _interaction = false;
@@ -21,6 +22,7 @@ public class NavAgent
     {
         _owner = owner;
         _stateMachine = new FiniteStateMachine<Npc>(_owner);
+        _animator = _owner.GetComponent<Animator>();
         _navMeshAgent = _owner.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         // Settings
@@ -29,12 +31,12 @@ public class NavAgent
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
-        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO: animation*/}, () => {});
-        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationPath();}, () => {});
-        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationMove();}, () => {});
-        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {KeepTalking();}, () => {});
+        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Idle", true);}, () => {}, () => {});
+        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationPath();}, () => {});
+        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationMove();}, () => {});
+        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {});
         State interact = AddState("Interact", () => {}, () => {}, () => {});
-        interact = AddState("Interact", () => {_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_navMeshAgent.isStopped = true;Talk();}, () => {/*TODO: animation*/}, () => {});
+        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interact();}, () => {_owner.Animate();}, () => {});
 
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => _interaction);
@@ -88,16 +90,18 @@ public class NavAgent
 
     private void NextDestinationPath()
     {
-        if(_targets.Count == 0)Debug.LogError("PATH IS UNDEFINED");
+        if(_targets.Count == 0)Debug.LogError("UNDEFINED PATH");
         if(!DestinationReached())return;
         if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
-    public void KeepTalking(){}
+    public void Talk()
+    {
+        var index = Random.Range(-1, 1);
+        if(index != _animator.GetInteger("TalkIndex"))_animator.SetInteger("TalkIndex", index);
+    }
 
     public void Interactive(bool i){_interaction = i;}
-
-    public void Talk() => _owner.Talk();
 }

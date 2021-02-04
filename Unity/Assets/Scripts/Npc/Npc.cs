@@ -52,10 +52,11 @@ public class Npc : MonoBehaviour
 
     public void SetTargets(List<Vector3> targets) => _navAgent.SetTargets(targets);
 
-    public void Interact() => _navAgent.Interactive(true);
+    public void Interactive() => _navAgent.Interactive(true);
 
-    public void Talk()
+    public void Interact()
     {
+        //Talk
         int index = Random.Range(0, _audioFilesCount);
         _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
         _audioSource.Play();
@@ -65,11 +66,19 @@ public class Npc : MonoBehaviour
     private IEnumerator Subtitles(int index)
     {
         Globals.someoneIsTalking = true;
+        _animator.SetBool("Talk", true);
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
         //Debug.Log($"Playing {_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}: index of {_audioFilesCount}");
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
-        _navAgent.Interactive(false);
+        _animator.SetBool("Talk", false);
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
+        _navAgent.Interactive(false);
+    }
+
+    public void Animate()
+    {
+        var index = Random.Range(-1, 1);
+        if(index != _animator.GetInteger("TalkIndex"))_animator.SetInteger("TalkIndex", index);
     }
 }
