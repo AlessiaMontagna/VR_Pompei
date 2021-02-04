@@ -77,8 +77,7 @@ public class NavSpawner : MonoBehaviour
             int count = Random.Range(2, 5);
             for (int i = 0; i < count; i++)
             {
-                Vector2 random;
-                do{random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.position + new Vector3(random.x, 0, random.y);}
+                do{Vector2 random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.position + new Vector3(random.x, 0, random.y);}
                 while(!UnityEngine.AI.NavMesh.SamplePosition(position, out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas));
                 rotation = Quaternion.LookRotation(item.position-position, Vector3.up);
                 Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Schiavo);
