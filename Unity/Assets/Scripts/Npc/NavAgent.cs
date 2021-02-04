@@ -33,7 +33,7 @@ public class NavAgent
         State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationPath();}, () => {});
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationMove();}, () => {});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {KeepTalking();}, () => {});
-        State interact = AddState("Interact", () => {Talk();}, () => {/*TODO: animation*/}, () => {_stateMachine.ResetState();});
+        State interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;Talk();}, () => {/*TODO: animation*/}, () => {_stateMachine.ResetState();});
 
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => _interaction);

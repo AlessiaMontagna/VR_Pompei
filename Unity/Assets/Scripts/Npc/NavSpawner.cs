@@ -58,9 +58,9 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // spawn STOPS guards
-        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Guardia, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Guardia, out var prefabs))foreach (var item in stops.Where(i => i != null)){var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item.position, item.rotation, null);agent.GetComponent<CapsuleCollider>().radius = 1.5f;}
         // spawn STOPS mercanti
-        if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);}
+        if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach(var item in stops.Where(i => i != null)){var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);agent.GetComponent<CapsuleCollider>().radius = 1.5f;}
         // spawn STOPS balcony
         if(_stops.TryGetValue(NavSubroles.BalconyStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
@@ -77,12 +77,14 @@ public class NavSpawner : MonoBehaviour
             int count = Random.Range(2, 5);
             for (int i = 0; i < count; i++)
             {
-                do{var random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.position + new Vector3(random.x, 0, random.y);}
+                Vector2 random;
+                do{random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.position + new Vector3(random.x, 0, random.y);}
                 while(!UnityEngine.AI.NavMesh.SamplePosition(position, out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas));
                 rotation = Quaternion.LookRotation(item.position-position, Vector3.up);
                 Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Schiavo);
                 if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
-                SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", position, rotation, null);
+                var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", position, rotation, null);
+                agent.GetComponent<CapsuleCollider>().radius = 1.3f;
             }
         }
         // SET agents total numbers

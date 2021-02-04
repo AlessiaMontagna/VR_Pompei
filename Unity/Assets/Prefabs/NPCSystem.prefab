@@ -145,13 +145,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729432993619757}
   - component: {fileID: 7025729432993619756}
-  - component: {fileID: 2689486558005750749}
   m_Layer: 0
   m_Name: GroupStop (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729432993619757
 Transform:
@@ -181,22 +180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &2689486558005750749
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729432993619758}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433024301945
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +268,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433074718222}
   - component: {fileID: 7025729433074718221}
-  - component: {fileID: 4510111539193778794}
   m_Layer: 0
   m_Name: MercanteStop
   m_TagString: Untagged
@@ -325,22 +307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 3
---- !u!208 &4510111539193778794
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433074718223}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433085022028
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +525,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433197900356}
   - component: {fileID: 7025729433197900363}
-  - component: {fileID: 2853476668652248612}
   m_Layer: 0
   m_Name: GuardStop
   m_TagString: Untagged
@@ -600,22 +565,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 2
---- !u!208 &2853476668652248612
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433197900357}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433203674718
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,13 +936,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433301522326}
   - component: {fileID: 7025729433301522325}
-  - component: {fileID: 2712911010304849242}
   m_Layer: 0
   m_Name: GroupStop (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729433301522326
 Transform:
@@ -1023,22 +971,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &2712911010304849242
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433301522327}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433405341878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,7 +1210,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433604320981}
   - component: {fileID: 7025729433604320980}
-  - component: {fileID: 4717506268891651369}
   m_Layer: 0
   m_Name: MercanteStop (1)
   m_TagString: Untagged
@@ -1314,22 +1245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 3
---- !u!208 &4717506268891651369
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433604320982}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433613732530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1255,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433613732529}
   - component: {fileID: 7025729433613732528}
-  - component: {fileID: 2919905944908111924}
   m_Layer: 0
   m_Name: GuardStop (1)
   m_TagString: Untagged
@@ -1376,22 +1290,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 2
---- !u!208 &2919905944908111924
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433613732530}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433685393804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,13 +1345,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433718211315}
   - component: {fileID: 7025729433718211314}
-  - component: {fileID: 1305891833998042646}
   m_Layer: 0
   m_Name: GroupStop (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729433718211315
 Transform:
@@ -1483,22 +1380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &1305891833998042646
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433718211308}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433794427578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,13 +1577,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729433931508705}
   - component: {fileID: 7025729433931508704}
-  - component: {fileID: 6226986640407566941}
   m_Layer: 0
   m_Name: GroupStop (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729433931508705
 Transform:
@@ -1712,7 +1592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7025729433931508706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -52.36, y: 0, z: 42.18}
+  m_LocalPosition: {x: -52.36, y: 0, z: 43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7025729434804171164}
@@ -1732,22 +1612,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &6226986640407566941
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729433931508706}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729433961046793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1801,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434070552119}
   - component: {fileID: 7025729434070552118}
-  - component: {fileID: 688486496746118304}
   m_Layer: 0
   m_Name: MercanteStop (4)
   m_TagString: Untagged
@@ -1973,22 +1836,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 3
---- !u!208 &688486496746118304
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434070552112}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434070935660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,13 +1981,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434173027789}
   - component: {fileID: 7025729434173027788}
-  - component: {fileID: 8323267428117673422}
   m_Layer: 0
   m_Name: GroupStop (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729434173027789
 Transform:
@@ -2170,22 +2016,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &8323267428117673422
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434173027790}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434195403380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2026,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434195403387}
   - component: {fileID: 7025729434195403386}
-  - component: {fileID: 2891491656865999407}
   m_Layer: 0
   m_Name: MercanteStop (3)
   m_TagString: Untagged
@@ -2232,22 +2061,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 3
---- !u!208 &2891491656865999407
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434195403380}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434223057111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,7 +2206,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434371066018}
   - component: {fileID: 7025729434371066017}
-  - component: {fileID: 563227337139102089}
   m_Layer: 0
   m_Name: GuardStop (3)
   m_TagString: Untagged
@@ -2429,22 +2241,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 2
---- !u!208 &563227337139102089
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434371066019}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434390366382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,7 +2251,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434390366381}
   - component: {fileID: 7025729434390366380}
-  - component: {fileID: 7210644503947294881}
   m_Layer: 0
   m_Name: GuardStop (2)
   m_TagString: Untagged
@@ -2491,22 +2286,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 2
---- !u!208 &7210644503947294881
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434390366382}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434402691613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2790,13 +2569,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434643742331}
   - component: {fileID: 7025729434643742330}
-  - component: {fileID: 1637919986022966692}
   m_Layer: 0
   m_Name: GroupStop (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729434643742331
 Transform:
@@ -2826,22 +2604,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &1637919986022966692
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434643742324}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434676210790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,13 +2753,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434804171164}
   - component: {fileID: 7025729434804171235}
-  - component: {fileID: 2959595328627693992}
   m_Layer: 0
   m_Name: GroupStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729434804171164
 Transform:
@@ -3035,22 +2796,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &2959595328627693992
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434804171165}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434809107431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3151,13 +2896,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434817627682}
   - component: {fileID: 7025729434817627681}
-  - component: {fileID: 342899741811509812}
   m_Layer: 0
   m_Name: GroupStop (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729434817627682
 Transform:
@@ -3187,22 +2931,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &342899741811509812
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434817627683}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434833867306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,7 +2986,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434848689392}
   - component: {fileID: 7025729434848689399}
-  - component: {fileID: 140698152205161519}
   m_Layer: 0
   m_Name: MercanteStop (2)
   m_TagString: Untagged
@@ -3294,22 +3021,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 3
---- !u!208 &140698152205161519
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434848689393}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434849334850
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,13 +3031,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7025729434849334849}
   - component: {fileID: 7025729434849334848}
-  - component: {fileID: 1917105973925168837}
   m_Layer: 0
   m_Name: GroupStop (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7025729434849334849
 Transform:
@@ -3356,22 +3066,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 5
---- !u!208 &1917105973925168837
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025729434849334850}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.25, y: 1, z: 1.25}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &7025729434885977588
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,7 +3301,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4651254876664694990}
   - component: {fileID: 8382711022244553594}
-  - component: {fileID: 279074041494141750}
   m_Layer: 0
   m_Name: GuardStop (4)
   m_TagString: Untagged
@@ -3643,22 +3336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 2
---- !u!208 &279074041494141750
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8455320686408468445}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &8869464429439548467
 GameObject:
   m_ObjectHideFlags: 0
@@ -3669,7 +3346,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2793642617990614073}
   - component: {fileID: 3185948309076113354}
-  - component: {fileID: 3853000027409948499}
   m_Layer: 0
   m_Name: GuardStop (5)
   m_TagString: Untagged
@@ -3705,19 +3381,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _role: 1
   _subrole: 2
---- !u!208 &3853000027409948499
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8869464429439548467}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.2, y: 1, z: 1.2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5

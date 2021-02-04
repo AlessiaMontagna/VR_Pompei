@@ -32,9 +32,9 @@ public class Npc : MonoBehaviour
         _audioFilesCount = _audioFiles.Count/3;
         _audioVoice = _audioFiles.ElementAt(0);
         var collider = GetComponent<CapsuleCollider>();
-        if(collider.center.y < 0.8f || collider.center.y > 1f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
+        if(collider.center.y != 0.85f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         if(collider.height < 1.6f || collider.height > 1.8f)collider.height = 1.7f;
-        if(collider.radius < 1.2f || collider.radius > 1.3f)collider.radius = 1.2f;
+        if(collider.radius != 1f)collider.radius = 1f;
         // here add/override states and transitions();
         /*
         State interact = _navAgent.AddState("Interact", () => {}, () => {}, () => {});
@@ -72,7 +72,7 @@ public class Npc : MonoBehaviour
     {
         Globals.someoneIsTalking = true;
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
-        Debug.Log($"Playing {_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}: index of {_audioFilesCount}");
+        //Debug.Log($"Playing {_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}: index of {_audioFilesCount}");
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
         _navAgent.Interactive(false);
