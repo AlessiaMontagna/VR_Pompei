@@ -16,31 +16,9 @@ public class Npc : MonoBehaviour
     private Animator _animator;
     private Characters _character;
     private AudioSource _audioSource;
-    private string _voce;
-    private int _nAudioFiles = -1;
-    
-    private List<string> _vociMaschili = new List<string>{"Giorgio", "Francesco", "Antonio", "Klajdi", "Edoardo", "Fabrizio", "Andrea", "Diego", "Marco", "Alessandro"};
-    private List<string> _vociFemminili = new List<string>{"Alessia", "Sofia", "Nadia", "Paola", "Stella", "Camilla"};
-    /*
-    Giorgio: Nobile_SchiavoN_; Nobile_MercanteN_; Nobile_GuardiaN_; Nobile_NobileMN_; Mercante_GuardiaN_; Schiavo_MercanteN_; 
-    Francesco: Nobile_NobileMN_; Mercante_SchiavoN_; Mercante_MercanteN_; Nobile_SchiavoN_; Mercante_NobileMN_; Schiavo_GuardiaN_; 
-    Antonio: Mercante_GuardiaN_; Mercante_NobileMN_; Schiavo_SchiavoN_; Nobile_MercanteN_; Mercante_SchiavoN_; Schiavo_NobileMN_; 
-    Klajdi: Schiavo_MercanteN_; Schiavo_GuardiaN_; Schiavo_NobileMN_; Nobile_GuardiaN_; Mercante_MercanteN_; Schiavo_SchiavoN_; 
-    
-    Edoardo: Nobile_SchiavoN_; Nobile_MercanteN_; 
-    Fabrizio: Nobile_GuardiaN_; Nobile_NobileMN_; 
-    Andrea: Mercante_SchiavoN_; Mercante_MercanteN_; 
-    Diego: Mercante_GuardiaN_; Mercante_NobileMN_; 
-    Marco: Schiavo_SchiavoN_; Schiavo_MercanteN_; 
-    Alessandro: Schiavo_GuardiaN_; Schiavo_NobileMN_; 
+    private int _audioFilesCount = 0;
+    private string _audioVoice;
 
-    Alessia: Nobile_NobileFN_; Schiavo_NobileFN_;
-    Sofia: Mercante_NobileFN_; Nobile_NobileFN_;
-    Nadia: Schiavo_NobileFN_; Mercante_NobileFN_;
-    Paola: Nobile_NobileFN_; Schiavo_NobileFN_;
-    Stella: Mercante_NobileFN_; Nobile_NobileFN_;
-    Camilla: Schiavo_NobileFN_; Mercante_NobileFN_;
-    */
     void Awake()
     {
         _navAgent = new NavAgent(this);
@@ -50,23 +28,13 @@ public class Npc : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        var files = Resources.LoadAll<AudioClip>("Talking").Where(i => i.name.Contains(Globals.player.ToString() + "_" + _character.ToString())).ToList();
-        var count = _vociMaschili.Count;
-        if(count < _vociFemminili.Count) count = _vociFemminili.Count;
-        var voci = _vociMaschili;
-        if(_character == Characters.NobileF)voci = _vociFemminili;
-        do
-        {
-            if(count <= 0){string s = "";foreach (var item in files){s += item.name+"; ";}Debug.LogError($"Audio files not found for {Globals.player.ToString()}_{_character.ToString()} audios of {_voce}: {s}");break;}
-            _voce = voci.ElementAt(Random.Range(0, voci.Count));
-            voci.Remove(_voce);
-            _nAudioFiles = files.Where(i => i.name.Contains(_voce)).ToList().Count;
-            count--;
-        }while(_nAudioFiles <= 0);
-        //Debug.Log($"Found {_nAudioFiles} audios for {Globals.player.ToString()}_{_character.ToString()} of {_voce}");
+        var _audioFiles = FindObjectOfType<AudioSubManager>().GetAudios(_character);
+        _audioFilesCount = _audioFiles.Count/3;
+        _audioVoice = _audioFiles.ElementAt(0);
         var collider = GetComponent<CapsuleCollider>();
-        if(collider.center.y < 0.8f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
+        if(collider.center.y < 0.8f || collider.center.y > 1f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         if(collider.height < 1.6f || collider.height > 1.8f)collider.height = 1.7f;
+        if(collider.radius < 1.2f || collider.radius > 1.3f)collider.radius = 1.2f;
         // here add/override states and transitions();
         /*
         State interact = _navAgent.AddState("Interact", () => {}, () => {}, () => {});
@@ -92,21 +60,19 @@ public class Npc : MonoBehaviour
 
     public void Interact() => _navAgent.Interactive(true);
 
-    public void StartTalking()
+    public void Talk()
     {
-        if(_audioSource.isPlaying || _nAudioFiles <= 0) return;
-        int index = Random.Range(0, _nAudioFiles)+1;
-        Debug.Log($"Playing {Globals.player.ToString() + "_" + _character.ToString() + index + "_" + _voce} audio of {_nAudioFiles}");
-        _audioSource.clip = Resources.Load<AudioClip>("Talking/" + Globals.player.ToString() + "_" + _character.ToString() + index + "_" + _voce);
+        int index = Random.Range(0, _audioFilesCount);
+        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
         _audioSource.Play();
         StartCoroutine(Subtitles(index));
     }
 
-    private IEnumerator Subtitles(int i)
+    private IEnumerator Subtitles(int index)
     {
         Globals.someoneIsTalking = true;
-        Debug.Log($"sottotitoli {FindObjectOfType<sottotitoli>()}; text FindObjectOfType<Sottotitoli>().GetComponent<Text>(); audiosubmanager {FindObjectOfType<AudioSubManager>()}");
-        FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(i, _character);
+        FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
+        Debug.Log($"Playing {_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}: index of {_audioFilesCount}");
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
         _navAgent.Interactive(false);

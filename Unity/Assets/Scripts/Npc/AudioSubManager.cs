@@ -11,6 +11,9 @@ public class AudioSubManager : MonoBehaviour
 
     private Dictionary<string, List<string>> _subtitles = new Dictionary<string, List<string>>();
 
+    private List<string> _vociMaschili = new List<string>{"Giorgio", "Francesco", "Antonio", "Klajdi", "Edoardo", "Fabrizio"};
+    private List<string> _vociFemminili = new List<string>{"Alessia"};
+
     void Start()
     {
         _subtitles.Add(Players.Nobile.ToString() + Characters.Amico.ToString(), _ConversazioneNobileAmico);
@@ -18,9 +21,26 @@ public class AudioSubManager : MonoBehaviour
         _subtitles.Add(Players.Nobile.ToString() + Characters.MySchiavo.ToString(), _ConversazioneNobileSchiavo);
     }
 
+    public List<string> GetAudios(Characters character)
+    {
+        var files = Resources.LoadAll<AudioClip>($"Talking/{character.ToString()}").ToList();
+        var voci = _vociMaschili;
+        if(character == Characters.NobileF)voci = _vociFemminili;
+        while(voci.Count > 0){
+            var voce = voci.ElementAt(Random.Range(0, voci.Count));
+            voci.Remove(voce);
+            var tmp = files.Where(i => i.name.Contains(voce)).ToList();
+            if(tmp.Count > 0) {files = tmp;break;}
+        }
+        if(files.Count < 3) Debug.LogError($"Not enough files found for {character.ToString()}");
+        List<string> audios = new List<string>();
+        foreach (var item in files){audios.Add(item.name.Split('_')[1]);}
+        return audios;
+    }
+
     public string GetSubs(int index, Characters type)
     {
-        if(_subtitles.TryGetValue(Globals.player.ToString()+type.ToString(), out var subtitles))return subtitles.ElementAt(index-1);
+        if(_subtitles.TryGetValue(Globals.player.ToString()+type.ToString(), out var subtitles))return subtitles.ElementAt(index);
         return null;
     }
 }

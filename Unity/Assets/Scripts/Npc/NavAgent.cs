@@ -29,11 +29,11 @@ public class NavAgent
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
-        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO:*/}, () => {});
+        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;}, () => {/*TODO: animation*/}, () => {});
         State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationPath();}, () => {});
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationMove();}, () => {});
-        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {Talk();}, () => {});
-        State interact = AddState("Interact", () => {StartTalking();}, () => {/*TODO:*/}, () => {_stateMachine.ResetState();});
+        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {KeepTalking();}, () => {});
+        State interact = AddState("Interact", () => {Talk();}, () => {/*TODO: animation*/}, () => {_stateMachine.ResetState();});
 
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => _interaction);
@@ -92,9 +92,9 @@ public class NavAgent
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
+    public void KeepTalking(){}
+
     public void Interactive(bool i){_interaction = i;}
 
-    public void Talk(){}
-
-    public void StartTalking() => _owner.StartTalking();
+    public void Talk() => _owner.Talk();
 }
