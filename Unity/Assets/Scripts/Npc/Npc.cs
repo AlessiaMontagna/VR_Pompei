@@ -35,12 +35,6 @@ public class Npc : MonoBehaviour
         if(collider.center.y != 0.85f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         if(collider.height < 1.6f || collider.height > 1.8f)collider.height = 1.7f;
         if(collider.radius != 1f)collider.radius = 1f;
-        // here add/override states and transitions();
-        /*
-        State interact = _navAgent.AddState("Interact", () => {}, () => {}, () => {});
-        _navAgent.AddTransition(_navAgent.GetState("Talk"), interact, () => Random.Range(0f, 1f) < 0.1f);
-        _navAgent.AddTransition(interact, _navAgent.GetState("Talk"), () => Random.Range(0f, 1f) < 0.6f);
-        */
     }
 
     void Update()

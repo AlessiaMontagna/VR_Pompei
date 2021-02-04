@@ -24,7 +24,7 @@ public class FiniteStateMachine<T>
     public void SetState(State state)
     {
         if(state == _currentState) return;
-        //Debug.Log($"{_owner.GetComponent<MonoBehaviour>().GetType().ToString()} switching from {_currentState?.Name} to {state.Name}");
+        Debug.Log($"{_owner.GetComponent<MonoBehaviour>().GetType().ToString()} switching from {_currentState?.Name} to {state.Name}");
         _previousState = _currentState;
         _currentState?.Exit();
         _currentState = state;
@@ -32,9 +32,9 @@ public class FiniteStateMachine<T>
         _currentState.Enter();
     }
 
-    public void ResetState() => SetState(_previousState);
-
     public State GetCurrentState(){return _currentState;}
+
+    public State GetPreviousState(){return _previousState;}
 
     public void AddTransition(State fromState, State toState, Func<bool> transitionCondition)
     {

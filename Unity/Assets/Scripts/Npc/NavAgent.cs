@@ -8,7 +8,7 @@ public class NavAgent
     private Npc _owner;
     private FiniteStateMachine<Npc> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
-    private bool _interaction = false;
+    public bool _interaction = false;
 
     public readonly float walkSpeed = 1.5f;
     public readonly float runSpeed = 3f;
@@ -33,14 +33,15 @@ public class NavAgent
         State path = AddState("Path", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationPath();}, () => {});
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;}, () => {NextDestinationMove();}, () => {});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;}, () => {KeepTalking();}, () => {});
-        State interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;Talk();}, () => {/*TODO: animation*/}, () => {_stateMachine.ResetState();});
+        State interact = AddState("Interact", () => {}, () => {}, () => {});
+        interact = AddState("Interact", () => {_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_navMeshAgent.isStopped = true;Talk();}, () => {/*TODO: animation*/}, () => {});
 
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => _interaction);
         _stateMachine.AddTransition(talk, interact, () => _interaction);
         _stateMachine.AddTransition(path, interact, () => _interaction);
         _stateMachine.AddTransition(move, interact, () => _interaction);
-        _stateMachine.AddTransition(interact, idle, () => !_interaction);
+        _stateMachine.AddTransition(interact, idle, () => false);
 
         // START STATE
         SetState("Idle");
@@ -63,6 +64,8 @@ public class NavAgent
     public State GetState(string name){if(_states.TryGetValue(name, out State state))return state;return null;}
 
     public State GetCurrentState(){return _stateMachine.GetCurrentState();}
+
+    public State GetPreviousState(){return _stateMachine.GetPreviousState();}
 
     public void SetState(string statename){if(_states.TryGetValue(statename, out State state)) _stateMachine.SetState(state);}
 
