@@ -5,13 +5,13 @@ using UnityEngine;
 public class ImpactAudioScript : MonoBehaviour
 {
     public AudioClip ImpactAudio;
-    AudioSource audio;
+    AudioSource _audioSource;
     public bool AlreadyPlayed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class ImpactAudioScript : MonoBehaviour
     {
         if(!AlreadyPlayed)
         {
-            audio.PlayOneShot(ImpactAudio);
+            _audioSource.PlayOneShot(ImpactAudio);
             AlreadyPlayed = true;
         }
     }

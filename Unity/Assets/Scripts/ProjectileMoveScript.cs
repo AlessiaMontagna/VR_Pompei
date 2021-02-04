@@ -9,14 +9,14 @@ public class ProjectileMoveScript : MonoBehaviour
     public List<GameObject> Trails;
     public AudioClip FallAudio;
     public bool AlreadyPlayed = false;
-    AudioSource audio;
+    AudioSource _audioSource;
 
     private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -30,7 +30,7 @@ public class ProjectileMoveScript : MonoBehaviour
 
             if(!AlreadyPlayed)
             {
-                audio.PlayOneShot(FallAudio);
+                _audioSource.PlayOneShot(FallAudio);
                 AlreadyPlayed = true;
             }
     }
