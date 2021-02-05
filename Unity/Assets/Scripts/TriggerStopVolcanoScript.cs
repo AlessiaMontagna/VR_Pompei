@@ -16,7 +16,7 @@ public class TriggerStopVolcanoScript : MonoBehaviour
             Debug.Log("Player entered the Trigger: STOP Lapills!!!");
             stop = true;
             Debug.Log("Stopping lappils...");
-            lapils.kill_player(player);
+            lapils.kill_player();
         }
         else
             return;

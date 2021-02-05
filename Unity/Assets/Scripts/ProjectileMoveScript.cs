@@ -7,11 +7,11 @@ public class ProjectileMoveScript : MonoBehaviour
     public float Speed;
     public GameObject Impactprefab;
     public List<GameObject> Trails;
-    public AudioClip FallAudio;
-    public bool AlreadyPlayed = false;
-    AudioSource audio;
+    public SpawnLapillusScript parentScript;
+    GameObject target;  
 
-    private Rigidbody rb;
+    private Rigidbody rb;    
+    private bool last;
 
     public float GetSpeed()
     {
@@ -21,23 +21,23 @@ public class ProjectileMoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();        
     }
 
     // Update is called once per frame
-    void FixedUpdate() 
+    void FixedUpdate()
     {
         if(Speed != 0 && rb != null)
-        {
-            rb.position += transform.forward * (Speed * Time.deltaTime);
-        }
-
-            if(!AlreadyPlayed)
+        {  
+            if(last)
             {
-                audio.PlayOneShot(FallAudio);
-                AlreadyPlayed = true;
-            }
+                rb.position += target.transform.position * (Speed * Time.deltaTime);
+            } 
+            else 
+            {
+                rb.position += transform.forward * (Speed * Time.deltaTime);
+            }                                                                                          
+        }
     }
 
     void OnCollisionEnter(Collision collision) 
@@ -49,10 +49,12 @@ public class ProjectileMoveScript : MonoBehaviour
         ContactPoint contact = collision.contacts[0]; //Quaternion.identity
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.up);//, contact.point);
         Vector3 pos = contact.point;
+        parentScript.TellHitPos(pos);                       
 
         if(Impactprefab != null)
         {
             var impactVFX = Instantiate(Impactprefab, pos, rot) as GameObject;
+           
             //Check if lapil hit the floor
             if(collision.gameObject.tag != "Floor")
             {            
@@ -76,5 +78,11 @@ public class ProjectileMoveScript : MonoBehaviour
         }
 
         Destroy (gameObject);
-    }
+    } 
+
+    public void IsLast(GameObject character)
+    {
+        target = character;
+        last = true;    
+    } 
 }

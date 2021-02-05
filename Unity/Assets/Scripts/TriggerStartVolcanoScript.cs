@@ -9,6 +9,13 @@ public class TriggerStartVolcanoScript : MonoBehaviour
     public GameObject player;
     Collider pcol;
     public bool first_time = false;
+
+    void Start()
+    {
+        //start coroutine to play volcano eruption sound
+        //start coroutine to create fog
+        StartCoroutine("Fog");
+    }
     
     void OnTriggerEnter(Collider other) 
     {        
@@ -27,5 +34,17 @@ public class TriggerStartVolcanoScript : MonoBehaviour
         {            
             StartCoroutine(lapils.Rain());            
         }
-    }    
+    }
+
+    private IEnumerator Fog()
+    {
+        RenderSettings.fogDensity = 0;
+        RenderSettings.fog = true;        
+        yield return new WaitForSeconds(10.0f);
+        for(float f = 0.0001f; f <= 0.05; f+= 0.0001f)
+        {
+            RenderSettings.fogDensity = f;
+            yield return new WaitForSeconds(0.0001f);
+        }
+    }  
 }

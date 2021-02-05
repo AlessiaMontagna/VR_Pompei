@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072618038655429008}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!198 &969872483
 ParticleSystem:
@@ -4842,7 +4842,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072618038655429008}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &1034005213
 ParticleSystem:
@@ -14461,12 +14461,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561763788}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0.18, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.11000061, y: 0.17999983, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2072618038655429008}
-  m_RootOrder: 4
+  m_Father: {fileID: 2072618037971754990}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &1561763791
 ParticleSystem:
@@ -19278,7 +19278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072618038655429008}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &1681235409
 ParticleSystem:
@@ -24089,8 +24089,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2072618038655429008}
-  m_RootOrder: 3
+  m_Father: {fileID: 2072618037971754990}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &1805245879
 ParticleSystem:
@@ -28902,7 +28902,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072618038655429008}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &1966231141
 ParticleSystem:
@@ -43317,8 +43317,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2072618037971754990}
-  - component: {fileID: -2230437987388063193}
-  - component: {fileID: 637077910663577694}
+  - component: {fileID: 5438648564836355168}
+  - component: {fileID: -1546318500515502594}
   m_Layer: 0
   m_Name: lapillus_hit_VFX
   m_TagString: Untagged
@@ -43337,11 +43337,13 @@ Transform:
   m_LocalPosition: {x: 95.43, y: 5.67, z: -2.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1561763789}
+  - {fileID: 1805245877}
   - {fileID: 2072618038655429008}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2230437987388063193
+--- !u!114 &5438648564836355168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43355,10 +43357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crater: {fileID: 1805245879}
   lapillus: {fileID: 1561763791}
-  ImpactAudio: {fileID: 8300000, guid: f07227b9178ac4640a61d18606ae0438, type: 3}
-  AlreadyPlayed: 0
-  floor: 1
---- !u!82 &637077910663577694
+--- !u!82 &-1546318500515502594
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43378,7 +43377,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 10
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -43414,7 +43413,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -43486,14 +43485,12 @@ Transform:
   - {fileID: 2072618036698719765}
   - {fileID: 1089855325}
   - {fileID: 2055795898}
-  - {fileID: 1805245877}
-  - {fileID: 1561763789}
   - {fileID: 1966231139}
   - {fileID: 1681235407}
   - {fileID: 1034005211}
   - {fileID: 969872481}
   m_Father: {fileID: 2072618037971754990}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &2072618038655429010
 ParticleSystem:

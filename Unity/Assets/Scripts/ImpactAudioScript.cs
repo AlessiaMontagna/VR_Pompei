@@ -6,29 +6,30 @@ public class ImpactAudioScript : MonoBehaviour
 {
     public ParticleSystem crater;
     public ParticleSystem lapillus;
-    public AudioClip ImpactAudio;
-    AudioSource audio;
-    public bool AlreadyPlayed = false;    
+    //public AudioClip ImpactAudio;
+    //AudioSource audio;
+    //public bool AlreadyPlayed = false;    
 
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        //audio = GetComponent<AudioSource>();
+        //FindObjectOfType<AudioManager>().Play("LapillusImpact");
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(!AlreadyPlayed)
-        {
-            audio.PlayOneShot(ImpactAudio);
-            AlreadyPlayed = true;
-        }
-    }
+    /*void Update()
+    {        
+        
+            //audio.PlayOneShot(ImpactAudio);
+            //AlreadyPlayed = true;
+    }*/
 
     public void StopParticles()
     {
-        crater.Stop();
+        crater.Stop();        
         lapillus.Stop();
+        Destroy(crater);
+        Destroy(lapillus);
     }
 }

@@ -28,6 +28,7 @@ public class ShowAgenda : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Agenda"))
         {
             MoveAgenda();
+
         }
     }
 

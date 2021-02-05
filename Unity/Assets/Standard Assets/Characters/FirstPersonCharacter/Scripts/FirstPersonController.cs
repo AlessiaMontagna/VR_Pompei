@@ -42,9 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-        private bool sceneStarted = true;
-
-        public GameObject level;
+        private bool sceneStarted = true;        
 
         // Use this for initialization
         private void Start()
@@ -87,8 +85,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     sceneStarted = false;  
 
                 m_MoveDir.y = 0f;
-                m_Jumping = false;  
-                //level.GetComponent<LevelChangerScript>().StartLevel();              
+                m_Jumping = false;                              
 
             }
             if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)

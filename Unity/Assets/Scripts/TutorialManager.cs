@@ -11,7 +11,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Text obiettiviText;
     [SerializeField] private SchiavoInteractable schiavo;
     [SerializeField] private BoxCollider collider;
-    [SerializeField] private ShowAgenda scriptAgenda;
+    //[SerializeField] private ShowAgenda scriptAgenda;
     [SerializeField] private SwitchWhatIsShowing mco_text;
     private float waitTime = 5f;
     private int missionIndex;
@@ -19,7 +19,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        scriptAgenda.enabled = false;
+        FindObjectOfType<ShowAgenda>().enabled = false;
         missionIndex = 0;
         obiettiviText.text = "";
         agendaText.text = "";
@@ -78,7 +78,7 @@ public class TutorialManager : MonoBehaviour
             {
                 obiettiviText.text = "Nuovo obiettivo: Raggiungi i tuoi amici al foro";
                 tutorialText.text = "Premi TAB per aprire la mappa";
-                scriptAgenda.enabled = true;
+                FindObjectOfType<ShowAgenda>().enabled = true;
                 missionIndex = 3;
                 waitTime = 5f;
             }
