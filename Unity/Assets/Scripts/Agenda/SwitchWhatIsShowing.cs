@@ -9,6 +9,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
     private GameObject codex;
     private GameObject mappa;
     private GameObject obiettivi;
+    private bool m_isAxisInUse = false;
     public byte indexAgenda;
     [SerializeField] private Text textUp;
     [SerializeField] private Text textDown;
@@ -28,16 +29,27 @@ public class SwitchWhatIsShowing : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxisRaw("Arrows_v")>0)
         {
+            if(m_isAxisInUse == false)  //serve per prendere l'input della freccia del joystick solo 1 volta (es.: keydown)
+         {
             if (indexAgenda == 0) indexAgenda = 2; else indexAgenda--;
             Show();
+            m_isAxisInUse = true;
+         }
+            
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxisRaw("Arrows_v")<0)
         {
+            if(m_isAxisInUse == false)
+            {
             if (indexAgenda == 2) indexAgenda = 0; else indexAgenda++;
             Show();
+            m_isAxisInUse = true;
+            }
         }
+
+        if(Input.GetAxisRaw("Arrows_v") == 0) m_isAxisInUse = false;
     }
 
     private void Show()

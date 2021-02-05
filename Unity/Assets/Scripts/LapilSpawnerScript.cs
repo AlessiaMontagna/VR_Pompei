@@ -5,47 +5,69 @@ using UnityEngine;
 public class LapilSpawnerScript : MonoBehaviour
 {
     public GameObject prefab;
-    //public GameObject character;
-    float offset = 50.0f; 
+    public GameObject last;
+    public GameObject character;
+    public LevelChangerScript level;
+    float offset = 50.0f;
+    public bool running = false;
+    public float min = 0.0f;
+    public float max = 3.0f;    
 
-IEnumerator Rain() 
-{
-    yield return new WaitForSeconds(Random.Range(0,3));
+public IEnumerator Rain() 
+{   
+    running = true;
+    Debug.Log("Coroutine Started.");
     Vector3 position = new Vector3(Random.Range(transform.position.x-offset, transform.position.x+offset), 0, Random.Range(transform.position.z-offset, transform.position.z+offset));
-    Instantiate(prefab, position, Quaternion.identity);
-    var timer = 5f;
-    while (timer>0f)
-    {
-        timer -= 1 * Time.deltaTime;                          
-    }
-    Destroy(prefab);
-    routineStarter(0);
+    var prefabVFX = Instantiate(prefab, position, Quaternion.identity);
+    prefabVFX.GetComponent<SpawnLapillusScript>().Normal(); 
+    Destroy(prefabVFX, 5);
+    yield return new WaitForSeconds(Random.Range(min, max));
+    running = false;
+    Debug.Log("Coroutine finished.");        
 }
 
-public void routineStarter(int code)
+public void LoadFinalScene()
 {
-    if(code == 1)
+    if(level != null)
     {
-        Update();
-    }        
-    else
+        level.FadeToNextLevel();
+    } else
     {
-        StartCoroutine("Rain");  
+        Debug.Log("Level error");
+        return;
     }
-        
+    //SceneLoader.Load(SceneLoader.Scene.ScenaFinale);
 }
 
-public void kill_player(GameObject player)
+public void kill_player()
 {
     Debug.Log("Killing player!!!");
-    Vector3 position = player.transform.position;
-    Instantiate(prefab, position, Quaternion.identity);
-    routineStarter(1);
+    Vector3 position = character.transform.position;
+    var prefabVFX = Instantiate(last, position, Quaternion.identity);
+    prefabVFX.GetComponent<SpawnLapillusScript>().Normal();    
+    Destroy(prefabVFX, 5);
+    //Debug.Log("Loading Scene...");
+    //LoadFinalScene();
 }
 
-void Update() 
+public void ComputeDistance(Vector3 pos)
 {
-    
+    if(pos != null)
+    {
+        Debug.Log("FOUND IT!!!2");
+        float distance = Vector3.Distance (pos, character.transform.position);
+        Debug.Log("Distance: "+ distance); 
+        if(distance <= 5)
+        {
+            Debug.Log("DEAD!!!");
+            LoadFinalScene();
+        } 
+    } 
+    else
+    {
+        Debug.Log("NOTHING!!!2");
+        return;
+    }      
 }
 
 }

@@ -37,7 +37,7 @@ public class ArrayModifier : MonoBehaviour
             for(int j=0; j <CountX; j++)
             {
                 Vector3 pos = new Vector3(transform.localPosition.x + lastX, transform.localPosition.y, transform.localPosition.z + lastZ);
-                GameObject go = Instantiate(TheObject, pos, Quaternion.identity, transform) as GameObject;
+                GameObject go = (GameObject)Instantiate(TheObject, pos, Quaternion.identity, transform) as GameObject;
                 go.name = TheObject.name + "_" + i + "_" + j;
                 lastX -= renderer.bounds.size.x;
             }

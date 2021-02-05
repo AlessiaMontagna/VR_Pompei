@@ -7,6 +7,7 @@ public class EarthQuakeScript : MonoBehaviour
     public GameObject player;
     public CameraShakeScript cameraShake;
     Collider player_collider;
+    bool first;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +19,11 @@ public class EarthQuakeScript : MonoBehaviour
         
    void OnTriggerEnter(Collider other)
    {
-       if(other == player_collider)
+       if(other == player_collider && !first)
         {
             Debug.Log("Entered the Trigger");
-            StartCoroutine(cameraShake.Shake(5f, .2f));
+            first = true;
+            StartCoroutine(cameraShake.Shake(10f, .2f));     //(duration, magnitude)
         }
         else
             return;
