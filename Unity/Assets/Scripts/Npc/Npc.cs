@@ -33,9 +33,9 @@ public class Npc : MonoBehaviour
         _audioFilesCount = _audioFiles.Count/3;
         _audioVoice = _audioFiles.ElementAt(0);
         var collider = GetComponent<CapsuleCollider>();
-        if(collider.center.y != 0.85f)collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
-        if(collider.height < 1.6f || collider.height > 1.8f)collider.height = 1.7f;
-        if(collider.radius != 1f)collider.radius = 1f;
+        collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
+        collider.height = 1.6f;
+        collider.radius = 0.7f;
     }
 
     void Update()
