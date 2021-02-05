@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class ImpactAudioScript : MonoBehaviour
 {
-    public AudioClip ImpactAudio;
-    AudioSource audio;
-    public bool AlreadyPlayed = false;
+    public ParticleSystem crater;
+    public ParticleSystem lapillus;
+    //public AudioClip ImpactAudio;
+    //AudioSource audio;
+    //public bool AlreadyPlayed = false;    
 
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        //audio = GetComponent<AudioSource>();
+        //FindObjectOfType<AudioManager>().Play("LapillusImpact");
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
+    {        
+        
+            //audio.PlayOneShot(ImpactAudio);
+            //AlreadyPlayed = true;
+    }*/
+
+    public void StopParticles()
     {
-        if(!AlreadyPlayed)
-        {
-            audio.PlayOneShot(ImpactAudio);
-            AlreadyPlayed = true;
-        }
+        crater.Stop();        
+        lapillus.Stop();
+        Destroy(crater);
+        Destroy(lapillus);
     }
 }
