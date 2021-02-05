@@ -18,6 +18,7 @@ public class Npc : MonoBehaviour
     private AudioSource _audioSource;
     private int _audioFilesCount = 0;
     private string _audioVoice;
+    private Quaternion _defaultRotation;
 
     void Awake()
     {
@@ -48,6 +49,8 @@ public class Npc : MonoBehaviour
 
     public Characters GetCharacter(){return _character;}
 
+    public void SetRotation(Quaternion rotation){_defaultRotation = rotation;}
+
     public void SetState(string statename) => _navAgent.SetState(statename);
 
     public void SetTargets(List<Vector3> targets) => _navAgent.SetTargets(targets);
@@ -56,6 +59,9 @@ public class Npc : MonoBehaviour
 
     public void Interact()
     {
+        _animator.SetBool("Move", false);
+        _animator.SetBool("Talk", false);
+        gameObject.transform.LookAt(GameObject.FindObjectOfType<InteractionManager>().gameObject.transform, Vector3.up);
         //Talk
         int index = Random.Range(0, _audioFilesCount);
         _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
@@ -73,12 +79,15 @@ public class Npc : MonoBehaviour
         Globals.someoneIsTalking = false;
         _animator.SetBool("Talk", false);
         FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
+        gameObject.transform.rotation = _defaultRotation;
         _navAgent.Interactive(false);
     }
 
     public void Animate()
     {
-        var index = Random.Range(-1, 1);
-        if(index != _animator.GetInteger("TalkIndex"))_animator.SetInteger("TalkIndex", index);
+        var index = Random.Range(0, 15);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
+        while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
+        _animator.SetInteger("TalkIndex", index);
     }
 }

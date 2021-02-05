@@ -15,6 +15,7 @@ public class AudioSubManager : MonoBehaviour
     {
         _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON.text);
     }
+
     public string GetSubs(int index, Characters type)
     {
         if (_subtitles.TryGetValue(Globals.player.ToString() + type.ToString(), out var subtitles)) return subtitles[index];
@@ -32,7 +33,7 @@ public class AudioSubManager : MonoBehaviour
             var tmp = files.Where(i => i.name.Contains(voce)).ToList();
             if(tmp.Count > 0) {files = tmp;break;}
         }
-        if(files.Count < 3) Debug.LogError($"Not enough files found for {character.ToString()}");
+        if(files.Count < 3) Debug.LogError($"Not enough files found for {character.ToString()} ({files.Count}/3)");
         List<string> audios = new List<string>();
         foreach (var item in files){audios.Add(item.name.Split('_')[1]);}
         return audios;

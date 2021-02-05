@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class NavSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _guardPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _soldierPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _schiavoPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _mercantePrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _patrizioPrefabs = new List<GameObject>();
@@ -32,6 +33,7 @@ public class NavSpawner : MonoBehaviour
     void Start()
     {
         _prefabs.Add(Characters.Guardia, _guardPrefabs);
+        _prefabs.Add(Characters.Soldato, _soldierPrefabs);
         _prefabs.Add(Characters.Schiavo, _schiavoPrefabs);
         _prefabs.Add(Characters.Mercante, _mercantePrefabs);
         _prefabs.Add(Characters.NobileM, _patrizioPrefabs);
@@ -58,14 +60,15 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // spawn STOPS guards
-        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Guardia, out var prefabs))foreach (var item in stops.Where(i => i != null)){var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item.position, item.rotation, null);agent.GetComponent<CapsuleCollider>().radius = 1.5f;}
+        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Soldato, out var prefabs))
+        foreach (var item in stops.Where(i => i != null)){var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item.position, item.rotation, null);agent.GetComponent<CapsuleCollider>().radius = 1.5f;}
         // spawn STOPS mercanti
         if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach(var item in stops.Where(i => i != null)){var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item.position, item.rotation, null);agent.GetComponent<CapsuleCollider>().radius = 1.5f;}
         // spawn STOPS balcony
         if(_stops.TryGetValue(NavSubroles.BalconyStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
             // TODO: POSE
-            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Schiavo);
+            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Soldato || character == Characters.Schiavo);
             if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
             SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Idle", item.position, item.rotation, null);
         }
@@ -80,7 +83,7 @@ public class NavSpawner : MonoBehaviour
                 do{Vector2 random = Random.insideUnitCircle.normalized * Random.Range(1f, 1.1f);position = item.position + new Vector3(random.x, 0, random.y);}
                 while(!UnityEngine.AI.NavMesh.SamplePosition(position, out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas));
                 rotation = Quaternion.LookRotation(item.position-position, Vector3.up);
-                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Schiavo);
+                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Soldato || character == Characters.Schiavo);
                 if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
                 var agent = SpawnAgent(false, prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", position, rotation, null);
                 agent.GetComponent<CapsuleCollider>().radius = 1.3f;
@@ -131,6 +134,7 @@ public class NavSpawner : MonoBehaviour
         if(count){if(character == Characters.Guardia){_guards++;}else{_people++;}}
         var component = agent.AddComponent<Npc>();
         component.SetCharacter(character);
+        component.SetRotation(rotation);
         component.SetState(state);
         if(targets != null && targets?.Count > 0)component.SetTargets(targets);
         return agent;

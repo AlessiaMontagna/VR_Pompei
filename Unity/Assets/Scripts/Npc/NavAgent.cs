@@ -75,6 +75,8 @@ public class NavAgent
 
     public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f) && Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
     
+    public void Interactive(bool i){_interaction = i;}
+
     private void NextDestinationMove()
     {
         if(!DestinationReached())return;
@@ -97,11 +99,11 @@ public class NavAgent
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
-    public void Talk()
+    private void Talk()
     {
-        var index = Random.Range(-1, 1);
-        if(index != _animator.GetInteger("TalkIndex"))_animator.SetInteger("TalkIndex", index);
+        var index = Random.Range(0, 15);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
+        while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
+        _animator.SetInteger("TalkIndex", index);
     }
-
-    public void Interactive(bool i){_interaction = i;}
 }
