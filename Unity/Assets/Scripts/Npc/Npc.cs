@@ -55,39 +55,52 @@ public class Npc : MonoBehaviour
 
     public void SetTargets(List<Vector3> targets) => _navAgent.SetTargets(targets);
 
-    public void Interactive() => _navAgent.Interactive(true);
+    public void Interact() => _navAgent.Interact(true);
 
-    public void Interact()
+    public void Interaction()
     {
-        _animator.SetBool("Move", false);
-        _animator.SetBool("Talk", false);
-        gameObject.transform.LookAt(GameObject.FindObjectOfType<InteractionManager>().gameObject.transform, Vector3.up);
-        //Talk
+        Globals.someoneIsTalking = true;
+        var playerTransform = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform;
+        if(playerTransform.rotation.eulerAngles.y > gameObject.transform.rotation.eulerAngles.y) Turn(1f);
+        else if(playerTransform.rotation.eulerAngles.y < gameObject.transform.rotation.eulerAngles.y) Turn(-1f);
+        gameObject.transform.LookAt(playerTransform, Vector3.up);
+        Talk();
+    }
+
+    private void Turn(float turnSpeed)
+    {
+        _animator.SetBool("Turn", true);
+        _animator.SetFloat("turnSpeed", turnSpeed);
+    }
+
+    public void Talk()
+    {
+        _animator.SetBool("Talk", true);
+        StartCoroutine(Subtitles());
+    }
+
+    private IEnumerator Subtitles()
+    {
         int index = Random.Range(0, _audioFilesCount);
         _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
         _audioSource.Play();
-        StartCoroutine(Subtitles(index));
-    }
-
-    private IEnumerator Subtitles(int index)
-    {
-        Globals.someoneIsTalking = true;
-        _animator.SetBool("Talk", true);
-        FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
+        var sub = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        sub.text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
         //Debug.Log($"Playing {_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}: index of {_audioFilesCount}");
         yield return new WaitForSeconds(_audioSource.clip.length);
         Globals.someoneIsTalking = false;
         _animator.SetBool("Talk", false);
-        FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
+        sub.text = "";
         gameObject.transform.rotation = _defaultRotation;
-        _navAgent.Interactive(false);
+        _navAgent.Interact(false);
+        _animator.SetBool("Turn", false);
     }
 
     public void Animate()
     {
         var index = Random.Range(0, 15);
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
-        while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Turning"))_animator.SetBool("Turn", false);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
         _animator.SetInteger("TalkIndex", index);
     }
 }

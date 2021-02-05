@@ -32,11 +32,11 @@ public class NavAgent
 
         // Basic states
         State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Idle", true);}, () => {}, () => {});
-        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationPath();}, () => {});
-        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationMove();}, () => {});
-        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {});
+        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationPath();}, () => {_animator.SetBool("Move", false);});
+        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationMove();}, () => {_animator.SetBool("Move", false);});
+        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {_animator.SetBool("Talk", false);});
         State interact = AddState("Interact", () => {}, () => {}, () => {});
-        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interact();}, () => {_owner.Animate();}, () => {});
+        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interaction();}, () => {_owner.Animate();}, () => {});
 
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => _interaction);
@@ -75,7 +75,7 @@ public class NavAgent
 
     public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f) && Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
     
-    public void Interactive(bool i){_interaction = i;}
+    public void Interact(bool i){_interaction = i;}
 
     private void NextDestinationMove()
     {
