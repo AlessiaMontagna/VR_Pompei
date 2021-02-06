@@ -35,7 +35,8 @@ public class Npc : MonoBehaviour
         var collider = GetComponent<CapsuleCollider>();
         collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         collider.height = 1.6f;
-        collider.radius = 0.7f;
+        collider.radius = 0.6f;
+        //collider.isTrigger = true;
     }
 
     void Update()
