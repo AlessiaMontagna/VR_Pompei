@@ -36,7 +36,7 @@ public class NavAgent
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);NextDestinationMove();}, () => {_animator.SetBool("Move", false);});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {_animator.SetBool("Talk", false);});
         State interact = AddState("Interact", () => {}, () => {}, () => {});
-        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interaction();}, () => {_owner.Animate();}, () => {});
+        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Interact", true);_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interaction();}, () => {_owner.Animate();}, () => {_animator.SetBool("Interact", false);});
 
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => _interaction);
@@ -103,7 +103,9 @@ public class NavAgent
     {
         var index = Random.Range(0, 15);
         if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
-        while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
-        _animator.SetInteger("TalkIndex", index);
+        {
+            while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
+            _animator.SetInteger("TalkIndex", index);
+        }
     }
 }
