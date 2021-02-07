@@ -61,19 +61,24 @@ public class Npc : MonoBehaviour
     public void Interaction()
     {
         Globals.someoneIsTalking = true;
-        TurnToPlayer(true);
         StartCoroutine(Talk());
     }
 
-    private void TurnToPlayer(bool player)
+    private IEnumerator Turn()
     {
-        if(!player){gameObject.transform.rotation = _defaultRotation;return;}
-        var playerTransform = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform;
-        if(playerTransform.rotation.eulerAngles.y > gameObject.transform.rotation.eulerAngles.y) _animator.SetFloat("turnSpeed", -1f);
-        else if(playerTransform.rotation.eulerAngles.y < gameObject.transform.rotation.eulerAngles.y) _animator.SetFloat("turnSpeed", 1f);
-        else {_animator.SetBool("Turn", true);return;}
-        gameObject.transform.LookAt(playerTransform, Vector3.up);
-        _animator.SetBool("Turn", true);
+        float angle = Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position).normalized, gameObject.transform.forward, Vector3.up);
+        if (angle > 5f){Debug.Log("Left");_animator.SetBool("Turn", true);_animator.SetInteger("TurnDirection", -1);}
+        else if (angle < -5f){Debug.Log("Right");_animator.SetBool("Turn", true);_animator.SetInteger("TurnDirection", 1);}
+        else{Debug.Log("Forward");_animator.SetBool("Turn", false);_animator.SetInteger("TurnDirection", 0);}
+
+        if(_animator.GetBool("Turn"))
+        {
+            yield return new WaitForSeconds(_animator.GetNextAnimatorStateInfo(0).length);
+            if(_animator.GetBool("Talk"))gameObject.transform.LookAt(transform, Vector3.up);
+            else gameObject.transform.rotation = _defaultRotation;
+            _animator.SetBool("Turn", false);
+            _animator.SetFloat("TurnDirection", 0f);
+        }
     }
 
     private IEnumerator Talk()
@@ -86,8 +91,8 @@ public class Npc : MonoBehaviour
         sub.text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
         yield return new WaitForSeconds(_audioSource.clip.length);
         sub.text = "";
-        TurnToPlayer(false);
         _animator.SetBool("Talk", false);
+        StartCoroutine(Turn());
         _navAgent.Interact(false);
         Globals.someoneIsTalking = false;
     }
@@ -99,6 +104,7 @@ public class Npc : MonoBehaviour
         else _animator.SetBool("Turn", false);
         if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
         {
+            StartCoroutine(Turn());
             while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
             _animator.SetInteger("TalkIndex", index);
         }
