@@ -11,8 +11,8 @@ public class NavAgent
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     public bool _interaction = false;
 
-    public readonly float walkSpeed = 1.5f;
-    public readonly float runSpeed = 3f;
+    public readonly float walkSpeed = 1.25f;
+    public readonly float runSpeed = 2.5f;
     public readonly float distanceToStop = 2f;
 
     private Dictionary<string, State> _states = new Dictionary<string, State>();

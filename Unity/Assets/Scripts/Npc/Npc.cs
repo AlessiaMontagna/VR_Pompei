@@ -18,7 +18,7 @@ public class Npc : MonoBehaviour
     private AudioSource _audioSource;
     private int _audioFilesCount = 0;
     private string _audioVoice;
-    private Quaternion _defaultRotation;
+    private bool _turning = false;
 
     void Awake()
     {
@@ -36,21 +36,17 @@ public class Npc : MonoBehaviour
         collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         collider.height = 1.6f;
         collider.radius = 0.6f;
-        //collider.isTrigger = true;
     }
 
     void Update()
     {
-        //if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.walkSpeed)_animator.SetBool("Run", false);
-        //else if(gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().speed == _navAgent.runSpeed)_animator.SetBool("Run", true);
+        _animator.SetFloat("MoveSpeed", gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity.magnitude);
         _navAgent.Tik();
     }
 
     public void SetCharacter(Characters c) => _character = c;
 
     public Characters GetCharacter(){return _character;}
-
-    public void SetRotation(Quaternion rotation){_defaultRotation = rotation;}
 
     public void SetState(string statename) => _navAgent.SetState(statename);
 
@@ -64,18 +60,18 @@ public class Npc : MonoBehaviour
         StartCoroutine(Talk());
     }
 
-    private IEnumerator Turn()
+    private IEnumerator TurnToPlayer(bool b)
     {
-        float angle = Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position).normalized, gameObject.transform.forward, Vector3.up);
-        if (angle > 5f){Debug.Log("Left");_animator.SetBool("Turn", true);_animator.SetInteger("TurnDirection", -1);}
-        else if (angle < -5f){Debug.Log("Right");_animator.SetBool("Turn", true);_animator.SetInteger("TurnDirection", 1);}
-        else{Debug.Log("Forward");_animator.SetBool("Turn", false);_animator.SetInteger("TurnDirection", 0);}
-
-        if(_animator.GetBool("Turn"))
+        float angle = 0f;
+        if(b) angle = Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position).normalized, gameObject.transform.forward, Vector3.up);
+        else angle = Vector3.SignedAngle((gameObject.transform.parent.position - gameObject.transform.position).normalized, gameObject.transform.forward, Vector3.up);
+        if(angle > -10f && angle < 10f){Debug.Log("Forward");_animator.SetBool("Turn", false);_animator.SetFloat("TurnDirection", 0f);}
+        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnDirection", angle);}
+        if(_animator.GetBool("Turn") && !_turning)
         {
+            _turning = true;
             yield return new WaitForSeconds(_animator.GetNextAnimatorStateInfo(0).length);
-            if(_animator.GetBool("Talk"))gameObject.transform.LookAt(transform, Vector3.up);
-            else gameObject.transform.rotation = _defaultRotation;
+            _turning = false;
             _animator.SetBool("Turn", false);
             _animator.SetFloat("TurnDirection", 0f);
         }
@@ -92,7 +88,7 @@ public class Npc : MonoBehaviour
         yield return new WaitForSeconds(_audioSource.clip.length);
         sub.text = "";
         _animator.SetBool("Talk", false);
-        StartCoroutine(Turn());
+        StartCoroutine(TurnToPlayer(false));
         _navAgent.Interact(false);
         Globals.someoneIsTalking = false;
     }
@@ -101,10 +97,9 @@ public class Npc : MonoBehaviour
     {
         var index = Random.Range(0, 15);
         if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Interact"))_animator.SetBool("Interact", false);
-        else _animator.SetBool("Turn", false);
         if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
         {
-            StartCoroutine(Turn());
+            StartCoroutine(TurnToPlayer(true));
             while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
             _animator.SetInteger("TalkIndex", index);
         }
