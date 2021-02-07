@@ -9,7 +9,7 @@ public class NavAgent
     private Animator _animator;
     private FiniteStateMachine<Npc> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
-    public bool _interaction = false;
+    public bool interaction = false;
 
     public readonly float walkSpeed = 1.25f;
     public readonly float runSpeed = 2.5f;
@@ -36,13 +36,13 @@ public class NavAgent
         State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);NextDestinationMove();}, () => {_animator.SetBool("Move", false);});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {_animator.SetBool("Talk", false);});
         State interact = AddState("Interact", () => {}, () => {}, () => {});
-        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Interact", true);_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interaction();}, () => {_owner.Animate();}, () => {_animator.SetBool("Interact", false);});
+        interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !interaction);_owner.Interaction();}, () => {_owner.AnimationUpdate();}, () => {});
 
         // Basic transitions
-        _stateMachine.AddTransition(idle, interact, () => _interaction);
-        _stateMachine.AddTransition(talk, interact, () => _interaction);
-        _stateMachine.AddTransition(path, interact, () => _interaction);
-        _stateMachine.AddTransition(move, interact, () => _interaction);
+        _stateMachine.AddTransition(idle, interact, () => interaction);
+        _stateMachine.AddTransition(talk, interact, () => interaction);
+        _stateMachine.AddTransition(path, interact, () => interaction);
+        _stateMachine.AddTransition(move, interact, () => interaction);
         _stateMachine.AddTransition(interact, idle, () => false);
 
         // START STATE
@@ -74,8 +74,6 @@ public class NavAgent
     public void SetTargets(List<Vector3> targets){_targets = new List<Vector3>(targets);}
 
     public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f) && Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
-    
-    public void Interact(bool i){_interaction = i;}
 
     private void NextDestinationMove()
     {

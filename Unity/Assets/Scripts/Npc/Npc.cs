@@ -18,7 +18,6 @@ public class Npc : MonoBehaviour
     private AudioSource _audioSource;
     private int _audioFilesCount = 0;
     private string _audioVoice;
-    private bool _turning = false;
 
     void Awake()
     {
@@ -52,56 +51,55 @@ public class Npc : MonoBehaviour
 
     public void SetTargets(List<Vector3> targets) => _navAgent.SetTargets(targets);
 
-    public void Interact() => _navAgent.Interact(true);
+    public void Interact() => _navAgent.interaction = true;
 
-    public void Interaction()
+    public void Interaction() => StartCoroutine(TalkInteraction());
+
+    private IEnumerator TalkInteraction()
     {
         Globals.someoneIsTalking = true;
-        StartCoroutine(Talk());
-    }
-
-    private IEnumerator TurnToPlayer(bool b)
-    {
-        float angle = 0f;
-        if(b) angle = Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position).normalized, gameObject.transform.forward, Vector3.up);
-        else angle = Vector3.SignedAngle((gameObject.transform.parent.position - gameObject.transform.position).normalized, gameObject.transform.forward, Vector3.up);
-        if(angle > -10f && angle < 10f){Debug.Log("Forward");_animator.SetBool("Turn", false);_animator.SetFloat("TurnDirection", 0f);}
-        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnDirection", angle);}
-        if(_animator.GetBool("Turn") && !_turning)
-        {
-            _turning = true;
-            yield return new WaitForSeconds(_animator.GetNextAnimatorStateInfo(0).length);
-            _turning = false;
-            _animator.SetBool("Turn", false);
-            _animator.SetFloat("TurnDirection", 0f);
-        }
-    }
-
-    private IEnumerator Talk()
-    {
         _animator.SetBool("Talk", true);
         int index = Random.Range(0, _audioFilesCount);
         _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
         _audioSource.Play();
-        var sub = FindObjectOfType<sottotitoli>().GetComponent<Text>();
-        sub.text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
+        FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
         yield return new WaitForSeconds(_audioSource.clip.length);
-        sub.text = "";
-        _animator.SetBool("Talk", false);
-        StartCoroutine(TurnToPlayer(false));
-        _navAgent.Interact(false);
-        Globals.someoneIsTalking = false;
+        StopInteraction();
     }
 
-    public void Animate()
+    public void AnimationUpdate()
     {
-        var index = Random.Range(0, 15);
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Interact"))_animator.SetBool("Interact", false);
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
+        CheckPlayerPosition();
+        if(_animator.GetBool("Talk") && !_animator.GetBool("Turn")) _animator.SetFloat("TalkIndex", Random.Range(0f, 1f));
+    }
+
+    private void CheckPlayerPosition()
+    {
+        var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
+        if(Vector3.Distance(player, gameObject.transform.position) > 5f){StopInteraction();return;}
+        float angle = Vector3.SignedAngle((player - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
+        if(angle > -40f && angle < 40f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
+        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
+    }
+
+    private void StopInteraction()
+    {
+        StopCoroutine(TalkInteraction());
+        if(_audioSource.isPlaying)_audioSource.Stop();
+        FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
+        _animator.SetBool("Talk", false);
+        _navAgent.interaction = false;
+        Globals.someoneIsTalking = false;
+        //TurnToParent();
+    }
+
+    private void TurnToParent()
+    {
+        do
         {
-            StartCoroutine(TurnToPlayer(true));
-            while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
-            _animator.SetInteger("TalkIndex", index);
-        }
+            float angle = Vector3.SignedAngle((gameObject.transform.parent.gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward*-1, Vector3.up);
+            if(angle > -40f && angle < 40f){Debug.Log("Forward");_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
+            else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
+        }while(!_animator.GetBool("Turn"));
     }
 }
