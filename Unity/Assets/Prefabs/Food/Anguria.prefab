@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 638598632209277952}
   - component: {fileID: 3402528185465868490}
   - component: {fileID: 6158874205220220395}
+  - component: {fileID: 4428549865156536450}
   m_Layer: 0
   m_Name: Anguria
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8224541, y: 1.0346593, z: 0.79932237}
   m_Center: {x: -0.024474114, y: 0.00474608, z: 0.0071754316}
+--- !u!114 &4428549865156536450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3762978676503556383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 0
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4960770693011579092}
   - component: {fileID: 7150807876688106526}
   - component: {fileID: 3296687779775431945}
+  - component: {fileID: 8036589836029335279}
   m_Layer: 0
   m_Name: Cipolla
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.34, z: 0.66}
   m_Center: {x: 0.018722773, y: 0.008955903, z: 0.0028734505}
+--- !u!114 &8036589836029335279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663863076570854859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 3
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

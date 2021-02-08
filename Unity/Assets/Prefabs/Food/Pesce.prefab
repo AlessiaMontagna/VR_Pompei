@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3749815558688178227}
   - component: {fileID: 1436351601815549177}
   - component: {fileID: 1891382992481235502}
+  - component: {fileID: 5475821058721137183}
   m_Layer: 0
   m_Name: Pesce
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3012147, y: 0.044104323, z: 0.3486647}
   m_Center: {x: -0.005690433, y: -0.0007795887, z: 0.005256869}
+--- !u!114 &5475821058721137183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643467583993468204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 1
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

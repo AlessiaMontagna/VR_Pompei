@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7501297844627446720}
   - component: {fileID: 5763765213601787658}
   - component: {fileID: 4604045307484330660}
+  - component: {fileID: 6390059669713734514}
   m_Layer: 0
   m_Name: MelaVerde
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19246031, y: 0.17500477, z: 0.19123313}
   m_Center: {x: -0.002932403, y: -0.015136543, z: 0.0025420112}
+--- !u!114 &6390059669713734514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6124329917901655775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 0
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

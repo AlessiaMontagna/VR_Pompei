@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5718806161647735543}
   - component: {fileID: 7546256913722566205}
   - component: {fileID: 8297331407677831732}
+  - component: {fileID: 521516005045547471}
   m_Layer: 0
   m_Name: Broccols
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4377594, y: 1.3619087, z: 1.2062197}
   m_Center: {x: 0.4321804, y: 0.58331025, z: -0.541657}
+--- !u!114 &521516005045547471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338780702777231336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 3
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

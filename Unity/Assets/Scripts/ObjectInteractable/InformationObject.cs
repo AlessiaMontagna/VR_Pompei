@@ -7,7 +7,12 @@ public class InformationObject : ObjectInteractable
 {
     [SerializeField] private CodexInformation _objectName;
     [SerializeField] private Text _nuovaVoceText;
-
+    private Codex _codex;
+    private void Start()
+    {
+        _nuovaVoceText = FindObjectOfType<CodexText>().GetComponent<Text>();
+        _codex = FindObjectOfType<Codex>();
+    }
 
     public override void Interact()
     {
@@ -20,6 +25,8 @@ public class InformationObject : ObjectInteractable
     public override void UITextOn()
     {
         StartCoroutine(NewVoice());
+        _codex.addDiscoveryId((int)_objectName);
+        
         foreach(BoxCollider b in GetComponents<BoxCollider>())
         {
             b.enabled = false;

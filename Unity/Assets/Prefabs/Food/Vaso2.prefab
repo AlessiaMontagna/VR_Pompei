@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1471547841370126910}
   - component: {fileID: 3715201132449697524}
   - component: {fileID: 6978175989611553727}
+  - component: {fileID: 246610504597227852}
   m_Layer: 0
   m_Name: Vaso2
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.72593075, y: 0.8402321, z: 0.72312564}
   m_Center: {x: -0.114628606, y: 0.41329315, z: -0.05068266}
+--- !u!114 &246610504597227852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922827150784769825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 3
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1574330984049034095}
   - component: {fileID: 3620281645538654117}
   - component: {fileID: 8489949157247761775}
+  - component: {fileID: 4122366222412483548}
   m_Layer: 0
   m_Name: Cheese2
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.39766577, y: 0.59375304, z: 0.65211654}
   m_Center: {x: 0.027611569, y: 0.29687652, z: -0.32605827}
+--- !u!114 &4122366222412483548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971582497422120560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 3
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

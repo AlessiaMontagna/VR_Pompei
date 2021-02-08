@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4097340772889687847}
   - component: {fileID: 2249648002887091181}
   - component: {fileID: 7197978599913319746}
+  - component: {fileID: 578209684073326348}
   m_Layer: 0
   m_Name: Mela
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.73548234, y: 0.84657747, z: 0.74573016}
   m_Center: {x: -0.05217199, y: 0.4143767, z: 0.0028823612}
+--- !u!114 &578209684073326348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304176046611046968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 0
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}

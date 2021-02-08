@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8286931292283438613}
   - component: {fileID: 6117558810099806943}
   - component: {fileID: 7215250344156773543}
+  - component: {fileID: 1198785640126254655}
   m_Layer: 0
   m_Name: Aglio
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.44, y: 0.35, z: 0.5}
   m_Center: {x: 0.01673472, y: -0.018335484, z: 0.0009855628}
+--- !u!114 &1198785640126254655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757028741555475210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af2a2419df4661479287ec42e48dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodType: 3
+  pick: {fileID: 0}
+  _eButton: {fileID: 0}
