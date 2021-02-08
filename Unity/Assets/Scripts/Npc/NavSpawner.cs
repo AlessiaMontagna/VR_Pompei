@@ -138,10 +138,10 @@ public class NavSpawner : MonoBehaviour
     {
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
         GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
-        agent.transform.parent = parent.transform;
         agent.transform.LookAt(parent.transform, Vector3.up);
         var component = agent.AddComponent<Npc>();
         component.SetCharacter(character);
+        component.SetParent(parent);
         component.SetState(state);
         if(targets != null && targets?.Count > 0)
         {

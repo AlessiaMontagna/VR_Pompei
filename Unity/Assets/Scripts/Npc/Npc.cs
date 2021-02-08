@@ -15,6 +15,7 @@ public class Npc : MonoBehaviour
     private NavAgent _navAgent;
     private Animator _animator;
     private Characters _character;
+    private GameObject _parent;
     private AudioSource _audioSource;
     private int _audioFilesCount = 0;
     private string _audioVoice;
@@ -37,15 +38,15 @@ public class Npc : MonoBehaviour
         collider.radius = 0.6f;
     }
 
-    void Update()
-    {
-        _animator.SetFloat("MoveSpeed", gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity.magnitude);
-        _navAgent.Tik();
-    }
+    void Update() => _navAgent?.Tik();
 
     public void SetCharacter(Characters c) => _character = c;
 
     public Characters GetCharacter(){return _character;}
+
+    public void SetParent(GameObject parent){_parent = parent;gameObject.transform.parent = _parent.transform;}
+
+    public GameObject GetParent(){return _parent;}
 
     public void SetState(string statename) => _navAgent.SetState(statename);
 
@@ -77,9 +78,7 @@ public class Npc : MonoBehaviour
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
         if(Vector3.Distance(player, gameObject.transform.position) > 5f){StopInteraction();return;}
-        float angle = Vector3.SignedAngle((player - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
-        if(angle > -30f && angle < 30f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
-        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
+        TurnToPosition(player);
     }
 
     private void StopInteraction()
@@ -90,18 +89,12 @@ public class Npc : MonoBehaviour
         _animator.SetBool("Talk", false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
-        //TurnToParent();
-        _animator.SetBool("Turn", false);
-        _animator.SetFloat("TurnAngle", 0f);
     }
 
-    private void TurnToParent()
+    public void TurnToPosition(Vector3 position)
     {
-        do
-        {
-            float angle = Vector3.SignedAngle((gameObject.transform.parent.gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward*-1, Vector3.up);
-            if(angle > -40f && angle < 40f){Debug.Log("Forward");_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
-            else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
-        }while(!_animator.GetBool("Turn"));
+        float angle = Vector3.SignedAngle((position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
+        if(angle > -30f && angle < 30f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
+        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
     }
 }

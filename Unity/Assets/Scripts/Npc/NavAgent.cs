@@ -31,10 +31,10 @@ public class NavAgent
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
-        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Idle", true);}, () => {}, () => {});
-        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);NextDestinationPath();}, () => {_animator.SetBool("Move", false);});
-        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);NextDestinationMove();}, () => {_animator.SetBool("Move", false);});
-        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {_animator.SetBool("Talk", false);});
+        State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Idle", true);}, () => {if(_owner.GetParent() != null)_owner.TurnToPosition(_owner.GetParent().transform.position);}, () => {});
+        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("MoveSpeed", _navMeshAgent.velocity.magnitude);NextDestinationPath();}, () => {_animator.SetBool("Move", false);_animator.SetFloat("MoveSpeed", 0f);});
+        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("MoveSpeed", _navMeshAgent.velocity.magnitude);NextDestinationMove();}, () => {_animator.SetBool("Move", false);_animator.SetFloat("MoveSpeed", 0f);});
+        State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {if(_owner.GetParent() != null)_owner.TurnToPosition(_owner.GetParent().transform.position);Talk();}, () => {_animator.SetBool("Talk", false);});
         State interact = AddState("Interact", () => {}, () => {}, () => {});
         interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !interaction);_owner.Interaction();}, () => {_owner.AnimationUpdate();}, () => {});
 
@@ -49,7 +49,7 @@ public class NavAgent
         SetState("Idle");
     }
 
-    public void Tik() => _stateMachine.Tik();
+    public void Tik() => _stateMachine?.Tik();
 
     public State AddState(string name, System.Action enter, System.Action tik, System.Action exit)
     {
@@ -63,7 +63,7 @@ public class NavAgent
 
     public List<string> GetAllStates(){return new List<string>(_states.Keys);}
 
-    public State GetState(string name){if(_states.TryGetValue(name, out State state))return state;return null;}
+    public State GetState(string statename){if(_states.TryGetValue(statename, out State state))return state;return null;}
 
     public State GetCurrentState(){return _stateMachine.GetCurrentState();}
 
@@ -97,13 +97,5 @@ public class NavAgent
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
-    private void Talk()
-    {
-        var index = Random.Range(0, 15);
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talking"))
-        {
-            while(index == _animator.GetInteger("TalkIndex")){index = Random.Range(0, 15);}
-            _animator.SetInteger("TalkIndex", index);
-        }
-    }
+    private void Talk(){if(_animator.GetBool("Talk") && !_animator.GetBool("Turn")) _animator.SetFloat("TalkIndex", Random.Range(0f, 1f));}
 }
