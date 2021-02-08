@@ -77,8 +77,8 @@ public class Npc : MonoBehaviour
     private void CheckPlayerPosition()
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
-        if(Vector3.Distance(player, gameObject.transform.position) > 5f){StopInteraction();return;}
-        TurnToPosition(player);
+        if(Vector3.Distance(player, gameObject.transform.position) > 5f)StopInteraction();
+        else TurnToPosition(player);
     }
 
     private void StopInteraction()
