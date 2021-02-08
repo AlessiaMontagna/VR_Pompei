@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1113363465010903170}
   - component: {fileID: 4097340772889687847}
   - component: {fileID: 2249648002887091181}
+  - component: {fileID: 7197978599913319746}
   m_Layer: 0
   m_Name: Mela
   m_TagString: Untagged
@@ -25,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304176046611046968}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 49.216, y: 1.179, z: -26.9}
-  m_LocalScale: {x: 0.30547, y: 0.30547, z: 0.30547}
+  m_LocalScale: {x: 0.22162151, y: 0.22162151, z: 0.22162153}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7197978599913319746
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304176046611046968}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.73548234, y: 0.84657747, z: 0.74573016}
+  m_Center: {x: -0.05217199, y: 0.4143767, z: 0.0028823612}
