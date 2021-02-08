@@ -32,10 +32,15 @@ public class Npc : MonoBehaviour
         var _audioFiles = FindObjectOfType<AudioSubManager>().GetAudios(_character);
         _audioFilesCount = _audioFiles.Count/3;
         _audioVoice = _audioFiles.ElementAt(0);
-        var collider = GetComponent<CapsuleCollider>();
+        var collider = gameObject.GetComponent<CapsuleCollider>();
         collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
         collider.height = 1.6f;
         collider.radius = 0.6f;
+        collider = gameObject.AddComponent<CapsuleCollider>();
+        collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
+        collider.height = 1.6f;
+        collider.radius = 1.6f;
+        collider.isTrigger = true;
     }
 
     void Update() => _navAgent?.Tik();
@@ -77,6 +82,7 @@ public class Npc : MonoBehaviour
     private void CheckPlayerPosition()
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
+        //Debug.Log(Vector3.Distance(player, gameObject.transform.position));
         if(Vector3.Distance(player, gameObject.transform.position) > 5f)StopInteraction();
         else TurnToPosition(player);
     }
@@ -96,5 +102,15 @@ public class Npc : MonoBehaviour
         float angle = Vector3.SignedAngle((position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
         if(angle > -30f && angle < 30f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
         else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        _animator.SetTrigger("Hit");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _animator.ResetTrigger("Hit");
     }
 }
