@@ -78,7 +78,7 @@ public class Npc : MonoBehaviour
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
         if(Vector3.Distance(player, gameObject.transform.position) > 5f){StopInteraction();return;}
         float angle = Vector3.SignedAngle((player - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
-        if(angle > -40f && angle < 40f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
+        if(angle > -30f && angle < 30f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
         else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
     }
 
@@ -91,6 +91,8 @@ public class Npc : MonoBehaviour
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
         //TurnToParent();
+        _animator.SetBool("Turn", false);
+        _animator.SetFloat("TurnAngle", 0f);
     }
 
     private void TurnToParent()
