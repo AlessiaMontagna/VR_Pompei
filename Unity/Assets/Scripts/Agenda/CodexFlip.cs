@@ -14,7 +14,6 @@ public class CodexFlip : MonoBehaviour
 
     public Texture _backgroundTexture;
 
-
     public int _currentPage = 0;
     [SerializeField] private Codex codex;
 
@@ -121,15 +120,31 @@ public class CodexFlip : MonoBehaviour
             _discoveredPagesList.Add(_totalPages[indexes[i]]);
         }
 
-        setTexture("Left_BG", _backgroundTexture);
-        setTexture("Right", _discoveredPagesList[0]);
-        setTexture("Right_BG", _discoveredPagesList[0]);
+        if (_currentPage == _discoveredPagesList.Count) {
+            setTexture("Right", _backgroundTexture);
+            setTexture("Right_BG", _backgroundTexture);
+        }
+        else {
+            setTexture("Right", _discoveredPagesList[_currentPage]);
+            setTexture("Right_BG", _discoveredPagesList[_currentPage]);
+        }
+        
+        if (_currentPage == 0) {
+            setTexture("Left_BG", _backgroundTexture);
+            setTexture("Left", _backgroundTexture);
+        }
+        else {
+            setTexture("Left_BG", _discoveredPagesList[_currentPage-1]);
+            setTexture("Left", _discoveredPagesList[_currentPage-1]);
+        }
+        
     }
 
     public void addDiscoveryId(int _discoveryId)
     {
         codex._discoveredIndex.Add(_discoveryId);
         codex._discoveredIndex.Sort();
+        _currentPage = _discoveryId;
         UpdateDiscovered(codex._discoveredIndex);
     }
 }
