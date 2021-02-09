@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
+
 public enum foodType { Frutta, Pesce, Pane, NonInteractable };
+[RequireComponent(typeof(AudioSource))]
 public class FoodInteractable : ObjectInteractable
 {
     [SerializeField] private foodType _foodType;
     [SerializeField] private Text pick;
     [SerializeField] private RawImage _eButton;
-
     private Color highlightColor;
     private MercatoFoodManager _foodManager;
     private Text dialogueText;
-
+    private AudioSource _audioSource;
 
     private void Start()
     {
+        _audioSource = FindObjectOfType<FirstPersonController>().GetComponents<AudioSource>()[1];
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
         _foodManager = FindObjectOfType<MercatoFoodManager>();
         pick = FindObjectOfType<Pick>().GetComponent<Text>();
         dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
@@ -35,6 +39,7 @@ public class FoodInteractable : ObjectInteractable
         if (_foodManager.getCounter(_foodType) < _foodManager.getMax(_foodType))
         {
             UITextOff();
+            _audioSource.Play();
             _foodManager.addCounter(_foodType);
             _foodManager.CheckMissionComplete();
             Destroy(gameObject);
@@ -58,7 +63,11 @@ public class FoodInteractable : ObjectInteractable
     {
         _eButton.enabled = true;
         pick.enabled = true;
-        GetComponent<Renderer>().material.SetColor("_EmissionColor", highlightColor);
+        if (_foodManager.getCounter(_foodType) < _foodManager.getMax(_foodType) && _foodType != foodType.NonInteractable)
+        {
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", highlightColor);
+        }
+
     }
 
     private IEnumerator startDialogue()

@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
-
 public enum agendaType {mappa, codex};
+
+[RequireComponent(typeof(AudioSource))]
 public class ShowAgenda : MonoBehaviour
 {
     private Animator _animator;
@@ -15,9 +16,12 @@ public class ShowAgenda : MonoBehaviour
     [SerializeField] private Text textUp;
     [SerializeField] private Text textDown;
     public agendaType _agendaType;
+    private AudioSource _audioSource;
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up_Down");
         _animator = GetComponent<Animator>();
         transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -51,11 +55,13 @@ public class ShowAgenda : MonoBehaviour
     {
         if (_animator == null) return;
         _animator.SetBool("show", true);
+        _audioSource.Play();
     }
     public void MoveAgendaDown()
     {
         if (_animator == null) return;
         _animator.SetBool("show", false);
+        _audioSource.Play();
     }
 
     public void disablePlayerMovement()
