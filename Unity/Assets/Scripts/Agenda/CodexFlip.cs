@@ -14,7 +14,6 @@ public class CodexFlip : MonoBehaviour
 
     public Texture _backgroundTexture;
 
-    public int _currentPage = 0;
     [SerializeField] private Codex codex;
 
 
@@ -37,7 +36,7 @@ public class CodexFlip : MonoBehaviour
 
     public void FlipRToL()
     {
-        if (_agendaAnimator == null || _currentPage == _discoveredPagesList.Count)
+        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count)
             return;
 
         _agendaAnimator.SetBool(name: "FlipRToL", true);
@@ -46,8 +45,8 @@ public class CodexFlip : MonoBehaviour
 
     public void setNextRightBG()
     {
-        if (codex._discoveredIndex.Count == _currentPage + 1) setTexture("Right_BG", _backgroundTexture);
-        else setTexture("Right_BG", _discoveredPagesList[_currentPage + 1]);
+        if (codex._discoveredIndex.Count == codex._currentPage + 1) setTexture("Right_BG", _backgroundTexture);
+        else setTexture("Right_BG", _discoveredPagesList[codex._currentPage + 1]);
     }
 
     private void setTexture(string child, Texture texture)
@@ -61,7 +60,7 @@ public class CodexFlip : MonoBehaviour
 
     public void FlipLToR()
     {
-        if (_agendaAnimator == null || _currentPage == 0)
+        if (_agendaAnimator == null || codex._currentPage == 0)
             return;
 
         _agendaAnimator.SetBool(name: "FlipLToR", true);
@@ -73,28 +72,28 @@ public class CodexFlip : MonoBehaviour
 
         _agendaAnimator.SetBool(name: "FlipRToL", false);
 
-        setTexture("Left", _discoveredPagesList[_currentPage]);
+        setTexture("Left", _discoveredPagesList[codex._currentPage]);
 
-        _currentPage++;
+        codex._currentPage++;
 
-        if (_currentPage == _discoveredPagesList.Count) setTexture("Right", _backgroundTexture);
-        else setTexture("Right", _discoveredPagesList[_currentPage]);
+        if (codex._currentPage == _discoveredPagesList.Count) setTexture("Right", _backgroundTexture);
+        else setTexture("Right", _discoveredPagesList[codex._currentPage]);
 
     }
 
     public void setNextLeftBG()
     {
-        setTexture("Left_BG", _discoveredPagesList[_currentPage]);
+        setTexture("Left_BG", _discoveredPagesList[codex._currentPage]);
     }
 
     public void setPreviousLeftBG()
     {
-        if (_currentPage - 1 == 0) setTexture("Left_BG", _backgroundTexture);
-        else setTexture("Left_BG", _discoveredPagesList[_currentPage - 2]);
+        if (codex._currentPage - 1 == 0) setTexture("Left_BG", _backgroundTexture);
+        else setTexture("Left_BG", _discoveredPagesList[codex._currentPage - 2]);
     }
     public void setPreviousRightBG()
     {
-        setTexture("Right_BG", _discoveredPagesList[_currentPage - 1]);
+        setTexture("Right_BG", _discoveredPagesList[codex._currentPage - 1]);
     }
 
     public void ResetLPage()
@@ -102,11 +101,11 @@ public class CodexFlip : MonoBehaviour
 
         _agendaAnimator.SetBool(name: "FlipLToR", false);
 
-        setTexture("Right", _discoveredPagesList[_currentPage - 1]);
+        setTexture("Right", _discoveredPagesList[codex._currentPage - 1]);
 
-        _currentPage--;
+        codex._currentPage--;
 
-        if (_currentPage > 0) setTexture("Left", _discoveredPagesList[_currentPage - 1]);
+        if (codex._currentPage > 0) setTexture("Left", _discoveredPagesList[codex._currentPage - 1]);
         else setTexture("Left", _discoveredPagesList[0]);
     }
 
@@ -120,31 +119,35 @@ public class CodexFlip : MonoBehaviour
             _discoveredPagesList.Add(_totalPages[indexes[i]]);
         }
 
-        if (_currentPage == _discoveredPagesList.Count) {
+        if (codex._currentPage > indexes.Count - 1)
+        {
             setTexture("Right", _backgroundTexture);
             setTexture("Right_BG", _backgroundTexture);
         }
-        else {
-            setTexture("Right", _discoveredPagesList[_currentPage]);
-            setTexture("Right_BG", _discoveredPagesList[_currentPage]);
+        else
+        {
+            setTexture("Right", _totalPages[codex._currentPage]);
+            setTexture("Right_BG", _totalPages[codex._currentPage]);
         }
-        
-        if (_currentPage == 0) {
+
+        if (codex._currentPage == 0)
+        {
             setTexture("Left_BG", _backgroundTexture);
             setTexture("Left", _backgroundTexture);
         }
-        else {
-            setTexture("Left_BG", _discoveredPagesList[_currentPage-1]);
-            setTexture("Left", _discoveredPagesList[_currentPage-1]);
+        else
+        {
+            setTexture("Left_BG", _totalPages[codex._currentPage - 1]);
+            setTexture("Left", _totalPages[codex._currentPage - 1]);
         }
-        
+
     }
 
     public void addDiscoveryId(int _discoveryId)
     {
         codex._discoveredIndex.Add(_discoveryId);
         codex._discoveredIndex.Sort();
-        _currentPage = _discoveryId;
+        codex._currentPage = _discoveryId;
         UpdateDiscovered(codex._discoveredIndex);
     }
 }

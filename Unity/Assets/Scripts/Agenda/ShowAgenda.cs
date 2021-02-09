@@ -5,17 +5,17 @@ using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
-enum agendaType { mappa = 0, codex = 1, obiettivi = 2 };
+public enum agendaType {mappa, codex};
 public class ShowAgenda : MonoBehaviour
 {
     private Animator _animator;
-    private bool _show = false;
-
     [SerializeField] private RawImage arrowDown;
     [SerializeField] private RawImage arrowUp;
     [SerializeField] FirstPersonController fpsScript;
     [SerializeField] private Text textUp;
     [SerializeField] private Text textDown;
+    public agendaType _agendaType;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -25,18 +25,37 @@ public class ShowAgenda : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CrossPlatformInputManager.GetButtonDown("Agenda"))
+        if (!GetComponent<SwitchWhatIsShowing>().enabled)
         {
-            MoveAgenda();
-
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                MoveAgendaUp();
+                _agendaType = agendaType.mappa;
+            }
+            else if (Input.GetKeyDown(KeyCode.C))
+            {
+                MoveAgendaUp();
+                _agendaType = agendaType.codex;
+            }
+        }
+        else
+        {
+            if((Input.GetKeyDown(KeyCode.M) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
+            {
+                MoveAgendaDown();
+            }
         }
     }
 
-    public void MoveAgenda()
+    public void MoveAgendaUp()
     {
         if (_animator == null) return;
-        _show = !_show;
-        _animator.SetBool("show", _show);
+        _animator.SetBool("show", true);
+    }
+    public void MoveAgendaDown()
+    {
+        if (_animator == null) return;
+        _animator.SetBool("show", false);
     }
 
     public void disablePlayerMovement()
