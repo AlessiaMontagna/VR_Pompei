@@ -7,7 +7,7 @@ public enum Players{Schiavo, Mercante, Nobile};
 
 public static class Globals
 {
-    public static Players player = Players.Schiavo;
+    public static Players player = Players.Nobile;
     public static bool someoneIsTalking = false;
 }
 

@@ -46,13 +46,9 @@ public class NpcSuperClass : MonoBehaviour
 
     public void Interaction(int phase)
     {
-        switch (phase)
-        {
-            case 1:StartCoroutine(StartInteraction());break;
-            case 0:UpdateInteraction();break;
-            case -1:StopInteraction();break;
-            default: throw new System.ArgumentOutOfRangeException();
-        }
+        if(phase > 0) StartCoroutine(StartInteraction());
+        else if (phase == 0) UpdateInteraction();
+        else StopInteraction();
     }
 
     public void SetSubtitles(string text){GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = text;}
@@ -73,7 +69,16 @@ public class NpcSuperClass : MonoBehaviour
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(_animator.GetBool(NavAgent.NavAgentStates.Talk.ToString()) && !_animator.GetBool("Turn")) _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+"Float", Random.Range(0f, 1f));
+        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgent.NavAgentStates.Turn.ToString()))
+        {
+            var animation = _navAgent.talkingAnimations.ElementAt(Random.Range(0, _navAgent.talkingAnimations.Count)).ToString();
+            foreach (var item in _navAgent.talkingAnimations)
+            {
+                var set = 0f;
+                if(item.ToString() == animation) set = 1f;
+                _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+item.ToString(), set);
+            }
+        }
     }
 
     protected virtual void StopInteraction()
@@ -88,11 +93,23 @@ public class NpcSuperClass : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
+        if(collider.tag != "Player" || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
         _animator.SetTrigger("Hit");
+        if(_animator.GetBool("Move"))
+        {
+            _animator.SetFloat("MoveFloat", 1f);
+            if(Globals.player == Players.Schiavo){_animator.SetFloat("HitReaction", 1f);_animator.SetFloat("HitNobile", 0f);}
+            else {_animator.SetFloat("HitReaction", 0f);_animator.SetFloat("HitNobile", 1f);}
+        }
+        _animator.SetFloat("HitFloat", Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward, Vector3.up));
     }
 
     protected virtual void OnTriggerExit(Collider collider)
     {
         _animator.ResetTrigger("Hit");
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
+        _animator.SetFloat("HitFloat", 0f);
+        _animator.SetFloat("HitReaction", 0f);
+        _animator.SetFloat("HitNobile", 0f);
     }
 }

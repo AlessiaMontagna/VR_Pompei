@@ -18,8 +18,12 @@ public class NavAgent
     private Dictionary<string, State> _states = new Dictionary<string, State>();
     private List<Vector3> _targets = new List<Vector3>();
 
-    public enum NavAgentStates{Idle, Path, Move, Talk, Interact};
+    public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn};
     private readonly string _animatorVariable = "Float";
+
+    public enum TalkingAnimations{Acknowledging, AnnoyedHeadShake, BeingCocky, DismissingGesture, HappyHandGesture, HeadNodYes, RelievedSigh, ShakingHeadNo, Talking, YellingOut};
+    public readonly List<TalkingAnimations> talkingAnimations = new List<TalkingAnimations>((TalkingAnimations[])System.Enum.GetValues(typeof(TalkingAnimations)));
+
 
     public NavAgent(NpcSuperClass owner)
     {
@@ -28,13 +32,13 @@ public class NavAgent
         _animator = _owner.GetComponent<Animator>();
         _navMeshAgent = _owner.GetComponent<UnityEngine.AI.NavMeshAgent>();
         var collider = _owner.gameObject.AddComponent<CapsuleCollider>();
-        collider.center = new Vector3(collider.center.x, 0.75f, collider.center.z);
-        collider.height = 1.5f;
-        collider.radius = 0.4f;
+        collider.center = new Vector3(0, 0.85f, 0);
+        collider.height = 1.7f;
+        collider.radius = 0.3f;
         var trigger = _owner.gameObject.AddComponent<CapsuleCollider>();
-        trigger.center = new Vector3(trigger.center.x, 0.75f, trigger.center.z);
-        trigger.height = 1.5f;
-        trigger.radius = 0.6f;
+        trigger.center = new Vector3(0, 0.85f, 0);
+        trigger.height = 1.7f;
+        trigger.radius = 0.4f;
         trigger.isTrigger = true;
 
         // Settings
@@ -115,7 +119,16 @@ public class NavAgent
     private void Talk()
     {
         if(_owner.parent != null)TurnToPosition(_owner.parent.transform.position);
-        if(_animator.GetBool(NavAgentStates.Talk.ToString()) && !_animator.GetBool("Turn")) _animator.SetFloat(NavAgentStates.Talk.ToString()+_animatorVariable, Random.Range(0f, 1f));
+        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgentStates.Turn.ToString()))
+        {
+            var animation = talkingAnimations.ElementAt(Random.Range(0, talkingAnimations.Count)).ToString();
+            foreach (var item in talkingAnimations)
+            {
+                var set = 0f;
+                if(item.ToString() == animation) set = 1f;
+                _animator.SetFloat(NavAgentStates.Talk.ToString()+item.ToString(), set);
+            }
+        }
     }
     
     public void CheckPlayerPosition()
@@ -128,8 +141,8 @@ public class NavAgent
     public void TurnToPosition(Vector3 position)
     {
         float angle = Vector3.SignedAngle((position - _owner.gameObject.transform.position), _owner.gameObject.transform.forward, Vector3.up);
-        if(angle > -30f && angle < 30f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnFloat", 0f);}
-        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnFloat", angle);}
+        if(angle > -30f && angle < 30f){_animator.SetBool(NavAgentStates.Turn.ToString(), false);_animator.SetFloat(NavAgentStates.Turn.ToString()+_animatorVariable, 0f);}
+        else {_animator.SetBool(NavAgentStates.Turn.ToString(), true);_animator.SetFloat(NavAgentStates.Turn.ToString()+_animatorVariable, angle);}
     }
 
     private void StartInteraction()
