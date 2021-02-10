@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MercatoFoodManager : MonoBehaviour
 {
-    private int _fruitCounter = 0;
-    private int _fishCounter = 0;
-    private int _breadCounter = 0;
+    [SerializeField] private int _fruitCounter;
+    [SerializeField] private int _fishCounter;
+    [SerializeField] private int _breadCounter;
     [SerializeField] private int _maxFruit = 5;
     [SerializeField] private int _maxBread = 2;
     [SerializeField] private int _maxFish = 3;
@@ -32,9 +32,9 @@ public class MercatoFoodManager : MonoBehaviour
             case foodType.Frutta:
                 return _maxFruit;
             case foodType.Pane:
-                return _maxFish;
-            case foodType.Pesce:
                 return _maxBread;
+            case foodType.Pesce:
+                return _maxFish;
         }
         return -1;
     }

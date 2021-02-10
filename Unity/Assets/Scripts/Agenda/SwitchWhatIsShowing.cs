@@ -12,7 +12,6 @@ public class SwitchWhatIsShowing : MonoBehaviour
     [SerializeField] private Text textUp;
     [SerializeField] private Text textDown;
 
-
     void Start()
     {
         Codex cod = GameObject.FindObjectOfType<Codex>();
@@ -52,6 +51,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
     {
         if(GetComponent<ShowAgenda>()._agendaType == agendaType.codex)
         {
+
             mappa.GetComponent<Renderer>().enabled = false;
             codex.GetComponent<CodexFlip>().enabled = true;
             for (int i = 0; i < codex.transform.childCount; i++)
@@ -59,6 +59,8 @@ public class SwitchWhatIsShowing : MonoBehaviour
                 codex.transform.GetChild(i).GetComponent<Renderer>().enabled = true;
             }
             textUp.text = "Mappa";
+         
+
         }
         else 
         {
