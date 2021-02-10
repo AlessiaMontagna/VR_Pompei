@@ -5,37 +5,57 @@ using UnityEngine.UI;
 
 public class SchiavoInteractable : Interattivo
 {
-    [SerializeField] private SchiavoTutorial character;
     [SerializeField] private Text talk;
     [SerializeField] private RawImage _eButton;
     public bool pointingSchiavo = false; 
     public bool hasTalked = false;
-    public int index = 1;
-    [SerializeField] private Animator _animator;
+    private Text _sottotitoli;
+    private Animator _animator;
+    private AudioSource _audioSource;
+    private int index = 0;
+    private AudioSubManager _subManager;
 
+    private void Start()
+    {
+        _subManager = FindObjectOfType<AudioSubManager>();
+        _sottotitoli = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        _audioSource = GetComponent<AudioSource>();
+        _animator = GetComponent<Animator>();
+    }
 
     public override void Interact(GameObject caller)
     {
-        if(index == 1)
+        hasTalked = true;
+        UITextOff();
+        Talk(Resources.Load<AudioClip>("Talking/TutorialSchiavo/" + Globals.player.ToString()));
+    }
+    public void Talk(AudioClip audio)
+    {
+        _audioSource.clip = audio;
+        if (!Globals.someoneIsTalking)
         {
-            hasTalked = true;
-            _eButton.enabled = false;
-            talk.enabled = false;
-            _animator.SetBool("Talk", true);
-            character.Talk(Resources.Load<AudioClip>("Talking/Nobile_Schiavo" + index));
-            index = 2;
+            _audioSource.Play();
+            StartCoroutine(StartDialogue(audio));
         }
+
     }
 
-
+    private IEnumerator StartDialogue(AudioClip audio)
+    {
+        _sottotitoli.text = _subManager.GetSubs(index, Characters.SchiavoTutorial);
+        Globals.someoneIsTalking = true;
+        yield return new WaitForSeconds(audio.length);
+        Globals.someoneIsTalking = false;
+        _sottotitoli.text ="";
+        yield return new WaitForSeconds(2f);
+        //TODO: schiavo se ne deve andare via. 
+    }
     public override void UITextOn()
     {
-        if (!hasTalked)
-        {
-            _eButton.enabled = true;
-            talk.enabled = true;
-            pointingSchiavo = true;
-        }
+        if (hasTalked) return;
+        _eButton.enabled = true;
+        talk.enabled = true;
+        pointingSchiavo = true;
     }
 
     public override void UITextOff()
