@@ -7,7 +7,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(NpcInteractable))]
 
 public class Npc : MonoBehaviour
@@ -22,7 +21,7 @@ public class Npc : MonoBehaviour
 
     void Awake()
     {
-        _navAgent = new NavAgent(this);
+        //_navAgent = new NavAgent(this);
         _animator = gameObject.GetComponent<Animator>();
     }
 
@@ -32,15 +31,6 @@ public class Npc : MonoBehaviour
         var _audioFiles = FindObjectOfType<AudioSubManager>().GetAudios(_character);
         _audioFilesCount = _audioFiles.Count/3;
         _audioVoice = _audioFiles.ElementAt(0);
-        var collider = gameObject.GetComponent<CapsuleCollider>();
-        collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
-        collider.height = 1.6f;
-        collider.radius = 0.6f;
-        collider = gameObject.AddComponent<CapsuleCollider>();
-        collider.center = new Vector3(collider.center.x, 0.85f, collider.center.z);
-        collider.height = 1.6f;
-        collider.radius = 1.6f;
-        collider.isTrigger = true;
     }
 
     void Update() => _navAgent?.Tik();
@@ -53,13 +43,13 @@ public class Npc : MonoBehaviour
 
     public GameObject GetParent(){return _parent;}
 
-    public void SetState(string statename) => _navAgent.SetState(statename);
+    public void SetState(string statename) => _navAgent.SetInitialState(statename);
 
     public void SetTargets(List<Vector3> targets) => _navAgent.SetTargets(targets);
 
     public void Interact() => _navAgent.interaction = true;
 
-    public void Interaction() => StartCoroutine(TalkInteraction());
+    public void StartInteraction() => StartCoroutine(TalkInteraction());
 
     private IEnumerator TalkInteraction()
     {
@@ -73,21 +63,13 @@ public class Npc : MonoBehaviour
         StopInteraction();
     }
 
-    public void AnimationUpdate()
+    public void UpdateInteraction()
     {
-        CheckPlayerPosition();
+        _navAgent.CheckPlayerPosition();
         if(_animator.GetBool("Talk") && !_animator.GetBool("Turn")) _animator.SetFloat("TalkIndex", Random.Range(0f, 1f));
     }
 
-    private void CheckPlayerPosition()
-    {
-        var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
-        //Debug.Log(Vector3.Distance(player, gameObject.transform.position));
-        if(Vector3.Distance(player, gameObject.transform.position) > 5f)StopInteraction();
-        else TurnToPosition(player);
-    }
-
-    private void StopInteraction()
+    public void StopInteraction()
     {
         StopCoroutine(TalkInteraction());
         if(_audioSource.isPlaying)_audioSource.Stop();
@@ -95,13 +77,6 @@ public class Npc : MonoBehaviour
         _animator.SetBool("Talk", false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
-    }
-
-    public void TurnToPosition(Vector3 position)
-    {
-        float angle = Vector3.SignedAngle((position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
-        if(angle > -30f && angle < 30f){_animator.SetBool("Turn", false);_animator.SetFloat("TurnAngle", 0f);}
-        else {_animator.SetBool("Turn", true);_animator.SetFloat("TurnAngle", angle);}
     }
 
     private void OnTriggerEnter(Collider collider)

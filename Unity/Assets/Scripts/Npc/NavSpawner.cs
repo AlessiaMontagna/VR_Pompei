@@ -10,8 +10,8 @@ public class NavSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> _soldierPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _schiavoPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _mercantePrefabs = new List<GameObject>();
-    [SerializeField] private List<GameObject> _patrizioPrefabs = new List<GameObject>();
-    [SerializeField] private List<GameObject> _patriziaPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _nobileMPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _nobileFPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _birdsPrefabs = new List<GameObject>();
     [SerializeField] private int _nGuards;
     [SerializeField] private int _nPeople;
@@ -36,8 +36,8 @@ public class NavSpawner : MonoBehaviour
         _prefabs.Add(Characters.Soldato, _soldierPrefabs);
         _prefabs.Add(Characters.Schiavo, _schiavoPrefabs);
         _prefabs.Add(Characters.Mercante, _mercantePrefabs);
-        _prefabs.Add(Characters.NobileM, _patrizioPrefabs);
-        _prefabs.Add(Characters.NobileF, _patriziaPrefabs);
+        _prefabs.Add(Characters.NobileM, _nobileMPrefabs);
+        _prefabs.Add(Characters.NobileF, _nobileFPrefabs);
         // get STOPS PATHS and SPAWNS
         foreach (var item in GameObject.FindObjectsOfType<NavElement>().Where(i => i != null))
         {
@@ -139,14 +139,11 @@ public class NavSpawner : MonoBehaviour
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
         GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
         agent.transform.LookAt(parent.transform, Vector3.up);
-        var component = agent.AddComponent<Npc>();
-        component.SetCharacter(character);
-        component.SetParent(parent);
-        component.SetState(state);
+        var component = agent.AddComponent<NpcSubClass>();
+        component.Initialize(character, parent, state, targets);
         if(targets != null && targets?.Count > 0)
         {
             if(character == Characters.Guardia){_guards++;}else{_people++;}
-            component.SetTargets(targets);
             agent.AddComponent<Rigidbody>();
             var body = agent.GetComponent<Rigidbody>();
             body.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
