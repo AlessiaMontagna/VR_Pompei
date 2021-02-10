@@ -6,30 +6,31 @@ using UnityEngine.UI;
 public class NpcInteractable : Interattivo
 {
 
-    private Npc character;
-    [SerializeField] private Text talk;
+    private NpcSuperClass _character;
+    [SerializeField] private Text _talk;
     [SerializeField] private RawImage _eButton;
+    
     void Start()
     {
-        talk = FindObjectOfType<talk>().GetComponent<Text>();
+        _talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        character = GetComponent<Npc>();
+        _character = GetComponent<NpcSuperClass>();
     }
 
     public override void Interact(GameObject caller)
     {
-        character.Interact();
+        _character.Interact();
     }
 
     public override void UITextOn()
     {
         _eButton.enabled = true;
-        talk.enabled = true;
+        _talk.enabled = true;
     }
 
     public override void UITextOff()
     {
         _eButton.enabled = false;
-        talk.enabled = false;
+        _talk.enabled = false;
     }
 }

@@ -26,9 +26,9 @@ public class NpcSuperClass : MonoBehaviour
     private string _audioVoice;
     public string audioVoice => _audioVoice;
 
-    public void Initialize(Characters _character, GameObject parent, string statename, List<Vector3> targets)
+    public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
     {
-        _character = _character;
+        _character = character;
         _parent = parent;
         _navAgent = new NavAgent(this);
         _navAgent.SetInitialState(statename);
@@ -60,9 +60,10 @@ public class NpcSuperClass : MonoBehaviour
     protected virtual IEnumerator StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        _animator.SetBool("Talk", true);
-        int index = Random.Range(0, audioFilesCount);
-        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{audioVoice}");
+        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
+        int index = Random.Range(0, _audioFilesCount);
+        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
+        if(_audioSource?.clip == null){Debug.Log($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice} NOT FOUND");StopInteraction();}
         _audioSource.Play();
         SetSubtitles(FindObjectOfType<AudioSubManager>().GetSubs(index, _character));
         yield return new WaitForSeconds(_audioSource.clip.length);
@@ -72,15 +73,15 @@ public class NpcSuperClass : MonoBehaviour
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(_animator.GetBool("Talk") && !_animator.GetBool("Turn")) _animator.SetFloat("TalkIndex", Random.Range(0f, 1f));
+        if(_animator.GetBool(NavAgent.NavAgentStates.Talk.ToString()) && !_animator.GetBool("Turn")) _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+"Float", Random.Range(0f, 1f));
     }
 
     protected virtual void StopInteraction()
     {
         StopCoroutine(StartInteraction());
-        if(_audioSource.isPlaying)_audioSource.Stop();
+        if(_audioSource.isPlaying)_audioSource?.Stop();
         SetSubtitles("");
-        _animator.SetBool("Talk", false);
+        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
     }

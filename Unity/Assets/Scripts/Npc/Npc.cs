@@ -66,7 +66,7 @@ public class Npc : MonoBehaviour
     public void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(_animator.GetBool("Talk") && !_animator.GetBool("Turn")) _animator.SetFloat("TalkIndex", Random.Range(0f, 1f));
+        if(_animator.GetBool("Talk") && !_animator.GetBool("Turn")) _animator.SetFloat("TalkFloat", Random.Range(0f, 1f));
     }
 
     public void StopInteraction()
