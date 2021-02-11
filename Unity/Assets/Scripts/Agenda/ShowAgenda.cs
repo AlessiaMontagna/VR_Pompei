@@ -10,18 +10,16 @@ public enum agendaType {mappa, codex};
 public class ShowAgenda : MonoBehaviour
 {
     private Animator _animator;
-    [SerializeField] private GameObject _projectCamera;
-    [SerializeField] private GameObject _redPoint;
-
-    private InteractionManager _interactionScript;
-
+    [SerializeField] private RawImage arrowDown;
+    [SerializeField] private RawImage arrowUp;
+    [SerializeField] FirstPersonController fpsScript;
+    [SerializeField] private Text textUp;
+    [SerializeField] private Text textDown;
     public agendaType _agendaType;
     private AudioSource _audioSource;
 
     void Start()
     {
-        _interactionScript = FindObjectOfType<InteractionManager>();
-        MappaMode(false);
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up_Down");
         _animator = GetComponent<Animator>();
@@ -35,13 +33,11 @@ public class ShowAgenda : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                MappaMode(true);
                 MoveAgendaUp();
                 _agendaType = agendaType.mappa;
             }
             else if (Input.GetKeyDown(KeyCode.C))
             {
-                MappaMode(false);
                 MoveAgendaUp();
                 _agendaType = agendaType.codex;
             }
@@ -51,15 +47,8 @@ public class ShowAgenda : MonoBehaviour
             if((Input.GetKeyDown(KeyCode.M) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
             {
                 MoveAgendaDown();
-                MappaMode(false);
             }
         }
-    }
-
-    public void MappaMode(bool value)
-    {
-        _projectCamera.SetActive(value);
-        _redPoint.GetComponent<Animator>().enabled = value;
     }
 
     public void MoveAgendaUp()
@@ -77,23 +66,30 @@ public class ShowAgenda : MonoBehaviour
 
     public void disablePlayerMovement()
     {
-        //fpsScript.enabled = false;
-        _interactionScript.enabled = false;
+        fpsScript.enabled = false;
         GetComponent<SwitchWhatIsShowing>().enabled = true;
 
     }
     public void enablePlayerMovement()
     {
-        _interactionScript.enabled = true;
+        fpsScript.enabled = true;
         GetComponent<SwitchWhatIsShowing>().enabled = false;
     }
 
     public void enableArrow()
     {
+        textUp.enabled = true;
+        textDown.enabled = true;
+        arrowDown.enabled = true;
+        arrowUp.enabled = true;
     }
 
     public void disableArrow()
     {
+        arrowDown.enabled = false;
+        arrowUp.enabled = false;
+        textUp.enabled = false;
+        textDown.enabled = false;
     }
 
 }

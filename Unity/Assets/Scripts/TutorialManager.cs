@@ -11,10 +11,11 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Text _tutorialText;
     [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
+    //[SerializeField] private Text _agendaText;
 
     private Text _obiettiviText;
     private ShowAgenda _scriptAgenda;
-    private float _waitTime = 6f;
+    private float _waitTime = 5f;
     private int _missionIndex;
 
     private void Start()
@@ -24,6 +25,7 @@ public class TutorialManager : MonoBehaviour
         _missionIndex = 0;
         _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<Text>();
         _obiettiviText.text = "";
+       // _agendaText.text = "";
         _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
     }
     private void Update()
@@ -43,12 +45,9 @@ public class TutorialManager : MonoBehaviour
                 CheckMappa();
                 break;
             case 4:
-                PutDownMappa();
+                MCOText();
                 break;
             case 5:
-                CheckCodex();
-                break;
-            case 6:
                 FinishTutorial();
                 break;
         }
@@ -81,9 +80,10 @@ public class TutorialManager : MonoBehaviour
             if(_waitTime <= 0)
             {
                 _obiettiviText.text = "Nuovo obiettivo: raggiungi Marcus al foro";
-                _tutorialText.text = "Per sapere il punto in cui devi recarti apri la mappa con ()";
+                _tutorialText.text = "Premi () per visualizzare la mappa";
                 _scriptAgenda.enabled = true;
                 _missionIndex = 3;
+                _waitTime = 5f;
             }
             else
             {
@@ -96,36 +96,33 @@ public class TutorialManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            _collider.enabled = false;
             _tutorialText.text = "Quì potrai visualizzare la tua posizione e il punto di destinazione. Premi nuovamente () per riporre la mappa.";
             _missionIndex = 4;
         }
     }
-    private void PutDownMappa()
+    private void MCOText()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
             _tutorialText.text = "";
             _missionIndex = 5;
         }
-        
     }
-
-    private void CheckCodex()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _tutorialText.text = "Alcuni monumenti presenti nell'ambiente contengono informazioni storiche. Quando ci passi vicino, queste informazioni verranno salvate in questa sezione.";
-            _missionIndex = 6;
-        }
-    }
-
     private void FinishTutorial()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        //TODO: lo schiavo se ne deve andare
+        _tutorialText.text = "Adesso sai tutto. Completa gli obiettivi che ti vengono mostrati in alto a destra. Buona fortuna!";
+        _collider.enabled = false;
+        if (_waitTime <= 0)
         {
             _tutorialText.enabled = false;
             this.enabled = false;
         }
+        else
+        {
+            _waitTime -= Time.deltaTime;
+        }
+
+        
     }
 }

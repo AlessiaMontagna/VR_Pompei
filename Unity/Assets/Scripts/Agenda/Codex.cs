@@ -14,7 +14,6 @@ public class Codex : MonoBehaviour
         
         this._discoveredIndex.Add(_discoveryId);
         this._discoveredIndex.Sort();
-        if(_discoveryId > this._discoveredIndex.Count-1) this._currentPage = this._discoveredIndex.Count-1;
-        else this._currentPage = _discoveryId;
+        this._currentPage = _discoveryId;
     }
 }

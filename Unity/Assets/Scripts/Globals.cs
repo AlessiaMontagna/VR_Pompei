@@ -5,11 +5,9 @@ public enum CodexInformation { Foro , Santuario , Macellum , ArchiOnorari , Temp
 public enum Characters{Guardia, Soldato, Schiavo, MySchiavo, Mercante, NobileM, NobileF, Amico, SchiavoTutorial};
 public enum Players{Schiavo, Mercante, Nobile};
 
-public enum Missions {Mission1_TalkWithFriend, Mission2_FindSlave, Mission3_GetFood}
-public enum MercanteFoodTypes { Frutta, Pane, Pesce, Verdura, Vasi}
 public static class Globals
 {
-    public static Players player = Players.Nobile;
+    public static Players player = Players.Schiavo;
     public static bool someoneIsTalking = false;
 }
 

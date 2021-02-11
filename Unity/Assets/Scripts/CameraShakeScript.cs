@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CameraShakeScript : MonoBehaviour
 {    
-    public AudioSource _audio;
+    public AudioSource audio;
     bool AlreadyPlayed = false;
     bool stop = false;
 
     void Start()
     {
         //audio = GetComponent<AudioSource>();        
-        GetComponent<AudioSource>().Stop();        
+        audio.Stop();        
     }
 
     public IEnumerator Shake (float duration, float magnitude)  //public -> can access this script from external scripts
@@ -19,8 +19,8 @@ public class CameraShakeScript : MonoBehaviour
         //play
         if(!AlreadyPlayed)
         {
-            _audio.Play();
-            _audio.volume = 0;
+            audio.Play();
+            audio.volume = 0;
             AlreadyPlayed = true;
         }        
                 
@@ -41,10 +41,10 @@ public class CameraShakeScript : MonoBehaviour
 
             if(time_elapsed >= threshold) stop = true;
             //fade in
-            if(_audio.volume <= 1f && !stop) _audio.volume = _audio.volume + 0.05f;
-            if(_audio.volume >= 0 && stop)
+            if(audio.volume <= 1f && !stop) audio.volume = audio.volume + delta;
+            if(audio.volume >= 0 && stop)
             {
-                _audio.volume = _audio.volume - 0.05f;
+                audio.volume = audio.volume - delta;
             }
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
@@ -56,7 +56,7 @@ public class CameraShakeScript : MonoBehaviour
             yield return null; // run this coroutine every time Update() is called, does 1 iteration of while per frame
         }
         //stop
-        _audio.Stop();
+        audio.Stop();
         AlreadyPlayed = false;
         transform.localPosition = originalPos; //restore original position
     }
