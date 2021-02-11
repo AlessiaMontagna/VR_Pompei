@@ -42,7 +42,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-        private bool sceneStarted = true;        
+        private bool sceneStarted = true;
+        public bool teleporting = false;
 
         // Use this for initialization
         private void Start()
@@ -96,6 +97,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
+        public void InitMouseLook(Transform t)
+        {
+            m_MouseLook.Init(t, m_Camera.transform);
+        }
 
         private void PlayLandingSound()
         {
@@ -138,7 +143,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+            if (!teleporting)
+            {
+                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+            }
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
