@@ -132,6 +132,18 @@ public class NavSpawner : MonoBehaviour
         GameObject agent = Instantiate(prefab, position, rotation);
         agent.transform.parent = gameObject.transform;
         if(count){if(character == Characters.Guardia){_guards++;}else{_people++;}}
+        if(state == "Move" || state == "Path")
+        {
+            agent.AddComponent<Rigidbody>();
+            var body = agent.GetComponent<Rigidbody>();
+            body.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            body.mass = 100f;
+            body.drag = 0.01f;
+            body.angularDrag = 0.05f;
+            body.useGravity = true;
+            body.interpolation = RigidbodyInterpolation.None;
+            body.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        }
         var component = agent.AddComponent<Npc>();
         component.SetCharacter(character);
         component.SetRotation(rotation);

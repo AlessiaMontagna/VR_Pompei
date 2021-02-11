@@ -32,8 +32,8 @@ public class NavAgent
 
         // Basic states
         State idle = AddState("Idle", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Idle", true);}, () => {}, () => {});
-        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationPath();}, () => {_animator.SetBool("Move", false);});
-        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {NextDestinationMove();}, () => {_animator.SetBool("Move", false);});
+        State path = AddState("Path", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);NextDestinationPath();}, () => {_animator.SetBool("Move", false);});
+        State move = AddState("Move", () => {_navMeshAgent.isStopped = false;_animator.SetBool("Move", true);}, () => {_animator.SetFloat("Speed", _navMeshAgent.velocity.magnitude);NextDestinationMove();}, () => {_animator.SetBool("Move", false);});
         State talk = AddState("Talk", () => {_navMeshAgent.isStopped = true;_animator.SetBool("Talk", true);}, () => {Talk();}, () => {_animator.SetBool("Talk", false);});
         State interact = AddState("Interact", () => {}, () => {}, () => {});
         interact = AddState("Interact", () => {_navMeshAgent.isStopped = true;_stateMachine.AddTransition(interact, _stateMachine.GetPreviousState(), () => !_interaction);_owner.Interaction();}, () => {_owner.Animate();}, () => {});
@@ -94,8 +94,8 @@ public class NavAgent
     {
         if(_targets.Count == 0)Debug.LogError("UNDEFINED PATH");
         if(!DestinationReached())return;
-        if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
-        else _navMeshAgent.speed = walkSpeed;
+        _navMeshAgent.speed = walkSpeed;
+        //if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
