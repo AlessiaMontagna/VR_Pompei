@@ -11,18 +11,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Text _tutorialText;
     [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
-<<<<<<< HEAD
-    //[SerializeField] private Text _agendaText;
-
-    private Text _obiettiviText;
-    private ShowAgenda _scriptAgenda;
-    private float _waitTime = 5f;
-=======
 
     private Text _obiettiviText;
     private ShowAgenda _scriptAgenda;
     private float _waitTime = 6f;
->>>>>>> origin/Alessia_New
     private int _missionIndex;
 
     private void Start()
@@ -32,10 +24,6 @@ public class TutorialManager : MonoBehaviour
         _missionIndex = 0;
         _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<Text>();
         _obiettiviText.text = "";
-<<<<<<< HEAD
-       // _agendaText.text = "";
-=======
->>>>>>> origin/Alessia_New
         _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
     }
     private void Update()
@@ -93,11 +81,7 @@ public class TutorialManager : MonoBehaviour
             if(_waitTime <= 0)
             {
                 _obiettiviText.text = "Nuovo obiettivo: raggiungi Marcus al foro";
-<<<<<<< HEAD
-                _tutorialText.text = "Premi () per visualizzare la mappa";
-=======
                 _tutorialText.text = "Per sapere il punto in cui devi recarti apri la mappa con ()";
->>>>>>> origin/Alessia_New
                 _scriptAgenda.enabled = true;
                 _missionIndex = 3;
             }
@@ -112,10 +96,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-<<<<<<< HEAD
-=======
             _collider.enabled = false;
->>>>>>> origin/Alessia_New
             _tutorialText.text = "Quì potrai visualizzare la tua posizione e il punto di destinazione. Premi nuovamente () per riporre la mappa.";
             _missionIndex = 4;
         }
@@ -126,8 +107,6 @@ public class TutorialManager : MonoBehaviour
         {
             _tutorialText.text = "";
             _missionIndex = 5;
-<<<<<<< HEAD
-=======
         }
         
     }
@@ -138,20 +117,12 @@ public class TutorialManager : MonoBehaviour
         {
             _tutorialText.text = "Alcuni monumenti presenti nell'ambiente contengono informazioni storiche. Quando ci passi vicino, queste informazioni verranno salvate in questa sezione.";
             _missionIndex = 6;
->>>>>>> origin/Alessia_New
         }
     }
 
     private void FinishTutorial()
     {
-<<<<<<< HEAD
-        //TODO: lo schiavo se ne deve andare
-        _tutorialText.text = "Adesso sai tutto. Completa gli obiettivi che ti vengono mostrati in alto a destra. Buona fortuna!";
-        _collider.enabled = false;
-        if (_waitTime <= 0)
-=======
         if (Input.GetKeyDown(KeyCode.C))
->>>>>>> origin/Alessia_New
         {
             _tutorialText.enabled = false;
             this.enabled = false;

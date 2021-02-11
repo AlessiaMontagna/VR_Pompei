@@ -27,11 +27,7 @@ public class SchiavoInteractable : Interattivo
     {
         hasTalked = true;
         UITextOff();
-<<<<<<< HEAD
-        Talk(Resources.Load<AudioClip>("Talking/TutorialSchiavo/" + index));
-=======
         Talk(Resources.Load<AudioClip>("Talking/TutorialSchiavo/" + Globals.player.ToString()));
->>>>>>> origin/Alessia_New
     }
     public void Talk(AudioClip audio)
     {
@@ -51,11 +47,8 @@ public class SchiavoInteractable : Interattivo
         yield return new WaitForSeconds(audio.length);
         Globals.someoneIsTalking = false;
         _sottotitoli.text ="";
-<<<<<<< HEAD
-=======
         yield return new WaitForSeconds(2f);
         //TODO: schiavo se ne deve andare via. 
->>>>>>> origin/Alessia_New
     }
     public override void UITextOn()
     {

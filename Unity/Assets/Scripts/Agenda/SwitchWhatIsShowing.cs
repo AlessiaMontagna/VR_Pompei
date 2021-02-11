@@ -10,10 +10,6 @@ public class SwitchWhatIsShowing : MonoBehaviour
     private bool m_isAxisInUse = false;
     private ShowAgenda _mappaMode;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/Alessia_New
     void Start()
     {
         _mappaMode = FindObjectOfType<ShowAgenda>();
@@ -56,25 +52,12 @@ public class SwitchWhatIsShowing : MonoBehaviour
     {
         if(GetComponent<ShowAgenda>()._agendaType == agendaType.codex)
         {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Alessia_New
             mappa.GetComponent<Renderer>().enabled = false;
             codex.GetComponent<CodexFlip>().enabled = true;
             for (int i = 0; i < codex.transform.childCount; i++)
             {
                 codex.transform.GetChild(i).GetComponent<Renderer>().enabled = true;
             }
-<<<<<<< HEAD
-            textUp.text = "Mappa";
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9744364682ce5c19689fb97664a46350ea59b48e
-         
-
->>>>>>> origin/Alessia_New
         }
         else 
         {
