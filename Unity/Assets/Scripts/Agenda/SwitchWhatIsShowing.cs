@@ -8,12 +8,11 @@ public class SwitchWhatIsShowing : MonoBehaviour
     private GameObject codex;
     private GameObject mappa;
     private bool m_isAxisInUse = false;
-    public byte indexAgenda;
-    [SerializeField] private Text textUp;
-    [SerializeField] private Text textDown;
+    private ShowAgenda _mappaMode;
 
     void Start()
     {
+        _mappaMode = FindObjectOfType<ShowAgenda>();
         Codex cod = GameObject.FindObjectOfType<Codex>();
         codex = cod.gameObject;
         Mappa map = GameObject.FindObjectOfType<Mappa>();
@@ -30,6 +29,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
                 GetComponent<ShowAgenda>()._agendaType = agendaType.mappa;
                 Show();
                 m_isAxisInUse = true;
+                _mappaMode.MappaMode(true);
             }
             
         }
@@ -42,6 +42,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
                 GetComponent<ShowAgenda>()._agendaType = agendaType.codex;
                 Show();
                 m_isAxisInUse = true;
+                _mappaMode.MappaMode(false);
             }
         }
         if(Input.GetAxisRaw("Arrows_v") == 0) m_isAxisInUse = false;
@@ -58,7 +59,6 @@ public class SwitchWhatIsShowing : MonoBehaviour
             {
                 codex.transform.GetChild(i).GetComponent<Renderer>().enabled = true;
             }
-            textUp.text = "Mappa";
          
 
         }
@@ -70,7 +70,6 @@ public class SwitchWhatIsShowing : MonoBehaviour
             {
                 codex.transform.GetChild(i).GetComponent<Renderer>().enabled = false;
             }
-            textDown.text = "Codex";
         }
     }
 

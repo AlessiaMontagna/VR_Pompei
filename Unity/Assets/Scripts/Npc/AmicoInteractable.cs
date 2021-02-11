@@ -12,9 +12,11 @@ public class AmicoInteractable : Interattivo
     private int index = 0;
     private AudioSubManager _subtitles;
     private Text dialogueText;
+    private MissionManager _updateMission;
 
     void Start()
     {
+        _updateMission = FindObjectOfType<MissionManager>();
         dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
         _subtitles = FindObjectOfType<AudioSubManager>();
         audioSource = GetComponent<AudioSource>();
@@ -35,6 +37,7 @@ public class AmicoInteractable : Interattivo
         if (Globals.player == Players.Nobile && index == 0)
         {
             FindObjectOfType<MySchiavoInteractable>()._switch = true;
+            _updateMission.UpdateMission(Missions.Mission2_FindSlave);
             index = 1;
         }
 

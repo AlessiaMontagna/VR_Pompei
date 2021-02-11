@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-[RequireComponent(typeof(AudioSource))]
 public class InformationObject : ObjectInteractable
 {
     [SerializeField] private CodexInformation _objectName;
@@ -10,12 +9,13 @@ public class InformationObject : ObjectInteractable
     [SerializeField] private Text _tutorialText;
 
     private Codex _codex;
-    private AudioSource _audiosource;
+    private AudioSource _audioSource;
+    private AudioClip _audioClip;
     
     private void Start()
     {
-        _audiosource = GetComponent<AudioSource>();
-        _audiosource.clip = Resources.Load<AudioClip>("FeedbackSounds/Nuova_voce_codex");
+        _audioSource = FindObjectOfType<InteractionManager>().GetComponents<AudioSource>()[1];
+        _audioClip = Resources.Load<AudioClip>("FeedbackSounds/Nuova_voce_codex");
         _nuovaVoceText = FindObjectOfType<CodexText>().GetComponent<Text>();
         _codex = FindObjectOfType<Codex>();
     }
@@ -32,7 +32,8 @@ public class InformationObject : ObjectInteractable
     {
         StartCoroutine(NewVoice());
         _codex.addDiscoveryId((int)_objectName);
-        _audiosource.Play();
+        _audioSource.clip = _audioClip;
+        _audioSource.Play();
         foreach(BoxCollider b in GetComponents<BoxCollider>())
         {
             b.enabled = false;

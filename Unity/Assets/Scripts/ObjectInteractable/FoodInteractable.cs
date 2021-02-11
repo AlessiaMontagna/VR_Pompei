@@ -22,7 +22,6 @@ public class FoodInteractable : ObjectInteractable
         GetComponent<BoxCollider>().enabled = false;
         _clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
         _audioSource = FindObjectOfType<FirstPersonController>().GetComponents<AudioSource>()[1];
-        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
         _foodManager = FindObjectOfType<MercatoFoodManager>();
         pick = FindObjectOfType<Pick>().GetComponent<Text>();
         dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
