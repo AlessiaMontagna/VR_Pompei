@@ -14,7 +14,7 @@ public class MySchiavoInteractable : Interattivo
 
     [SerializeField] private GameObject fpc2;
     [SerializeField] private GameObject nobile;
-
+    private MissionManager _mission;
     private Text talk;
     private RawImage _eButton;
     private AudioSubManager _sottotitoli;
@@ -25,6 +25,7 @@ public class MySchiavoInteractable : Interattivo
 
     void Start()
     {
+        _mission = FindObjectOfType<MissionManager>();
         _sottotitoli = FindObjectOfType<AudioSubManager>();
         _audioSource = GetComponent<AudioSource>();
         _dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
@@ -52,7 +53,8 @@ public class MySchiavoInteractable : Interattivo
 
     private IEnumerator Subtitles(GameObject player, AudioSource playerAudio)
     {
-        player.GetComponent<FirstPersonController>().enabled = false;
+        FirstPersonController playerController = player.GetComponent<FirstPersonController>();
+        playerController.enabled = false;
         player.GetComponent<InteractionManager>().enabled = false;
         GetComponent<MySchiavoInteractable>().UITextOff();
         path = "Talking/MySchiavo/";
@@ -74,14 +76,29 @@ public class MySchiavoInteractable : Interattivo
         //GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
         Globals.someoneIsTalking = false;
         Globals.player = Players.Schiavo;
-        player.GetComponent<FirstPersonController>().enabled = true;
+
+        GetComponent<CapsuleCollider>().enabled = false;
+        _mission.UpdateMission(Missions.Mission3_GetFood);
+        playerController.teleporting = true;
+        yield return new WaitForEndOfFrame();
+        player.transform.rotation = transform.rotation;
+        Vector3 newPosition = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
+        player.transform.position = newPosition;
+        playerController.InitMouseLook(player.transform);
+        yield return new WaitForFixedUpdate();
+        playerController.teleporting = false;
+        playerController.enabled = true;
         player.GetComponent<InteractionManager>().enabled = true;
+
+
+        Destroy(gameObject);
 
     }
 
     private IEnumerator StaticDialogue(AudioClip clip)
     {
         _dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        Debug.Log(_dialogueText.text);
         yield return new WaitForSeconds(clip.length);
         _dialogueText.text = "";
         Globals.someoneIsTalking = false;
@@ -89,15 +106,12 @@ public class MySchiavoInteractable : Interattivo
     }
     public override void UITextOn()
     {
-            _eButton.enabled = true;
-            talk.enabled = true;
-        
-        
+        _eButton.enabled = true;
+        talk.enabled = true;
     }
 
     public override void UITextOff()
     {
-
         _eButton.enabled = false;
         talk.enabled = false;
     }

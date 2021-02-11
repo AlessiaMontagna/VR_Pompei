@@ -28,7 +28,6 @@ public class FoodInteractable : ObjectInteractable
         _clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
 >>>>>>> origin/Alessia_New
         _audioSource = FindObjectOfType<FirstPersonController>().GetComponents<AudioSource>()[1];
-        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
         _foodManager = FindObjectOfType<MercatoFoodManager>();
         pick = FindObjectOfType<Pick>().GetComponent<Text>();
         dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
