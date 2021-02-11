@@ -18,5 +18,4 @@ public class NpcSubClass : NpcSuperClass
     {
         base.StopInteraction();
     }
-
 }

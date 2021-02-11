@@ -36,11 +36,16 @@ public class MercanteInteractable : Interattivo
                 food = FindObjectOfType<Verdura>().GetComponent<Transform>();
                 break;
         }
+        
         _subtitles = FindObjectOfType<AudioSubManager>();
         _dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
         audioSource = GetComponent<AudioSource>();
         talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
+        var _audioFiles = GameObject.FindObjectOfType<AudioSubManager>().GetAudios(_character);
+        _audioFilesCount = _audioFiles.Count/3;
+        _audioVoice = _audioFiles.ElementAt(0);
     }
     public override void Interact(GameObject caller)
     {
@@ -59,6 +64,10 @@ public class MercanteInteractable : Interattivo
     {
         Globals.someoneIsTalking = true;
         _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
+        int index = Random.Range(0, _audioFilesCount);
+        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
+        if(_audioSource?.clip == null){Debug.Log($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice} NOT FOUND");StopInteraction();}
+        _audioSource.Play();
         Debug.Log(_dialogueText.text);
         yield return new WaitForSeconds(audioSource.clip.length);
         _dialogueText.text = "";
