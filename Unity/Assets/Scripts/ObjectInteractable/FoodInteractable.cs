@@ -15,9 +15,18 @@ public class FoodInteractable : ObjectInteractable
     private MercatoFoodManager _foodManager;
     private Text dialogueText;
     private AudioSource _audioSource;
+<<<<<<< HEAD
 
     private void Start()
     {
+=======
+    private AudioClip _clip;
+
+    private void Start()
+    {
+        GetComponent<BoxCollider>().enabled = false;
+        _clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
+>>>>>>> origin/Alessia_New
         _audioSource = FindObjectOfType<FirstPersonController>().GetComponents<AudioSource>()[1];
         _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
         _foodManager = FindObjectOfType<MercatoFoodManager>();
@@ -39,6 +48,10 @@ public class FoodInteractable : ObjectInteractable
         if (_foodManager.getCounter(_foodType) < _foodManager.getMax(_foodType))
         {
             UITextOff();
+<<<<<<< HEAD
+=======
+            _audioSource.clip = _clip;
+>>>>>>> origin/Alessia_New
             _audioSource.Play();
             _foodManager.addCounter(_foodType);
             _foodManager.CheckMissionComplete();

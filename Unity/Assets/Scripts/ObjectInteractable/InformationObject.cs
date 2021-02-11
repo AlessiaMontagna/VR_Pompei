@@ -7,9 +7,17 @@ public class InformationObject : ObjectInteractable
 {
     [SerializeField] private CodexInformation _objectName;
     [SerializeField] private Text _nuovaVoceText;
+<<<<<<< HEAD
     private Codex _codex;
     private AudioSource _audiosource;
 
+=======
+    [SerializeField] private Text _tutorialText;
+
+    private Codex _codex;
+    private AudioSource _audiosource;
+    
+>>>>>>> origin/Alessia_New
     private void Start()
     {
         _audiosource = GetComponent<AudioSource>();
@@ -35,6 +43,10 @@ public class InformationObject : ObjectInteractable
         {
             b.enabled = false;
         }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/Alessia_New
     }
 
     private IEnumerator NewVoice()
