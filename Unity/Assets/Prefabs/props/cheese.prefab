@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3836509214293065252}
   - component: {fileID: 185174632934699393}
   - component: {fileID: 2699107605483914571}
-  - component: {fileID: 7983535194859783142}
-  - component: {fileID: 4492363442161707100}
+  - component: {fileID: 1463352297}
   m_Layer: 0
   m_Name: cheese
   m_TagString: Untagged
@@ -81,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7983535194859783142
-BoxCollider:
+--- !u!64 &1463352297
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91,22 +90,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3000002, y: 0.10853958, z: 0.29999542}
-  m_Center: {x: 0, y: 0.05426967, z: 0}
---- !u!54 &4492363442161707100
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4500736916337140894}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2719439086681959747, guid: b694833acee322f4d9e508c7242e3277, type: 3}

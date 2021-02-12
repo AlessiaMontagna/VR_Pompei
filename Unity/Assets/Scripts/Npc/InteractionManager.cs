@@ -84,4 +84,17 @@ public class InteractionManager : MonoBehaviour
             _objectInteractable = null;
         }
     }
+
+    private void OnDisable()
+    {
+        if (_objectInteractable != null)
+        {
+            _objectInteractable.UITextOff();
+        }
+        if (_pointingInteractable != null)
+        {
+            _pointingInteractable.UITextOff();
+        }
+
+    }
 }
