@@ -38,4 +38,13 @@ public class AudioSubManager : MonoBehaviour
         foreach (var item in files){audios.Add(item.name.Split('_')[1]);}
         return audios;
     }
+
+    public int GetMaxAudios(Characters characterType)
+    {
+        if (_subtitles.TryGetValue(Globals.player.ToString() + characterType.ToString(), out var subtitles))
+        {
+            return subtitles.Count;
+        }
+        return -1;
+    }
 }

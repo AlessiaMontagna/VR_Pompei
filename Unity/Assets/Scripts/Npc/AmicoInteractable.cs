@@ -13,6 +13,7 @@ public class AmicoInteractable : Interattivo
     private AudioSubManager _subtitles;
     private Text dialogueText;
     private MissionManager _updateMission;
+    private int _maxRand;
 
     void Start()
     {
@@ -29,7 +30,8 @@ public class AmicoInteractable : Interattivo
         Globals.someoneIsTalking = true;
         if (Globals.player == Players.Schiavo)
         {
-            index = Random.Range(0, 3);
+            _maxRand = _subtitles.GetMaxAudios(Characters.Amico);
+            index = Random.Range(0, _maxRand);
         }
         audioSource.clip = Resources.Load<AudioClip>("Talking/Amico/" + Globals.player.ToString() + index);
         audioSource.Play();

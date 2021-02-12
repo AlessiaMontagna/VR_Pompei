@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -23,8 +24,8 @@ public class MySchiavoInteractable : Interattivo
     private int index = 0;
     private string path;
 
-    void Start()
-    {
+    void Start() 
+    { 
         _mission = FindObjectOfType<MissionManager>();
         _sottotitoli = FindObjectOfType<AudioSubManager>();
         _audioSource = GetComponent<AudioSource>();
