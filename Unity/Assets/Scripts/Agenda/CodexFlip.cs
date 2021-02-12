@@ -126,8 +126,8 @@ public class CodexFlip : MonoBehaviour
         }
         else
         {
-            setTexture("Right", _discoveredPagesList[codex._currentPage]);
-            setTexture("Right_BG", _discoveredPagesList[codex._currentPage]);
+            setTexture("Right", _totalPages[codex._currentPage]);
+            setTexture("Right_BG", _totalPages[codex._currentPage]);
         }
 
         if (codex._currentPage == 0)
@@ -137,9 +137,17 @@ public class CodexFlip : MonoBehaviour
         }
         else
         {
-            setTexture("Left_BG", _discoveredPagesList[codex._currentPage - 1]);
-            setTexture("Left", _discoveredPagesList[codex._currentPage - 1]);
+            setTexture("Left_BG", _totalPages[codex._currentPage - 1]);
+            setTexture("Left", _totalPages[codex._currentPage - 1]);
         }
 
+    }
+
+    public void addDiscoveryId(int _discoveryId)
+    {
+        codex._discoveredIndex.Add(_discoveryId);
+        codex._discoveredIndex.Sort();
+        codex._currentPage = _discoveryId;
+        UpdateDiscovered(codex._discoveredIndex);
     }
 }
