@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Interattivo : MonoBehaviour
 {
-    public abstract void Interact(GameObject caller);
+    public abstract void Interact();
     public abstract void UITextOn();
     public abstract void UITextOff();
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcSubClass : NpcSuperClass
+public class NpcSubClass : NpcInteractable
 {
     protected override IEnumerator StartInteraction()
     {

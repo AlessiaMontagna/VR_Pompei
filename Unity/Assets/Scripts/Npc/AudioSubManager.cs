@@ -6,23 +6,30 @@ using Newtonsoft.Json;
 public class AudioSubManager : MonoBehaviour
 {
     [SerializeField] public TextAsset _textJSON;
-    private Dictionary<string, List<string>> _subtitles;
+    private Dictionary<string, List<string>> _subtitles = new Dictionary<string, List<string>>();
+    private Dictionary<string, List<string>> _audios = new Dictionary<string, List<string>>();
 
-    private List<string> _vociMaschili = new List<string>{"Giorgio", "Francesco", "Antonio", "Klajdi", "Edoardo", "Fabrizio"};
+    private List<string> _vociMaschili = new List<string>{"Giorgio", "Francesco", "Antonio", "Klajdi", "Edoardo", "Fabrizio", "Andrea"};
     private List<string> _vociFemminili = new List<string>{"Alessia"};
 
     public void Start()
     {
         _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON.text);
+        foreach (var character in new List<Characters>((Characters[])System.Enum.GetValues(typeof(Characters))))
+        {
+            var files = Resources.LoadAll<AudioClip>($"Talking/{character.ToString()}").ToList();
+            
+            _audios.Add(character.ToString()+Globals.player.ToString());
+        }
     }
 
-    public string GetSubs(int index, Characters type)
+    public string GetSubs(int index, Characters character)
     {
-        if (_subtitles.TryGetValue(Globals.player.ToString() + type.ToString(), out var subtitles)) return subtitles[index];
+        if(_subtitles.TryGetValue(Globals.player.ToString() + character.ToString(), out var subtitles)) return subtitles[index];
         return null;
     }
 
-    public List<string> GetAudios(Characters character)
+    public List<string> GetAudios(int index, Characters character)
     {
         var files = Resources.LoadAll<AudioClip>($"Talking/{character.ToString()}").ToList();
         var voci = _vociMaschili;

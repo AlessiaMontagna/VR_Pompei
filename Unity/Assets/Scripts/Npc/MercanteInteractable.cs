@@ -13,9 +13,10 @@ public class MercanteInteractable : Interattivo
     private Transform food;
     private AudioSubManager _subtitles;
     private Text _dialogueText;
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
     private bool unlockFood = true;
     private int index;
+
     void Start()
     {
         switch (_foodType)
@@ -47,7 +48,7 @@ public class MercanteInteractable : Interattivo
         _audioFilesCount = _audioFiles.Count/3;
         _audioVoice = _audioFiles.ElementAt(0);
     }
-    public override void Interact(GameObject caller)
+    public override void Interact()
     {
         audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
         audioSource.Play();
@@ -66,7 +67,7 @@ public class MercanteInteractable : Interattivo
         _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
         int index = Random.Range(0, _audioFilesCount);
         _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
-        if(_audioSource?.clip == null){Debug.Log($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice} NOT FOUND");StopInteraction();}
+        if(_audioSource?.clip == null){Debug.LogError($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice} NOT FOUND");StopInteraction();}
         _audioSource.Play();
         Debug.Log(_dialogueText.text);
         yield return new WaitForSeconds(audioSource.clip.length);

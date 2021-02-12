@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class NavAgent
 {
-    private NpcSuperClass _owner;
+    private NpcInteractable _owner;
     private Animator _animator;
-    private FiniteStateMachine<NpcSuperClass> _stateMachine;
+    private FiniteStateMachine<NpcInteractable> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     public bool interaction = false;
 
@@ -25,10 +25,10 @@ public class NavAgent
     public readonly List<TalkingAnimations> talkingAnimations = new List<TalkingAnimations>((TalkingAnimations[])System.Enum.GetValues(typeof(TalkingAnimations)));
 
 
-    public NavAgent(NpcSuperClass owner)
+    public NavAgent(NpcInteractable owner)
     {
         _owner = owner;
-        _stateMachine = new FiniteStateMachine<NpcSuperClass>(_owner);
+        _stateMachine = new FiniteStateMachine<NpcInteractable>(_owner);
         _animator = _owner.GetComponent<Animator>();
         _navMeshAgent = _owner.GetComponent<UnityEngine.AI.NavMeshAgent>();
         var collider = _owner.gameObject.AddComponent<CapsuleCollider>();
