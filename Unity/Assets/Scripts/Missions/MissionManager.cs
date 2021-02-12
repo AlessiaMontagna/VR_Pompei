@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MissionManager : MonoBehaviour
     private List<Vector3> _missions;
     private Vector3 _myPosition = new Vector3();
     private Vector3 _mission3 = new Vector3();
-    private TextMeshProUGUI _obiettiviText;
+    private Text _obiettiviText;
     private string[] _text = {  "Nuovo obiettivo: parla con Marcus",
                                 "Nuovo obiettivo: trova il tuo schiavo",
                                 "Nuovo obiettivo: vai al macellum e prendi il cibo indicato." };
@@ -30,7 +31,7 @@ public class MissionManager : MonoBehaviour
     public void UpdateMission(Missions missionIndex)
     {
         _myPosition = _missions[(int)missionIndex];
-        _obiettiviText.text = _text[(int)missionIndex];
+        //_obiettiviText.text = _text[(int)missionIndex];
         _myPosition.y = _myYPosition;
         transform.position = _myPosition;
     }

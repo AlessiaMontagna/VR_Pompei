@@ -12,7 +12,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
 
-    private TextMeshProUGUI _obiettiviText;
+    private Text _obiettiviText;
     private ShowAgenda _scriptAgenda;
     private float _waitTime = 6f;
     private int _missionIndex;
@@ -22,7 +22,7 @@ public class TutorialManager : MonoBehaviour
         _scriptAgenda = FindObjectOfType<ShowAgenda>();
         _scriptAgenda.enabled = false;
         _missionIndex = 0;
-        _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>();
+        _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<Text>();
         _obiettiviText.text = "";
         _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
     }
