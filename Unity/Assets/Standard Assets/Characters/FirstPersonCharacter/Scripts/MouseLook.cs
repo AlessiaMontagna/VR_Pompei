@@ -30,6 +30,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void LookRotation(Transform character, Transform camera)
         {
+            if (Cursor.lockState == CursorLockMode.None)
+                return;
             float yRot;
             float xRot;
             // Read looking input

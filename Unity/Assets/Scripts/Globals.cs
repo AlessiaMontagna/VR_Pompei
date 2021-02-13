@@ -6,7 +6,16 @@ public enum Characters{Guardia, Soldato, Schiavo, MySchiavo, Mercante, NobileM, 
 public enum Players{Schiavo, Mercante, Nobile};
 
 public enum Missions {Mission1_TalkWithFriend, Mission2_FindSlave, Mission3_GetFood}
+<<<<<<< HEAD
 public enum MercanteFoodTypes { Frutta, Pane, Pesce, Verdura, Vasi}
+=======
+
+public enum MercanteFoodTypes {Frutta, Pane, Pesce, Verdura, Vasi}
+
+public enum MaleVoices {Giorgio, Francesco, Antonio, Klajdi, Edoardo, Fabrizio, Andrea}
+public enum FemaleVoices {Alessia, Paola}
+
+>>>>>>> origin/Alessia_New
 public static class Globals
 {
     public static Players player = Players.Nobile;

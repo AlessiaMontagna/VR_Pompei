@@ -12,10 +12,14 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class MySchiavoInteractable : Interattivo
 {
     public bool _switch = false;
+<<<<<<< HEAD
     public LevelChangerScript level;
+=======
+    private LevelChangerScript level;
+>>>>>>> origin/Alessia_New
 
-    [SerializeField] private GameObject fpc2;
-    [SerializeField] private GameObject nobile;
+    //[SerializeField] private GameObject fpc2;
+    //[SerializeField] private GameObject nobile;
     private MissionManager _mission;
     private Text talk;
     private RawImage _eButton;
@@ -25,8 +29,9 @@ public class MySchiavoInteractable : Interattivo
     private int index = 0;
     private string path;
 
-    void Start() 
-    { 
+    void Start()
+    {
+        level = FindObjectOfType<LevelChangerScript>();
         _mission = FindObjectOfType<MissionManager>();
         _sottotitoli = FindObjectOfType<AudioSubManager>();
         _audioSource = GetComponent<AudioSource>();
@@ -40,8 +45,12 @@ public class MySchiavoInteractable : Interattivo
         if (_switch)
         {
             index = 1;
+<<<<<<< HEAD
             AudioSource playerAudio = caller.GetComponents<AudioSource>()[1];
             StartCoroutine(Subtitles(caller, playerAudio));
+=======
+            StartCoroutine(Subtitles(index));
+>>>>>>> origin/Alessia_New
         }
         else
         {
@@ -49,10 +58,8 @@ public class MySchiavoInteractable : Interattivo
             _audioSource.Play();
             StartCoroutine(StaticDialogue(_audioSource.clip));
         }
-        
-        
-    }
 
+<<<<<<< HEAD
     private IEnumerator Subtitles(GameObject player, AudioSource playerAudio)
     {
         FirstPersonController playerController = player.GetComponent<FirstPersonController>();
@@ -81,13 +88,50 @@ public class MySchiavoInteractable : Interattivo
         //GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
         Globals.someoneIsTalking = false;
         Globals.player = Players.Schiavo;
+=======
+>>>>>>> origin/Alessia_New
 
-        GetComponent<CapsuleCollider>().enabled = false;        
-        _mission.UpdateMission(Missions.Mission3_GetFood);        
-        playerController.teleporting = true;                
+    }
+
+<<<<<<< HEAD
+=======
+    private IEnumerator Subtitles(int index)
+    {
+        var player = FindObjectOfType<InteractionManager>();
+        var playerAudio = player.GetComponents<AudioSource>()[1];
+        FirstPersonController playerController = player.GetComponent<FirstPersonController>();
+        playerController.enabled = false;
+        player.GetComponent<InteractionManager>().enabled = false;
+        GetComponent<MySchiavoInteractable>().UITextOff();
+        path = "Talking/MySchiavo/";
+        _audioSource.clip = Resources.Load<AudioClip>(path + index.ToString());
+        _audioSource.Play();
+        _dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        index++;
+        yield return new WaitForSeconds(_audioSource.clip.length);
+        playerAudio.clip = Resources.Load<AudioClip>(path + index.ToString());
+        playerAudio.Play();
+        _dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        index++;
+        yield return new WaitForSeconds((playerAudio.clip.length) / 2);
+        _dialogueText.text = _sottotitoli.GetSubs(index, Characters.MySchiavo);
+        index++;
+        yield return new WaitForSeconds((playerAudio.clip.length) / 2);
+        _dialogueText.text = "";
+        //chiama animazione swoosh
+        level.SwooshIn();
+        yield return new WaitForSeconds(0.5f);
+
+        //GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
+        Globals.someoneIsTalking = false;
+        Globals.player = Players.Schiavo;
+
+        GetComponent<CapsuleCollider>().enabled = false;
+        _mission.UpdateMission(Missions.Mission3_GetFood);
+        playerController.teleporting = true;
         yield return new WaitForEndOfFrame();
         player.transform.rotation = transform.rotation;
-        Vector3 newPosition = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);                
+        Vector3 newPosition = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
         player.transform.position = newPosition;
         playerController.InitMouseLook(player.transform);
         yield return new WaitForFixedUpdate();
@@ -98,6 +142,7 @@ public class MySchiavoInteractable : Interattivo
 
         Destroy(gameObject);
 
+>>>>>>> origin/Alessia_New
     }
 
     private IEnumerator StaticDialogue(AudioClip clip)
@@ -121,4 +166,8 @@ public class MySchiavoInteractable : Interattivo
         talk.enabled = false;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/Alessia_New
