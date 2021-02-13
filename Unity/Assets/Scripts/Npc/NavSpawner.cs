@@ -139,7 +139,8 @@ public class NavSpawner : MonoBehaviour
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
         GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
         agent.transform.LookAt(parent.transform, Vector3.up);
-        var component = agent.AddComponent<NpcSubClass>();
+        NpcInteractable component = agent.AddComponent<NpcSubClass>();
+        if(character == Characters.Mercante && state == "Idle") component = agent.AddComponent<NpcMercante>();
         component.Initialize(character, parent, state, targets);
         if(targets != null && targets?.Count > 0)
         {

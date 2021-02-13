@@ -6,7 +6,7 @@ public class NpcMercante : NpcInteractable
 {
     [SerializeField] private MercanteFoodTypes _foodType;
     private Transform food;
-    private bool unlockFood = true;
+    private bool foodUnloked = false;
 
     void Start()
     {
@@ -27,20 +27,22 @@ public class NpcMercante : NpcInteractable
             case MercanteFoodTypes.Verdura:
                 food = FindObjectOfType<Verdura>().GetComponent<Transform>();
                 break;
+            default: throw new System.ArgumentOutOfRangeException();
         }
     }
 
     private void EnableFood()
     {
-        if (unlockFood && Globals.player == Players.Schiavo)
+        if (!foodUnloked && Globals.player == Players.Schiavo)
         {
             foreach (Transform child in food.transform)child.GetComponent<BoxCollider>().enabled = true;
-            unlockFood = false;
+            foodUnloked = true;
         }
     }
 
     protected override IEnumerator StartInteraction()
     {
+        EnableFood();
         return base.StartInteraction();
     }
 

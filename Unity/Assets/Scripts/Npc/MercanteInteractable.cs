@@ -16,6 +16,7 @@ public class MercanteInteractable : Interattivo
     private AudioSource _audioSource;
     private bool unlockFood = true;
     private int index;
+    private Characters _character;
 
     void Start()
     {
@@ -40,18 +41,15 @@ public class MercanteInteractable : Interattivo
         
         _subtitles = FindObjectOfType<AudioSubManager>();
         _dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
         talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         _audioSource = gameObject.GetComponent<AudioSource>();
-        var _audioFiles = GameObject.FindObjectOfType<AudioSubManager>().GetAudios(_character);
-        _audioFilesCount = _audioFiles.Count/3;
-        _audioVoice = _audioFiles.ElementAt(0);
     }
     public override void Interact()
     {
-        audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
-        audioSource.Play();
+        _audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
+        _audioSource.Play();
         if (unlockFood && Globals.player == Players.Schiavo)
         {
             for (int i = 0; i < food.childCount; i++)
@@ -65,12 +63,11 @@ public class MercanteInteractable : Interattivo
     {
         Globals.someoneIsTalking = true;
         _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
-        int index = Random.Range(0, _audioFilesCount);
-        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
-        if(_audioSource?.clip == null){Debug.LogError($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice} NOT FOUND");StopInteraction();}
+        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_");
+        if(_audioSource?.clip == null){Debug.LogError($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_ NOT FOUND");}
         _audioSource.Play();
         Debug.Log(_dialogueText.text);
-        yield return new WaitForSeconds(audioSource.clip.length);
+        yield return new WaitForSeconds(_audioSource.clip.length);
         _dialogueText.text = "";
         Globals.someoneIsTalking = false;
     }

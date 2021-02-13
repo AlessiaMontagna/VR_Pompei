@@ -20,10 +20,10 @@ public class NpcInteractable : Interattivo
     public GameObject parent => _parent;
     private AudioSource _audioSource;
     public AudioSource audioSource => _audioSource;
+    private string _voice;
+    public string voice => _voice;
     private int _audioFilesCount;
     public int audioFilesCount => _audioFilesCount;
-    private string _audioVoice;
-    public string audioVoice => _audioVoice;
     private Text _talk;
     private RawImage _eButton;
 
@@ -36,9 +36,10 @@ public class NpcInteractable : Interattivo
         _navAgent.SetTargets(targets);
         _animator = gameObject.GetComponent<Animator>();
         _audioSource = gameObject.GetComponent<AudioSource>();
-        var _audioFiles = GameObject.FindObjectOfType<AudioSubManager>().GetAudios(_character);
-        _audioFilesCount = _audioFiles.Count/3;
-        _audioVoice = _audioFiles.ElementAt(0);
+        _voice = GameObject.FindObjectOfType<AudioSubManager>().GetVoice(_character);
+        if(_voice == null)Debug.LogError($"GetVoice({_character}) returned null");
+        _audioFilesCount = 0;
+        while(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(_audioFilesCount, _character, _voice) != null){_audioFilesCount++;}
         _talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
@@ -68,18 +69,27 @@ public class NpcInteractable : Interattivo
         else StopInteraction();
     }
 
-    public void SetSubtitles(string text){GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = text;}
+    public void SetSubtitles(int index)
+    {
+        if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
+        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
+    }
+    
+    public void SetAudio(int index)
+    {
+        if(index < 0) return;
+        _audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
+        if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
+        _audioSource.Play();
+    }
 
     protected virtual IEnumerator StartInteraction()
     {
         Globals.someoneIsTalking = true;
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         int index = Random.Range(0, _audioFilesCount);
-        GameObject.FindObjectOfType<AudioSubManager>().GetAudios(_character);
-        _audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice}");
-        if(_audioSource?.clip == null){Debug.LogError($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_{_audioVoice} NOT FOUND");StopInteraction();}
-        _audioSource.Play();
-        SetSubtitles(FindObjectOfType<AudioSubManager>().GetSubs(index, _character));
+        SetAudio(index);
+        SetSubtitles(index);
         yield return new WaitForSeconds(_audioSource.clip.length);
         StopInteraction();
     }
@@ -103,7 +113,7 @@ public class NpcInteractable : Interattivo
     {
         StopCoroutine(StartInteraction());
         if(_audioSource.isPlaying)_audioSource?.Stop();
-        SetSubtitles("");
+        SetSubtitles(-1);
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
