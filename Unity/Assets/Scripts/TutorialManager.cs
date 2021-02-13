@@ -8,7 +8,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class TutorialManager : MonoBehaviour
 {
 
-    [SerializeField] private Text _tutorialText;
+    [SerializeField] private TextMeshProUGUI _tutorialText;
     [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
 

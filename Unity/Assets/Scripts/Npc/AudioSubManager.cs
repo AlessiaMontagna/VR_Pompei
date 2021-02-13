@@ -49,4 +49,13 @@ public class AudioSubManager : MonoBehaviour
         foreach (var audio in audios) if(audio.Contains(index.ToString()))return audio;
         return null;
     }
+
+    public int GetMaxAudios(Characters characterType)
+    {
+        if (_subtitles.TryGetValue(Globals.player.ToString() + characterType.ToString(), out var subtitles))
+        {
+            return subtitles.Count;
+        }
+        return -1;
+    }
 }
