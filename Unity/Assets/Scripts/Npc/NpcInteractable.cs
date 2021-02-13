@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
-//[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(OcclusionInteract))]
 
 public class NpcInteractable : Interattivo
@@ -19,8 +18,6 @@ public class NpcInteractable : Interattivo
     public Characters character => _character;
     private GameObject _parent;
     public GameObject parent => _parent;
-    /* private AudioSource _audioSource;
-    public AudioSource audioSource => _audioSource; */
     private OcclusionInteract _fmodAudioSource;
     public OcclusionInteract fmodAudioSource => _fmodAudioSource;
     private string _voice;
@@ -40,7 +37,6 @@ public class NpcInteractable : Interattivo
         _navAgent.SetInitialState(statename);
         _navAgent.SetTargets(targets);
         _animator = gameObject.GetComponent<Animator>();
-        //_audioSource = gameObject.GetComponent<AudioSource>();
 
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;
@@ -103,9 +99,6 @@ public class NpcInteractable : Interattivo
     {
         if(index < 0){_fmodAudioSource.enabled = false;return;}
         _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
-        //_audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
-        //if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
-        //_audioSource.Play();
         _fmodAudioSource.enabled = true;
     }
 
@@ -149,11 +142,13 @@ public class NpcInteractable : Interattivo
         SetAudio(index);
         SetSubtitles(index);
 
-        int fmodLength;
         float length = 0;
-        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
-        if (res == FMOD.RESULT.OK) length = fmodLength /1000;
+        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out int fmodLength);
+        if(res == FMOD.RESULT.OK) length = fmodLength /1000;
+
+        Debug.Log($"{length}");
         yield return new WaitForSeconds(length);
+        Debug.Log($"{length}");
 
         StopInteraction();
     }
