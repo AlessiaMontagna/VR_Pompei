@@ -134,7 +134,7 @@ public class NavAgent
     public void CheckPlayerPosition()
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
-        if(Vector3.Distance(player, _owner.gameObject.transform.position) > 5f)_owner.Interaction(-1);
+        if(Vector3.Distance(player, _owner.gameObject.transform.position) > 10f)_owner.Interaction(-1);
         else TurnToPosition(player);
     }
 

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
+//[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(OcclusionInteract))]
 
 public class NpcInteractable : Interattivo
 {
@@ -18,16 +19,18 @@ public class NpcInteractable : Interattivo
     public Characters character => _character;
     private GameObject _parent;
     public GameObject parent => _parent;
-    private AudioSource _audioSource;
-    public AudioSource audioSource => _audioSource;
+    /* private AudioSource _audioSource;
+    public AudioSource audioSource => _audioSource; */
+    private OcclusionInteract _fmodAudioSource;
+    public OcclusionInteract fmodAudioSource => _fmodAudioSource;
     private string _voice;
     public string voice => _voice;
     private int _audioFilesCount;
     public int audioFilesCount => _audioFilesCount;
     private Text _talk;
     private RawImage _eButton;
-    private int _subIndex;
-    public int subIndex => _subIndex;
+    private int _talkIndex;
+    public int talkIndex => _talkIndex;
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
     {
@@ -37,13 +40,22 @@ public class NpcInteractable : Interattivo
         _navAgent.SetInitialState(statename);
         _navAgent.SetTargets(targets);
         _animator = gameObject.GetComponent<Animator>();
-        _audioSource = gameObject.GetComponent<AudioSource>();
+        //_audioSource = gameObject.GetComponent<AudioSource>();
+
+        _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
+        _fmodAudioSource.enabled = false;
+        _fmodAudioSource.PlayerOcclusionWidening = 0.15f;
+        _fmodAudioSource.SoundOcclusionWidening = 0.8f;
+        LayerMask mask = LayerMask.GetMask("ProjectCameraLayer");
+        _fmodAudioSource.OcclusionLayer = mask;
+
         _voice = GameObject.FindObjectOfType<AudioSubManager>().GetVoice(_character);
         if(_voice == null)Debug.LogError($"GetVoice({_character}) returned null");
         _audioFilesCount = 0;
         while(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(_audioFilesCount, _character, _voice) != null){_audioFilesCount++;}
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        _talkIndex = -1;
     }
 
     void Update() => _navAgent?.Tik();
@@ -75,25 +87,33 @@ public class NpcInteractable : Interattivo
         else StopInteraction();
     }
 
+    public void SetTalkIndex(int index)
+    {
+        if(index < 0) _talkIndex = Random.Range(0, _audioFilesCount);
+        else _talkIndex = index;
+    }
+
     public void SetSubtitles(int index)
     {
         if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
         else GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = FindObjectOfType<AudioSubManager>().GetSubs(index, _character);
     }
-    
+
     public void SetAudio(int index)
     {
-        if(index < 0) return;
-        _audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
-        if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
-        _audioSource.Play();
+        if(index < 0){_fmodAudioSource.enabled = false;return;}
+        _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
+        //_audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
+        //if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
+        //_audioSource.Play();
+        _fmodAudioSource.enabled = true;
     }
 
     protected virtual void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        _subIndex = Random.Range(0, _audioFilesCount);
-        StartCoroutine(Talk(_subIndex));
+        if(_talkIndex < 0) SetTalkIndex(-1);
+        StartCoroutine(Talk(_talkIndex));
     }
 
     protected virtual void UpdateInteraction()
@@ -113,12 +133,14 @@ public class NpcInteractable : Interattivo
 
     protected virtual void StopInteraction()
     {
-        StopCoroutine(Talk(_subIndex));
-        if(_audioSource.isPlaying)_audioSource?.Stop();
-        SetSubtitles(-1);
+        StopCoroutine(Talk(_talkIndex));
+        _talkIndex = -1;
+        SetAudio(_talkIndex);
+        SetSubtitles(_talkIndex);
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
+        _fmodAudioSource.enabled = false;
     }
 
     protected virtual IEnumerator Talk(int index)
@@ -126,7 +148,13 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
         SetSubtitles(index);
-        yield return new WaitForSeconds(_audioSource.clip.length);
+
+        int fmodLength;
+        float length = 0;
+        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
+        if (res == FMOD.RESULT.OK) length = fmodLength /1000;
+        yield return new WaitForSeconds(length);
+
         StopInteraction();
     }
 

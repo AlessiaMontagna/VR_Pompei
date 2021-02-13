@@ -7,7 +7,7 @@ public class OcclusionInteract : MonoBehaviour
     [Header("FMOD Event")]
     [SerializeField]
     [EventRef]
-    public string SelectAudio;
+    public string SelectAudio = "";
     private EventInstance Audio;
     public EventDescription AudioDes;
     private StudioListener Listener;
@@ -16,12 +16,12 @@ public class OcclusionInteract : MonoBehaviour
     [Header("Occlusion Options")]
     [SerializeField]
     [Range(0f, 10f)]
-    private float SoundOcclusionWidening = 1f;
+    public float SoundOcclusionWidening = 1f;
     [SerializeField]
     [Range(0f, 10f)]
-    private float PlayerOcclusionWidening = 1f;
+    public float PlayerOcclusionWidening = 1f;
     [SerializeField]
-    private LayerMask OcclusionLayer;
+    public LayerMask OcclusionLayer;
 
     private bool AudioIsVirtual;
     private float MaxDistance;
@@ -31,13 +31,15 @@ public class OcclusionInteract : MonoBehaviour
 
     private void OnEnable()
     {
-        Audio = RuntimeManager.CreateInstance(SelectAudio);
-        RuntimeManager.AttachInstanceToGameObject(Audio, GetComponent<Transform>(), GetComponent<Rigidbody>());
-        Audio.start();
-        Audio.release();
-        AudioDes = RuntimeManager.GetEventDescription(SelectAudio);
-        AudioDes.getMaximumDistance(out MaxDistance);
-        Listener = FindObjectOfType<StudioListener>();
+        if(SelectAudio != "") {
+            Audio = RuntimeManager.CreateInstance(SelectAudio);
+            RuntimeManager.AttachInstanceToGameObject(Audio, GetComponent<Transform>(), GetComponent<Rigidbody>());
+            Audio.start();
+            Audio.release();
+            AudioDes = RuntimeManager.GetEventDescription(SelectAudio);
+            AudioDes.getMaximumDistance(out MaxDistance);
+            Listener = FindObjectOfType<StudioListener>();
+        }
     }
     
     private void FixedUpdate()
