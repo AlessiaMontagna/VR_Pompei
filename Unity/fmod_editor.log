@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000019A4F0E3D08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001EB43B9E2E8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,156 +18,194 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
 [LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115200
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 116576
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002AB4D2F4F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002FF296F098
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF93F4D7B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF93F4D7AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF93F4D7BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF93F4D7CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019A29541368
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF8A87B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF8A87AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF8A87BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF8A87CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EA426EFF38
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Nobile0', format=5, channels=2, frequency=48000, lengthbytes=40064, lengthpcm=219428, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.454163.
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='NobileGuardia0_Giorgio', format=5, channels=2, frequency=48000, lengthbytes=82144, lengthpcm=392463, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
 [LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115200
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 116576
 [LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002AB4D2F4F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002FF296F098
 [LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF93F4D7B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF93F4D7AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF93F4D7BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF93F4D7CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019A2A76A588
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF8A87B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF8A87AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF8A87BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF8A87CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EA426EB708
 [LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='SchiavoMercante4_Andrea', format=5, channels=2, frequency=48000, lengthbytes=89344, lengthpcm=406256, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.309967.
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115200
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002AB4D2F4F8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF93F4D7B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF93F4D7AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF93F4D7BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF93F4D7CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019A29F17928
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='SchiavoMercante1_Andrea', format=5, channels=2, frequency=48000, lengthbytes=82144, lengthpcm=392463, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='NobileGuardia3_Giorgio', format=5, channels=2, frequency=48000, lengthbytes=23648, lengthpcm=112848, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.886414.
 [LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio\Build\Desktop/Master.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
 [LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] SystemI::createSound                     : setdata soundi = 0000019B754C2E48 : node = 0000019A501F9230
-[LOG] SystemI::createSound                     : add node to async list : head = 0000019A7B5B39E8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019B754C2E48
+[LOG] SystemI::createSound                     : setdata soundi = 000001EA4AC3E448 : node = 000001EA436479A0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001EB697EE948.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001EA4AC3E448
 [LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio\Build\Desktop/Master.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115200
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116576
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019A501F9340
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001EA43647AB0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='NobileNobileF2_Paola', format=5, channels=2, frequency=48000, lengthbytes=183680, lengthpcm=665808, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.608398.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 49152, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001EA4AC3E448
+[LOG] SoundI::release                          : NobileNobileF2_Paola (000001EA4AC3E448)
+[LOG] SoundI::release                          :     NobileNobileF2_Paola (000001EA700C4A58)
+[LOG] SoundI::release                          :     NobileNobileF2_Paola (000001EA706024A8)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 116576
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002FF296F098
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF8A87B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF8A87AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF8A87BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF8A87CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EA426EFF38
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='NobileNobileM2_Klajdi', format=5, channels=2, frequency=48000, lengthbytes=94656, lengthpcm=369893, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.704498.
+[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio\Build\Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001EA297F57A8 : node = 000001EA41CA91A0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001EB697EE948.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001EA297F57A8
+[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio\Build\Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001EA41CA92B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='NobileGuardia2_Giorgio', format=5, channels=2, frequency=48000, lengthbytes=125056, lengthpcm=492773, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.644928.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001EA297F57A8
+[LOG] SoundI::release                          : NobileGuardia2_Giorgio (000001EA297F57A8)
+[LOG] SoundI::release                          :     NobileGuardia2_Giorgio (000001EA700C4BF8)
+[LOG] SoundI::release                          :     NobileGuardia2_Giorgio (000001EA297F41B8)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 116576
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002FF296F098
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF8A87B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF8A87AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF8A87BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF8A87CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EA426ED3E8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Nobile0', format=5, channels=2, frequency=48000, lengthbytes=40064, lengthpcm=219428, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.454163.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 116576
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002FF296F098
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF8A87B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF8A87AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF8A87BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF8A87CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EA7023B618
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Nobile1', format=5, channels=2, frequency=48000, lengthbytes=48864, lengthpcm=245760, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.531250.
+[LOG] SoundI::release                          :  (000001EA70C7A078)
+[LOG] SoundI::release                          :     NobileGuardia0_Giorgio (000001EA700C43D8)
+[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio\Build\Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001EA297F41B8 : node = 000001EA41D14710
+[LOG] SystemI::createSound                     : add node to async list : head = 000001EB697EE948.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001EA297F41B8
+[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio\Build\Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001EA41D14820
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SchiavoNobileM3_Klajdi', format=5, channels=2, frequency=48000, lengthbytes=259008, lengthpcm=994324, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001EA297F41B8
+[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio\Build\Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001EA42653668 : node = 000001EA70A266E0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001EB697EE948.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001EA42653668
+[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio\Build\Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001EA70A267F0
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SchiavoMercante2_Andrea', format=5, channels=2, frequency=48000, lengthbytes=155296, lengthpcm=633208, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.769318.
-[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 49152, Semaphore: No, Sleep Time: 10, Looping: Yes.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019B754C2E48
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001EA42653668
+[LOG] SoundI::release                          : SchiavoNobileM3_Klajdi (000001EA297F41B8)
+[LOG] SoundI::release                          :     SchiavoNobileM3_Klajdi (000001EA700C4BF8)
+[LOG] SoundI::release                          :     SchiavoNobileM3_Klajdi (000001EA297F4368)
+[LOG] SoundI::release                          : SchiavoMercante2_Andrea (000001EA42653668)
+[LOG] SoundI::release                          :     SchiavoMercante2_Andrea (000001EA700C43D8)
+[LOG] SoundI::release                          :     SchiavoMercante2_Andrea (000001EA42653B78)
 [LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio\Build\Desktop/Master.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0000019A25C6B1D8 : node = 0000019A501F94B0
-[LOG] SystemI::createSound                     : add node to async list : head = 0000019A7B5B39E8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019A25C6B1D8
+[LOG] SystemI::createSound                     : setdata soundi = 000001EA42652A98 : node = 000001EA436479A0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001EB697EE948.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001EA42652A98
 [LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio\Build\Desktop/Master.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115200
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8789024
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116576
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019A501F95C0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001EA43647AB0
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SchiavoNobileF1_Paola', format=5, channels=2, frequency=48000, lengthbytes=259008, lengthpcm=994324, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019A25C6B1D8
-[LOG] SoundI::release                          : SchiavoMercante2_Andrea (0000019B754C2E48)
-[LOG] SoundI::release                          :     SchiavoMercante2_Andrea (0000019A7C114C38)
-[LOG] SoundI::release                          :     SchiavoMercante2_Andrea (0000019B754C3BC8)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115200
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002AB4D2F4F8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF93F4D7B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF93F4D7AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF93F4D7BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF93F4D7CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019A2953D9A8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='SchiavoMercante0_Andrea', format=5, channels=2, frequency=48000, lengthbytes=23648, lengthpcm=112848, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.886414.
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0000019A25C5D828 : node = 0000019A501F9230
-[LOG] SystemI::createSound                     : add node to async list : head = 0000019A7B5B39E8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000019A25C5D828
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115200
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019A501F9340
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SchiavoNobileF1_Paola', format=5, channels=2, frequency=48000, lengthbytes=259008, lengthpcm=994324, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000019A25C5D828
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 8727872
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115200
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000002AB4D2F4F8
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF93F4D7B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF93F4D7AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF93F4D7BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF93F4D7CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000019A2A76A168
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='SchiavoNobileF0_Paola', format=5, channels=2, frequency=48000, lengthbytes=104000, lengthpcm=411271, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.996307.
-[LOG] SoundI::release                          :  (0000019A7B060EA8)
-[LOG] SoundI::release                          :     Nobile0 (0000019A7C113BF8)
-[LOG] SoundI::release                          :  (0000019A25CE7698)
-[LOG] SoundI::release                          :     SchiavoMercante1_Andrea (0000019A7C116498)
-[LOG] SoundI::release                          : SchiavoNobileF1_Paola (0000019A25C5D828)
-[LOG] SoundI::release                          :     SchiavoNobileF1_Paola (0000019A7C116158)
-[LOG] SoundI::release                          :     SchiavoNobileF1_Paola (0000019A25C5F328)
-[LOG] SoundI::release                          : SchiavoNobileF1_Paola (0000019A25C6B1D8)
-[LOG] SoundI::release                          :     SchiavoNobileF1_Paola (0000019A7C113098)
-[LOG] SoundI::release                          :     SchiavoNobileF1_Paola (0000019A25C6B6E8)
-[LOG] SoundI::release                          :  (0000019A7B05FD68)
-[LOG] SoundI::release                          :     SchiavoMercante0_Andrea (0000019A7C115118)
-[LOG] SoundI::release                          :  (0000019A25D22FB8)
-[LOG] SoundI::release                          :     SchiavoMercante4_Andrea (0000019A7C115938)
-[LOG] SoundI::release                          :  (0000019A25D23128)
-[LOG] SoundI::release                          :     SchiavoNobileF0_Paola (0000019A7C1167D8)
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SchiavoSoldato0_Giorgio', format=5, channels=2, frequency=48000, lengthbytes=155296, lengthpcm=633208, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.769318.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001EA42652A98
+[LOG] SoundI::release                          : SchiavoSoldato0_Giorgio (000001EA42652A98)
+[LOG] SoundI::release                          :     SchiavoSoldato0_Giorgio (000001EA700C43D8)
+[LOG] SoundI::release                          :     SchiavoSoldato0_Giorgio (000001EA42653B78)
+[LOG] SoundI::release                          :  (000001EA70C7A7A8)
+[LOG] SoundI::release                          :     NobileGuardia3_Giorgio (000001EA700C48B8)
+[LOG] SoundI::release                          :  (000001E9DF50DCE8)
+[LOG] SoundI::release                          :     NobileNobileM2_Klajdi (000001EA700C4A58)
+[LOG] SoundI::release                          :  (000001E87F01EB38)
+[LOG] SoundI::release                          :     Nobile0 (000001EA700B8278)
+[LOG] SoundI::release                          :  (000001EBAAB4E518)
+[LOG] SoundI::release                          :     Nobile1 (000001EA700B8A98)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients

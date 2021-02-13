@@ -12,10 +12,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class MySchiavoInteractable : Interattivo
 {
     public bool _switch = false;
-    public LevelChangerScript level;
+    private LevelChangerScript level;
 
-    [SerializeField] private GameObject fpc2;
-    [SerializeField] private GameObject nobile;
+    //[SerializeField] private GameObject fpc2;
+    //[SerializeField] private GameObject nobile;
     private MissionManager _mission;
     private Text talk;
     private RawImage _eButton;
