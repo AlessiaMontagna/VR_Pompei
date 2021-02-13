@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum NavRoles{Spawn, Stop, Path};
 public enum NavSubroles{PeopleSpawn, FlocksSpawn, 
-    GuardStop, MercanteStop, BalconyStop, GroupStop,
+    GuardStop, SoldierStop, MercanteStop, BalconyStop, GroupStop,
     ColonnatoPath, ForoPath, ViaPath, MacellumPath, TempioPath};
 
 public class NavElement : MonoBehaviour

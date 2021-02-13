@@ -479,7 +479,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7869650334707273533}
+<<<<<<< HEAD
   - {fileID: 410963554078041221}
+=======
+  - {fileID: 8004180526080636720}
+>>>>>>> origin/Giorgio
   m_Father: {fileID: 400002}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -625,14 +629,53 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+<<<<<<< HEAD
 --- !u!95 &5010685890346570358
+=======
+--- !u!1 &6122779714818273115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473376357803340038}
+  m_Layer: 0
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1473376357803340038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122779714818273115}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400002}
+  m_Father: {fileID: 400000}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8776728580826423462
+>>>>>>> origin/Giorgio
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1080821580625641023}
+=======
+  m_GameObject: {fileID: 7232604441182137738}
+>>>>>>> origin/Giorgio
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8eed276704e57e746a2a747c7ff6a7f2, type: 2}
@@ -644,13 +687,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< HEAD
 --- !u!114 &1545256924540845840
+=======
+--- !u!114 &6276494880218535322
+>>>>>>> origin/Giorgio
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1080821580625641023}
+=======
+  m_GameObject: {fileID: 7232604441182137738}
+>>>>>>> origin/Giorgio
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7646d85303ee3f43b86a5a4c89dcc7a, type: 3}
@@ -658,13 +709,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _discoveredIndex: 
   _currentPage: 0
+<<<<<<< HEAD
 --- !u!114 &7913478109338696531
+=======
+--- !u!114 &8451290899859804353
+>>>>>>> origin/Giorgio
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1080821580625641023}
+=======
+  m_GameObject: {fileID: 7232604441182137738}
+>>>>>>> origin/Giorgio
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0408ba6a5b494a24fa05c4c58cf59c6f, type: 3}
@@ -679,6 +738,7 @@ MonoBehaviour:
   _discoveredPagesList: []
   _discoveredPages: []
   _backgroundTexture: {fileID: 2800000, guid: ff0e4739ff794c640a5a2fcac63e38f8, type: 3}
+<<<<<<< HEAD
   codex: {fileID: 1545256924540845840}
 --- !u!1 &6122779714818273115
 GameObject:
@@ -711,6 +771,9 @@ Transform:
   m_Father: {fileID: 400000}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  codex: {fileID: 6276494880218535322}
+>>>>>>> origin/Giorgio
 --- !u!114 &7385144607222884415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,36 +786,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76c84c215ed80b4292e16f2c539108d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1001 &8092349214637585628
+=======
+--- !u!1001 &3581457892148627067
+>>>>>>> origin/Giorgio
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 207840784}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 1598920082817343835, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
         type: 3}
       propertyPath: m_Name
       value: Mappa
+=======
+    - target: {fileID: 6191529820952407025, guid: 28085693358b1cf40ac570965f032a98,
+        type: 3}
+      propertyPath: m_Name
+      value: Codex
+>>>>>>> origin/Giorgio
       objectReference: {fileID: 0}
-    - target: {fileID: 2124381760100809697, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
         type: 3}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 0
+=======
+      value: 1
+>>>>>>> origin/Giorgio
       objectReference: {fileID: 0}
-    - target: {fileID: 2124381760100809697, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.67981
+      value: 4.0408
       objectReference: {fileID: 0}
-    - target: {fileID: 2124381760100809697, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.67981
+      value: 4.0408
       objectReference: {fileID: 0}
-    - target: {fileID: 2124381760100809697, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
         type: 3}
       propertyPath: m_LocalScale.z
+<<<<<<< HEAD
       value: 0.67981
       objectReference: {fileID: 0}
     - target: {fileID: 2124381760100809697, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
@@ -847,56 +926,122 @@ PrefabInstance:
       value: 4.0408
       objectReference: {fileID: 0}
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+      value: 4.0408
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.218
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.157
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.9979782
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.06355685
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -7.288001
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8221951914368522784, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    - target: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 8742029042443026586, guid: 28085693358b1cf40ac570965f032a98,
+=======
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28085693358b1cf40ac570965f032a98, type: 3}
+--- !u!1 &7232604441182137738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6191529820952407025, guid: 28085693358b1cf40ac570965f032a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 3581457892148627067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8004180526080636720 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6820538074450850123, guid: 28085693358b1cf40ac570965f032a98,
+    type: 3}
+  m_PrefabInstance: {fileID: 3581457892148627067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8092349214637585628
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 207840784}
+    m_Modifications:
+    - target: {fileID: 1598920082817343835, guid: 7cdc73c7a0a81d74a960bccfcb45788b,
+>>>>>>> origin/Giorgio
         type: 3}
       propertyPath: m_Name
       value: Codex
