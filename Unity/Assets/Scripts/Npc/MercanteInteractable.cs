@@ -13,9 +13,12 @@ public class MercanteInteractable : Interattivo
     private Transform food;
     private AudioSubManager _subtitles;
     private Text _dialogueText;
-    private AudioSource audioSource;
+    //private AudioSource audioSource;
     private bool unlockFood = true;
     private int index;
+
+    [SerializeField] private OcclusionInteract _fmodAudioSource;
+
     void Start()
     {
         switch (_foodType)
@@ -36,16 +39,20 @@ public class MercanteInteractable : Interattivo
                 food = FindObjectOfType<Verdura>().GetComponent<Transform>();
                 break;
         }
+
+        _fmodAudioSource = GetComponent<OcclusionInteract>();
         _subtitles = FindObjectOfType<AudioSubManager>();
         _dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
         talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
     public override void Interact(GameObject caller)
     {
-        audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
-        audioSource.Play();
+        _fmodAudioSource.SelectAudio = "event:/Talking/Mercante/Mercante0_Antonio";
+        _fmodAudioSource.enabled = true;
+        //audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
+        //audioSource.Play();
         if (unlockFood && Globals.player == Players.Schiavo)
         {
             for (int i = 0; i < food.childCount; i++)
@@ -60,9 +67,20 @@ public class MercanteInteractable : Interattivo
         Globals.someoneIsTalking = true;
         _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
         Debug.Log(_dialogueText.text);
-        yield return new WaitForSeconds(audioSource.clip.length);
+
+        int fmodLength;
+        float length = 0;
+
+        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
+
+        if (res == FMOD.RESULT.OK)
+            length = fmodLength /1000;
+        yield return new WaitForSeconds(length);
+        
         _dialogueText.text = "";
         Globals.someoneIsTalking = false;
+        _fmodAudioSource.enabled = false;
+
     }
 
     public override void UITextOn()
