@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(OcclusionInteract))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
 
@@ -14,8 +13,6 @@ public class RandomFlyer : MonoBehaviour
 
     private Animator _animator;
     private Rigidbody _body;
-    private OcclusionInteract _fmodAudioSource;
-    private LayerMask _mask;
 
     private float _idleSpeed = 10f, _turnSpeed = 80f, _switchSeconds = 3f, _idleRatio = 0.3f, changeTarget = 0f, changeAnim = 0f, timeSinceTarget = 0f, timeSinceAnim = 0f, prevAnim, currentAnim = 0f;
     private float prevSpeed, speed, zturn, prevz, _turnSpeedBackup, distanceFromBase, distanceFromTarget;
@@ -25,16 +22,7 @@ public class RandomFlyer : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-        _fmodAudioSource = gameObject.AddComponent(typeof(OcclusionInteract)) as OcclusionInteract;
-        _fmodAudioSource = GetComponent<OcclusionInteract>();
-        _fmodAudioSource.enabled = false;
-        _fmodAudioSource.PlayerOcclusionWidening = 0.15f;
-        _fmodAudioSource.SoundOcclusionWidening = 1.2f;
-        _mask = LayerMask.GetMask("ProjectCameraLayer");
-        _fmodAudioSource.OcclusionLayer = _mask;
-        _fmodAudioSource.SelectAudio = "event:/Props/Environment_seagull";
-        int delay = Random.Range(0, 7);
+    {
         _animator = GetComponent<Animator>();
         _body = GetComponent<Rigidbody>();
         _turnSpeedBackup = _turnSpeed;
@@ -42,15 +30,6 @@ public class RandomFlyer : MonoBehaviour
         if(delayStart < 0f) _body.velocity = _idleSpeed * _direction;
         if(_homeTarget == null) _homeTarget = gameObject.transform.parent;
         if(_flyingTarget == null) _flyingTarget = _homeTarget;
-        _fmodAudioSource.enabled = true;
-        //startSound(delay);
-    }
-
-    protected virtual IEnumerator startSound(int _delay) {
-        int delay = _delay;
-        if(delay>0) yield return new WaitForSeconds(_delay);
-        _fmodAudioSource.enabled = true;
-        
     }
 
     void FixedUpdate()
