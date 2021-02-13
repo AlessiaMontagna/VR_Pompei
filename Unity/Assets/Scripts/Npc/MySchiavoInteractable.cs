@@ -35,14 +35,13 @@ public class MySchiavoInteractable : Interattivo
         talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
-    public override void Interact(GameObject caller)
+    public override void Interact()
     {
         Globals.someoneIsTalking = true;
         if (_switch)
         {
             index = 1;
-            AudioSource playerAudio = caller.GetComponents<AudioSource>()[1];
-            StartCoroutine(Subtitles(caller, playerAudio));
+            StartCoroutine(Subtitles(index));
         }
         else
         {
@@ -54,8 +53,10 @@ public class MySchiavoInteractable : Interattivo
 
     }
 
-    private IEnumerator Subtitles(GameObject player, AudioSource playerAudio)
+    private IEnumerator Subtitles(int index)
     {
+        var player = FindObjectOfType<InteractionManager>();
+        var playerAudio = player.GetComponents<AudioSource>()[1];
         FirstPersonController playerController = player.GetComponent<FirstPersonController>();
         playerController.enabled = false;
         player.GetComponent<InteractionManager>().enabled = false;
