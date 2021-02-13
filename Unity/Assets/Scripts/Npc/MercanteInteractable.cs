@@ -13,6 +13,11 @@ public class MercanteInteractable : Interattivo
     private Transform food;
     private AudioSubManager _subtitles;
     private Text _dialogueText;
+<<<<<<< HEAD
+    private AudioSource audioSource;
+    private bool unlockFood = true;
+    private int index;
+=======
     //private AudioSource audioSource;
     private bool unlockFood = true;
     private int index;
@@ -20,6 +25,7 @@ public class MercanteInteractable : Interattivo
     [SerializeField] private OcclusionInteract _fmodAudioSource;
     private Characters _character;
 
+>>>>>>> origin/Giorgio
     void Start()
     {
         switch (_foodType)
@@ -40,6 +46,18 @@ public class MercanteInteractable : Interattivo
                 food = FindObjectOfType<Verdura>().GetComponent<Transform>();
                 break;
         }
+<<<<<<< HEAD
+        _subtitles = FindObjectOfType<AudioSubManager>();
+        _dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        audioSource = GetComponent<AudioSource>();
+        talk = FindObjectOfType<talk>().GetComponent<Text>();
+        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+    }
+    public override void Interact(GameObject caller)
+    {
+        audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
+        audioSource.Play();
+=======
 
         _fmodAudioSource = GetComponent<OcclusionInteract>();
         _subtitles = FindObjectOfType<AudioSubManager>();
@@ -54,6 +72,7 @@ public class MercanteInteractable : Interattivo
         _fmodAudioSource.enabled = true;
         //audioSource.clip = Resources.Load<AudioClip>("Talking/Mercante/" + Globals.player + index);
         //audioSource.Play();
+>>>>>>> origin/Giorgio
         if (unlockFood && Globals.player == Players.Schiavo)
         {
             for (int i = 0; i < food.childCount; i++)
@@ -67,6 +86,12 @@ public class MercanteInteractable : Interattivo
     {
         Globals.someoneIsTalking = true;
         _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
+<<<<<<< HEAD
+        Debug.Log(_dialogueText.text);
+        yield return new WaitForSeconds(audioSource.clip.length);
+        _dialogueText.text = "";
+        Globals.someoneIsTalking = false;
+=======
         //_audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_");
         //if(_audioSource?.clip == null){Debug.LogError($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_ NOT FOUND");}
         //_audioSource.Play();
@@ -85,6 +110,7 @@ public class MercanteInteractable : Interattivo
         Globals.someoneIsTalking = false;
         _fmodAudioSource.enabled = false;
 
+>>>>>>> origin/Giorgio
     }
 
     public override void UITextOn()
