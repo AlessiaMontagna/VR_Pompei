@@ -29,7 +29,6 @@ public class AudioSubManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log($"VOICES COMPUTATION ENDED");
     }
 
     public string GetVoice(Characters character)
