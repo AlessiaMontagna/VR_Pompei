@@ -26,6 +26,8 @@ public class NpcInteractable : Interattivo
     public int audioFilesCount => _audioFilesCount;
     private Text _talk;
     private RawImage _eButton;
+    private int _subIndex;
+    public int subIndex => _subIndex;
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
     {
@@ -40,8 +42,8 @@ public class NpcInteractable : Interattivo
         if(_voice == null)Debug.LogError($"GetVoice({_character}) returned null");
         _audioFilesCount = 0;
         while(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(_audioFilesCount, _character, _voice) != null){_audioFilesCount++;}
-        _talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        _talk = FindObjectOfType<talk>().GetComponent<Text>();
     }
 
     void Update() => _navAgent?.Tik();
@@ -50,12 +52,16 @@ public class NpcInteractable : Interattivo
 
     public override void UITextOn()
     {
+        if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton.enabled = true;
         _talk.enabled = true;
     }
 
     public override void UITextOff()
     {
+        if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton.enabled = false;
         _talk.enabled = false;
     }
@@ -83,15 +89,11 @@ public class NpcInteractable : Interattivo
         _audioSource.Play();
     }
 
-    protected virtual IEnumerator StartInteraction()
+    protected virtual void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
-        int index = Random.Range(0, _audioFilesCount);
-        SetAudio(index);
-        SetSubtitles(index);
-        yield return new WaitForSeconds(_audioSource.clip.length);
-        StopInteraction();
+        _subIndex = Random.Range(0, _audioFilesCount);
+        StartCoroutine(Talk(_subIndex));
     }
 
     protected virtual void UpdateInteraction()
@@ -111,12 +113,21 @@ public class NpcInteractable : Interattivo
 
     protected virtual void StopInteraction()
     {
-        StopCoroutine(StartInteraction());
+        StopCoroutine(Talk(_subIndex));
         if(_audioSource.isPlaying)_audioSource?.Stop();
         SetSubtitles(-1);
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
+    }
+
+    protected virtual IEnumerator Talk(int index)
+    {
+        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
+        SetAudio(index);
+        SetSubtitles(index);
+        yield return new WaitForSeconds(_audioSource.clip.length);
+        StopInteraction();
     }
 
     protected virtual void OnTriggerEnter(Collider collider)
@@ -143,3 +154,32 @@ public class NpcInteractable : Interattivo
         _animator.SetFloat("HitNobile", 0f);
     }
 }
+
+/* SUBCLASS EXAMPLE
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NpcSubClass : NpcInteractable
+{
+    protected override void StartInteraction()
+    {
+        base.StartInteraction();
+    }
+
+    protected override void UpdateInteraction()
+    {
+        base.UpdateInteraction();
+    }
+
+    protected override void StopInteraction()
+    {
+        base.StopInteraction();
+    }
+
+    protected override IEnumerator Talk(int index)
+    {
+        return base.Talk(index);
+    }
+}
+*/
