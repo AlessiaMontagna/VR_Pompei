@@ -12,6 +12,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class MySchiavoInteractable : Interattivo
 {
     public bool _switch = false;
+    public LevelChangerScript level;
 
     [SerializeField] private GameObject fpc2;
     [SerializeField] private GameObject nobile;
@@ -24,8 +25,9 @@ public class MySchiavoInteractable : Interattivo
     private int index = 0;
     private string path;
 
-    void Start() 
-    { 
+    void Start()
+    {
+        level = FindObjectOfType<LevelChangerScript>();
         _mission = FindObjectOfType<MissionManager>();
         _sottotitoli = FindObjectOfType<AudioSubManager>();
         _audioSource = GetComponent<AudioSource>();
@@ -48,8 +50,8 @@ public class MySchiavoInteractable : Interattivo
             _audioSource.Play();
             StartCoroutine(StaticDialogue(_audioSource.clip));
         }
-        
-        
+
+
     }
 
     private IEnumerator Subtitles(GameObject player, AudioSource playerAudio)
@@ -74,6 +76,9 @@ public class MySchiavoInteractable : Interattivo
         yield return new WaitForSeconds((playerAudio.clip.length) / 2);
         _dialogueText.text = "";
         //chiama animazione swoosh
+        level.SwooshIn();
+        yield return new WaitForSeconds(0.5f);
+
         //GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
         Globals.someoneIsTalking = false;
         Globals.player = Players.Schiavo;
