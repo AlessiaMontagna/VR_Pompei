@@ -121,19 +121,21 @@ public class NpcInteractable : Interattivo
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag != "Player" || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
+        if(_animator == null || collider?.tag != "Player" || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
         _animator.SetTrigger("Hit");
         if(_animator.GetBool("Move"))
         {
-            _animator.SetFloat("MoveFloat", 1f);
-            if(Globals.player == Players.Schiavo){_animator.SetFloat("HitReaction", 1f);_animator.SetFloat("HitNobile", 0f);}
-            else {_animator.SetFloat("HitReaction", 0f);_animator.SetFloat("HitNobile", 1f);}
+            _animator?.SetFloat("MoveFloat", 1f);
+            if(Globals.player == Players.Schiavo){_animator?.SetFloat("HitReaction", 1f);_animator?.SetFloat("HitNobile", 0f);}
+            else {_animator?.SetFloat("HitReaction", 0f);_animator?.SetFloat("HitNobile", 1f);}
         }
         _animator.SetFloat("HitFloat", Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward, Vector3.up));
     }
 
     protected virtual void OnTriggerExit(Collider collider)
     {
+        if(_animator == null) return;
+        _animator.SetTrigger("Hit");
         _animator.ResetTrigger("Hit");
         if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
         _animator.SetFloat("HitFloat", 0f);

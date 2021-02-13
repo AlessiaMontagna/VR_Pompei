@@ -10,7 +10,7 @@ public class AudioSubManager : MonoBehaviour
     private Dictionary<string, List<string>> _voices = new Dictionary<string, List<string>>();
     private Dictionary<string, List<string>> _audios = new Dictionary<string, List<string>>();
 
-    public void Start()
+    public void Awake()
     {
         _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON.text);
         foreach (var character in new List<Characters>((Characters[])System.Enum.GetValues(typeof(Characters))))
