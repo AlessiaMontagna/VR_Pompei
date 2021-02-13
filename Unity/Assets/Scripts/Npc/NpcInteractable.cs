@@ -26,8 +26,8 @@ public class NpcInteractable : Interattivo
     public int audioFilesCount => _audioFilesCount;
     private Text _talk;
     private RawImage _eButton;
-    private int _subIndex;
-    public int subIndex => _subIndex;
+    private int _talkIndex;
+    public int talkIndex => _talkIndex;
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
     {
@@ -44,6 +44,7 @@ public class NpcInteractable : Interattivo
         while(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(_audioFilesCount, _character, _voice) != null){_audioFilesCount++;}
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        _talkIndex = -1;
     }
 
     void Update() => _navAgent?.Tik();
@@ -75,6 +76,12 @@ public class NpcInteractable : Interattivo
         else StopInteraction();
     }
 
+    public void SetTalkIndex(int index)
+    {
+        if(index < 0) _talkIndex = Random.Range(0, _audioFilesCount);
+        else _talkIndex = index;
+    }
+
     public void SetSubtitles(int index)
     {
         if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
@@ -83,7 +90,7 @@ public class NpcInteractable : Interattivo
     
     public void SetAudio(int index)
     {
-        if(index < 0) return;
+        if(index < 0){_audioSource.Stop();return;}
         _audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
         if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
         _audioSource.Play();
@@ -92,8 +99,8 @@ public class NpcInteractable : Interattivo
     protected virtual void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        _subIndex = Random.Range(0, _audioFilesCount);
-        StartCoroutine(Talk(_subIndex));
+        if(_talkIndex < 0) SetTalkIndex(-1);
+        StartCoroutine(Talk(_talkIndex));
     }
 
     protected virtual void UpdateInteraction()
@@ -113,9 +120,10 @@ public class NpcInteractable : Interattivo
 
     protected virtual void StopInteraction()
     {
-        StopCoroutine(Talk(_subIndex));
-        if(_audioSource.isPlaying)_audioSource?.Stop();
-        SetSubtitles(-1);
+        StopCoroutine(Talk(_talkIndex));
+        _talkIndex = -1;
+        SetAudio(_talkIndex);
+        SetSubtitles(_talkIndex);
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
