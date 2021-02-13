@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class NpcMySchiavo : NpcInteractable
 {
-    
-
     void Start()
     {
         _missionManager = FindObjectOfType<MissionManager>();
@@ -41,7 +39,7 @@ public class NpcMySchiavo : NpcInteractable
         playerFirstPersonController.enabled = false;
         playerInteractionManager.enabled = false;
         UITextOff();
-        
+
         path = "Talking/MySchiavo/";
         audioSource.clip = Resources.Load<AudioClip>(path + index.ToString());
         audioSource.Play();

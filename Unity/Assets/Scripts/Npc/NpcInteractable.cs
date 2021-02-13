@@ -70,7 +70,7 @@ public class NpcInteractable : Interattivo
 
     public void Interaction(int phase)
     {
-        if(phase > 0) StartCoroutine(StartInteraction());
+        if(phase > 0) StartInteraction();
         else if (phase == 0) UpdateInteraction();
         else StopInteraction();
     }
