@@ -18,6 +18,7 @@ public class MercanteInteractable : Interattivo
     private int index;
 
     [SerializeField] private OcclusionInteract _fmodAudioSource;
+    private Characters _character;
 
     void Start()
     {
@@ -47,7 +48,7 @@ public class MercanteInteractable : Interattivo
         talk = FindObjectOfType<talk>().GetComponent<Text>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
-    public override void Interact(GameObject caller)
+    public override void Interact()
     {
         _fmodAudioSource.SelectAudio = "event:/Talking/Mercante/Mercante0_Antonio";
         _fmodAudioSource.enabled = true;
@@ -66,6 +67,9 @@ public class MercanteInteractable : Interattivo
     {
         Globals.someoneIsTalking = true;
         _dialogueText.text = _subtitles.GetSubs(index, Characters.Mercante);
+        //_audioSource.clip = Resources.Load<AudioClip>($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_");
+        //if(_audioSource?.clip == null){Debug.LogError($"Talking/{_character.ToString()}/{Globals.player.ToString()}{index}_ NOT FOUND");}
+        //_audioSource.Play();
         Debug.Log(_dialogueText.text);
 
         int fmodLength;

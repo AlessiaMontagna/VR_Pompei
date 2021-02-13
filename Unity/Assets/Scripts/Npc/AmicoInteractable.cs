@@ -34,7 +34,7 @@ public class AmicoInteractable : Interattivo
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
 
-    public override void Interact(GameObject caller)
+    public override void Interact()
     {
         Globals.someoneIsTalking = true;
         if (Globals.player == Players.Schiavo)
