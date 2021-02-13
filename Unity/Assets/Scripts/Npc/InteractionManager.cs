@@ -51,7 +51,7 @@ public class InteractionManager : MonoBehaviour
                 {
                     _pointingInteractable.UITextOn();
                     if (CrossPlatformInputManager.GetButtonDown("Interact"))
-                        _pointingInteractable.Interact(); 
+                        _pointingInteractable.Interact(gameObject); 
                 }
             }
         }

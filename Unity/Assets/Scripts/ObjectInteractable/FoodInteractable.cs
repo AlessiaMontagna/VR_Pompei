@@ -6,7 +6,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public enum foodType { Frutta, Pesce, Pane, NonInteractable };
 [RequireComponent(typeof(AudioSource))]
-
 public class FoodInteractable : ObjectInteractable
 {
     [SerializeField] private foodType _foodType;

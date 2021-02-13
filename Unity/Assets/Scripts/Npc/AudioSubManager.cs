@@ -6,57 +6,37 @@ using Newtonsoft.Json;
 public class AudioSubManager : MonoBehaviour
 {
     [SerializeField] public TextAsset _textJSON;
-    private Dictionary<string, List<string>> _subtitles = new Dictionary<string, List<string>>();
-    private Dictionary<string, List<string>> _voices = new Dictionary<string, List<string>>();
-    private Dictionary<string, List<string>> _audios = new Dictionary<string, List<string>>();
+    private Dictionary<string, List<string>> _subtitles;
 
-    public void Awake()
+    private List<string> _vociMaschili = new List<string>{"Giorgio", "Francesco", "Antonio", "Klajdi", "Edoardo", "Fabrizio"};
+    private List<string> _vociFemminili = new List<string>{"Alessia"};
+
+    public void Start()
     {
         _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON.text);
-        foreach (var character in new List<Characters>((Characters[])System.Enum.GetValues(typeof(Characters))))
-        {
-            var characterFiles = Resources.LoadAll<AudioClip>($"Talking/{character.ToString()}").ToList();
-            foreach (var player in new List<Players>((Players[])System.Enum.GetValues(typeof(Players))))
-            {
-                var key = player.ToString()+character.ToString();
-                foreach (var file in characterFiles.Where(i => i.name.Contains(key)))
-                {
-                    var voice = file.name.Split('_')[1];
-                    if(_voices.TryGetValue(key, out var voices)){if(!voices.Contains(voice))voices.Add(voice);}
-                    else _voices.Add(key, new List<string>{voice});
-                    if(_audios.TryGetValue(key+voice, out var audios)) audios.Add($"Talking/{character.ToString()}/{file.name}");
-                    else _audios.Add(key+voice, new List<string>{$"Talking/{character.ToString()}/{file.name}"});
-                }
-            }
-        }
     }
 
-    public string GetVoice(Characters character)
+    public string GetSubs(int index, Characters type)
     {
-        if(!_voices.TryGetValue(Globals.player.ToString() + character.ToString(), out var voices)) return null;
-        return voices.ElementAt(Random.Range(0, voices.Count));
-    }
-
-    public string GetSubs(int index, Characters character)
-    {
-        if(!_subtitles.TryGetValue(Globals.player.ToString() + character.ToString(), out var subtitles)) return null;
-        return subtitles.ElementAt(index);
-    }
-
-    public string GetAudio(int index, Characters character, string voice)
-    {
-        if(!_audios.TryGetValue(Globals.player.ToString() + character.ToString() + voice, out var audios))return null;
-        foreach (var audio in audios) if(audio.Contains(index.ToString()))return audio;
+        if (_subtitles.TryGetValue(Globals.player.ToString() + type.ToString(), out var subtitles)) return subtitles[index];
         return null;
     }
 
-    public int GetMaxAudios(Characters characterType)
+    public List<string> GetAudios(Characters character)
     {
-        if (_subtitles.TryGetValue(Globals.player.ToString() + characterType.ToString(), out var subtitles))
-        {
-            return subtitles.Count;
+        var files = Resources.LoadAll<AudioClip>($"Talking/{character.ToString()}").ToList();
+        var voci = _vociMaschili;
+        if(character == Characters.NobileF)voci = _vociFemminili;
+        while(voci.Count > 0){
+            var voce = voci.ElementAt(Random.Range(0, voci.Count));
+            voci.Remove(voce);
+            var tmp = files.Where(i => i.name.Contains(voce)).ToList();
+            if(tmp.Count > 0) {files = tmp;break;}
         }
-        return -1;
+        if(files.Count < 3) Debug.LogError($"Not enough files found for {character.ToString()} ({files.Count}/3)");
+        List<string> audios = new List<string>();
+        foreach (var item in files){audios.Add(item.name.Split('_')[1]);}
+        return audios;
     }
 
     public int GetMaxAudios(Characters characterType)

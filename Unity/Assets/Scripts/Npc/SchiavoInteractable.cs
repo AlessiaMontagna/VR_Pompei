@@ -23,7 +23,7 @@ public class SchiavoInteractable : Interattivo
         _animator = GetComponent<Animator>();
     }
 
-    public override void Interact()
+    public override void Interact(GameObject caller)
     {
         hasTalked = true;
         UITextOff();
