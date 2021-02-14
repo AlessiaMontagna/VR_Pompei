@@ -1,4 +1,4 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -6,60 +6,45 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class NpcMySchiavo : NpcInteractable
 {
-    public bool _switch = false;
+    [SerializeField] private GameObject nobile;
 
-    void Start()
-    {
-        
-    }
+    public bool _switch = false;
 
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        if (_switch) StartCoroutine(Subtitles());
-        else
-        {
-            SetTalkIndex(0);
-            base.StartInteraction();
-        }
+        if(_switch) StartCoroutine(MissionTalk(0));
+        else base.StartInteraction();
     }
 
-    private IEnumerator Subtitles()
+    private IEnumerator MissionTalk(int index)
     {
         var player = FindObjectOfType<InteractionManager>();
-        var playerInteractionManager = player.GetComponent<InteractionManager>();
-        var playerAudioSource = player.GetComponents<AudioSource>()[1];
         var playerFirstPersonController = player.GetComponent<FirstPersonController>();
-        var _audioSubManager = FindObjectOfType<AudioSubManager>();
-
-        int index = 0;
 
         playerFirstPersonController.enabled = false;
-        playerInteractionManager.enabled = false;
+        player.GetComponent<InteractionManager>().enabled = false;
         UITextOff();
-
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
 
         SetAudio(++index);
         SetSubtitles(index);
-        yield return new WaitForSeconds(_audioSource.clip.length);
+        yield return new WaitForSeconds(GetAudioLength());
 
-        //player
-        SetAudio(_audioSubManager.GetAudio(++index, Characters.MySchiavo, voice));
-        SetSubtitles(_audioSubManager.GetSubs(index, Characters.MySchiavo, voice));
-        yield return new WaitForSeconds((playerAudioSource.clip.length) / 2);
+        //AUDIO SOURCE DA SOSTITUIRE
+        var playerAudioSource = player.GetComponents<AudioSource>()[1];
+        playerAudioSource.clip = Resources.Load<AudioClip>(audioSubManager.GetAudio(++index, Characters.MySchiavo, voice));
+        playerAudioSource.Play();
+        //AUDIO SOURCE DA SOSTITUIRE
+        
+        SetSubtitles(index);
+        yield return new WaitForSeconds(GetAudioLength() / 2f);
+        SetSubtitles(++index);
+        yield return new WaitForSeconds(GetAudioLength() / 2f);
 
-        SetSubtitles(_audioSubManager.GetSubs(++index, Characters.MySchiavo, voice));
-        yield return new WaitForSeconds((playerAudioSource.clip.length) / 2);
-
-        SetSubtitles("");
-
-        //chiama animazione swoosh
-        //GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
-
-        Globals.someoneIsTalking = false;
+        // Swoosh personaggi
+        // GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
         Globals.player = Players.Schiavo;
-
         GetComponent<CapsuleCollider>().enabled = false;
         FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission3_GetFood);
         playerFirstPersonController.teleporting = true;
@@ -70,9 +55,9 @@ public class NpcMySchiavo : NpcInteractable
         yield return new WaitForFixedUpdate();
         playerFirstPersonController.teleporting = false;
         playerFirstPersonController.enabled = true;
-        playerInteractionManager.enabled = true;
-        
+        player.GetComponent<InteractionManager>().enabled = true;
+
+        StopInteraction();
         Destroy(gameObject);
     }
 }
-*/

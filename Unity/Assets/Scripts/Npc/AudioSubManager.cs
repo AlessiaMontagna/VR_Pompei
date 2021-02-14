@@ -50,12 +50,11 @@ public class AudioSubManager : MonoBehaviour
         return null;
     }
 
-    public int GetMaxAudios(Characters characterType)
+    public int GetMaxAudios(Characters character, string voice)
     {
-        if (_subtitles.TryGetValue(Globals.player.ToString() + characterType.ToString(), out var subtitles))
-        {
-            return subtitles.Count;
-        }
+        int count = 0;
+        while(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(count, character, voice) != null){count++;}
+        if(count > 0) return count;
         return -1;
     }
 }
