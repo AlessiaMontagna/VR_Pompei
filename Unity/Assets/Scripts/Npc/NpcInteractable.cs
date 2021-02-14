@@ -147,7 +147,7 @@ public class NpcInteractable : Interattivo
         Debug.Log($"Audio length: {fmodLength}");
         return (float)fmodLength/1000f;
     }
-*/
+
     protected virtual void OnTriggerEnter(Collider collider)
     {
         if(_animator == null || collider?.tag != "Player" || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
