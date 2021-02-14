@@ -96,7 +96,9 @@ public class NpcInteractable : Interattivo
     {
         if(index < 0) _talkIndex = Random.Range(0, _audioSubManager.GetMaxAudios(_character, _voice));
         else _talkIndex = index;
+        //Debug.Log(_audioSubManager.GetAudio(_talkIndex, _character, _voice));
         _fmodAudioSource.SelectAudio = "event:/"+ _audioSubManager.GetAudio(_talkIndex, _character, _voice);
+        _fmodAudioSource.enabled = true;
         //_audioSource.clip = Resources.Load<AudioClip>(_audioSubManager.GetAudio(_talkIndex, _character, _voice));
         //if(_audioSource?.clip == null){Debug.LogError($"{_audioSubManager.GetAudio(_talkIndex, _character, _voice)} NOT FOUND");StopInteraction();}
     }
@@ -134,7 +136,7 @@ public class NpcInteractable : Interattivo
         float length = 0;
         FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
         length = fmodLength;
-        //Debug.Log("waitForSecond " + length);
+        Debug.Log("waitForSecond " + length);
         yield return new WaitForSeconds(length/1000); 
 
         StopInteraction();
