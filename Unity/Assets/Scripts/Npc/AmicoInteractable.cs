@@ -42,7 +42,7 @@ public class AmicoInteractable : Interattivo
             _maxRand = _subtitles.GetMaxAudios(Characters.Amico);
             index = Random.Range(0, _maxRand);
         }
-        _fmodAudioSource.SelectAudio = "event:/Talking/Amico/" + Globals.player.ToString() + index;
+        _fmodAudioSource.SelectAudio = "event:/Talking/Amico/" + Globals.player.ToString() + "Amico" + index + "_Alessia";
         _fmodAudioSource.enabled = true;
         //playerIntro = FMODUnity.RuntimeManager.CreateInstance("event:/Talking/Amico/" + Globals.player.ToString() + index);
         //playerIntro.start();
