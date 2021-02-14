@@ -110,6 +110,9 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
         _audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
+=======
 >>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
 =======
 >>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
