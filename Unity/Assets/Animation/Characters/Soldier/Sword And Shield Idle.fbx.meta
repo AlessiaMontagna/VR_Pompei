@@ -1,91 +1,12 @@
 fileFormatVersion: 2
-guid: 0ddba4ff3c385074c968b5e82969d5f8
+guid: fb676ce1d079b4e58b632a31ea5d4e29
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: -4485881400430384070
-    second: Idle
-  - first:
-      74: -2004776400613781340
-    second: Armature|push_back
-  - first:
-      74: -4799524434163024911
-    second: Armature|walk
-  - first:
-      74: -5765815459246456821
-    second: Armature|walk2
-  - first:
-      74: -3207939024694722738
-    second: Armature|walk
-  - first:
-      74: 511389365063832151
-    second: Walking_start
-  - first:
-      74: 5733829252212566869
-    second: Walking_stop
-  - first:
-      74: -1250308563666316836
-    second: Push
-  - first:
-      74: -1610863427237328480
-    second: Walking
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 3_SkinArm
-    second: {fileID: 2100000, guid: 44cab1916727ad348aa7b34b81a2e2a3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Bronze_helmet
-    second: {fileID: 2100000, guid: a8e3b506d84a03f41b65c46d887900fd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Eyebrow
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LeatherEdge_balteus
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LeatherInterior
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LeatherInterior_balteus
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Shield_Front.001
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bone
-    second: {fileID: 2100000, guid: a8e3b506d84a03f41b65c46d887900fd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bronze
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: chain-mail1
-    second: {fileID: 2100000, guid: e17650c3d85f96147b9c9eb3c3f02543, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wood
-    second: {fileID: 2100000, guid: a8e3b506d84a03f41b65c46d887900fd, type: 2}
+      74: -203655887218126122
+    second: Sword And Shield Idle
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -100,34 +21,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Armature|push_back' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'mixamorig:LeftHandIndex1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandMiddle1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandRing1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandPinky1' has translation
-      animation that will be discarded.\n\nClip 'Armature|walk_3' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'mixamorig:LeftHand' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandIndex1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandMiddle1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandRing1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandPinky1' has translation
-      animation that will be discarded.\n\nClip 'Armature|walk_start' has import
-      animation warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'mixamorig:LeftHand' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandIndex1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandMiddle1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandRing1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandPinky1' has translation
-      animation that will be discarded.\n\nClip 'Armature|walk_stop' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'mixamorig:LeftHand' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandIndex1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandMiddle1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandRing1' has translation
-      animation that will be discarded.\n\t'mixamorig:LeftHandPinky1' has translation
-      animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -141,40 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
-      takeName: Armature|idle_1
+      name: Sword And Shield Idle
+      takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 836
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Push
-      takeName: Armature|push_back
-      internalID: 0
-      firstFrame: 5
-      lastFrame: 80
+      lastFrame: 76
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -186,93 +51,6 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Walking
-      takeName: Armature|walk_3
-      internalID: 0
-      firstFrame: 1
-      lastFrame: 62
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Walking_start
-      takeName: Armature|walk_start
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 71
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Walking_stop
-      takeName: Armature|walk_stop
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 40
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -1117,11 +895,12 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0ddba4ff3c385074c968b5e82969d5f8,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   additionalBone: 0
   userData: 
   assetBundleName: 
