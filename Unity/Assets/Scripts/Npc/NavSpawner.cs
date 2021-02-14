@@ -29,6 +29,7 @@ public class NavSpawner : MonoBehaviour
     private Dictionary<NavSubroles, List<GameObject>> _stops = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _paths = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _spawns = new Dictionary<NavSubroles, List<GameObject>>();
+    public Dictionary<NavSubroles, List<GameObject>> navspawns => _spawns;
 
     void Start()
     {
@@ -127,7 +128,7 @@ public class NavSpawner : MonoBehaviour
         {
             List<Vector3> path = new List<Vector3>();
             foreach(var item in _paths.ElementAt(Random.Range(0, _paths.Count)).Value){path.Add(item.transform.position);}
-            if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("PREFABS ERROR");
+            if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
             path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
             Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia);
             if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
