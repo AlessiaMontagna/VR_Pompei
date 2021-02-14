@@ -309,6 +309,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6452
+--- !u!114 &-7715142054169767133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Environment_fabbro/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-7631925939829297960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,7 +989,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 6016500318711522770}
+  - {fileID: -1610700090206973326}
   MinDistance: 1
   MaxDistance: 20
   Length: 6452
@@ -1345,6 +1365,49 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 8176
+--- !u!114 &-1640658271262981796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking/MySchiavo/NobileMySchiavo1_Alessia
+  m_EditorClassIdentifier: 
+  Path: event:/Talking/MySchiavo/NobileMySchiavo1_Alessia
+  guid: cb15985823d3d14ca4cd95dea583862c
+  Banks:
+  - {fileID: 3750132811458166346}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3657
+--- !u!114 &-1610700090206973326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MercanteMercante0_Andrea/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-1509034704273120732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1388,10 +1451,30 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -1321897292374626299}
+  - {fileID: 633752948898778839}
   MinDistance: 1
   MaxDistance: 20
   Length: 9534
+--- !u!114 &-1335020214460186583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Environment_seagull/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-1321897292374626299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1567,7 +1650,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 6506440344040950353}
+  - {fileID: 3447902790487495932}
   MinDistance: 1
   MaxDistance: 50
   Length: 55000
@@ -1782,7 +1865,7 @@ MonoBehaviour:
   - {fileID: 3750132811458166346}
   StringsBanks:
   - {fileID: 1914007442364986553}
-  stringsBankWriteTime: 637489405870700882
+  stringsBankWriteTime: 637489421610000000
   cacheVersion: 6
 --- !u!114 &319097711035437192
 MonoBehaviour:
@@ -1899,6 +1982,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 18311
+--- !u!114 &633752948898778839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/NobileSchiavo0_Francesco/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &710702361287299049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,7 +2114,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -7253693354162088779}
+  - {fileID: -7715142054169767133}
   MinDistance: 1
   MaxDistance: 30
   Length: 36075
@@ -2093,10 +2196,10 @@ MonoBehaviour:
   Path: ../FMOD/Pompei_Audio_3/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637489405870700882
+  lastModified: 637489421610000000
   LoadResult: 0
   FileSizes:
-  - Name: Desktop
+  - Name: 
     Value: 5112
   Exists: 1
 --- !u!114 &1991471449900940034
@@ -2145,6 +2248,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 57000
+--- !u!114 &2209202419816823665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking/MySchiavo/NobileMySchiavo0_Alessia
+  m_EditorClassIdentifier: 
+  Path: event:/Talking/MySchiavo/NobileMySchiavo0_Alessia
+  guid: a494d859182a2d428a997f09665b4886
+  Banks:
+  - {fileID: 3750132811458166346}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3657
 --- !u!114 &2312327776043849040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2237,6 +2363,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13871
+--- !u!114 &3447902790487495932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Environment_crowd/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &3615767086570900030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2257,7 +2403,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -2015756140317574544}
+  - {fileID: -1335020214460186583}
   MinDistance: 1
   MaxDistance: 40
   Length: 18444
@@ -2276,7 +2422,7 @@ MonoBehaviour:
   Path: ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637489405870590965
+  lastModified: 637489421610000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -2481,7 +2627,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 7489171895640128663}
+  - {fileID: 5991744681801160705}
   MinDistance: 1
   MaxDistance: 20
   Length: 10266
@@ -2574,6 +2720,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13191
+--- !u!114 &5991744681801160705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MercanteMercante1_Andrea/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &6016500318711522770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,6 +2760,29 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &6189875521898490787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking/MySchiavo/NobileMySchiavo3_Alessia
+  m_EditorClassIdentifier: 
+  Path: event:/Talking/MySchiavo/NobileMySchiavo3_Alessia
+  guid: a57d06606e62b141a0776be6152bf130
+  Banks:
+  - {fileID: 3750132811458166346}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3657
 --- !u!114 &6233045535092565424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2794,6 +2983,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3657
+--- !u!114 &7082363973300168592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/NobileAmico0_Alessia/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &7489171895640128663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,7 +3086,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -3004224061771592300}
+  - {fileID: 7082363973300168592}
   MinDistance: 1
   MaxDistance: 20
   Length: 4571
@@ -2990,6 +3199,29 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &8966652114911685362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Talking/MySchiavo/NobileMySchiavo2_Alessia
+  m_EditorClassIdentifier: 
+  Path: event:/Talking/MySchiavo/NobileMySchiavo2_Alessia
+  guid: 59d3244c10cad74da7217dc26fa37e8e
+  Banks:
+  - {fileID: 3750132811458166346}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3657
 --- !u!114 &9174325172770718964
 MonoBehaviour:
   m_ObjectHideFlags: 0
