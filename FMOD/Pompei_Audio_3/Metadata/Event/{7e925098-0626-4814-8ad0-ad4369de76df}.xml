@@ -88,11 +88,16 @@
 	</object>
 	<object class="EventMixerMaster" id="{ddeaf560-b34d-460f-800c-d4958692a3f8}">
 		<property name="pitch">
+<<<<<<< HEAD
+			<value>1.20000005</value>
+		</property>
+=======
 			<value>2.79999995</value>
 		</property>
 		<relationship name="automators">
 			<destination>{e23f9e93-fa24-4fb9-95dc-d0f3153f3f9b}</destination>
 		</relationship>
+>>>>>>> origin/Giorgio
 		<relationship name="effectChain">
 			<destination>{f6141f39-34f5-4a65-b3c2-46aee69b18bb}</destination>
 		</relationship>
@@ -125,6 +130,9 @@
 		</property>
 		<property name="timelockedOffset">
 			<value>9.2448979591836746</value>
+		</property>
+		<property name="looping">
+			<value>true</value>
 		</property>
 		<property name="looping">
 			<value>true</value>

@@ -42,19 +42,19 @@ public class NavSpawner : MonoBehaviour
         foreach (var item in GameObject.FindObjectsOfType<NavElement>().Where(i => i != null))
         {
             var navElement = item.GetComponent<NavElement>();
-            switch (navElement.GetRole())
+            switch (navElement.role)
             {
                 case NavRoles.Spawn:
-                    if(_spawns.TryGetValue(navElement.GetSubrole(), out var tlist)) tlist.Add(item.gameObject);
-                    else _spawns.Add(navElement.GetSubrole(), new List<GameObject>{item.gameObject});
+                    if(_spawns.TryGetValue(navElement.subrole, out var tlist)) tlist.Add(item.gameObject);
+                    else _spawns.Add(navElement.subrole, new List<GameObject>{item.gameObject});
                     break;
                 case NavRoles.Stop:
-                    if(_stops.TryGetValue(navElement.GetSubrole(), out tlist)) tlist.Add(item.gameObject);
-                    else _stops.Add(navElement.GetSubrole(), new List<GameObject>{item.gameObject});
+                    if(_stops.TryGetValue(navElement.subrole, out tlist)) tlist.Add(item.gameObject);
+                    else _stops.Add(navElement.subrole, new List<GameObject>{item.gameObject});
                     break;
                 case NavRoles.Path:
-                    if(_paths.TryGetValue(navElement.GetSubrole(), out var vlist)) vlist.Add(item.gameObject);
-                    else _paths.Add(navElement.GetSubrole(), new List<GameObject>{item.gameObject});
+                    if(_paths.TryGetValue(navElement.subrole, out var vlist)) vlist.Add(item.gameObject);
+                    else _paths.Add(navElement.subrole, new List<GameObject>{item.gameObject});
                     break;
                 default: throw new System.ArgumentOutOfRangeException();
             }
@@ -139,6 +139,7 @@ public class NavSpawner : MonoBehaviour
     {
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
         GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
+        agent.transform.parent = parent.transform;
         agent.transform.LookAt(parent.transform, Vector3.up);
         NpcInteractable component;
         if(character == Characters.Mercante && state == "Idle") component = agent.AddComponent<NpcMercante>();

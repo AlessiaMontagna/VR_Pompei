@@ -10,9 +10,9 @@ public enum NavSubroles{PeopleSpawn, FlocksSpawn,
 public class NavElement : MonoBehaviour
 {
     [SerializeField] private NavRoles _role;
+    public NavRoles role => _role;
     [SerializeField] private NavSubroles _subrole;
-    // Start is called before the first frame update
-    void Start(){}
-    public NavRoles GetRole(){return _role;}
-    public NavSubroles GetSubrole(){return _subrole;}
+    public NavSubroles subrole => _subrole;
+    [SerializeField] private MercanteFoodTypes _foodType;
+    public MercanteFoodTypes foodType => _foodType;
 }

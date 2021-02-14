@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +17,12 @@ public class AmicoInteractable : Interattivo
 
     [SerializeField] private OcclusionInteract _fmodAudioSource;
 
-    /* FMOD.Studio.EventInstance playerState;
+    /*FMOD.Studio.EventInstance playerState;
 
     [FMODUnity.EventRef]
     public string PlayerIntroEvent = "";
-    FMOD.Studio.EventInstance playerIntro; */
+    FMOD.Studio.EventInstance playerIntro;*/
+    /*
 
     void Start()
     {   
@@ -42,7 +43,7 @@ public class AmicoInteractable : Interattivo
             _maxRand = _subtitles.GetMaxAudios(Characters.Amico);
             index = Random.Range(0, _maxRand);
         }
-        _fmodAudioSource.SelectAudio = "event:/Talking/Amico/" + Globals.player.ToString() + "Amico" + index + "_Alessia";
+        _fmodAudioSource.SelectAudio = "event:/Talking/Amico/" + Globals.player.ToString() + index;
         _fmodAudioSource.enabled = true;
         //playerIntro = FMODUnity.RuntimeManager.CreateInstance("event:/Talking/Amico/" + Globals.player.ToString() + index);
         //playerIntro.start();
@@ -89,4 +90,4 @@ public class AmicoInteractable : Interattivo
         _eButton.enabled = false;
         talk.enabled = false;
     }
-}
+}*/
