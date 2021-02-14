@@ -19,8 +19,8 @@ public class NpcInteractable : Interattivo
     public Characters character => _character;
     private GameObject _parent;
     public GameObject parent => _parent;
-    /* private AudioSource _audioSource;
-    public AudioSource audioSource => _audioSource; */
+    //private AudioSource _audioSource;
+    //public AudioSource audioSource => _audioSource;
     private OcclusionInteract _fmodAudioSource;
     public OcclusionInteract fmodAudioSource => _fmodAudioSource;
     private string _voice;
@@ -44,7 +44,7 @@ public class NpcInteractable : Interattivo
 
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;
-        _fmodAudioSource.PlayerOcclusionWidening = 0.15f;
+        _fmodAudioSource.PlayerOcclusionWidening = 0.3f;
         _fmodAudioSource.SoundOcclusionWidening = 0.8f;
         LayerMask mask = LayerMask.GetMask("ProjectCameraLayer");
         _fmodAudioSource.OcclusionLayer = mask;
@@ -148,12 +148,14 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
         SetSubtitles(index);
+        //yield return new WaitForSeconds(_audioSource.clip.length);
 
         int fmodLength;
         float length = 0;
         FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
-        if (res == FMOD.RESULT.OK) length = fmodLength /1000;
-        yield return new WaitForSeconds(length);
+        length = fmodLength;
+        //Debug.Log("waitForSecond " + length);
+        yield return new WaitForSeconds(length/1000); 
 
         StopInteraction();
     }
