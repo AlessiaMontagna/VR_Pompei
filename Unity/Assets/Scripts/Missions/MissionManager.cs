@@ -21,7 +21,7 @@ public class MissionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _mission1 =  FindObjectOfType<AmicoInteractable>().transform.position;
+        _mission1 = FindObjectOfType<NpcAmico>().transform.position;
         _mission2 = FindObjectOfType<MySchiavoInteractable>().transform.position;
         _mission3 = _macellumPosition.position;
         _missions = new List<Vector3> {_mission1, _mission2, _mission3 };
