@@ -36,7 +36,7 @@ public class CodexFlip : MonoBehaviour
 
     public void FlipRToL()
     {
-        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count - 1)
+        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count - 1 || _discoveredPagesList.Count == 0)
             return;
 
         _agendaAnimator.SetBool(name: "FlipRToL", true);
