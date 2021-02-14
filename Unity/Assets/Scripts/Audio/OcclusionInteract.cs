@@ -41,6 +41,10 @@ public class OcclusionInteract : MonoBehaviour
             Listener = FindObjectOfType<StudioListener>();
         }
     }
+
+    private void OnDisable() {
+        Audio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
     
     private void FixedUpdate()
     {
