@@ -36,7 +36,7 @@ public class CodexFlip : MonoBehaviour
 
     public void FlipRToL()
     {
-        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count)
+        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count - 1)
             return;
 
         _agendaAnimator.SetBool(name: "FlipRToL", true);
@@ -55,7 +55,7 @@ public class CodexFlip : MonoBehaviour
         gameObject
                 .transform.Find(child)
                 .gameObject.GetComponent<Renderer>()
-                .material.mainTexture = texture;
+                .materials[1].mainTexture = texture;
     }
 
     public void FlipLToR()
