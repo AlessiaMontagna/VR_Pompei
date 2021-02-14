@@ -112,6 +112,9 @@ public class NpcInteractable : Interattivo
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
+=======
 >>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
 =======
 >>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
