@@ -124,7 +124,21 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.enabled = false;
         Globals.someoneIsTalking = false;
     }
-
+    protected virtual IEnumerator Talk(int index)
+    {
+        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
+        SetAudio(index);
+        SetSubtitles(index);
+        //yield return new WaitForSeconds(_audioSource.clip.length);
+        int fmodLength;
+        float length = 0;
+        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
+        length = fmodLength;
+        Debug.Log("waitForSecond " + length);
+        yield return new WaitForSeconds(length/1000); 
+        StopInteraction();
+    }
+/*
     protected virtual IEnumerator Talk(int index)
     {
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
@@ -141,7 +155,7 @@ public class NpcInteractable : Interattivo
         Debug.Log($"Audio length: {fmodLength}");
         return (float)fmodLength/1000f;
     }
-
+*/
     protected virtual void OnTriggerEnter(Collider collider)
     {
         if(_animator == null || collider?.tag != "Player" || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;

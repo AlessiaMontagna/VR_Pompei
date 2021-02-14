@@ -35,7 +35,7 @@ public class NpcMySchiavo : NpcInteractable
 
         SetAudio(++index);
         SetSubtitles(index);
-        yield return new WaitForSeconds(GetAudioLength());
+        //yield return new WaitForSeconds(GetAudioLength());
 
         //AUDIO SOURCE DA SOSTITUIRE
         var playerAudioSource = player.GetComponents<AudioSource>()[1];
@@ -44,9 +44,9 @@ public class NpcMySchiavo : NpcInteractable
         //AUDIO SOURCE DA SOSTITUIRE
         
         SetSubtitles(index);
-        yield return new WaitForSeconds(GetAudioLength() / 2f);
+        //yield return new WaitForSeconds(GetAudioLength() / 2f);
         SetSubtitles(++index);
-        yield return new WaitForSeconds(GetAudioLength() / 2f);
+        //yield return new WaitForSeconds(GetAudioLength() / 2f);
 
         // Swoosh personaggi
         // GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
