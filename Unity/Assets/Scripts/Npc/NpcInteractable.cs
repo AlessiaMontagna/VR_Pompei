@@ -138,7 +138,7 @@ public class NpcInteractable : Interattivo
     {
         //return _audioSource.clip.length;
         FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out var fmodLength);
-        Debug.Log($"Audio length: {(float)fmodLength}");
+        Debug.Log($"Audio length: {fmodLength}");
         return (float)fmodLength/1000f;
     }
 
