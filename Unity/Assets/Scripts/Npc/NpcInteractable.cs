@@ -134,23 +134,9 @@ public class NpcInteractable : Interattivo
         float length = 0;
         FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
         length = fmodLength;
-<<<<<<< HEAD
-        Debug.Log("waitForSecond " + length);
-        yield return new WaitForSeconds(length/1000); 
-        StopInteraction();
-    }
-/*
-    protected virtual IEnumerator Talk(int index)
-    {
-        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
-        SetAudio(index);
-        SetSubtitles(index);
-        yield return new WaitForSeconds(GetAudioLength());
-=======
         //Debug.Log("waitForSecond " + length);
         yield return new WaitForSeconds(length/1000); 
 
->>>>>>> origin/Giorgio
         StopInteraction();
     }
 
