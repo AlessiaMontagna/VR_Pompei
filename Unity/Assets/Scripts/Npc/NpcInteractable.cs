@@ -101,12 +101,11 @@ public class NpcInteractable : Interattivo
 
     public void SetAudio(int index)
     {
-        if(index < 0){_fmodAudioSource.enabled = false;return;}
-        _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
+        _fmodAudioSource.enabled = (index >= 0);
+        if(_fmodAudioSource.enabled){_fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);}
         //_audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
         //if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
         //_audioSource.Play();
-        _fmodAudioSource.enabled = true;
     }
 
     protected virtual void StartInteraction()
@@ -119,16 +118,8 @@ public class NpcInteractable : Interattivo
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgent.NavAgentStates.Turn.ToString()))
-        {
-            var animation = _navAgent.talkingAnimations.ElementAt(Random.Range(0, _navAgent.talkingAnimations.Count)).ToString();
-            foreach (var item in _navAgent.talkingAnimations)
-            {
-                var set = 0f;
-                if(item.ToString() == animation) set = 1f;
-                _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+item.ToString(), set);
-            }
-        }
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") || _animator.GetBool(NavAgent.NavAgentStates.Turn.ToString())) return;
+        else _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 10));
     }
 
     protected virtual void StopInteraction()
@@ -140,7 +131,6 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
         Globals.someoneIsTalking = false;
-        _fmodAudioSource.enabled = false;
     }
 
     protected virtual IEnumerator Talk(int index)

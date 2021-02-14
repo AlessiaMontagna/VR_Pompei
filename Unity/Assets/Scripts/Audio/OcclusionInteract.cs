@@ -46,6 +46,7 @@ public class OcclusionInteract : MonoBehaviour
     {
         Audio.isVirtual(out AudioIsVirtual);
         Audio.getPlaybackState(out pb);
+        if(Listener == null)Listener = FindObjectOfType<StudioListener>();
         ListenerDistance = Vector3.Distance(transform.position, Listener.transform.position);
 
         if (!AudioIsVirtual && pb == PLAYBACK_STATE.PLAYING && ListenerDistance <= MaxDistance)

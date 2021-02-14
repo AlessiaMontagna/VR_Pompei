@@ -19,11 +19,7 @@ public class NavAgent
     private List<Vector3> _targets = new List<Vector3>();
 
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn};
-    private readonly string _animatorVariable = "Float";
-
-    public enum TalkingAnimations{Acknowledging, AnnoyedHeadShake, BeingCocky, DismissingGesture, HappyHandGesture, HeadNodYes, RelievedSigh, ShakingHeadNo, Talking, YellingOut};
-    public readonly List<TalkingAnimations> talkingAnimations = new List<TalkingAnimations>((TalkingAnimations[])System.Enum.GetValues(typeof(TalkingAnimations)));
-
+    public readonly string animatorVariable = "Float";
 
     public NavAgent(NpcInteractable owner)
     {
@@ -48,8 +44,8 @@ public class NavAgent
 
         // Basic states
         State idle = AddState(NavAgentStates.Idle.ToString(), () => {_navMeshAgent.isStopped = true;}, () => {Idle();}, () => {});
-        State path = AddState(NavAgentStates.Path.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Path();}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+_animatorVariable, 0f);});
-        State move = AddState(NavAgentStates.Move.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Move();}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+_animatorVariable, 0f);});
+        State path = AddState(NavAgentStates.Path.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Path();}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, 0f);});
+        State move = AddState(NavAgentStates.Move.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Move();}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, 0f);});
         State talk = AddState(NavAgentStates.Talk.ToString(), () => {_navMeshAgent.isStopped = true;_animator.SetBool(NavAgentStates.Talk.ToString(), true);}, () => {Talk();}, () => {_animator.SetBool(NavAgentStates.Talk.ToString(), false);});
         State play = AddState(NavAgentStates.Interact.ToString(), () => {StartInteraction();}, () => {_owner.Interaction(0);}, () => {});
 
@@ -90,10 +86,17 @@ public class NavAgent
 
     public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f) && Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
 
-    private void Idle(){if(_owner?.parent != null)TurnToPosition(_owner.parent.transform.position);}
+    private void Idle()
+    {
+        if(_owner?.parent != null)TurnToPosition(_owner.parent.transform.position);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || _animator.GetBool(NavAgentStates.Turn.ToString())) return;
+        else _animator.SetFloat(NavAgentStates.Idle.ToString()+animatorVariable, (float)Random.Range(0, 6));
+    }
 
     private void Move()
     {
+        Debug.Log($"nav velocity: {_navMeshAgent.velocity.magnitude/_navMeshAgent.speed}");
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         if(!DestinationReached())return;
         if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
         Vector3 _destination;
@@ -103,32 +106,23 @@ public class NavAgent
         if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
         _navMeshAgent.SetDestination(_destination);
-        _animator.SetFloat(NavAgentStates.Move.ToString()+_animatorVariable, _navMeshAgent.velocity.magnitude);
     }
 
     private void Path()
     {
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         if(_targets.Count == 0)Debug.LogError("UNDEFINED PATH");
         if(!DestinationReached())return;
         _navMeshAgent.speed = walkSpeed;
         //if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
-        _animator.SetFloat(NavAgentStates.Move.ToString()+_animatorVariable, _navMeshAgent.velocity.magnitude);
     }
 
     private void Talk()
     {
         if(_owner.parent != null)TurnToPosition(_owner.parent.transform.position);
-        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgentStates.Turn.ToString()))
-        {
-            var animation = talkingAnimations.ElementAt(Random.Range(0, talkingAnimations.Count)).ToString();
-            foreach (var item in talkingAnimations)
-            {
-                var set = 0f;
-                if(item.ToString() == animation) set = 1f;
-                _animator.SetFloat(NavAgentStates.Talk.ToString()+item.ToString(), set);
-            }
-        }
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") || _animator.GetBool(NavAgentStates.Turn.ToString())) return;
+        else _animator.SetFloat(NavAgentStates.Talk.ToString()+animatorVariable, (float)Random.Range(0, 10));
     }
     
     public void CheckPlayerPosition()
@@ -141,8 +135,8 @@ public class NavAgent
     public void TurnToPosition(Vector3 position)
     {
         float angle = Vector3.SignedAngle((position - _owner.gameObject.transform.position), _owner.gameObject.transform.forward, Vector3.up);
-        if(angle > -30f && angle < 30f){_animator.SetBool(NavAgentStates.Turn.ToString(), false);_animator.SetFloat(NavAgentStates.Turn.ToString()+_animatorVariable, 0f);}
-        else {_animator.SetBool(NavAgentStates.Turn.ToString(), true);_animator.SetFloat(NavAgentStates.Turn.ToString()+_animatorVariable, angle);}
+        if(angle > -30f && angle < 30f){_animator.SetBool(NavAgentStates.Turn.ToString(), false);_animator.SetFloat(NavAgentStates.Turn.ToString()+animatorVariable, 0f);}
+        else {_animator.SetBool(NavAgentStates.Turn.ToString(), true);_animator.SetFloat(NavAgentStates.Turn.ToString()+animatorVariable, angle);}
     }
 
     private void StartInteraction()
