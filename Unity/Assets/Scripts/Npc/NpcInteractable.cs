@@ -101,13 +101,8 @@ public class NpcInteractable : Interattivo
 
     public void SetAudio(int index)
     {
-<<<<<<< HEAD
         _fmodAudioSource.enabled = (index > 0);
         if(_fmodAudioSource.enabled)_fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
-=======
-        if(index < 0){_fmodAudioSource.enabled = false;return;}
-        _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
->>>>>>> parent of a3b3899 (mo mercanti e animazioni dovrebbero andare)
         //_audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
         //if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
         //_audioSource.Play();
