@@ -118,7 +118,6 @@ public class NpcInteractable : Interattivo
     {
         StopCoroutine(Talk(_talkIndex));
         _talkIndex = -1;
-        SetAudio(_talkIndex);
         SetSubtitles(_talkIndex);
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), false);
         _navAgent.interaction = false;
@@ -131,7 +130,7 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
         SetSubtitles(index);
-        yield return new WaitForSeconds(GetAudioLength()); 
+        yield return new WaitForSeconds(GetAudioLength());
         StopInteraction();
     }
 
@@ -139,8 +138,8 @@ public class NpcInteractable : Interattivo
     {
         //return _audioSource.clip.length;
         FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out var fmodLength);
-        Debug.Log($"Audio length: {((float)fmodLength)/1000f}");
-        return ((float)fmodLength)/1000f;
+        Debug.Log($"Audio length: {(float)fmodLength}");
+        return (float)fmodLength/1000f;
     }
 
     protected virtual void OnTriggerEnter(Collider collider)

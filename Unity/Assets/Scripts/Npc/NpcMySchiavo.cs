@@ -10,6 +10,12 @@ public class NpcMySchiavo : NpcInteractable
 
     public bool _switch = false;
 
+    void Start()
+    {
+        if(navAgent != null)return;
+        Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+    }
+
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
