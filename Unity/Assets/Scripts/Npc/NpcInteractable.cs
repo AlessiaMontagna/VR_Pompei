@@ -101,32 +101,9 @@ public class NpcInteractable : Interattivo
 
     public void SetAudio(int index)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         _fmodAudioSource.enabled = (index >= 0);
         if(_fmodAudioSource.enabled){_fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);}
-=======
-        if(index < 0){_fmodAudioSource.enabled = false;return;}
-        _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
->>>>>>> parent of a3b3899 (mo mercanti e animazioni dovrebbero andare)
         //_audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
-=======
-        if(index < 0){_fmodAudioSource.enabled = false;return;}
-        _fmodAudioSource.SelectAudio = "event:/"+ GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice);
-        _audioSource.clip = Resources.Load<AudioClip>(GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice));
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
-=======
->>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
-=======
->>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
-=======
->>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
-=======
->>>>>>> parent of b6ecb89 (Merge remote-tracking branch 'origin/Giorgio' into Fra)
         //if(_audioSource?.clip == null){Debug.LogError($"{GameObject.FindObjectOfType<AudioSubManager>().GetAudio(index, _character, _voice)} NOT FOUND");StopInteraction();}
         //_audioSource.Play();
         _fmodAudioSource.enabled = true;

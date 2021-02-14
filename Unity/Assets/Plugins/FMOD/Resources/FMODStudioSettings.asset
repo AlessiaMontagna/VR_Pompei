@@ -328,10 +328,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
-  sourceProjectPath: ../FMOD/Pompei_Audio/Pompei_Audio.fspro
-  sourceBankPath: ../FMOD/Pompei_Audio/Build
+  HasSourceProject: 0
+  HasPlatforms: 0
+  sourceProjectPath: ../FMOD/Pompei_Audio_3/Pompei_Audio_3.fspro
+  sourceBankPath: ../FMOD/Pompei_Audio_3/Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -350,8 +350,7 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks:
-  - Master
+  MasterBanks: []
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
