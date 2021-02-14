@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,11 +17,12 @@ public class AmicoInteractable : Interattivo
 
     [SerializeField] private OcclusionInteract _fmodAudioSource;
 
-    /* FMOD.Studio.EventInstance playerState;
+    /*FMOD.Studio.EventInstance playerState;
 
     [FMODUnity.EventRef]
     public string PlayerIntroEvent = "";
-    FMOD.Studio.EventInstance playerIntro; */
+    FMOD.Studio.EventInstance playerIntro;*/
+    /*
 
     void Start()
     {   
@@ -89,4 +90,4 @@ public class AmicoInteractable : Interattivo
         _eButton.enabled = false;
         talk.enabled = false;
     }
-}
+}*/
