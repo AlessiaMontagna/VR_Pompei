@@ -6,11 +6,7 @@ public class NpcAmico : NpcInteractable
 {
     private int index = 0;
 
-    void Start()
-    {
-        if(navAgent != null)return;
-        Initialize(Characters.Amico, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
-    }
+    void Start(){if(navAgent == null) Initialize(Characters.Amico, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
 
     protected override void StartInteraction()
     {

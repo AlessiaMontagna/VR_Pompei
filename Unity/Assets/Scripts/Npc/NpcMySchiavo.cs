@@ -10,6 +10,7 @@ public class NpcMySchiavo : NpcInteractable
 
     public bool _switch = false;
 
+    // Start is called before the first frame update
     void Start()
     {
         if(navAgent != null)return;
@@ -30,12 +31,11 @@ public class NpcMySchiavo : NpcInteractable
 
         playerFirstPersonController.enabled = false;
         player.GetComponent<InteractionManager>().enabled = false;
-        UITextOff();
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
 
         SetAudio(++index);
         SetSubtitles(index);
-        //yield return new WaitForSeconds(GetAudioLength());
+        yield return new WaitForSeconds(GetAudioLength());
 
         //AUDIO SOURCE DA SOSTITUIRE
         var playerAudioSource = player.GetComponents<AudioSource>()[1];
@@ -44,9 +44,9 @@ public class NpcMySchiavo : NpcInteractable
         //AUDIO SOURCE DA SOSTITUIRE
         
         SetSubtitles(index);
-        //yield return new WaitForSeconds(GetAudioLength() / 2f);
+        yield return new WaitForSeconds(GetAudioLength() / 2f);
         SetSubtitles(++index);
-        //yield return new WaitForSeconds(GetAudioLength() / 2f);
+        yield return new WaitForSeconds(GetAudioLength() / 2f);
 
         // Swoosh personaggi
         // GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
