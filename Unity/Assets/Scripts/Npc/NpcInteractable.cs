@@ -141,7 +141,6 @@ public class NpcInteractable : Interattivo
         yield return new WaitForSeconds(length/1000);
         */
         yield return new WaitForSeconds(GetAudioLength());
-
         StopInteraction();
     }
 

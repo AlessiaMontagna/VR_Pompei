@@ -11,21 +11,18 @@ public class NpcMySchiavo : NpcInteractable
     public bool _switch = false;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        if(navAgent != null)return;
-        Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
-    }
+    void Start(){if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
 
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        if(_switch) StartCoroutine(MissionTalk(0));
+        if(_switch) StartCoroutine(Mission3Talk(0));
         else base.StartInteraction();
     }
 
-    private IEnumerator MissionTalk(int index)
+    private IEnumerator Mission3Talk(int index)
     {
+        animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         var player = FindObjectOfType<InteractionManager>();
         var playerFirstPersonController = player.GetComponent<FirstPersonController>();
 

@@ -5,24 +5,26 @@ using UnityEngine;
 public class NpcTutorial : NpcInteractable
 {
     public bool pointingSchiavo = false; 
-    public bool hasTalked = false;
+    public int index = 0;
 
     // Start is called before the first frame update
     void Start(){if(navAgent == null) Initialize(Characters.SchiavoTutorial, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
 
     protected override void StartInteraction()
     {
-        if(charcter == Characters.SchiavoTutorial)StartCoroutine(DialogTalk());
+        Globals.someoneIsTalking = true;
+        if(character == Characters.SchiavoTutorial)StartCoroutine(TutorialTalk());
+        else base.StartInteraction();
     }
 
-    private IEnumerator DialogTalk()
+    private IEnumerator TutorialTalk()
     {
-        SetSubtitles(audioSubManager.GetSubs(index));
+        animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
+        SetAudio(index);
+        SetSubtitles(index);
         Globals.someoneIsTalking = true;
-        yield return new WaitForSeconds(audio.length);
-        Globals.someoneIsTalking = false;
-        _sottotitoli.text ="";
-        yield return new WaitForSeconds(2f);
-        //TODO: schiavo se ne deve andare via. 
+        yield return new WaitForSeconds(GetAudioLength()+2f);
+        StopInteraction();
+        Initialize(Characters.Schiavo, FindObjectOfType<NavSpawner>().gameObject, "Move", null);
     }
 }
