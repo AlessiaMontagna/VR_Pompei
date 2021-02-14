@@ -89,7 +89,7 @@ public class NavAgent
     private void Idle()
     {
         if(_owner?.parent != null)TurnToPosition(_owner.parent.transform.position);
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || _animator.GetBool(NavAgentStates.Turn.ToString()))
+        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") && !_animator.GetBool(NavAgentStates.Turn.ToString()))
             _animator.SetFloat(NavAgentStates.Idle.ToString()+animatorVariable, (float)Random.Range(0, 6));
     }
 
@@ -120,8 +120,8 @@ public class NavAgent
     private void Talk()
     {
         if(_owner.parent != null)TurnToPosition(_owner.parent.transform.position);
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || _animator.GetBool(NavAgentStates.Turn.ToString()))
-            _animator.SetFloat(NavAgentStates.Idle.ToString()+animatorVariable, (float)Random.Range(0, 6));
+        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgentStates.Turn.ToString()))
+            _animator.SetFloat(NavAgentStates.Talk.ToString()+animatorVariable, (float)Random.Range(0, 6));
     }
     
     public void CheckPlayerPosition()

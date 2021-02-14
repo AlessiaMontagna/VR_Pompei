@@ -119,7 +119,7 @@ public class NpcInteractable : Interattivo
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") || _animator.GetBool(NavAgent.NavAgentStates.Turn.ToString()))
+        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgent.NavAgentStates.Turn.ToString()))
             _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 10));
     }
 
