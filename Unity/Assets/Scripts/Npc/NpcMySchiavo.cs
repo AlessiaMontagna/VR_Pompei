@@ -10,32 +10,29 @@ public class NpcMySchiavo : NpcInteractable
 
     public bool _switch = false;
 
-    void Start()
-    {
-        if(navAgent != null)return;
-        Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
-    }
+    // Start is called before the first frame update
+    void Start(){if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
 
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        if(_switch) StartCoroutine(MissionTalk(0));
+        if(_switch) StartCoroutine(Mission3Talk(0));
         else base.StartInteraction();
     }
 
-    private IEnumerator MissionTalk(int index)
+    private IEnumerator Mission3Talk(int index)
     {
+        animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         var player = FindObjectOfType<InteractionManager>();
         var playerFirstPersonController = player.GetComponent<FirstPersonController>();
 
         playerFirstPersonController.enabled = false;
         player.GetComponent<InteractionManager>().enabled = false;
-        UITextOff();
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
 
         SetAudio(++index);
         SetSubtitles(index);
-        //yield return new WaitForSeconds(GetAudioLength());
+        yield return new WaitForSeconds(GetAudioLength());
 
         //AUDIO SOURCE DA SOSTITUIRE
         var playerAudioSource = player.GetComponents<AudioSource>()[1];
@@ -44,9 +41,9 @@ public class NpcMySchiavo : NpcInteractable
         //AUDIO SOURCE DA SOSTITUIRE
         
         SetSubtitles(index);
-        //yield return new WaitForSeconds(GetAudioLength() / 2f);
+        yield return new WaitForSeconds(GetAudioLength() / 2f);
         SetSubtitles(++index);
-        //yield return new WaitForSeconds(GetAudioLength() / 2f);
+        yield return new WaitForSeconds(GetAudioLength() / 2f);
 
         // Swoosh personaggi
         // GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
