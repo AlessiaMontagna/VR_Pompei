@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -44,6 +45,7 @@ public class ShowAgenda : MonoBehaviour
                 MappaMode(false);
                 MoveAgendaUp();
                 _agendaType = agendaType.codex;
+                FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
             }
         }
         else

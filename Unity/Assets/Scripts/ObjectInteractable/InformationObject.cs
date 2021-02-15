@@ -18,6 +18,7 @@ public class InformationObject : ObjectInteractable
         _audioSource = FindObjectOfType<InteractionManager>().GetComponents<AudioSource>()[1];
         _audioClip = Resources.Load<AudioClip>("FeedbackSounds/Nuova_voce_codex");
         _nuovaVoceText = FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>();
+        _nuovaVoceText.text = "";
         _codex = FindObjectOfType<Codex>();
     }
 
@@ -44,9 +45,9 @@ public class InformationObject : ObjectInteractable
 
     private IEnumerator NewVoice()
     {
-        _nuovaVoceText.text = "Nuova nota nel codex: " + _objectName.ToString();
+        _nuovaVoceText.text = "Nuova nota nel codex: " + _objectName.ToString() + "\n\npremi <sprite index= 0>  per informazioni";
         yield return new WaitForSeconds(5);
-        if(_nuovaVoceText.text == "Nuova nota nel codex: " + _objectName.ToString()) _nuovaVoceText.text = "";
+        if(_nuovaVoceText.text == "Nuova nota nel codex: " + _objectName.ToString() + "\n\npremi <sprite index= 0>  per informazioni") _nuovaVoceText.text = "";
 
     }
 }

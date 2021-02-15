@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
             {
                 GetComponent<ShowAgenda>()._agendaType = agendaType.codex;
                 Show();
+                FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
                 m_isAxisInUse = true;
                 _mappaMode.MappaMode(false);
             }
