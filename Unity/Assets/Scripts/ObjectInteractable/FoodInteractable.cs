@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -10,11 +11,11 @@ public enum foodType { Frutta, Pesce, Pane, NonInteractable };
 public class FoodInteractable : ObjectInteractable
 {
     [SerializeField] private foodType _foodType;
-    [SerializeField] private Text pick;
+    [SerializeField] private TextMeshProUGUI pick;
     [SerializeField] private RawImage _eButton;
     private Color highlightColor;
     private MercatoFoodManager _foodManager;
-    private Text dialogueText;
+    private TextMeshProUGUI dialogueText;
     private AudioSource _audioSource;
     private AudioClip _clip;
 
@@ -24,8 +25,8 @@ public class FoodInteractable : ObjectInteractable
         _clip = Resources.Load<AudioClip>("FeedbackSounds/Prendere_Cibo");
         _audioSource = FindObjectOfType<FirstPersonController>().GetComponents<AudioSource>()[1];
         _foodManager = FindObjectOfType<MercatoFoodManager>();
-        pick = FindObjectOfType<Pick>().GetComponent<Text>();
-        dialogueText = FindObjectOfType<sottotitoli>().GetComponent<Text>();
+        pick = FindObjectOfType<Pick>().GetComponent<TextMeshProUGUI>();
+        dialogueText = FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         highlightColor = new Color(0.3962264f, 0.3962264f, 0.3962264f, 1);
         gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");

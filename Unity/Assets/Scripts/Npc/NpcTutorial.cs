@@ -25,9 +25,10 @@ public class NpcTutorial : NpcInteractable
         SetAudio(0);
         SetSubtitles(0);
         Globals.someoneIsTalking = true;
-        yield return new WaitForSeconds(GetAudioLength()+2f);
+        yield return new WaitForSeconds(GetAudioLength());
         hasTalked = true;
         StopInteraction();
+        yield return new WaitForSeconds(2f);
         if(!FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         Initialize(Characters.Schiavo, FindObjectOfType<NavSpawner>().gameObject, "Move", new List<Vector3>{spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position});
     }

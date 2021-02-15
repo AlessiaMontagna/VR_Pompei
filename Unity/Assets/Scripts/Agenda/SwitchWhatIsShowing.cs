@@ -22,7 +22,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
     void Update()
     {
         //Map case
-        if ((Input.GetKeyDown(KeyCode.M) || Input.GetAxisRaw("Arrows_v")>0) && GetComponent<ShowAgenda>()._agendaType!= agendaType.mappa)
+        if ((Input.GetKeyDown(KeyCode.V) || Input.GetAxisRaw("Arrows_v")>0) && GetComponent<ShowAgenda>()._agendaType!= agendaType.mappa)
         {
             if(m_isAxisInUse == false)  //serve per prendere l'input della freccia del joystick solo 1 volta (es.: keydown)
             {

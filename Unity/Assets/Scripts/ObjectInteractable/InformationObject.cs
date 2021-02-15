@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 public class InformationObject : ObjectInteractable
 {
+    //[SerializeField] private TextMeshProUGUI _tutorialText;
     [SerializeField] private CodexInformation _objectName;
-    [SerializeField] private Text _nuovaVoceText;
-    [SerializeField] private Text _tutorialText;
-
     private Codex _codex;
     private AudioSource _audioSource;
     private AudioClip _audioClip;
-    
+    private TextMeshProUGUI _nuovaVoceText;
+
     private void Start()
     {
         _audioSource = FindObjectOfType<InteractionManager>().GetComponents<AudioSource>()[1];
         _audioClip = Resources.Load<AudioClip>("FeedbackSounds/Nuova_voce_codex");
-        _nuovaVoceText = FindObjectOfType<CodexText>().GetComponent<Text>();
+        _nuovaVoceText = FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>();
         _codex = FindObjectOfType<Codex>();
     }
 

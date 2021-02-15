@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -27,7 +29,7 @@ public class NpcInteractable : Interattivo
     public OcclusionInteract fmodAudioSource => _fmodAudioSource;
     private string _voice;
     public string voice => _voice;
-    private Text _talk;
+    private TextMeshProUGUI _talk;
     private RawImage _eButton;
     private int _talkIndex;
     public int talkIndex => _talkIndex;
@@ -53,7 +55,7 @@ public class NpcInteractable : Interattivo
         _voice = _audioSubManager.GetVoice(_character);
         if(_voice == null)Debug.LogError($"GetVoice({_character}) returned null");
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _talkIndex = -1;
     }
 
@@ -64,7 +66,7 @@ public class NpcInteractable : Interattivo
     public override void UITextOn()
     {
         if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _eButton.enabled = true;
         _talk.enabled = true;
     }
@@ -72,7 +74,7 @@ public class NpcInteractable : Interattivo
     public override void UITextOff()
     {
         if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _eButton.enabled = false;
         _talk.enabled = false;
     }
@@ -88,8 +90,8 @@ public class NpcInteractable : Interattivo
 
     public void SetSubtitles(int index)
     {
-        if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
-        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = _audioSubManager.GetSubs(index, _character);
+        if (index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = "";
+        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text =_audioSubManager.GetSubs(index, _character);
     }
 
     public void SetAudio(int index)

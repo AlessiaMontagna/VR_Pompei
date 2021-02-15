@@ -33,7 +33,7 @@ public class ShowAgenda : MonoBehaviour
     {
         if (!GetComponent<SwitchWhatIsShowing>().enabled)
         {
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.V))
             {
                 MappaMode(true);
                 MoveAgendaUp();
@@ -48,7 +48,7 @@ public class ShowAgenda : MonoBehaviour
         }
         else
         {
-            if((Input.GetKeyDown(KeyCode.M) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
+            if((Input.GetKeyDown(KeyCode.V) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
             {
                 MoveAgendaDown();
                 MappaMode(false);
