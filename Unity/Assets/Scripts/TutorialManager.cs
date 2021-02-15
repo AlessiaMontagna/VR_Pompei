@@ -9,9 +9,9 @@ public class TutorialManager : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI _tutorialText;
-    [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
 
+    private NpcTutorial _schiavo;
     private Text _obiettiviText;
     private ShowAgenda _scriptAgenda;
     private float _waitTime = 6f;
@@ -19,6 +19,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
+        _schiavo = FindObjectOfType<NpcTutorial>();
         _scriptAgenda = FindObjectOfType<ShowAgenda>();
         _scriptAgenda.enabled = false;
         _missionIndex = 0;
@@ -28,6 +29,7 @@ public class TutorialManager : MonoBehaviour
     }
     private void Update()
     {
+        if(_schiavo == null) _schiavo = FindObjectOfType<NpcTutorial>();
         switch(_missionIndex)
         {
             case 0:
@@ -51,6 +53,7 @@ public class TutorialManager : MonoBehaviour
             case 6:
                 FinishTutorial();
                 break;
+            default: throw new System.ArgumentOutOfRangeException();
         }
     }
 
