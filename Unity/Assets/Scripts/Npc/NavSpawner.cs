@@ -31,7 +31,7 @@ public class NavSpawner : MonoBehaviour
     private Dictionary<NavSubroles, List<GameObject>> _spawns = new Dictionary<NavSubroles, List<GameObject>>();
     public Dictionary<NavSubroles, List<GameObject>> navspawns => _spawns;
 
-    void Start()
+    void Awake()
     {
         _prefabs.Add(Characters.Guardia, _guardPrefabs);
         _prefabs.Add(Characters.Soldato, _soldierPrefabs);
@@ -60,9 +60,15 @@ public class NavSpawner : MonoBehaviour
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
+    }
+
+    void Start()
+    {
+        List<GameObject> prefabs;
         //spawn TUTORIAL
         var tutorialManager = FindObjectOfType<TutorialManager>();
-        if(tutorialManager != null && tutorialManager.enabled && _prefabs.TryGetValue(Characters.Schiavo, out var prefabs)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Tutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);}
+        if(tutorialManager == null || !tutorialManager.enabled || !_prefabs.TryGetValue(Characters.Schiavo, out prefabs))Debug.Log($"Tutorial disabled");
+        else SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
         // spawn STOPS guards
         if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
         // spawn STOPS soldier
@@ -146,12 +152,16 @@ public class NavSpawner : MonoBehaviour
         agent.transform.parent = parent.transform;
         agent.transform.LookAt(parent.transform, Vector3.up);
         NpcInteractable component;
-        if(character == Characters.Mercante && state == "Idle") component = agent.AddComponent<NpcMercante>();
-        else component = agent.AddComponent<NpcInteractable>();
+        switch(character)
+        {
+            case Characters.Mercante: if(state == "Idle")component = agent.AddComponent<NpcMercante>();else component = agent.AddComponent<NpcInteractable>();break;
+            case Characters.SchiavoTutorial: if(state == "Idle")component = agent.AddComponent<NpcTutorial>();else component = agent.AddComponent<NpcInteractable>();break;
+            default: component = agent.AddComponent<NpcInteractable>();break;
+        }
         component.Initialize(character, parent, state, targets);
         if(targets != null && targets?.Count > 0)
         {
-            if(character == Characters.Guardia){_guards++;}else{_people++;}
+            if(character == Characters.Guardia)_guards++;else _people++;
             agent.AddComponent<Rigidbody>();
             var body = agent.GetComponent<Rigidbody>();
             body.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;

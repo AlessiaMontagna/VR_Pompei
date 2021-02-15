@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum CodexInformation {Foro , Santuario , Macellum , ArchiOnorari , TempioDiGiove}
 
-public enum Characters {Guardia, Soldato, Schiavo, MySchiavo, Mercante, NobileM, NobileF, Amico, Tutorial};
+public enum Characters {Guardia, Soldato, Schiavo, MySchiavo, Mercante, NobileM, NobileF, Amico, SchiavoTutorial};
 
 public enum Players {Schiavo, Mercante, Nobile};
 

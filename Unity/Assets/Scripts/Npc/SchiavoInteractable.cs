@@ -42,7 +42,7 @@ public class SchiavoInteractable : Interattivo
 
     private IEnumerator StartDialogue(AudioClip audio)
     {
-        _sottotitoli.text = _subManager.GetSubs(index, Characters.Tutorial);
+        _sottotitoli.text = _subManager.GetSubs(index, Characters.SchiavoTutorial);
         Globals.someoneIsTalking = true;
         yield return new WaitForSeconds(audio.length);
         Globals.someoneIsTalking = false;

@@ -29,6 +29,7 @@ public class TutorialManager : MonoBehaviour
     }
     private void Update()
     {
+        if(_schiavo == null) _schiavo = FindObjectOfType<NpcTutorial>();
         switch(_missionIndex)
         {
             case 0:
@@ -52,6 +53,7 @@ public class TutorialManager : MonoBehaviour
             case 6:
                 FinishTutorial();
                 break;
+            default: throw new System.ArgumentOutOfRangeException();
         }
     }
 
