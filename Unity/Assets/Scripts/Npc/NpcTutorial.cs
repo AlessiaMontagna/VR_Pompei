@@ -10,13 +10,13 @@ public class NpcTutorial : NpcInteractable
     private int index = 0;
 
     // Start is called before the first frame update
-    void Start(){if(navAgent == null) Initialize(Characters.SchiavoTutorial, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
+    void Start(){if(navAgent == null) Initialize(Characters.Tutorial, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
 
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
         hasTalked = true;
-        if(character == Characters.SchiavoTutorial) StartCoroutine(TutorialTalk());
+        if(character == Characters.Tutorial) StartCoroutine(TutorialTalk());
         else base.StartInteraction();
     }
 

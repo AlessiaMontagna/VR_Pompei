@@ -60,12 +60,15 @@ public class NavSpawner : MonoBehaviour
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
+        //spawn TUTORIAL
+        var tutorialManager = FindObjectOfType<TutorialManager>();
+        if(tutorialManager != null && tutorialManager.enabled && _prefabs.TryGetValue(Characters.Schiavo, out var prefabs)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Tutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);}
         // spawn STOPS guards
-        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Soldato, out var prefabs))foreach (var item in stops.Where(i => i != null)){var agent = SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
+        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
         // spawn STOPS soldier
-        if(_stops.TryGetValue(NavSubroles.SoldierStop, out stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){var agent = SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Soldato, "Idle", item, default(Vector3), null);}
+        if(_stops.TryGetValue(NavSubroles.SoldierStop, out stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Soldato, "Idle", item, default(Vector3), null);}
         // spawn STOPS mercanti
-        if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach(var item in stops.Where(i => i != null)){var agent = SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item, default(Vector3), null);}
+        if(_stops.TryGetValue(NavSubroles.MercanteStop, out stops) && _prefabs.TryGetValue(Characters.Mercante, out prefabs))foreach(var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Mercante, "Idle", item, default(Vector3), null);}
         // spawn STOPS balcony
         if(_stops.TryGetValue(NavSubroles.BalconyStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
