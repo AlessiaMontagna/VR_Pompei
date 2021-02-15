@@ -7,17 +7,20 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] private MouseLook _mouseLook;
+    [SerializeField] private GameObject _ui;
+
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
     public FirstPersonController fps;
     public GameObject optionsMenuHolder;
     public GameObject controlsMenuHolder;
-
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
     public int[] screenWidhts;
     int activeScreenResIndex;
+
 
     public void Start()
     {
@@ -28,18 +31,16 @@ public class PauseMenu : MonoBehaviour
     { 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(GameIsPaused)
-            {
-                Resume();
-            } else
-            {
-                Pause();
-            }
+            Pause();
         }
     }
 
    public void Resume()
     {
+        _ui.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        _mouseLook.m_cursorIsLocked = true;
         pauseMenuUI.SetActive(false);
         optionsMenuHolder.SetActive(false);
         controlsMenuHolder.SetActive(false);
@@ -50,10 +51,16 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        _ui.SetActive(false);
+        _mouseLook.m_cursorIsLocked = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        fps.enabled = false;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        fps.enabled = false;
+
+        
     }
     
     public void LoadMenu()
