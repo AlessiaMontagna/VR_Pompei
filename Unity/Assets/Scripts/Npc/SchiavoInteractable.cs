@@ -27,7 +27,7 @@ public class SchiavoInteractable : Interattivo
     {
         hasTalked = true;
         UITextOff();
-        Talk(Resources.Load<AudioClip>("Talking/TutorialSchiavo/" + Globals.player.ToString()));
+        Talk(Resources.Load<AudioClip>("Talking/SchiavoTutorial/0"));
     }
     public void Talk(AudioClip audio)
     {
