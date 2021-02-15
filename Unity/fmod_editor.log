@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001D20522EE08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000242D3EB58C8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -15,1418 +15,154 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FD9210D8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FD9210D8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FD921E58
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FD921E58
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9A088
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9A088
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000243346EEAA8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000243346EEAA8
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9C758
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9C758
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9CC68
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9CC68
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9D688
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9D688
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FD9221B8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FD9221B8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9A088
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9A088
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001D0D4F9A598 : node = 000001D0ADA07790
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001D0D4F9B318 : node = 000001D0ADA05850
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9A598
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9AAA8 : node = 000001D0ADA04090
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA078A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9B4C8 : node = 000001D0ADA05710
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 2
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9B828 : node = 000001D0ADA06D90
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 3
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9BB88 : node = 000001D0ADA05210
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 4
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E6728 : node = 000001D0ADA05490
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 5
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E9B78 : node = 000001D0ADA04810
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 6
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E9D28 : node = 000001D0ADA06ED0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 7
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E8738 : node = 000001D0ADA04450
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 8
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E94B8 : node = 000001D0ADA06110
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 9
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E6C38 : node = 000001D0ADA05990
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 10
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9A598
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9B318
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E9668 : node = 000001D0ADA06390
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 10
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05960
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E9158 : node = 000001D0ADA07150
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 11
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E7D18 : node = 000001D0ADA04590
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 12
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E7658 : node = 000001D0ADA069D0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 13
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E9308 : node = 000001D0ADA05350
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 14
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D17D3E63C8 : node = 000001D0ADA06610
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 15
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9B318
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9AAA8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA041A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9AAA8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9B4C8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05820
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9B4C8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9B828
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06EA0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9B828
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9BB88
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05320
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9BB88
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E6728
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA055A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E6728
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E9B78
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA04920
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E9B78
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E9D28
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06FE0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E9D28
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E8738
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA04560
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E8738
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E94B8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06220
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E94B8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E6C38
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05AA0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E6C38
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E9668
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA064A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E9668
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E9158
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA07260
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E9158
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E7D18
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA046A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E7D18
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E7658
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06AE0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E7658
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E9308
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05460
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E9308
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E63C8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06720
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E63C8
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA90CA8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088CB8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9DD48)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA90798)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085F38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9DB98)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA90438)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087AD8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9C758)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA91008)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088FF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9C5A8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA920E8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205089CF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9CC68)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA90288)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A9F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9C248)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA93A38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A1D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9AFB8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA92B08)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A858)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9C3F8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA91BD8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087C78)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9D688)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA92448)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050858B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9AE08)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA92958)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087798)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9A748)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA925F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508AD38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D1FD9221B8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA93D98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205089678)
-[LOG] SoundI::release                          :     Environment_seagull (000001D1FD922008)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA93BE8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050894D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D1FD921CA8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA900D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086758)
-[LOG] SoundI::release                          :     Environment_seagull (000001D1FD921AF8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D48E7C98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086DD8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D1FD921948)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D48E95E8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205089338)
-[LOG] SoundI::release                          :     Environment_seagull (000001D1FD921798)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA92CB8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508AED8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9A088)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E6578
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E6578
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000009C6ABFF528
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF5597B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF5597AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF5597BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF5597CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001D205BF6CC8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='NobileMySchiavo3_Alessia', format=5, channels=2, frequency=48000, lengthbytes=28032, lengthpcm=175542, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.961731.
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E8FA8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E8FA8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6711D8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6711D8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E83D8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E83D8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E9818
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E9818
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E8228
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E8228
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E6578
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E6578
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000009C6ABFF528
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFDF5597B10
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFDF5597AE0
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFDF5597BE0
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFDF5597CA0
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001D0ACCAA6E8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='NobileAmico0_Alessia', format=5, channels=2, frequency=48000, lengthbytes=40064, lengthpcm=219428, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.454163.
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B671028
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B671028
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D17D3E83D8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D17D3E83D8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B670E78
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B670E78
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001D20B6731E8 : node = 000001D0ADA07A10
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6731E8
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B66E958 : node = 000001D0ADA078D0
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA07B20
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B66FA38 : node = 000001D0ADA06B10
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B674628 : node = 000001D0ADA064D0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 2
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B66E5F8 : node = 000001D0ADA04F90
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 3
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B673DB8 : node = 000001D0ADA07290
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 4
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B671BF8 : node = 000001D0ADA04950
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 5
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6731E8
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66E958
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B6707B8 : node = 000001D0ADA05AD0
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA079E0
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B66FD98 : node = 000001D0ADA05C10
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 6
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B670968 : node = 000001D0ADA05D50
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 7
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B6700F8 : node = 000001D0ADA073D0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 8
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B671898 : node = 000001D0ADA050D0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 9
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B66ECB8 : node = 000001D0ADA05FD0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 10
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B674478 : node = 000001D0ADA07B50
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 11
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B671DA8 : node = 000001D0ADA07C90
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 12
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B672108 : node = 000001D0ADA06750
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 13
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B670458 : node = 000001D1FDEE56E0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 14
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66E958
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66FA38
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D20B6736F8 : node = 000001D1FDEE47E0
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 14
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06C20
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66FA38
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B674628
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA065E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B674628
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66E5F8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA050A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66E5F8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B673DB8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA073A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B673DB8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B671BF8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA04A60
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B671BF8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6707B8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05BE0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6707B8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66FD98
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05D20
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66FD98
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B670968
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05E60
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B670968
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6700F8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA074E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6700F8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B671898
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA051E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B671898
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66ECB8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA060E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66ECB8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B674478
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA07C60
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B674478
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B671DA8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA07DA0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B671DA8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B672108
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06860
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B672108
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B670458
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE57F0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B670458
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6736F8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE48F0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6736F8
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E63C8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086A98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6711D8)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E9308)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050868F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B671028)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E7658)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050865B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6742C8)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E9158)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A6B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E8588)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E9668)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A518)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E83D8)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E6C38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086278)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E7808)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E94B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A378)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E7148)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E8738)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085D98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E8078)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E9D28)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088E58)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E74A8)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E9B78)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088B18)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E6F98)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E6728)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085BF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E7EC8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9BB88)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087E18)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E68D8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9B828)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050887D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E9818)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9B4C8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088638)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E8228)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9AAA8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087458)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E6578)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9B318)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085A58)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E8A98)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9A598)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085718)
-[LOG] SoundI::release                          :     Environment_seagull (000001D17D3E8FA8)
-[LOG] SoundI::release                          : Environment_seagull (000001D17D3E7D18)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086418)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B670E78)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66DF38
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66DF38
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B66EE68
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B66EE68
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B672B28
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B672B28
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B672978
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B672978
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B672468
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B672468
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001D1FDA92298 : node = 000001D1FDEE4920
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA92298
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA927A8 : node = 000001D1FDEE4BA0
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE4A30
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA900D8 : node = 000001D0ADA06110
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA93BE8 : node = 000001D0ADA07790
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 2
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA911B8 : node = 000001D0ADA05210
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 3
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_fabbro', format=5, channels=2, frequency=48000, lengthbytes=364608, lengthpcm=1731604, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.926727.
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA91D88 : node = 000001D0ADA05710
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 4
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA92298
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA927A8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE4CB0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_fabbro', format=5, channels=2, frequency=48000, lengthbytes=364608, lengthpcm=1731604, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.926727.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA927A8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA900D8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06220
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_fabbro', format=5, channels=2, frequency=48000, lengthbytes=364608, lengthpcm=1731604, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.926727.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA900D8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA93BE8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA078A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_fabbro', format=5, channels=2, frequency=48000, lengthbytes=364608, lengthpcm=1731604, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.926727.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA93BE8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA911B8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05320
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_fabbro', format=5, channels=2, frequency=48000, lengthbytes=364608, lengthpcm=1731604, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.926727.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA911B8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA91D88
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05820
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_fabbro', format=5, channels=2, frequency=48000, lengthbytes=364608, lengthpcm=1731604, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.926727.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA91D88
-[LOG] SoundI::release                          : Environment_fabbro (000001D155D4B838)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D205087118)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FD9215E8)
-[LOG] SoundI::release                          : Environment_fabbro (000001D17D9540F8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D2050800F8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FD922368)
-[LOG] SoundI::release                          : Environment_fabbro (000001D17D9547B8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D20507FF58)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FD922518)
-[LOG] SoundI::release                          : Environment_fabbro (000001D1C4E4FD18)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D20507F0B8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA931C8)
-[LOG] SoundI::release                          : Environment_fabbro (000001D17DEC5258)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D205084878)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D04ABC3E18)
-[LOG] SoundI::release                          : Environment_fabbro (000001D17DEC49E8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D205084538)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D17D954608)
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001D1FDA925F8 : node = 000001D0ADA06610
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] SystemI::createSound                     : filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000001D1FDA90948 : node = 000001D0ADA05990
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA925F8
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 0
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA916C8 : node = 000001D0ADA069D0
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06720
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA931C8 : node = 000001D0ADA06D90
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 2
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D1FDA92958 : node = 000001D0ADA06ED0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 3
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9C248 : node = 000001D0ADA07150
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 4
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9CC68 : node = 000001D0ADA04090
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 5
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9DB98 : node = 000001D0ADA04450
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 6
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9A088 : node = 000001D0ADA04590
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 7
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9AE08 : node = 000001D0ADA04810
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 8
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9A3E8 : node = 000001D1FDEE50A0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 9
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9A598 : node = 000001D1FDEE55A0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 10
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9C5A8 : node = 000001D1FDEE51E0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 11
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA925F8
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA90948
-[LOG] SystemI::createSound                     : setdata soundi = 000001D0D4F9C758 : node = 000001D1FDEE5AA0
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 11
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA05AA0
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9B318 : node = 000001D17D224CD0
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 12
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9B828 : node = 000001D17D226990
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 13
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000001D0D4F9BB88 : node = 000001D17D2251D0
-[LOG] SystemI::createSound                     :     add node to async list : head = 000001D0AD0334F8.  list count = 14
-[LOG] SystemI::createSound                     :     filename = ..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA90948
-[LOG] SystemI::createSound                     : setdata soundi = 000001D20B673548 : node = 000001D155F60AE0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA916C8
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D0AD0334F8.  list count = 14
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06AE0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA916C8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA931C8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06EA0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA931C8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D1FDA92958
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA06FE0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D1FDA92958
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9C248
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA07260
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9C248
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9CC68
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA041A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9CC68
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9DB98
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA04560
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9DB98
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9A088
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA046A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9A088
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9AE08
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D0ADA04920
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9AE08
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9A3E8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE51B0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9A3E8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9A598
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE56B0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9A598
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9C5A8
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE52F0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9C5A8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9C758
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D1FDEE5BB0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9C758
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9B318
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D17D224DE0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9B318
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9B828
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D17D226AA0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9B828
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D0D4F9BB88
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D17D2252E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D0D4F9BB88
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B673548
-[LOG] SystemI::createSoundInternal             :     Create name='..\FMOD\Pompei_Audio_3\Build\Desktop/Master.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10768896
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 115616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D155F60BF0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 12244
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_seagull', format=5, channels=2, frequency=48000, lengthbytes=61024, lengthpcm=664555, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B673548
-[LOG] SoundI::release                          : Environment_seagull (000001D20B6736F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20506F338)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B672CD8)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B670458)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A1D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B672978)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B672108)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205089CF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66DF38)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B671DA8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205089678)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B672618)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B674478)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050894D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B674118)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B66ECB8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087AD8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B672468)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B671898)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085F38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6727C8)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B6700F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087798)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B673038)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B670968)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508AD38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B670B18)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B66FD98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050858B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66DD88)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B6707B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205089338)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6722B8)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B671BF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086758)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66E448)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B673DB8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088CB8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B670608)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B66E5F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086DD8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B672B28)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B674628)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A9F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B673F68)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B66FA38)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20508A858)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66EE68)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B66E958)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088FF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66F6D8)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B6731E8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087C78)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B671F58)
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6751F8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6751F8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B674B38
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B674B38
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B675708
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B675708
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D20B6758B8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D20B6758B8
-[LOG] SoundI::release                          : Environment_fabbro (000001D1FDA93BE8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D20508A518)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA92448)
-[LOG] SoundI::release                          : Environment_fabbro (000001D1FDA91D88)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D205086278)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA93888)
-[LOG] SoundI::release                          : Environment_fabbro (000001D1FDA927A8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D205085718)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA905E8)
-[LOG] SoundI::release                          : Environment_fabbro (000001D1FDA911B8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D20508A6B8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA90288)
-[LOG] SoundI::release                          : Environment_fabbro (000001D1FDA92298)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D205085A58)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA92E68)
-[LOG] SoundI::release                          : Environment_fabbro (000001D1FDA900D8)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D20508A378)
-[LOG] SoundI::release                          :     Environment_fabbro (000001D1FDA93528)
-[LOG] SoundI::release                          : Environment_crowd (000001D1C4E4F808)
-[LOG] SoundI::release                          :     Environment_crowd (000001D20507EF18)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FDA93018)
-[LOG] SoundI::release                          : Environment_crowd (000001D17D9542A8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D2050805D8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD922A28)
-[LOG] SoundI::release                          : Environment_crowd (000001D155D4AE18)
-[LOG] SoundI::release                          :     Environment_crowd (000001D2050872B8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD921288)
-[LOG] SoundI::release                          : Environment_crowd (000001D0D48E9798)
-[LOG] SoundI::release                          :     Environment_crowd (000001D205087938)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD921438)
-[LOG] SoundI::release                          : Environment_crowd (000001D1C4E4EC38)
-[LOG] SoundI::release                          :     Environment_crowd (000001D20507ED78)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FDA91878)
-[LOG] SoundI::release                          : Environment_crowd (000001D1C4E4E8D8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D20507FDB8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD9210D8)
-[LOG] SoundI::release                          : Environment_crowd (000001D155D4A098)
-[LOG] SoundI::release                          :     Environment_crowd (000001D205088978)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD922D88)
-[LOG] SoundI::release                          : Environment_crowd (000001D094901778)
-[LOG] SoundI::release                          :     Environment_crowd (000001D205085238)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD921E58)
-[LOG] SoundI::release                          : Environment_crowd (000001D17DEC5768)
-[LOG] SoundI::release                          :     Environment_crowd (000001D20507EA38)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FDA91368)
-[LOG] SoundI::release                          : Environment_crowd (000001D1C4E4E578)
-[LOG] SoundI::release                          :     Environment_crowd (000001D20507FC18)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FDA90E58)
-[LOG] SoundI::release                          : Environment_crowd (000001D17D954458)
-[LOG] SoundI::release                          :     Environment_crowd (000001D205080DF8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD922BD8)
-[LOG] SoundI::release                          : Environment_crowd (000001D094902A08)
-[LOG] SoundI::release                          :     Environment_crowd (000001D205089198)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD9226C8)
-[LOG] SoundI::release                          : Environment_crowd (000001D1C4E4E218)
-[LOG] SoundI::release                          :     Environment_crowd (000001D20507F3F8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FDA936D8)
-[LOG] SoundI::release                          : Environment_crowd (000001D0949026A8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D2050875F8)
-[LOG] SoundI::release                          :     Environment_crowd (000001D1FD922878)
-[LOG] SoundI::release                          : Environment_seagull (000001D20B673548)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050887D8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6751F8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9BB88)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087E18)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B675708)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9B828)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087458)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B675A68)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9B318)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088638)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B674B38)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9C758)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088E58)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B674E98)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9C5A8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086A98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6758B8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9A598)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050868F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B675048)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9A3E8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050865B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B674CE8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9AE08)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205087118)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66F018)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9A088)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205086418)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B66E7A8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9DB98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205088B18)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6742C8)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9CC68)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085D98)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B673A58)
-[LOG] SoundI::release                          : Environment_seagull (000001D0D4F9C248)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205085BF8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6738A8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA92958)
-[LOG] SoundI::release                          :     Environment_seagull (000001D2050800F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B6711D8)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA931C8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20507FF58)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B672E88)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA916C8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205084878)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B671028)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA90948)
-[LOG] SoundI::release                          :     Environment_seagull (000001D205084538)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20B670E78)
-[LOG] SoundI::release                          : Environment_seagull (000001D1FDA925F8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D20507F0B8)
-[LOG] SoundI::release                          :     Environment_seagull (000001D0D4F9D688)
-[LOG] SoundI::release                          :  (000001D0AE5641B8)
-[LOG] SoundI::release                          :     NobileMySchiavo3_Alessia (000001D205086C38)
-[LOG] SoundI::release                          :  (000001D0AE565748)
-[LOG] SoundI::release                          :     NobileAmico0_Alessia (000001D20508AED8)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000243346EE748
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000243346EE748
+[LOG] SoundI::release                          : Environment_fabbro (00000241C584E9D8)
+[LOG] SoundI::release                          :     Environment_fabbro (0000024213EB7088)
+[LOG] SoundI::release                          :     Environment_fabbro (00000243346ED158)
+[LOG] SoundI::release                          : Environment_fabbro (00000241C12A40A8)
+[LOG] SoundI::release                          :     Environment_fabbro (0000024213EBA968)
+[LOG] SoundI::release                          :     Environment_fabbro (00000243346ED668)
+[LOG] SoundI::release                          : Environment_fabbro (00000241C4EECD48)
+[LOG] SoundI::release                          :     Environment_fabbro (0000024213EB9108)
+[LOG] SoundI::release                          :     Environment_fabbro (00000241C12A2E18)
+[LOG] SoundI::release                          : Environment_fabbro (00000241C584EB88)
+[LOG] SoundI::release                          :     Environment_fabbro (0000024213EB7568)
+[LOG] SoundI::release                          :     Environment_fabbro (00000243346EF828)
+[LOG] SoundI::release                          : Environment_fabbro (00000241C4EED258)
+[LOG] SoundI::release                          :     Environment_fabbro (0000024213EBC368)
+[LOG] SoundI::release                          :     Environment_fabbro (00000241C584B588)
+[LOG] SoundI::release                          : Environment_fabbro (00000241C584BC48)
+[LOG] SoundI::release                          :     Environment_fabbro (0000024213EB8C28)
+[LOG] SoundI::release                          :     Environment_fabbro (000002415DA98AF8)
+[LOG] SoundI::release                          : Environment_crowd (00000241C4EEE848)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBC508)
+[LOG] SoundI::release                          :     Environment_crowd (0000024256AD9B68)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584D748)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EB9E08)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346EF318)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584B8E8)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBD068)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346ED818)
+[LOG] SoundI::release                          : Environment_crowd (00000241C12A4768)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EB80C8)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346ECFA8)
+[LOG] SoundI::release                          : Environment_crowd (00000241C4EEDFD8)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EB7F28)
+[LOG] SoundI::release                          :     Environment_crowd (00000241CA282A98)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584CB78)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBCB88)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346EDB78)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584D238)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBCEC8)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346EEC58)
+[LOG] SoundI::release                          : Environment_crowd (00000241C12A5188)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBD208)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346EF678)
+[LOG] SoundI::release                          : Environment_crowd (00000241C4EEDC78)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBC9E8)
+[LOG] SoundI::release                          :     Environment_crowd (00000241CA283668)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584E828)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBAE48)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346F0098)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584DC58)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EB7BE8)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346ECA98)
+[LOG] SoundI::release                          : Environment_crowd (00000241C12A59F8)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBB328)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346EF4C8)
+[LOG] SoundI::release                          : Environment_crowd (00000241C584C668)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EB9928)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213ECE098)
+[LOG] SoundI::release                          : Environment_crowd (00000241C12A5698)
+[LOG] SoundI::release                          :     Environment_crowd (0000024213EBAFE8)
+[LOG] SoundI::release                          :     Environment_crowd (00000243346EFB88)
+[LOG] SoundI::release                          : Environment_seagull (00000243346ED4B8)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BD598)
+[LOG] SoundI::release                          :     Environment_seagull (00000241BF4D19E8)
+[LOG] SoundI::release                          : Environment_seagull (0000024213ECFD48)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BCF18)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EC8E8)
+[LOG] SoundI::release                          : Environment_seagull (0000024213ECE3F8)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BC558)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346F05A8)
+[LOG] SoundI::release                          : Environment_seagull (000002415DA99A28)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BD0B8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346F03F8)
+[LOG] SoundI::release                          : Environment_seagull (000002415DA98CA8)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BC6F8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EEFB8)
+[LOG] SoundI::release                          : Environment_seagull (000002415DA99F38)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BE0F8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EEAA8)
+[LOG] SoundI::release                          : Environment_seagull (000002415DA99008)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BCD78)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EE8F8)
+[LOG] SoundI::release                          : Environment_seagull (0000024256AD8218)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BF2D8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346F0248)
+[LOG] SoundI::release                          : Environment_seagull (0000024256AD8DE8)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BC3B8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EE748)
+[LOG] SoundI::release                          : Environment_seagull (0000024256AD92F8)
+[LOG] SoundI::release                          :     Environment_seagull (00000241C08BD8D8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EE598)
+[LOG] SoundI::release                          : Environment_seagull (0000024256AD9D18)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EB8748)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EE3E8)
+[LOG] SoundI::release                          : Environment_seagull (0000024256AD9148)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EB85A8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EFD38)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA283158)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EAF6A8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346ECC48)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA282FA8)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EAAF28)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EF9D8)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA282738)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EAF1C8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EE238)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA2823D8)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EC9508)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EE088)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA282228)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EC9368)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EDED8)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA2828E8)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EC99E8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EEE08)
+[LOG] SoundI::release                          : Environment_seagull (00000241CA282078)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EB8408)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EF168)
+[LOG] SoundI::release                          : Environment_seagull (00000241C12A34D8)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EB7A48)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EFEE8)
+[LOG] SoundI::release                          : Environment_seagull (00000241C12A3838)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EB78A8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346ECDF8)
+[LOG] SoundI::release                          : Environment_seagull (00000241C12A2758)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EBB668)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346EDD28)
+[LOG] SoundI::release                          : Environment_seagull (00000241C12A45B8)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EBB4C8)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346ED9C8)
+[LOG] SoundI::release                          : Environment_seagull (00000241C12A3EF8)
+[LOG] SoundI::release                          :     Environment_seagull (0000024213EB7228)
+[LOG] SoundI::release                          :     Environment_seagull (00000243346ED308)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 

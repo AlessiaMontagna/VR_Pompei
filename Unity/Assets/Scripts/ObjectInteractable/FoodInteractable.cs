@@ -37,7 +37,7 @@ public class FoodInteractable : ObjectInteractable
     {
         if(_foodType == foodType.NonInteractable)
         {
-            StartCoroutine(startDialogue());
+            StartCoroutine(startDialogue("Non devo prendere queste cose"));
             return;
         }
         if (_foodManager.getCounter(_foodType) < _foodManager.getMax(_foodType))
@@ -47,11 +47,12 @@ public class FoodInteractable : ObjectInteractable
             _audioSource.Play();
             _foodManager.addCounter(_foodType);
             _foodManager.CheckMissionComplete();
+            _foodManager.CheckGetMaxFood(_foodType);
             Destroy(gameObject);
         }
         else
         {
-            StartCoroutine(startDialogue());
+            StartCoroutine(startDialogue("Ho finito di prendere questo cibo."));
             //TODO: Play audio tizio
         }
 
@@ -59,9 +60,12 @@ public class FoodInteractable : ObjectInteractable
 
     public override void UITextOff()
     {
-        _eButton.enabled = false;
-        pick.enabled = false;
-        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+        if(gameObject != null)
+        {
+            _eButton.enabled = false;
+            pick.enabled = false;
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+        }
     }
 
     public override void UITextOn()
@@ -75,11 +79,11 @@ public class FoodInteractable : ObjectInteractable
 
     }
 
-    private IEnumerator startDialogue()
+    private IEnumerator startDialogue(string text)
     {
-        dialogueText.text = "Non posso prendere più cose";
+        dialogueText.text = text;
         yield return new WaitForSeconds(2);
-        if (dialogueText.text == "Non posso prendere più cose")
+        if (dialogueText.text == text)
             dialogueText.text = "";
     }
 }
