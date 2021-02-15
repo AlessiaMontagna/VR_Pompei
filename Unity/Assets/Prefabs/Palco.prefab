@@ -27,7 +27,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7523072672925509763
 Transform:
@@ -57,6 +57,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Palco
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669351674279595164, guid: 912c692c3e19df047881304c4bd15978,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3332841402432738854, guid: 912c692c3e19df047881304c4bd15978,
         type: 3}
@@ -224,6 +229,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColonnaForo_UP (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5687645672594373004, guid: 9b06174bc6239594e856217d4863ba83,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b06174bc6239594e856217d4863ba83, type: 3}
 --- !u!4 &251504464560815241 stripped
@@ -313,6 +323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ColonnaForo_UP
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687645672594373004, guid: 9b06174bc6239594e856217d4863ba83,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b06174bc6239594e856217d4863ba83, type: 3}

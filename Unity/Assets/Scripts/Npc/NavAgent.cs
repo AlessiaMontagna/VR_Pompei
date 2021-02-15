@@ -14,9 +14,12 @@ public class NavAgent
     public readonly float walkSpeed = 1.25f;
     public readonly float runSpeed = 2.5f;
     public readonly float distanceToStop = 2f;
+    public readonly float forwardAngle = 30f;
+    public readonly float maxInteractionDistance = 10f;
 
     private Dictionary<string, State> _states = new Dictionary<string, State>();
     private List<Vector3> _targets = new List<Vector3>();
+    private Vector3 _lookTarget = default(Vector3);
 
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn};
     public readonly string animatorVariable = "Float";
@@ -28,8 +31,8 @@ public class NavAgent
         _animator = _owner.GetComponent<Animator>();
         _navMeshAgent = _owner.GetComponent<UnityEngine.AI.NavMeshAgent>();
         var collider = _owner.gameObject.AddComponent<CapsuleCollider>();
-        collider.center = new Vector3(0, 0.85f, 0);
-        collider.height = 1.7f;
+        collider.center = new Vector3(0, 1f, 0);
+        collider.height = 1.25f;
         collider.radius = 0.3f;
         var trigger = _owner.gameObject.AddComponent<CapsuleCollider>();
         trigger.center = new Vector3(0, 0.85f, 0);
@@ -60,7 +63,7 @@ public class NavAgent
         SetInitialState(NavAgentStates.Idle.ToString());
     }
 
-    public void Tik() => _stateMachine?.Tik();
+    public void Tik(){TurnToTarget();_stateMachine?.Tik();}
 
     public State AddState(string name, System.Action enter, System.Action tik, System.Action exit)
     {
@@ -86,16 +89,22 @@ public class NavAgent
 
     public bool DestinationReached(){return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f) && Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f,1f);}
 
+    public void SetAnimation(int availableAnimations)
+    {
+        if(_animator.GetBool("Turn") || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit") || !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Random"))return;
+        _animator.SetFloat(GetCurrentState().ToString()+animatorVariable, (float)Random.Range(0, availableAnimations));
+    }
+
     private void Idle()
     {
-        if(_owner?.parent != null)TurnToPosition(_owner.parent.transform.position);
-        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") && !_animator.GetBool(NavAgentStates.Turn.ToString()))
-            _animator.SetFloat(NavAgentStates.Idle.ToString()+animatorVariable, (float)Random.Range(0, 6));
+        _lookTarget = _owner.parent.transform.position;
+        SetAnimation(6);
     }
 
     private void Move()
     {
         _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
+        _lookTarget = default(Vector3);
         if(!DestinationReached())return;
         if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
         Vector3 _destination;
@@ -110,6 +119,7 @@ public class NavAgent
     private void Path()
     {
         _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
+        _lookTarget = default(Vector3);
         if(_targets.Count == 0)Debug.LogError("UNDEFINED PATH");
         if(!DestinationReached())return;
         _navMeshAgent.speed = walkSpeed;
@@ -119,22 +129,22 @@ public class NavAgent
 
     private void Talk()
     {
-        if(_owner.parent != null)TurnToPosition(_owner.parent.transform.position);
-        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgentStates.Turn.ToString()))
-            _animator.SetFloat(NavAgentStates.Talk.ToString()+animatorVariable, (float)Random.Range(0, 6));
+        _lookTarget = _owner.parent.transform.position;
+        SetAnimation(10);
     }
     
     public void CheckPlayerPosition()
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
-        if(Vector3.Distance(player, _owner.gameObject.transform.position) > 10f) _owner.Interaction(-1);
-        else TurnToPosition(player);
+        if(Vector3.Distance(player, _owner.gameObject.transform.position) > maxInteractionDistance) _owner.Interaction(-1);
+        else _lookTarget = player;
     }
 
-    public void TurnToPosition(Vector3 position)
+    public void TurnToTarget()
     {
-        float angle = Vector3.SignedAngle((position - _owner.gameObject.transform.position), _owner.gameObject.transform.forward, Vector3.up);
-        if(angle > -30f && angle < 30f){_animator.SetBool(NavAgentStates.Turn.ToString(), false);_animator.SetFloat(NavAgentStates.Turn.ToString()+animatorVariable, 0f);}
+        if(_lookTarget == default(Vector3)){_animator.SetBool(NavAgentStates.Turn.ToString(), false);_animator.SetFloat(NavAgentStates.Turn.ToString()+animatorVariable, 0f);return;}
+        float angle = Vector3.SignedAngle((_lookTarget - _owner.gameObject.transform.position), _owner.gameObject.transform.forward, Vector3.up);
+        if(angle > -forwardAngle && angle < forwardAngle){_animator.SetBool(NavAgentStates.Turn.ToString(), false);_animator.SetFloat(NavAgentStates.Turn.ToString()+animatorVariable, 0f);}
         else {_animator.SetBool(NavAgentStates.Turn.ToString(), true);_animator.SetFloat(NavAgentStates.Turn.ToString()+animatorVariable, angle);}
     }
 
