@@ -23,6 +23,7 @@ public class NavAgent
 
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn};
     public readonly string animatorVariable = "Float";
+    private bool _changeAnimation = true;
 
     public NavAgent(NpcInteractable owner)
     {
@@ -91,8 +92,8 @@ public class NavAgent
 
     public void SetAnimation(int availableAnimations)
     {
-        if(!_animator.GetBool("Turn") && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString()))
-            _animator.SetFloat(GetCurrentState().Name+animatorVariable, (float)Random.Range(0, availableAnimations));
+        if(!_animator.GetBool("Turn") && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString()) && !_changeAnimation) _changeAnimation = true;
+        if(_changeAnimation){_animator.SetFloat(GetCurrentState().Name+animatorVariable, (float)Random.Range(0, availableAnimations));_changeAnimation = false;}
     }
 
     private void Idle()

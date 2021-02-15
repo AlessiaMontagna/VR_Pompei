@@ -27,6 +27,7 @@ public class NavSpawner : MonoBehaviour
     readonly int MAXBIRDSPERFLOCK = 5;
 
     private Dictionary<Characters, List<GameObject>> _prefabs = new Dictionary<Characters, List<GameObject>>();
+    public Dictionary<Characters, List<GameObject>> prefabs => _prefabs;
     private Dictionary<NavSubroles, List<GameObject>> _stops = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _paths = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _spawns = new Dictionary<NavSubroles, List<GameObject>>();
@@ -165,7 +166,7 @@ public class NavSpawner : MonoBehaviour
         }
     }
 
-    private GameObject SpawnAgent(GameObject prefab, Characters character, string state, GameObject parent, Vector3 position, List<Vector3> targets)
+    public GameObject SpawnAgent(GameObject prefab, Characters character, string state, GameObject parent, Vector3 position, List<Vector3> targets)
     {
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
         GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
