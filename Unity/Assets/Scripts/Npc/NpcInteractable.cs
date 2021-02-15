@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
 //[RequireComponent(typeof(AudioSource))]
@@ -90,8 +89,8 @@ public class NpcInteractable : Interattivo
 
     public void SetSubtitles(int index)
     {
-        if (index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = "";
-        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text =_audioSubManager.GetSubs(index, _character);
+        if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = "";
+        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = _audioSubManager.GetSubs(index, _character);
     }
 
     public void SetAudio(int index)
@@ -114,8 +113,7 @@ public class NpcInteractable : Interattivo
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgent.NavAgentStates.Turn.ToString()))
-            _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 10));
+        _navAgent.SetAnimation(10);
     }
 
     protected virtual void StopInteraction()
@@ -132,7 +130,7 @@ public class NpcInteractable : Interattivo
     {
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
-        SetSubtitles(index);
+        SetSubtitles(_talkIndex);
         /*
         //yield return new WaitForSeconds(_audioSource.clip.length);
         int fmodLength;

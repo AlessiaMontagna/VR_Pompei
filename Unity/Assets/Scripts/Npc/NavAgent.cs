@@ -91,8 +91,8 @@ public class NavAgent
 
     public void SetAnimation(int availableAnimations)
     {
-        if(_animator.GetBool("Turn") || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit") || !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Random"))return;
-        _animator.SetFloat(GetCurrentState().ToString()+animatorVariable, (float)Random.Range(0, availableAnimations));
+        if(!_animator.GetBool("Turn") && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString()))
+            _animator.SetFloat(GetCurrentState().Name+animatorVariable, (float)Random.Range(0, availableAnimations));
     }
 
     private void Idle()
