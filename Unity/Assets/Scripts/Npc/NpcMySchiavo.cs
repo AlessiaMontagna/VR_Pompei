@@ -53,6 +53,8 @@ public class NpcMySchiavo : NpcInteractable
         _swoosh.SwooshIn();
         yield return new WaitForSeconds(0.5f);
         
+        var playerPosition = player.gameObject.transform.position;
+        var playerRotation = player.gameObject.transform.rotation;
         var spawner = FindObjectOfType<NavSpawner>();
         var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
         if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
@@ -61,8 +63,6 @@ public class NpcMySchiavo : NpcInteractable
         nobile.transform.position = playerPosition;
         nobile.transform.rotation = playerRotation;
         nobile.GetComponent<NpcInteractable>().WaitForMotion(2f);
-
-        
 
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;
