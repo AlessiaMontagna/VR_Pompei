@@ -409,7 +409,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 44867f056252642a5b75baf498adc91a,
+    m_Motion: {fileID: -203655887218126122, guid: 1da49ad7f2dde41288869df29adffe3f,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
@@ -418,7 +418,7 @@ BlendTree:
     m_DirectBlendParameter: IdleFloat
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 1da49ad7f2dde41288869df29adffe3f,
+    m_Motion: {fileID: -203655887218126122, guid: 44867f056252642a5b75baf498adc91a,
       type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
@@ -893,7 +893,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: ed4b6738e8a2bc149870831da925c81d,
       type: 3}
-    m_Threshold: 1
+    m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -911,7 +911,7 @@ BlendTree:
   m_BlendParameter: MoveFloat
   m_BlendParameterY: MoveSpeed
   m_MinThreshold: 0
-  m_MaxThreshold: 3
+  m_MaxThreshold: 2
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -2285,7 +2285,7 @@ AnimatorStateMachine:
     m_Position: {x: 0, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3294347828675115947}
-    m_Position: {x: 740, y: 260, z: 0}
+    m_Position: {x: 1100, y: 460, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2551,6 +2551,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Turn
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Earthquake
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2645668418791514967}

@@ -71,8 +71,8 @@ public class NavSpawner : MonoBehaviour
         List<GameObject> stops;
         // spawn TUTORIAL
         var tutorialManager = FindObjectOfType<TutorialManager>();
-        if(tutorialManager == null || !tutorialManager.enabled || !_prefabs.TryGetValue(Characters.Schiavo, out prefabs))Debug.Log($"Tutorial disabled");
-        else SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
+        if(tutorialManager != null && tutorialManager.enabled && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))
+            SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
         // spawn AMICO
         if(_stops.TryGetValue(NavSubroles.AmicoStop, out stops) && _prefabs.TryGetValue(Characters.Amico, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Amico, "Idle", item, default(Vector3), null);}
         // spawn MYSCHIAVO
@@ -139,6 +139,7 @@ public class NavSpawner : MonoBehaviour
 
     void Update()
     {
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli")return;
         // SPAWN agents if there are less then defined in Start()
         while(_nGuards > _guards)
         {
@@ -151,7 +152,13 @@ public class NavSpawner : MonoBehaviour
         {
             if(Random.Range(0f, 1f) < 0.2)
             {
-                //spawns = spawns.Where(i => i.transform.position.y);
+                if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+                spawns = spawns.Where(i => i.transform.position.y > 5f).ToList();
+                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Soldato);
+                if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
+                var spawn = spawns.ElementAt(Random.Range(0, spawns.Count));
+                spawns.Remove(spawn);
+                SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawn, default(Vector3), new List<Vector3>{spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position});
             }
             else
             {

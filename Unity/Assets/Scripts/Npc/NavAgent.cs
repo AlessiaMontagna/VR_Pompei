@@ -42,8 +42,8 @@ public class NavAgent
         trigger.isTrigger = true;
 
         // Settings
-        _navMeshAgent.angularSpeed = 1000f;
-        _navMeshAgent.acceleration = 10f;
+        _navMeshAgent.angularSpeed = 500f;
+        _navMeshAgent.acceleration = 15f;
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
@@ -92,7 +92,7 @@ public class NavAgent
 
     public void SetAnimation(int availableAnimations)
     {
-        if(!_animator.GetBool(NavAgentStates.Turn.ToString()) && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString() || GetCurrentState().Name == NavAgentStates.Earthquake.ToString()) && !_changeAnimation) _changeAnimation = true;
+        if(!_animator.GetBool(NavAgentStates.Turn.ToString()) && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString()) && !_changeAnimation) _changeAnimation = true;
         if(_changeAnimation){_animator.SetFloat(GetCurrentState().Name+animatorVariable, (float)Random.Range(0, availableAnimations));_changeAnimation = false;}
     }
 
@@ -107,15 +107,13 @@ public class NavAgent
         if(!DestinationReached())return;
         if(run)_navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
-        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.speed);
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
-        Vector3 _destination;
-        if(_targets.Count == 1)_destination = _targets.First();
-        else _destination = _targets.ElementAt(Random.Range(0, _targets.Count-1));
-        _targets.Remove(_destination);
-        if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
-        else _navMeshAgent.speed = walkSpeed;
-        _navMeshAgent.SetDestination(_destination);
+        Vector3 destination;
+        if(_targets.Count == 1)destination = _targets.First();
+        else destination = _targets.ElementAt(Random.Range(0, _targets.Count-1));
+        _targets.Remove(destination);
+        _navMeshAgent.SetDestination(destination);
     }
 
     private void Path()
@@ -124,7 +122,7 @@ public class NavAgent
         if(!DestinationReached())return;
         if(run)_navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
-        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.speed);
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 

@@ -22,8 +22,6 @@ public class NpcInteractable : Interattivo
     public AudioSubManager audioSubManager => _audioSubManager;
     private GameObject _parent;
     public GameObject parent => _parent;
-    //private AudioSource _audioSource;
-    //public AudioSource audioSource => _audioSource;
     private OcclusionInteract _fmodAudioSource;
     public OcclusionInteract fmodAudioSource => _fmodAudioSource;
     private string _voice;
@@ -40,7 +38,6 @@ public class NpcInteractable : Interattivo
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _audioSubManager = GameObject.FindObjectOfType<AudioSubManager>();
-        //_audioSource = gameObject.GetComponent<AudioSource>();
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;
         _fmodAudioSource.PlayerOcclusionWidening = 0.3f;
@@ -50,8 +47,8 @@ public class NpcInteractable : Interattivo
 
         State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => {StartCoroutine(Earthquake());}, () => {}, () => {});
         foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
-        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => _navAgent.run);
-        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => _navAgent.interaction);
+        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !Globals.earthquake);
+        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
@@ -104,11 +101,8 @@ public class NpcInteractable : Interattivo
     {
         if(index < 0) _talkIndex = Random.Range(0, _audioSubManager.GetMaxAudios(_character, _voice));
         else _talkIndex = index;
-        //Debug.Log(_audioSubManager.GetAudio(_talkIndex, _character, _voice));
         _fmodAudioSource.SelectAudio = "event:/"+ _audioSubManager.GetAudio(_talkIndex, _character, _voice);
         _fmodAudioSource.enabled = true;
-        //_audioSource.clip = Resources.Load<AudioClip>(_audioSubManager.GetAudio(_talkIndex, _character, _voice));
-        //if(_audioSource?.clip == null){Debug.LogError($"{_audioSubManager.GetAudio(_talkIndex, _character, _voice)} NOT FOUND");StopInteraction();}
     }
 
     protected virtual void StartInteraction()
@@ -138,24 +132,13 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
         SetSubtitles(_talkIndex);
-        /*
-        //yield return new WaitForSeconds(_audioSource.clip.length);
-        int fmodLength;
-        float length = 0;
-        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
-        length = fmodLength;
-        Debug.Log("waitForSecond " + length);
-        yield return new WaitForSeconds(length/1000);
-        */
         yield return new WaitForSeconds(GetAudioLength());
         StopInteraction();
     }
 
     protected float GetAudioLength()
     {
-        //return _audioSource.clip.length;
         FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out int fmodLength);
-        //Debug.Log("waitForSecond " + (float)fmodLength/1000);
         return (float)fmodLength/1000;
     }
 
@@ -184,17 +167,14 @@ public class NpcInteractable : Interattivo
 
     protected virtual IEnumerator Earthquake()
     {
-        Debug.Log("Begin Coroutine Earthquake");
         _animator.SetFloat(NavAgent.NavAgentStates.Earthquake.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 2));
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-        Debug.Log($"Run to: {spawns.ElementAt(0).transform.position}");
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
-        _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
         _navAgent.run = true;
-        Debug.Log("End Coroutine Earthquake");
+        Globals.earthquake = false;
     }
 }
 
