@@ -43,7 +43,7 @@ public class NavAgent
         trigger.isTrigger = true;
 
         // Settings
-        _navMeshAgent.speed = runSpeed;
+        _navMeshAgent.speed = walkSpeed;
         _navMeshAgent.angularSpeed = 1000f;
         _navMeshAgent.acceleration = 10f;
         _navMeshAgent.stoppingDistance = distanceToStop;
