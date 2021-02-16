@@ -14,7 +14,7 @@ public class NavAgent
     private bool _motion = false;
     private bool _waitForMotion = false;
 
-    public readonly float walkSpeed = 1.2f;
+    public readonly float walkSpeed = 1f;
     public readonly float runSpeed = 3f;
     public readonly float distanceToStop = 2f;
     public readonly float forwardAngle = 30f;
