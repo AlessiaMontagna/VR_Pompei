@@ -26,7 +26,7 @@ public class LevelChangerScript : MonoBehaviour
     public void FadeToLevel (int levelIndex)
     {
         _levelToLoad = levelIndex;
-        if(levelIndex == 2) animator.SetTrigger("FadeOut_Fast");
+        if(levelIndex == 3 || levelIndex == 0) animator.SetTrigger("FadeOut_Fast");
         else animator.SetTrigger("FadeOut");
     }
 
