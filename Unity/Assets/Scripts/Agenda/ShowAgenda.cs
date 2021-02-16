@@ -32,30 +32,34 @@ public class ShowAgenda : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<SwitchWhatIsShowing>().enabled)
+        if (!Globals.gamePause)
         {
-            if (Input.GetKeyDown(KeyCode.V))
+            if (!GetComponent<SwitchWhatIsShowing>().enabled)
             {
-                MappaMode(true);
-                MoveAgendaUp();
-                _agendaType = agendaType.mappa;
+                if (Input.GetKeyDown(KeyCode.V))
+                {
+                    MappaMode(true);
+                    MoveAgendaUp();
+                    _agendaType = agendaType.mappa;
+                }
+                else if (Input.GetKeyDown(KeyCode.C))
+                {
+                    MappaMode(false);
+                    MoveAgendaUp();
+                    _agendaType = agendaType.codex;
+                    FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else
             {
-                MappaMode(false);
-                MoveAgendaUp();
-                _agendaType = agendaType.codex;
-                FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
+                if ((Input.GetKeyDown(KeyCode.V) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
+                {
+                    MoveAgendaDown();
+                    MappaMode(false);
+                }
             }
         }
-        else
-        {
-            if((Input.GetKeyDown(KeyCode.V) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
-            {
-                MoveAgendaDown();
-                MappaMode(false);
-            }
-        }
+        
     }
 
     public void MappaMode(bool value)

@@ -20,6 +20,7 @@ public static class Globals
     public static Players player = Players.Nobile;
     public static bool someoneIsTalking = false;
     public static bool earthquake = false;
+    public static bool gamePause = false;
 }
 
 // access variables via Globals.variable

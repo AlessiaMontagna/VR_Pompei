@@ -51,14 +51,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         fps.enabled = true;
-        _agenda.enabled = true;
-        _agendashow.enabled = true;
+        Globals.gamePause = false;
     }
 
     public void Pause()
     {
-        _agendashow.enabled = false;
-        _agenda.enabled = false;
         _ui.SetActive(false);
         _mouseLook.m_cursorIsLocked = false;
         Cursor.lockState = CursorLockMode.None;
@@ -67,6 +64,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        Globals.gamePause = true;
 
         
     }
