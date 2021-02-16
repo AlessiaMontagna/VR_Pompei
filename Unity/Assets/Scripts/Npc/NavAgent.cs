@@ -51,7 +51,7 @@ public class NavAgent
         State move = AddState(NavAgentStates.Move.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Move(false);}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, 0f);});
         State talk = AddState(NavAgentStates.Talk.ToString(), () => {_navMeshAgent.isStopped = true;_animator.SetBool(NavAgentStates.Talk.ToString(), true);}, () => {Talk();}, () => {_animator.SetBool(NavAgentStates.Talk.ToString(), false);});
         State interact = AddState(NavAgentStates.Interact.ToString(), () => {StartInteraction();}, () => {_owner.Interaction(0);}, () => {});
-        State earthquake = AddState(NavAgentStates.Earthquake.ToString(), () => {_animator.SetTrigger(NavAgentStates.Earthquake.ToString());}, () => {Earthquake();}, () => {});
+        State earthquake = AddState(NavAgentStates.Earthquake.ToString(), () => {SetAnimation(2);_animator.SetBool(NavAgentStates.Earthquake.ToString(), true);_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Earthquake();}, () => {});
         
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => interaction);
@@ -162,7 +162,8 @@ public class NavAgent
 
     private void Earthquake()
     {
-        Debug.Log("Eartquake state");
+        _animator.SetBool(NavAgentStates.Earthquake.ToString(), false);
+        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake"))return;
         //SetTargets();
         _navMeshAgent.isStopped = false;
         Move(true);
