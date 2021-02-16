@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelChangerScript : MonoBehaviour
 {
     public Animator animator;
-    public AudioSource audio;
     bool AlreadyPlayed = false;
-    bool stop = false;
     private int levelToLoad;
     
     void Start()
@@ -49,7 +47,7 @@ public class LevelChangerScript : MonoBehaviour
     {
         if(!AlreadyPlayed)
         {
-            audio.Play();
+            GetComponent<AudioSource>().Play();
             AlreadyPlayed = true;
         }
 

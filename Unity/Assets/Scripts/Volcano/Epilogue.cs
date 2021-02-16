@@ -32,7 +32,7 @@ public class Epilogue : MonoBehaviour
     {
         yield return new WaitForSeconds(10.0f);  
         SmokeColumn.SetActive(true);
-        yield return new WaitForSeconds(6.0f);
+        yield return new WaitForSeconds(4.5f);
         level.FadeToLevel(0); //torna al menu
     }
 }
