@@ -24,7 +24,7 @@ public class ShowAgenda : MonoBehaviour
         _interactionScript = FindObjectOfType<InteractionManager>();
         MappaMode(false);
         _audioSource = GetComponent<AudioSource>();
-        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up_Down");
+        //_audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up_Down");
         _animator = GetComponent<Animator>();
         transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -68,12 +68,14 @@ public class ShowAgenda : MonoBehaviour
     {
         if (_animator == null) return;
         _animator.SetBool("show", true);
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up");
         _audioSource.Play();
     }
     public void MoveAgendaDown()
     {
         if (_animator == null) return;
         _animator.SetBool("show", false);
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Down");
         _audioSource.Play();
     }
 

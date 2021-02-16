@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 public class LevelChangerScript : MonoBehaviour
 {
     public Animator animator;
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     bool AlreadyPlayed = false;
     //bool stop = false;
     private int _levelToLoad;
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine("StartLevel");
     }
 
