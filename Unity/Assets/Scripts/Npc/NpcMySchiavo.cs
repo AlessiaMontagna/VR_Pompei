@@ -44,7 +44,6 @@ public class NpcMySchiavo : NpcInteractable
         SetSubtitles(++index);
         yield return new WaitForSeconds(GetAudioLength() / 2f);
 
-        
         var playerPosition = player.gameObject.transform.position;
         var playerRotation = player.gameObject.transform.rotation;
         var spawner = FindObjectOfType<NavSpawner>();
