@@ -20,11 +20,15 @@ public class PauseMenu : MonoBehaviour
     public Toggle[] resolutionToggles;
     public int[] screenWidhts;
     int activeScreenResIndex;
+    private ShowAgenda _agenda;
+    private SwitchWhatIsShowing _agendashow;
 
 
     public void Start()
     {
         fps = FindObjectOfType<FirstPersonController>();
+        _agenda = FindObjectOfType<ShowAgenda>();
+        _agendashow = FindObjectOfType<SwitchWhatIsShowing>();
     }
     // Update is called once per frame
     void Update()
@@ -47,10 +51,14 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         fps.enabled = true;
+        _agenda.enabled = true;
+        _agendashow.enabled = true;
     }
 
     public void Pause()
     {
+        _agendashow.enabled = false;
+        _agenda.enabled = false;
         _ui.SetActive(false);
         _mouseLook.m_cursorIsLocked = false;
         Cursor.lockState = CursorLockMode.None;

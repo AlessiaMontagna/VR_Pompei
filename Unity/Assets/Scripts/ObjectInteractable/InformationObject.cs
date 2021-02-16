@@ -12,9 +12,12 @@ public class InformationObject : ObjectInteractable
     private AudioSource _audioSource;
     private AudioClip _audioClip;
     private TextMeshProUGUI _nuovaVoceText;
+    private bool _getInformation = false;
+    private GameObject _fps;
 
     private void Start()
     {
+        _fps = FindObjectOfType<InteractionManager>().gameObject;
         _audioSource = FindObjectOfType<InteractionManager>().GetComponents<AudioSource>()[1];
         _audioClip = Resources.Load<AudioClip>("FeedbackSounds/Nuova_voce_codex");
         _nuovaVoceText = FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>();
@@ -32,15 +35,36 @@ public class InformationObject : ObjectInteractable
 
     public override void UITextOn()
     {
+        
         StartCoroutine(NewVoice());
         _codex.addDiscoveryId((int)_objectName);
+        _getInformation = true;
         _audioSource.clip = _audioClip;
         _audioSource.Play();
-        foreach(BoxCollider b in GetComponents<BoxCollider>())
+        foreach (BoxCollider b in GetComponents<BoxCollider>())
         {
             b.enabled = false;
         }
+        
+        
     
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!_getInformation && other.gameObject == _fps)
+        {
+            StartCoroutine(NewVoice());
+            _codex.addDiscoveryId((int)_objectName);
+            _getInformation = true;
+            _audioSource.clip = _audioClip;
+            _audioSource.Play();
+            foreach (BoxCollider b in GetComponents<BoxCollider>())
+            {
+                b.enabled = false;
+            }
+        }
+
     }
 
     private IEnumerator NewVoice()

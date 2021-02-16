@@ -28,7 +28,6 @@ public class MissionManager : MonoBehaviour
         _mission2 = FindObjectOfType<NpcMySchiavo>().transform.position;
         _mission3 = _macellumPosition.position;
         _missions = new List<Vector3> {_mission1, _mission2, _mission3 };
-        //UpdateMission(Missions.Mission1_TalkWithFriend);
     }
 
     public void UpdateMission(Missions missionIndex)

@@ -6,28 +6,35 @@ using UnityEngine.UI;
 
 public class MercatoFoodManager : MonoBehaviour
 {
-    [SerializeField] private int _fruitCounter;
-    [SerializeField] private int _fishCounter;
-    [SerializeField] private int _breadCounter;
-    [SerializeField] private int _maxFruit = 6;
-    [SerializeField] private int _maxBread = 4;
-    [SerializeField] private int _maxFish = 3;
-
-    [SerializeField] private TextMeshProUGUI _nFruitToTake;
-    [SerializeField] private TextMeshProUGUI _nBreadToTake;
-    [SerializeField] private TextMeshProUGUI _nFishToTake;
-
+    [SerializeField] private GameObject _screams;
     [SerializeField] private List<Sprite> _imagesFinish;
-    [SerializeField] private Image _FishFinish;
-    [SerializeField] private Image _FruitFinish;
-    [SerializeField] private Image _BreadFinish;
 
-    [SerializeField] private GameObject _pergamena;
+
+    private int _fruitCounter;
+    private int _fishCounter;
+    private int _breadCounter;
+    private int _maxFruit = 6;
+    private int _maxBread = 4;
+    private int _maxFish = 3;
+
+    private TextMeshProUGUI _nFruitToTake;
+    private TextMeshProUGUI _nBreadToTake;
+    private TextMeshProUGUI _nFishToTake;
+
+    private Image _FishFinish;
+    private Image _FruitFinish;
+    private Image _BreadFinish;
+
+    private GameObject _pergamena;
 
     private CameraShakeScript _cameraShake;
 
     private void Awake()
     {
+        if(_screams == null)
+        {
+            Debug.LogError("Inserisci il prefab SoundsUrla");
+        }
         _cameraShake = FindObjectOfType<CameraShakeScript>();
         _pergamena = FindObjectOfType<Pergamena>().gameObject;
 
@@ -109,6 +116,8 @@ public class MercatoFoodManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         StartCoroutine(_cameraShake.Shake(10f, .2f));
+        yield return new WaitForSeconds(1);
+        _screams.SetActive(true);
     }
     public void CheckGetMaxFood(foodType _foodtype)
     {
