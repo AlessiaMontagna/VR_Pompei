@@ -11,10 +11,10 @@ public class TutorialManager : MonoBehaviour
 
     private TextMeshProUGUI _tutorialText;
     private NpcTutorial _schiavo;
-    private TextMeshProUGUI _obiettiviText;
     private ShowAgenda _scriptAgenda;
     private float _waitTime = 1f;
     private int _missionIndex;
+    private MissionManager _activateMission;
 
     private void Start()
     {
@@ -23,9 +23,10 @@ public class TutorialManager : MonoBehaviour
         _scriptAgenda = FindObjectOfType<ShowAgenda>();
         _scriptAgenda.enabled = false;
         _missionIndex = 0;
-        _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>();
-        _obiettiviText.text = "";
         _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
+        _activateMission = FindObjectOfType<MissionManager>();
+       // _activateMission.enabled = false;
+
     }
     private void Update()
     {
@@ -89,8 +90,8 @@ public class TutorialManager : MonoBehaviour
         }
         if(_schiavo.hasTalked)
         {
-            _obiettiviText.text = "Nuovo obiettivo: raggiungi Marcus al foro";
             _tutorialText.text = "Premi  <sprite index= 0> per visualizzare la mappa";
+            _activateMission.UpdateMission(Missions.Mission1_TalkWithFriend);
             _scriptAgenda.enabled = true;
             _missionIndex = 3;
         }

@@ -17,22 +17,28 @@ public class MissionManager : MonoBehaviour
     private string[] _text = {  "Nuovo obiettivo: parla con Marcus",
                                 "Nuovo obiettivo: trova il tuo schiavo",
                                 "Nuovo obiettivo: vai al macellum e prendi il cibo indicato." };
-
+    private GameObject _pergamena;
     // Start is called before the first frame update
     void Start()
     {
+        _pergamena = FindObjectOfType<Pergamena>().gameObject;
+        _pergamena.SetActive(false);
         _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>();
         _mission1 = FindObjectOfType<NpcAmico>().transform.position;
         _mission2 = FindObjectOfType<NpcMySchiavo>().transform.position;
         _mission3 = _macellumPosition.position;
         _missions = new List<Vector3> {_mission1, _mission2, _mission3 };
-        UpdateMission(Missions.Mission1_TalkWithFriend);
+        //UpdateMission(Missions.Mission1_TalkWithFriend);
     }
 
     public void UpdateMission(Missions missionIndex)
     {
         _myPosition = _missions[(int)missionIndex];
         _obiettiviText.text = _text[(int)missionIndex];
+        if((int)missionIndex == 2)
+        {
+            _pergamena.SetActive(true);
+        }
         _myPosition.y = _myYPosition;
         transform.position = _myPosition;
     }

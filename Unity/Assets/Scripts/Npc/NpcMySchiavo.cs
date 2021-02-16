@@ -10,9 +10,14 @@ public class NpcMySchiavo : NpcInteractable
     [SerializeField] private GameObject nobile;
 
     public bool swoosh = false;
+    private LevelChangerScript _swoosh;
 
     // Start is called before the first frame update
-    void Start(){if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
+    void Start()
+    {
+        if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+        _swoosh = FindObjectOfType<LevelChangerScript>();
+    }
 
     protected override void StartInteraction()
     {
@@ -23,12 +28,14 @@ public class NpcMySchiavo : NpcInteractable
 
     private IEnumerator Mission3Talk(int index)
     {
+       
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         var player = FindObjectOfType<InteractionManager>();
         var playerFirstPersonController = player.GetComponent<FirstPersonController>();
 
         playerFirstPersonController.enabled = false;
         player.GetComponent<InteractionManager>().enabled = false;
+        FindObjectOfType<ShowAgenda>().enabled = false;
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
 
         SetAudio(++index);
@@ -43,13 +50,16 @@ public class NpcMySchiavo : NpcInteractable
         yield return new WaitForSeconds(GetAudioLength() / 2f);
         SetSubtitles(++index);
         yield return new WaitForSeconds(GetAudioLength() / 2f);
-
-        // Swoosh personaggi
+        _swoosh.SwooshIn();
+        yield return new WaitForSeconds(0.5f);
+        
         var spawner = FindObjectOfType<NavSpawner>();
         var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
         if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
         var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Move", parent, player.gameObject.transform.position, new List<Vector3>{parent.transform.position});
         nobile.transform.LookAt(gameObject.transform);
+
+        
 
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;
@@ -63,7 +73,7 @@ public class NpcMySchiavo : NpcInteractable
         playerFirstPersonController.teleporting = false;
         playerFirstPersonController.enabled = true;
         player.GetComponent<InteractionManager>().enabled = true;
-
+        FindObjectOfType<ShowAgenda>().enabled = true;
         StopInteraction();
         Destroy(gameObject);
     }

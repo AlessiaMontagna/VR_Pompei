@@ -24,9 +24,29 @@ public class MercatoFoodManager : MonoBehaviour
 
     [SerializeField] private GameObject _pergamena;
 
+    private CameraShakeScript _cameraShake;
 
+    private void Awake()
+    {
+        _cameraShake = FindObjectOfType<CameraShakeScript>();
+        _pergamena = FindObjectOfType<Pergamena>().gameObject;
+
+    }
     private void Start()
     {
+        if(_imagesFinish.Count != 3)
+        {
+            Debug.LogError("Inserisci le immagini contenute in Textures/UI/Cibo. pos 0 = frutta, pos 1 = pane, pos 2 = pesce");
+        }
+        _FruitFinish = _pergamena.transform.Find("Frutta").GetComponent<Image>();
+        _BreadFinish = _pergamena.transform.Find("Pane").GetComponent<Image>();
+        _FishFinish = _pergamena.transform.Find("Pesce").GetComponent<Image>();
+
+        _nFruitToTake = _pergamena.transform.Find("NFrutta").GetComponent<TextMeshProUGUI>();
+        _nBreadToTake = _pergamena.transform.Find("NPane").GetComponent<TextMeshProUGUI>();
+        _nFishToTake = _pergamena.transform.Find("NPesce").GetComponent<TextMeshProUGUI>();
+
+
         _nFruitToTake.text = _maxFruit.ToString();
         _nBreadToTake.text = _maxBread.ToString();
         _nFishToTake.text = _maxFish.ToString();
@@ -80,9 +100,16 @@ public class MercatoFoodManager : MonoBehaviour
         if (_fruitCounter == _maxFruit && _maxBread == _breadCounter && _fishCounter == _maxFish)
         {
             _pergamena.SetActive(false);
+            StartCoroutine(Wait());
+
         }
     }
 
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(5);
+        StartCoroutine(_cameraShake.Shake(10f, .2f));
+    }
     public void CheckGetMaxFood(foodType _foodtype)
     {
         switch (_foodtype)
