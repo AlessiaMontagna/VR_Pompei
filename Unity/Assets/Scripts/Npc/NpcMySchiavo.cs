@@ -44,9 +44,19 @@ public class NpcMySchiavo : NpcInteractable
         SetSubtitles(++index);
         yield return new WaitForSeconds(GetAudioLength() / 2f);
 
-        // Swoosh personaggi
+        
         var playerPosition = player.gameObject.transform.position;
         var playerRotation = player.gameObject.transform.rotation;
+        var spawner = FindObjectOfType<NavSpawner>();
+        var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
+        if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
+        var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Idle", parent, playerPosition, new List<Vector3>{parent.transform.position});
+        parent.transform.LookAt(nobile.transform);
+        nobile.transform.position = playerPosition;
+        nobile.transform.rotation = playerRotation;
+        nobile.GetComponent<NpcInteractable>().WaitForMotion(2f);
+
+        // Swoosh personaggi
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;
         FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission3_GetFood);
@@ -59,17 +69,7 @@ public class NpcMySchiavo : NpcInteractable
         playerFirstPersonController.teleporting = false;
         playerFirstPersonController.enabled = true;
         player.GetComponent<InteractionManager>().enabled = true;
+        StopInteraction();
         Destroy(gameObject);
-
-        var spawner = FindObjectOfType<NavSpawner>();
-        var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
-        if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
-        var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Talk", parent, playerPosition, new List<Vector3>{parent.transform.position});
-        parent.transform.LookAt(nobile.transform);
-        nobile.transform.position = playerPosition;
-        nobile.transform.rotation = playerRotation;
-        //yield return new WaitForSeconds(2f);
-        nobile.GetComponent<NpcInteractable>().navAgent.motion = true;
-        Debug.Log("state: "+nobile.GetComponent<NpcInteractable>().navAgent.GetCurrentState());
     }
 }

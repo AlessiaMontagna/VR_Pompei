@@ -164,6 +164,8 @@ public class NpcInteractable : Interattivo
         _animator.SetFloat("HitReaction", 0f);
         _animator.SetFloat("HitNobile", 0f);
     }
+    
+    public void WaitForMotion(float time) => StartCoroutine(_navAgent.WaitForMotion(time));
 
     protected virtual IEnumerator Earthquake()
     {
