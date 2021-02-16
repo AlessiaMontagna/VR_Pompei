@@ -120,8 +120,8 @@ public class MercatoFoodManager : MonoBehaviour
         _screams.SetActive(true);
         _talk.SetActive(false);
         StartCoroutine(_cameraShake.Shake(10f, .2f));
-        //yield return new WaitForSeconds(1);
-        
+        yield return new WaitForSeconds(10f);
+        FindObjectOfType<LevelChangerScript>().GetComponent<LevelChangerScript>().FadeToNextLevel();
     }
     public void CheckGetMaxFood(foodType _foodtype)
     {

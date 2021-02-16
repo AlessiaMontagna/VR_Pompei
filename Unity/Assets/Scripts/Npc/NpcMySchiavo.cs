@@ -47,9 +47,11 @@ public class NpcMySchiavo : NpcInteractable
         playerAudioSource.Play();
         
         SetSubtitles(index);
-        yield return new WaitForSeconds(GetAudioLength() / 2f);
-        SetSubtitles(++index);
-        yield return new WaitForSeconds(GetAudioLength() / 2f);
+        yield return new WaitForSeconds(GetAudioLength());
+        playerAudioSource.clip = Resources.Load<AudioClip>(audioSubManager.GetAudio(++index, Characters.MySchiavo, voice));
+        playerAudioSource.Play();
+        SetSubtitles(index);
+        yield return new WaitForSeconds(GetAudioLength());
         _swoosh.SwooshIn();
         yield return new WaitForSeconds(0.5f);
         
