@@ -50,6 +50,7 @@ public class NpcMySchiavo : NpcInteractable
         if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
         var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Move", parent, player.gameObject.transform.position, new List<Vector3>{parent.transform.position});
         nobile.transform.LookAt(gameObject.transform);
+        parent.transform.LookAt(nobile.transform);
 
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;

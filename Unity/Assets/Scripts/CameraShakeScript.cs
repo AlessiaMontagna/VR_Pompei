@@ -22,7 +22,7 @@ public class CameraShakeScript : MonoBehaviour
             audioSource.Play();
             audioSource.volume = 0;
             AlreadyPlayed = true;
-        }        
+        }
                 
         Vector3 originalPos = transform.localPosition;
         

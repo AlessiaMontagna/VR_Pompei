@@ -11,7 +11,7 @@ public class NavAgent
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     public bool interaction = false;
 
-    public readonly float walkSpeed = 1.25f;
+    public readonly float walkSpeed = 1.2f;
     public readonly float runSpeed = 2.5f;
     public readonly float distanceToStop = 2f;
     public readonly float forwardAngle = 30f;
@@ -20,7 +20,7 @@ public class NavAgent
     private Dictionary<string, State> _states = new Dictionary<string, State>();
     private List<Vector3> _targets = new List<Vector3>();
 
-    public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn};
+    public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
     private bool _changeAnimation = true;
 
@@ -48,16 +48,22 @@ public class NavAgent
         // Basic states
         State idle = AddState(NavAgentStates.Idle.ToString(), () => {_navMeshAgent.isStopped = true;}, () => {Idle();}, () => {});
         State path = AddState(NavAgentStates.Path.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Path();}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, 0f);});
-        State move = AddState(NavAgentStates.Move.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Move();}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, 0f);});
+        State move = AddState(NavAgentStates.Move.ToString(), () => {_navMeshAgent.isStopped = false;_animator.SetBool(NavAgentStates.Move.ToString(), true);}, () => {Move(false);}, () => {_animator.SetBool(NavAgentStates.Move.ToString(), false);_animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, 0f);});
         State talk = AddState(NavAgentStates.Talk.ToString(), () => {_navMeshAgent.isStopped = true;_animator.SetBool(NavAgentStates.Talk.ToString(), true);}, () => {Talk();}, () => {_animator.SetBool(NavAgentStates.Talk.ToString(), false);});
-        State play = AddState(NavAgentStates.Interact.ToString(), () => {StartInteraction();}, () => {_owner.Interaction(0);}, () => {});
-
+        State interact = AddState(NavAgentStates.Interact.ToString(), () => {StartInteraction();}, () => {_owner.Interaction(0);}, () => {});
+        State earthquake = AddState(NavAgentStates.Earthquake.ToString(), () => {_animator.SetTrigger(NavAgentStates.Earthquake.ToString());}, () => {Earthquake();}, () => {});
+        
         // Basic transitions
-        _stateMachine.AddTransition(idle, play, () => interaction);
-        _stateMachine.AddTransition(talk, play, () => interaction);
-        _stateMachine.AddTransition(path, play, () => interaction);
-        _stateMachine.AddTransition(move, play, () => interaction);
-        _stateMachine.AddTransition(play, idle, () => false);
+        _stateMachine.AddTransition(idle, interact, () => interaction);
+        _stateMachine.AddTransition(talk, interact, () => interaction);
+        _stateMachine.AddTransition(path, interact, () => interaction);
+        _stateMachine.AddTransition(move, interact, () => interaction);
+        _stateMachine.AddTransition(interact, idle, () => false);
+        _stateMachine.AddTransition(earthquake, interact, () => interaction);
+        _stateMachine.AddTransition(idle, earthquake, () => Globals.earthquake);
+        _stateMachine.AddTransition(talk, earthquake, () => Globals.earthquake);
+        _stateMachine.AddTransition(path, earthquake, () => Globals.earthquake);
+        _stateMachine.AddTransition(move, earthquake, () => Globals.earthquake);
 
         // START STATE
         SetInitialState(NavAgentStates.Idle.ToString());
@@ -91,7 +97,7 @@ public class NavAgent
 
     public void SetAnimation(int availableAnimations)
     {
-        if(!_animator.GetBool("Turn") && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString()) && !_changeAnimation) _changeAnimation = true;
+        if(!_animator.GetBool(NavAgentStates.Turn.ToString()) && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Random") && (GetCurrentState().Name == NavAgentStates.Idle.ToString() || GetCurrentState().Name == NavAgentStates.Talk.ToString()) && !_changeAnimation) _changeAnimation = true;
         if(_changeAnimation){_animator.SetFloat(GetCurrentState().Name+animatorVariable, (float)Random.Range(0, availableAnimations));_changeAnimation = false;}
     }
 
@@ -101,10 +107,12 @@ public class NavAgent
         SetAnimation(6);
     }
 
-    private void Move()
+    private void Move(bool run)
     {
-        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         if(!DestinationReached())return;
+        if(run)_navMeshAgent.speed = runSpeed;
+        else _navMeshAgent.speed = walkSpeed;
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.speed);
         if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
         Vector3 _destination;
         if(_targets.Count == 1)_destination = _targets.First();
@@ -117,11 +125,10 @@ public class NavAgent
 
     private void Path()
     {
-        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         if(_targets.Count == 0)Debug.LogError("UNDEFINED PATH");
         if(!DestinationReached())return;
         _navMeshAgent.speed = walkSpeed;
-        //if(Random.Range(0f, 1f) < 0.2f) _navMeshAgent.speed = runSpeed;
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.speed);
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
@@ -151,5 +158,13 @@ public class NavAgent
         _navMeshAgent.isStopped = true;
         _stateMachine.AddTransition(GetState(NavAgentStates.Interact.ToString()), _stateMachine.GetPreviousState(), () => !interaction);
         _owner.Interaction(1);
+    }
+
+    private void Earthquake()
+    {
+        Debug.Log("Eartquake state");
+        //SetTargets();
+        _navMeshAgent.isStopped = false;
+        Move(true);
     }
 }
