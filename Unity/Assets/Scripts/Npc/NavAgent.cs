@@ -9,10 +9,12 @@ public class NavAgent
     private Animator _animator;
     private FiniteStateMachine<NpcInteractable> _stateMachine;
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
+    public UnityEngine.AI.NavMeshAgent navMeshAgent => _navMeshAgent;
     public bool interaction = false;
+    public bool motion = false;
 
     public readonly float walkSpeed = 1.2f;
-    public readonly float runSpeed = 2.25f;
+    public readonly float runSpeed = 3f;
     public readonly float distanceToStop = 2f;
     public readonly float forwardAngle = 30f;
     public readonly float maxInteractionDistance = 10f;
@@ -23,7 +25,6 @@ public class NavAgent
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
     private bool _changeAnimation = true;
-    public bool run = false;
 
     public NavAgent(NpcInteractable owner)
     {
@@ -42,8 +43,9 @@ public class NavAgent
         trigger.isTrigger = true;
 
         // Settings
-        _navMeshAgent.angularSpeed = 500f;
-        _navMeshAgent.acceleration = 15f;
+        _navMeshAgent.speed = runSpeed;
+        _navMeshAgent.angularSpeed = 1000f;
+        _navMeshAgent.acceleration = 10f;
         _navMeshAgent.stoppingDistance = distanceToStop;
 
         // Basic states
@@ -55,9 +57,12 @@ public class NavAgent
         
         // Basic transitions
         _stateMachine.AddTransition(idle, interact, () => interaction);
+        _stateMachine.AddTransition(idle, move, () => motion);
         _stateMachine.AddTransition(talk, interact, () => interaction);
+        _stateMachine.AddTransition(talk, move, () => motion);
         _stateMachine.AddTransition(path, interact, () => interaction);
         _stateMachine.AddTransition(move, interact, () => interaction);
+        _stateMachine.AddTransition(move, talk, () => motion && DestinationReached());
         _stateMachine.AddTransition(interact, idle, () => false);
 
         // START STATE
@@ -104,11 +109,15 @@ public class NavAgent
 
     private void Move()
     {
+        Debug.Log($"run: {_navMeshAgent.speed}");
+        _animator.SetBool(NavAgentStates.Turn.ToString(), false);
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
         if(!DestinationReached())return;
-        if(run)_navMeshAgent.speed = runSpeed;
-        else _navMeshAgent.speed = walkSpeed;
-        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, runSpeed);
-        if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
+        if(_targets.Count == 0)
+        {
+            if(motion){motion = false;return;}
+            else {GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
+        }
         Vector3 destination;
         if(_targets.Count == 1)destination = _targets.First();
         else destination = _targets.ElementAt(Random.Range(0, _targets.Count-1));
@@ -119,10 +128,9 @@ public class NavAgent
     private void Path()
     {
         if(_targets.Count == 0)Debug.LogError("UNDEFINED PATH");
-        if(!DestinationReached())return;
-        if(run)_navMeshAgent.speed = runSpeed;
-        else _navMeshAgent.speed = walkSpeed;
+        _animator.SetBool(NavAgentStates.Turn.ToString(), false);
         _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
+        if(!DestinationReached())return;
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 

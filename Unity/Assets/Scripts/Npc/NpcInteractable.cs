@@ -173,7 +173,7 @@ public class NpcInteractable : Interattivo
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
-        _navAgent.run = true;
+        _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;
     }
 }
