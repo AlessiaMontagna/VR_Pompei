@@ -72,7 +72,7 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("LightsSetup 1");
+        SceneManager.LoadScene("StartMenu");
     }
     public void LoadPauseMenu()
     {
