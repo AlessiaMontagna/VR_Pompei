@@ -130,4 +130,9 @@ public class OcclusionStart : MonoBehaviour
     {
         Audio.setParameterByName("Occlusion", lineCastHitCount / 11);
     }
+
+    private void OnDisable()
+    {
+        Audio.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
 }

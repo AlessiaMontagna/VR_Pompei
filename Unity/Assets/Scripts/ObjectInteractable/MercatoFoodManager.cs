@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MercatoFoodManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _talk;
+
     [SerializeField] private GameObject _screams;
     [SerializeField] private List<Sprite> _imagesFinish;
 
@@ -115,9 +117,11 @@ public class MercatoFoodManager : MonoBehaviour
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(5);
-        StartCoroutine(_cameraShake.Shake(10f, .2f));
-        yield return new WaitForSeconds(1);
         _screams.SetActive(true);
+        _talk.SetActive(false);
+        StartCoroutine(_cameraShake.Shake(10f, .2f));
+        //yield return new WaitForSeconds(1);
+        
     }
     public void CheckGetMaxFood(foodType _foodtype)
     {

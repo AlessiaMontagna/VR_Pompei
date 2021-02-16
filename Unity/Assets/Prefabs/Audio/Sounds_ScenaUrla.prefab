@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4652808631110159548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967188634669560230}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ebb5152ef03da429605b2e508b223a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectAudio: event:/Props/Environment_urla3
+  SoundOcclusionWidening: 5
+  PlayerOcclusionWidening: 0.3
+  OcclusionLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &9093784546301284021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967188634669560230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5036e889f471e4fbebbf91b6a17c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 74.63, y: 2.3, z: 7.71}
 --- !u!114 &5944473421361881602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7,17 +38,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6288982557990982383}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65ebb5152ef03da429605b2e508b223a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectAudio: 
-  SoundOcclusionWidening: 1
-  PlayerOcclusionWidening: 1
+  SelectAudio: event:/Props/Environment_urla2
+  SoundOcclusionWidening: 5
+  PlayerOcclusionWidening: 0.3
   OcclusionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &9072796170993377281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,48 +82,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6333167439124033636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65ebb5152ef03da429605b2e508b223a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectAudio: 
-  SoundOcclusionWidening: 1
-  PlayerOcclusionWidening: 1
+  SelectAudio: event:/Props/Environment_urla1
+  SoundOcclusionWidening: 5
+  PlayerOcclusionWidening: 0.3
   OcclusionLayer:
     serializedVersion: 2
-    m_Bits: 0
---- !u!114 &9093784546301284021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967188634669560230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc5036e889f471e4fbebbf91b6a17c52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  position: {x: 74.63, y: 2.3, z: 7.71}
---- !u!114 &4652808631110159548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967188634669560230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65ebb5152ef03da429605b2e508b223a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectAudio: 
-  SoundOcclusionWidening: 1
-  PlayerOcclusionWidening: 1
-  OcclusionLayer:
-    serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1 &7234784597000156493
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,17 +147,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8599718907916917649}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65ebb5152ef03da429605b2e508b223a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectAudio: 
-  SoundOcclusionWidening: 1
-  PlayerOcclusionWidening: 1
+  SelectAudio: event:/Props/Environment_urla3
+  SoundOcclusionWidening: 5
+  PlayerOcclusionWidening: 0.3
   OcclusionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1001 &385471353496268782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,12 +474,12 @@ PrefabInstance:
     - target: {fileID: 3136177739531432810, guid: 58ac9359235314747a8ff9c6f32b2203,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 56.9
+      value: 62.64
       objectReference: {fileID: 0}
     - target: {fileID: 3136177739531432810, guid: 58ac9359235314747a8ff9c6f32b2203,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3
+      value: 10.25
       objectReference: {fileID: 0}
     - target: {fileID: 3136177739531432810, guid: 58ac9359235314747a8ff9c6f32b2203,
         type: 3}
@@ -544,7 +544,7 @@ PrefabInstance:
     - target: {fileID: 5961242105395617674, guid: 58ac9359235314747a8ff9c6f32b2203,
         type: 3}
       propertyPath: m_Name
-      value: urla3 (1)
+      value: urla4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3733019723450800404, guid: 58ac9359235314747a8ff9c6f32b2203, type: 3}
