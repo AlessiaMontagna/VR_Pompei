@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -8,7 +9,7 @@ public class NpcMySchiavo : NpcInteractable
 {
     [SerializeField] private GameObject nobile;
 
-    public bool _switch = false;
+    public bool swoosh = false;
 
     // Start is called before the first frame update
     void Start(){if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
@@ -16,7 +17,7 @@ public class NpcMySchiavo : NpcInteractable
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        if(_switch) StartCoroutine(Mission3Talk(0));
+        if(swoosh) StartCoroutine(Mission3Talk(0));
         else base.StartInteraction();
     }
 
@@ -34,11 +35,9 @@ public class NpcMySchiavo : NpcInteractable
         SetSubtitles(index);
         yield return new WaitForSeconds(GetAudioLength());
 
-        //AUDIO SOURCE DA SOSTITUIRE
         var playerAudioSource = player.GetComponents<AudioSource>()[1];
         playerAudioSource.clip = Resources.Load<AudioClip>(audioSubManager.GetAudio(++index, Characters.MySchiavo, voice));
         playerAudioSource.Play();
-        //AUDIO SOURCE DA SOSTITUIRE
         
         SetSubtitles(index);
         yield return new WaitForSeconds(GetAudioLength() / 2f);
@@ -46,7 +45,12 @@ public class NpcMySchiavo : NpcInteractable
         yield return new WaitForSeconds(GetAudioLength() / 2f);
 
         // Swoosh personaggi
-        // GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
+        var spawner = FindObjectOfType<NavSpawner>();
+        var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
+        if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
+        var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Move", parent, player.gameObject.transform.position, new List<Vector3>{parent.transform.position});
+        nobile.transform.LookAt(gameObject.transform);
+
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;
         FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission3_GetFood);

@@ -11,6 +11,7 @@ public class NavSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> _schiavoPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _mercantePrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _nobileMPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _amicoPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _nobileFPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> _birdsPrefabs = new List<GameObject>();
     [SerializeField] private int _nGuards;
@@ -26,6 +27,7 @@ public class NavSpawner : MonoBehaviour
     readonly int MAXBIRDSPERFLOCK = 5;
 
     private Dictionary<Characters, List<GameObject>> _prefabs = new Dictionary<Characters, List<GameObject>>();
+    public Dictionary<Characters, List<GameObject>> prefabs => _prefabs;
     private Dictionary<NavSubroles, List<GameObject>> _stops = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _paths = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _spawns = new Dictionary<NavSubroles, List<GameObject>>();
@@ -38,6 +40,7 @@ public class NavSpawner : MonoBehaviour
         _prefabs.Add(Characters.Schiavo, _schiavoPrefabs);
         _prefabs.Add(Characters.Mercante, _mercantePrefabs);
         _prefabs.Add(Characters.NobileM, _nobileMPrefabs);
+        _prefabs.Add(Characters.Amico, _amicoPrefabs);
         _prefabs.Add(Characters.NobileF, _nobileFPrefabs);
         // get STOPS PATHS and SPAWNS
         foreach (var item in GameObject.FindObjectsOfType<NavElement>().Where(i => i != null))
@@ -65,12 +68,17 @@ public class NavSpawner : MonoBehaviour
     void Start()
     {
         List<GameObject> prefabs;
-        //spawn TUTORIAL
+        List<GameObject> stops;
+        // spawn TUTORIAL
         var tutorialManager = FindObjectOfType<TutorialManager>();
         if(tutorialManager == null || !tutorialManager.enabled || !_prefabs.TryGetValue(Characters.Schiavo, out prefabs))Debug.Log($"Tutorial disabled");
         else SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
+        // spawn AMICO
+        if(_stops.TryGetValue(NavSubroles.AmicoStop, out stops) && _prefabs.TryGetValue(Characters.Amico, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Amico, "Idle", item, default(Vector3), null);}
+        // spawn MYSCHIAVO
+        if(_stops.TryGetValue(NavSubroles.MySchiavoStop, out stops) && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.MySchiavo, "Idle", item, default(Vector3), null);}
         // spawn STOPS guards
-        if(_stops.TryGetValue(NavSubroles.GuardStop, out var stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
+        if(_stops.TryGetValue(NavSubroles.GuardStop, out stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
         // spawn STOPS soldier
         if(_stops.TryGetValue(NavSubroles.SoldierStop, out stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Soldato, "Idle", item, default(Vector3), null);}
         // spawn STOPS mercanti
@@ -79,7 +87,7 @@ public class NavSpawner : MonoBehaviour
         if(_stops.TryGetValue(NavSubroles.BalconyStop, out stops)) foreach (var item in stops.Where(i => i != null))
         {
             // TODO: POSE
-            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Soldato || character == Characters.Schiavo);
+            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character != Characters.NobileM && character != Characters.NobileF);
             if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
             SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Idle", item, default(Vector3), null);
         }
@@ -95,7 +103,7 @@ public class NavSpawner : MonoBehaviour
                 do{random = Random.insideUnitCircle.normalized * 1f;foreach (var rand in randoms){if(rand.x-random.x<5f || rand.y-random.y<5f)used = true;}}while(used && !UnityEngine.AI.NavMesh.SamplePosition(item.transform.position + new Vector3(random.x, 0, random.y), out UnityEngine.AI.NavMeshHit hit, 1.0f, UnityEngine.AI.NavMesh.AllAreas));
                 randoms.Add(random);
                 Vector3 position = item.transform.position + new Vector3(random.x, 0, random.y);
-                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Soldato || character == Characters.Schiavo);
+                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character != Characters.Guardia && character != Characters.Mercante && character != Characters.NobileM && character != Characters.NobileF);
                 if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
                 var agent = SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", item, position, null);
             }
@@ -105,6 +113,7 @@ public class NavSpawner : MonoBehaviour
         if(_nGuards < 0 || _nGuards > MAXGUARDS) _nGuards = Random.Range(5, MAXGUARDS+1);
         if(_nFlocks < 0 || _nFlocks > MAXFLOCKS) _nFlocks = Random.Range(5, MAXFLOCKS+1);
         int flocksToSpawn = _nFlocks;
+        // spawn BIRDS
         if(_spawns.TryGetValue(NavSubroles.FlocksSpawn, out var spawns)) foreach (var item in spawns.Where(i => i != null))
         {
             if(flocksToSpawn <= 0) break;
@@ -121,6 +130,11 @@ public class NavSpawner : MonoBehaviour
                 bird.GetComponent<RandomFlyer>().SetFlyingTarget(flockFlyingTarget);
             }
         }
+        // spawn people
+        List<Vector3> path = new List<Vector3>();
+        List<GameObject> pathGO = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;
+        foreach(var item in pathGO){path.Add(item.transform.position);}
+        if(!_prefabs.TryGetValue(Characters.Guardia, out prefabs))Debug.LogError("PREFABS ERROR");
     }
 
     void Update()
@@ -135,27 +149,36 @@ public class NavSpawner : MonoBehaviour
             SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Path", pathGO.ElementAt(Random.Range(0, pathGO.Count)), default(Vector3), path);}
         while(_nPeople > _people)
         {
-            List<Vector3> path = new List<Vector3>();
-            foreach(var item in _paths.ElementAt(Random.Range(0, _paths.Count)).Value){path.Add(item.transform.position);}
-            if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-            path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
-            Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia);
-            if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
-            SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawns.ElementAt(Random.Range(0, spawns.Count)), default(Vector3), path);
+            if(Random.Range(0f, 1f) < 0.2)
+            {
+                //spawns = spawns.Where(i => i.transform.position.y);
+            }
+            else
+            {
+                List<Vector3> path = new List<Vector3>();
+                foreach(var item in _paths.ElementAt(Random.Range(0, _paths.Count)).Value){path.Add(item.transform.position);}
+                if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+                path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
+                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Soldato);
+                if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
+                SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawns.ElementAt(Random.Range(0, spawns.Count)), default(Vector3), path);
+            }
         }
     }
 
-    private GameObject SpawnAgent(GameObject prefab, Characters character, string state, GameObject parent, Vector3 position, List<Vector3> targets)
+    public GameObject SpawnAgent(GameObject prefab, Characters character, string state, GameObject parent, Vector3 position, List<Vector3> targets)
     {
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
         GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
         agent.transform.parent = parent.transform;
-        agent.transform.LookAt(parent.transform, Vector3.up);
         NpcInteractable component;
         switch(character)
         {
-            case Characters.Mercante: if(state == "Idle")component = agent.AddComponent<NpcMercante>();else component = agent.AddComponent<NpcInteractable>();break;
-            case Characters.SchiavoTutorial: if(state == "Idle")component = agent.AddComponent<NpcTutorial>();else component = agent.AddComponent<NpcInteractable>();break;
+            case Characters.Mercante: if(parent.GetComponent<NavElement>().foodType != MercanteFoodTypes.None){component = agent.AddComponent<NpcMercante>();break;}goto default;
+            case Characters.SchiavoTutorial: component = agent.AddComponent<NpcTutorial>();break;
+            case Characters.MySchiavo: component = agent.AddComponent<NpcMySchiavo>();break;
+            case Characters.Amico: component = agent.AddComponent<NpcAmico>();break;
+            case Characters.Soldato: component = agent.AddComponent<NpcSoldato>();break;
             default: component = agent.AddComponent<NpcInteractable>();break;
         }
         component.Initialize(character, parent, state, targets);

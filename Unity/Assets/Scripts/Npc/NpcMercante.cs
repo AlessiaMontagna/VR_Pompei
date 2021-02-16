@@ -24,11 +24,11 @@ public class NpcMercante : NpcInteractable
 
     protected override void StartInteraction()
     {
+        base.StartInteraction();
         if (!_foodUnloked && Globals.player == Players.Schiavo)
         {
             foreach (Transform child in _food.transform) child.GetComponent<BoxCollider>().enabled = true;
             _foodUnloked = true;
         }
-        base.StartInteraction();
     }
 }

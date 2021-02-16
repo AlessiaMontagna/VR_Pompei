@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class NpcAmico : NpcInteractable
 {
-    private int index = 0;
+    private bool _firstTalk = true;
 
     void Start(){if(navAgent == null) Initialize(Characters.Amico, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
 
     protected override void StartInteraction()
     {
-        if(Globals.player == Players.Schiavo){index = Random.Range(0, audioSubManager.GetMaxAudios(Characters.Amico, voice));}
-        base.StartInteraction();
-        if(Globals.player == Players.Nobile && index == 0)
+        Globals.someoneIsTalking = true;
+        int minIndex = 0;
+        if(Globals.player == Players.Nobile)
         {
-            FindObjectOfType<NpcMySchiavo>()._switch = true;
-            FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission2_FindSlave);
-            index = 1;
+            if(_firstTalk)
+            {
+                FindObjectOfType<NpcMySchiavo>().swoosh = true;
+                FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission2_FindSlave);
+                _firstTalk = false;
+                StartCoroutine(Talk(0));
+                return;
+            }
+            else minIndex = 1;
         }
+        else minIndex = 0;
+        StartCoroutine(Talk(Random.Range(minIndex, audioSubManager.GetMaxAudios(Characters.Amico, voice))));
     }
 }
