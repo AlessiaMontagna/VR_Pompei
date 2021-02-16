@@ -107,7 +107,7 @@ public class NavAgent
         if(!DestinationReached())return;
         if(run)_navMeshAgent.speed = runSpeed;
         else _navMeshAgent.speed = walkSpeed;
-        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, _navMeshAgent.velocity.magnitude);
+        _animator.SetFloat(NavAgentStates.Move.ToString()+animatorVariable, runSpeed);
         if(_targets.Count == 0){GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner);return;}
         Vector3 destination;
         if(_targets.Count == 1)destination = _targets.First();
