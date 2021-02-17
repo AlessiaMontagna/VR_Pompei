@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -8,48 +9,63 @@ public class NpcMySchiavo : NpcInteractable
 {
     [SerializeField] private GameObject nobile;
 
-    public bool _switch = false;
+    public bool swoosh = false;
+    private LevelChangerScript _swoosh;
 
+    // Start is called before the first frame update
     void Start()
     {
-        if(navAgent != null)return;
-        Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+        if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+        _swoosh = FindObjectOfType<LevelChangerScript>();
     }
 
     protected override void StartInteraction()
     {
         Globals.someoneIsTalking = true;
-        if(_switch) StartCoroutine(MissionTalk(0));
+        if(swoosh) StartCoroutine(Mission3Talk(0));
         else base.StartInteraction();
     }
 
-    private IEnumerator MissionTalk(int index)
+    private IEnumerator Mission3Talk(int index)
     {
+       
+        animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         var player = FindObjectOfType<InteractionManager>();
         var playerFirstPersonController = player.GetComponent<FirstPersonController>();
 
         playerFirstPersonController.enabled = false;
         player.GetComponent<InteractionManager>().enabled = false;
-        UITextOff();
+        FindObjectOfType<ShowAgenda>().enabled = false;
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
 
         SetAudio(++index);
         SetSubtitles(index);
-        //yield return new WaitForSeconds(GetAudioLength());
+        yield return new WaitForSeconds(GetAudioLength());
 
-        //AUDIO SOURCE DA SOSTITUIRE
         var playerAudioSource = player.GetComponents<AudioSource>()[1];
         playerAudioSource.clip = Resources.Load<AudioClip>(audioSubManager.GetAudio(++index, Characters.MySchiavo, voice));
         playerAudioSource.Play();
-        //AUDIO SOURCE DA SOSTITUIRE
         
         SetSubtitles(index);
-        //yield return new WaitForSeconds(GetAudioLength() / 2f);
-        SetSubtitles(++index);
-        //yield return new WaitForSeconds(GetAudioLength() / 2f);
+        yield return new WaitForSeconds(GetAudioLength());
+        playerAudioSource.clip = Resources.Load<AudioClip>(audioSubManager.GetAudio(++index, Characters.MySchiavo, voice));
+        playerAudioSource.Play();
+        SetSubtitles(index);
+        yield return new WaitForSeconds(GetAudioLength());
+        _swoosh.SwooshIn();
+        yield return new WaitForSeconds(0.5f);
+        
+        var playerPosition = player.gameObject.transform.position;
+        var playerRotation = player.gameObject.transform.rotation;
+        var spawner = FindObjectOfType<NavSpawner>();
+        var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
+        if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
+        var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Idle", parent, playerPosition, new List<Vector3>{parent.transform.position});
+        parent.transform.LookAt(nobile.transform);
+        nobile.transform.position = playerPosition;
+        nobile.transform.rotation = playerRotation;
+        nobile.GetComponent<NpcInteractable>().WaitForMotion(2f);
 
-        // Swoosh personaggi
-        // GameObject go = Instantiate(nobile, player.transform.position, player.transform.rotation, transform) as GameObject;
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;
         FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission3_GetFood);
@@ -62,7 +78,7 @@ public class NpcMySchiavo : NpcInteractable
         playerFirstPersonController.teleporting = false;
         playerFirstPersonController.enabled = true;
         player.GetComponent<InteractionManager>().enabled = true;
-
+        FindObjectOfType<ShowAgenda>().enabled = true;
         StopInteraction();
         Destroy(gameObject);
     }

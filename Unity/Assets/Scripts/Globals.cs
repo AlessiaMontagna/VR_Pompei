@@ -10,7 +10,7 @@ public enum Players {Schiavo, Mercante, Nobile};
 
 public enum Missions {Mission1_TalkWithFriend, Mission2_FindSlave, Mission3_GetFood}
 
-public enum MercanteFoodTypes {Frutta, Pane, Pesce, Verdura, Vasi}
+public enum MercanteFoodTypes {None, Frutta, Pane, Pesce, Verdura, Vasi}
 
 public enum MaleVoices {Giorgio, Francesco, Antonio, Klajdi, Edoardo, Fabrizio, Andrea}
 public enum FemaleVoices {Alessia, Paola}
@@ -19,6 +19,8 @@ public static class Globals
 {
     public static Players player = Players.Nobile;
     public static bool someoneIsTalking = false;
+    public static bool earthquake = false;
+    public static bool gamePause = false;
 }
 
 // access variables via Globals.variable

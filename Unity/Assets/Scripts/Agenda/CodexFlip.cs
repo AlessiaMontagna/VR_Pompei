@@ -14,11 +14,14 @@ public class CodexFlip : MonoBehaviour
 
     public Texture _backgroundTexture;
 
+    private AudioSource _audioSource;
+
     [SerializeField] private Codex codex;
 
 
     void Start()
     {
+        _audioSource = FindObjectOfType<ShowAgenda>().GetComponent<AudioSource>();
         _agendaAnimator = GetComponent<Animator>();
     }
     void OnEnable()
@@ -36,9 +39,10 @@ public class CodexFlip : MonoBehaviour
 
     public void FlipRToL()
     {
-        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count)
+        if (_agendaAnimator == null || codex._currentPage == _discoveredPagesList.Count - 1 || _discoveredPagesList.Count == 0)
             return;
-
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Turn_Pages");
+        _audioSource.Play();
         _agendaAnimator.SetBool(name: "FlipRToL", true);
 
     }
@@ -55,14 +59,15 @@ public class CodexFlip : MonoBehaviour
         gameObject
                 .transform.Find(child)
                 .gameObject.GetComponent<Renderer>()
-                .material.mainTexture = texture;
+                .materials[1].mainTexture = texture;
     }
 
     public void FlipLToR()
     {
         if (_agendaAnimator == null || codex._currentPage == 0)
             return;
-
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Turn_Pages");
+        _audioSource.Play();
         _agendaAnimator.SetBool(name: "FlipLToR", true);
 
     }

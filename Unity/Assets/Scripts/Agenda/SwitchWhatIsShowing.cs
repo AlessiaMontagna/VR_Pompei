@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
     void Update()
     {
         //Map case
-        if ((Input.GetKeyDown(KeyCode.M) || Input.GetAxisRaw("Arrows_v")>0) && GetComponent<ShowAgenda>()._agendaType!= agendaType.mappa)
+        if ((Input.GetKeyDown(KeyCode.V) || Input.GetAxisRaw("Arrows_v")>0) && GetComponent<ShowAgenda>()._agendaType!= agendaType.mappa && !Globals.gamePause)
         {
             if(m_isAxisInUse == false)  //serve per prendere l'input della freccia del joystick solo 1 volta (es.: keydown)
             {
@@ -35,12 +36,13 @@ public class SwitchWhatIsShowing : MonoBehaviour
         }
 
         //Codex case
-        if ((Input.GetKeyDown(KeyCode.C) || Input.GetAxisRaw("Arrows_v")<0) && GetComponent<ShowAgenda>()._agendaType != agendaType.codex)
+        if ((Input.GetKeyDown(KeyCode.C) || Input.GetAxisRaw("Arrows_v")<0) && GetComponent<ShowAgenda>()._agendaType != agendaType.codex && !Globals.gamePause)
         {
             if(m_isAxisInUse == false)
             {
                 GetComponent<ShowAgenda>()._agendaType = agendaType.codex;
                 Show();
+                FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
                 m_isAxisInUse = true;
                 _mappaMode.MappaMode(false);
             }

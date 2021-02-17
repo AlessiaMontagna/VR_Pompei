@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -21,28 +22,22 @@ public class NpcInteractable : Interattivo
     public AudioSubManager audioSubManager => _audioSubManager;
     private GameObject _parent;
     public GameObject parent => _parent;
-    //private AudioSource _audioSource;
-    //public AudioSource audioSource => _audioSource;
     private OcclusionInteract _fmodAudioSource;
     public OcclusionInteract fmodAudioSource => _fmodAudioSource;
     private string _voice;
     public string voice => _voice;
-    private Text _talk;
+    private TextMeshProUGUI _talk;
     private RawImage _eButton;
     private int _talkIndex;
     public int talkIndex => _talkIndex;
 
-    public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
+    void Awake()
     {
-        _character = character;
-        _parent = parent;
         _navAgent = new NavAgent(this);
-        _navAgent.SetInitialState(statename);
-        _navAgent.SetTargets(targets);
         _animator = gameObject.GetComponent<Animator>();
+        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _audioSubManager = GameObject.FindObjectOfType<AudioSubManager>();
-        //_audioSource = gameObject.GetComponent<AudioSource>();
-
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;
         _fmodAudioSource.PlayerOcclusionWidening = 0.3f;
@@ -50,10 +45,20 @@ public class NpcInteractable : Interattivo
         LayerMask mask = LayerMask.GetMask("ProjectCameraLayer");
         _fmodAudioSource.OcclusionLayer = mask;
 
-        _voice = _audioSubManager.GetVoice(_character);
-        if(_voice == null)Debug.LogError($"GetVoice({_character}) returned null");
-        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => {StartCoroutine(Earthquake());}, () => {}, () => {});
+        foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
+        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !Globals.earthquake);
+        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
+    }
+
+    public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
+    {
+        _character = character;
+        _parent = parent;
+        _navAgent.SetInitialState(statename);
+        _navAgent.SetTargets(targets);
+        _voice = _audioSubManager.GetVoice(character);
+        if(_voice == null)Debug.LogError($"GetVoice({character}) returned null");
         _talkIndex = -1;
     }
 
@@ -64,7 +69,7 @@ public class NpcInteractable : Interattivo
     public override void UITextOn()
     {
         if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _eButton.enabled = true;
         _talk.enabled = true;
     }
@@ -72,7 +77,7 @@ public class NpcInteractable : Interattivo
     public override void UITextOff()
     {
         if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<Text>();
+        if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         _eButton.enabled = false;
         _talk.enabled = false;
     }
@@ -88,19 +93,16 @@ public class NpcInteractable : Interattivo
 
     public void SetSubtitles(int index)
     {
-        if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = "";
-        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<Text>().text = _audioSubManager.GetSubs(index, _character);
+        if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = "";
+        else GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = _audioSubManager.GetSubs(index, _character);
     }
 
     public void SetAudio(int index)
     {
         if(index < 0) _talkIndex = Random.Range(0, _audioSubManager.GetMaxAudios(_character, _voice));
         else _talkIndex = index;
-        //Debug.Log(_audioSubManager.GetAudio(_talkIndex, _character, _voice));
         _fmodAudioSource.SelectAudio = "event:/"+ _audioSubManager.GetAudio(_talkIndex, _character, _voice);
         _fmodAudioSource.enabled = true;
-        //_audioSource.clip = Resources.Load<AudioClip>(_audioSubManager.GetAudio(_talkIndex, _character, _voice));
-        //if(_audioSource?.clip == null){Debug.LogError($"{_audioSubManager.GetAudio(_talkIndex, _character, _voice)} NOT FOUND");StopInteraction();}
     }
 
     protected virtual void StartInteraction()
@@ -112,8 +114,7 @@ public class NpcInteractable : Interattivo
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        if(!_animator.GetCurrentAnimatorStateInfo(0).IsTag("Talk") && !_animator.GetBool(NavAgent.NavAgentStates.Turn.ToString()))
-            _animator.SetFloat(NavAgent.NavAgentStates.Talk.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 10));
+        _navAgent.SetAnimation(10);
     }
 
     protected virtual void StopInteraction()
@@ -130,24 +131,15 @@ public class NpcInteractable : Interattivo
     {
         _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
-        SetSubtitles(index);
-        //yield return new WaitForSeconds(_audioSource.clip.length);
-        int fmodLength;
-        float length = 0;
-        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out fmodLength);
-        length = fmodLength;
-        Debug.Log("waitForSecond " + length);
-        yield return new WaitForSeconds(length/1000); 
-
+        SetSubtitles(_talkIndex);
+        yield return new WaitForSeconds(GetAudioLength());
         StopInteraction();
     }
 
     protected float GetAudioLength()
     {
-        //return _audioSource.clip.length;
-        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out var fmodLength);
-        Debug.Log($"Audio length: {fmodLength}");
-        return (float)fmodLength/1000f;
+        FMOD.RESULT res = _fmodAudioSource.AudioDes.getLength(out int fmodLength);
+        return (float)fmodLength/1000;
     }
 
     protected virtual void OnTriggerEnter(Collider collider)
@@ -171,6 +163,20 @@ public class NpcInteractable : Interattivo
         _animator.SetFloat("HitFloat", 0f);
         _animator.SetFloat("HitReaction", 0f);
         _animator.SetFloat("HitNobile", 0f);
+    }
+    
+    public void WaitForMotion(float time) => StartCoroutine(_navAgent.WaitForMotion(time));
+
+    protected virtual IEnumerator Earthquake()
+    {
+        _animator.SetFloat(NavAgent.NavAgentStates.Earthquake.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 2));
+        _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
+        if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+        _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
+        _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
+        Globals.earthquake = false;
     }
 }
 

@@ -2,32 +2,35 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class TutorialManager : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI _tutorialText;
-    [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
 
-    private Text _obiettiviText;
+    private TextMeshProUGUI _tutorialText;
+    private NpcTutorial _schiavo;
     private ShowAgenda _scriptAgenda;
-    private float _waitTime = 6f;
+    private float _waitTime = 1f;
     private int _missionIndex;
+    private MissionManager _activateMission;
 
     private void Start()
     {
+        _tutorialText = FindObjectOfType<TutorialText>().GetComponent<TextMeshProUGUI>();
+        _schiavo = FindObjectOfType<NpcTutorial>();
         _scriptAgenda = FindObjectOfType<ShowAgenda>();
         _scriptAgenda.enabled = false;
         _missionIndex = 0;
-        _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<Text>();
-        _obiettiviText.text = "";
         _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
+        _activateMission = FindObjectOfType<MissionManager>();
+       // _activateMission.enabled = false;
+
     }
     private void Update()
     {
+        if(_schiavo == null) _schiavo = FindObjectOfType<NpcTutorial>();
         switch(_missionIndex)
         {
             case 0:
@@ -51,6 +54,7 @@ public class TutorialManager : MonoBehaviour
             case 6:
                 FinishTutorial();
                 break;
+            default: throw new System.ArgumentOutOfRangeException();
         }
     }
 
@@ -66,47 +70,48 @@ public class TutorialManager : MonoBehaviour
 
     private void CheckPointing()
     {
-        if (_schiavo.pointingSchiavo)
+        if (_waitTime <= 0)
         {
             _tutorialText.text = "Interagisci con oggetti e personaggi premendo il tasto indicato";
             _missionIndex = 2;
         }
+        else
+        {
+            _waitTime -= Time.deltaTime;
+        }
+        
     }
 
     private void CheckInteraction()
     {
-        if(_schiavo.hasTalked)
+        if (_schiavo.pointingSchiavo && !_schiavo.hasTalked)
         {
             _tutorialText.text = "";
-            if(_waitTime <= 0)
-            {
-                _obiettiviText.text = "Nuovo obiettivo: raggiungi Marcus al foro";
-                _tutorialText.text = "Per sapere il punto in cui devi recarti apri la mappa con ()";
-                _scriptAgenda.enabled = true;
-                _missionIndex = 3;
-            }
-            else
-            {
-                _waitTime -= Time.deltaTime;
-            }
+        }
+        if(_schiavo.hasTalked)
+        {
+            _tutorialText.text = "Premi  <sprite index= 0> per visualizzare la mappa";
+            _activateMission.UpdateMission(Missions.Mission1_TalkWithFriend);
+            _scriptAgenda.enabled = true;
+            _missionIndex = 3;
         }
     }
     
     private void CheckMappa()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             _collider.enabled = false;
-            _tutorialText.text = "Quì potrai visualizzare la tua posizione e il punto di destinazione. Premi nuovamente () per riporre la mappa.";
+            _tutorialText.text = "Quì vengono mostrati i punti di interesse per i vari obiettivi. Premi nuovamente <sprite index= 0> per chiudere la mappa";
             _missionIndex = 4;
         }
     }
     private void PutDownMappa()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            _tutorialText.text = "";
-            _missionIndex = 5;
+            _tutorialText.enabled = false;
+            this.enabled = false;
         }
         
     }

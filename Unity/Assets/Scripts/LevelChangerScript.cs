@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 public class LevelChangerScript : MonoBehaviour
 {
     public Animator animator;
-    private int levelToLoad;
+    private AudioSource audioSource;
+    bool AlreadyPlayed = false;
+    //bool stop = false;
+    private int _levelToLoad;
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine("StartLevel");
     }
 
@@ -21,15 +25,9 @@ public class LevelChangerScript : MonoBehaviour
 
     public void FadeToLevel (int levelIndex)
     {
-        levelToLoad = levelIndex;
-
-        if(levelIndex == 2)
-        {
-            animator.SetTrigger("FadeOut_Fast");
-        } else
-        {
-            animator.SetTrigger("FadeOut");
-        }                
+        _levelToLoad = levelIndex;
+        if(levelIndex == 3 || levelIndex == 0) animator.SetTrigger("FadeOut_Fast");
+        else animator.SetTrigger("FadeOut");
     }
 
     public void FadeToNextLevel()
@@ -39,6 +37,22 @@ public class LevelChangerScript : MonoBehaviour
 
     public void OnFadeComplete ()
     {
-        SceneManager.LoadScene(levelToLoad);
+        SceneManager.LoadScene(_levelToLoad);
+    }
+
+    public void SwooshIn()
+    {
+        if(!AlreadyPlayed)
+        {
+            audioSource.Play();
+            AlreadyPlayed = true;
+        }
+        animator.SetTrigger("SwooshIn");
+    }
+
+    public void SwooshOut()
+    {
+        animator.SetTrigger("SwooshOut");
+        AlreadyPlayed = false;
     }
 }

@@ -10,7 +10,8 @@ public class NpcMercante : NpcInteractable
 
     void Start()
     {
-        switch(gameObject.GetComponentInParent<NavElement>().foodType)
+        if(navAgent == null) Initialize(Characters.Mercante, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+        else switch(gameObject.GetComponentInParent<NavElement>().foodType)
         {
             case MercanteFoodTypes.Frutta: _food = FindObjectOfType<Frutta>().GetComponent<Transform>();break;
             case MercanteFoodTypes.Pane: _food = FindObjectOfType<Pane>().GetComponent<Transform>();break;
@@ -23,11 +24,11 @@ public class NpcMercante : NpcInteractable
 
     protected override void StartInteraction()
     {
+        base.StartInteraction();
         if (!_foodUnloked && Globals.player == Players.Schiavo)
         {
             foreach (Transform child in _food.transform) child.GetComponent<BoxCollider>().enabled = true;
             _foodUnloked = true;
         }
-        base.StartInteraction();
     }
 }

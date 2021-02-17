@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -23,7 +24,7 @@ public class ShowAgenda : MonoBehaviour
         _interactionScript = FindObjectOfType<InteractionManager>();
         MappaMode(false);
         _audioSource = GetComponent<AudioSource>();
-        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up_Down");
+        //_audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up_Down");
         _animator = GetComponent<Animator>();
         transform.localPosition = new Vector3(0, 0, 0);
     }
@@ -31,29 +32,34 @@ public class ShowAgenda : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<SwitchWhatIsShowing>().enabled)
+        if (!Globals.gamePause)
         {
-            if (Input.GetKeyDown(KeyCode.M))
+            if (!GetComponent<SwitchWhatIsShowing>().enabled)
             {
-                MappaMode(true);
-                MoveAgendaUp();
-                _agendaType = agendaType.mappa;
+                if (Input.GetKeyDown(KeyCode.V))
+                {
+                    MappaMode(true);
+                    MoveAgendaUp();
+                    _agendaType = agendaType.mappa;
+                }
+                else if (Input.GetKeyDown(KeyCode.C))
+                {
+                    MappaMode(false);
+                    MoveAgendaUp();
+                    _agendaType = agendaType.codex;
+                    FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else
             {
-                MappaMode(false);
-                MoveAgendaUp();
-                _agendaType = agendaType.codex;
+                if ((Input.GetKeyDown(KeyCode.V) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
+                {
+                    MoveAgendaDown();
+                    MappaMode(false);
+                }
             }
         }
-        else
-        {
-            if((Input.GetKeyDown(KeyCode.M) && _agendaType == agendaType.mappa) || Input.GetKeyDown(KeyCode.C) && _agendaType == agendaType.codex)
-            {
-                MoveAgendaDown();
-                MappaMode(false);
-            }
-        }
+        
     }
 
     public void MappaMode(bool value)
@@ -66,12 +72,14 @@ public class ShowAgenda : MonoBehaviour
     {
         if (_animator == null) return;
         _animator.SetBool("show", true);
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Up");
         _audioSource.Play();
     }
     public void MoveAgendaDown()
     {
         if (_animator == null) return;
         _animator.SetBool("show", false);
+        _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Agenda_Down");
         _audioSource.Play();
     }
 
