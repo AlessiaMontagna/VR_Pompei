@@ -74,9 +74,9 @@ public class NavSpawner : MonoBehaviour
         if(tutorialManager != null && tutorialManager.enabled && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))
             SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
         // spawn AMICO
-        if(_stops.TryGetValue(NavSubroles.AmicoStop, out stops) && _prefabs.TryGetValue(Characters.Amico, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Amico, "Idle", item, default(Vector3), null);}
+        if(FindObjectOfType<NpcAmico>() == null && _stops.TryGetValue(NavSubroles.AmicoStop, out stops) && _prefabs.TryGetValue(Characters.Amico, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Amico, "Idle", item, default(Vector3), null);}
         // spawn MYSCHIAVO
-        if(_stops.TryGetValue(NavSubroles.MySchiavoStop, out stops) && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.MySchiavo, "Idle", item, default(Vector3), null);}
+        if(FindObjectOfType<NpcMySchiavo>() == null && _stops.TryGetValue(NavSubroles.MySchiavoStop, out stops) && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.MySchiavo, "Idle", item, default(Vector3), null);}
         // spawn STOPS guards
         if(_stops.TryGetValue(NavSubroles.GuardStop, out stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
         // spawn STOPS soldier

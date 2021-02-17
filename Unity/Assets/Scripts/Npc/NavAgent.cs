@@ -63,7 +63,7 @@ public class NavAgent
         _stateMachine.AddTransition(talk, move, () => _motion);
         _stateMachine.AddTransition(path, interact, () => interaction);
         _stateMachine.AddTransition(move, interact, () => interaction);
-        _stateMachine.AddTransition(move, talk, () => _motion && DestinationReached());
+        _stateMachine.AddTransition(move, talk, () => _motion && DestinationReached(5f));
         _stateMachine.AddTransition(interact, idle, () => false);
 
         // START STATE
@@ -94,7 +94,7 @@ public class NavAgent
 
     public void SetTargets(List<Vector3> targets) { if (targets != null) _targets = new List<Vector3>(targets); }
 
-    public bool DestinationReached() { return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance * Random.Range(0.5f, 1f) || Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance * Random.Range(0.5f, 1f)); }
+    public bool DestinationReached(float stoppingDistance) { return _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && (_navMeshAgent.remainingDistance <= stoppingDistance * Random.Range(0.5f, 1f) || Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= stoppingDistance * Random.Range(0.5f, 1f)); }
 
     public void SetAnimation(int availableAnimations)
     {
@@ -104,16 +104,15 @@ public class NavAgent
 
     private void Idle()
     {
-        if (!_waitForMotion) TurnToTarget(_owner.parent.transform.position);
+        if (!_waitForMotion && _owner?.parent == null && _owner?.parent?.transform) TurnToTarget(_owner.parent.transform.position);
         SetAnimation(6);
     }
 
     private void Move()
     {
-        Debug.Log($"run: {_navMeshAgent.speed}");
         _animator.SetBool(NavAgentStates.Turn.ToString(), false);
         _animator.SetFloat(NavAgentStates.Move.ToString() + animatorVariable, _navMeshAgent.velocity.magnitude);
-        if (!DestinationReached()) return;
+        if (!DestinationReached(_navMeshAgent.stoppingDistance)) return;
         if (_targets.Count == 0)
         {
             if (_motion) { _motion = false; return; }
@@ -131,13 +130,13 @@ public class NavAgent
         if (_targets.Count == 0) Debug.LogError("UNDEFINED PATH");
         _animator.SetBool(NavAgentStates.Turn.ToString(), false);
         _animator.SetFloat(NavAgentStates.Move.ToString() + animatorVariable, _navMeshAgent.velocity.magnitude);
-        if (!DestinationReached()) return;
+        if (!DestinationReached(_navMeshAgent.stoppingDistance)) return;
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
     private void Talk()
     {
-        if (!_waitForMotion) TurnToTarget(_owner.parent.transform.position);
+        if (!_waitForMotion && _owner?.parent == null) TurnToTarget(_owner.parent.transform.position);
         SetAnimation(10);
     }
 
@@ -166,9 +165,7 @@ public class NavAgent
     public IEnumerator WaitForMotion(float time)
     {
         _waitForMotion = true;
-        Debug.Log("BEGIN WaitForMotion");
         yield return new WaitForSeconds(time);
-        Debug.Log("END WaitForMotion");
         _motion = true;
         _waitForMotion = false;
     }

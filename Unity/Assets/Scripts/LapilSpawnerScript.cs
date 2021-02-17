@@ -16,14 +16,14 @@ public class LapilSpawnerScript : MonoBehaviour
 public IEnumerator Rain() 
 {   
     running = true;
-    Debug.Log("Coroutine Started.");
+    //Debug.Log("Coroutine Started.");
     Vector3 position = new Vector3(Random.Range(transform.position.x-offset, transform.position.x+offset), 0, Random.Range(transform.position.z-offset, transform.position.z+offset));
     var prefabVFX = Instantiate(prefab, position, Quaternion.identity);
     prefabVFX.GetComponent<SpawnLapillusScript>().Normal(); 
     Destroy(prefabVFX, 5);
     yield return new WaitForSeconds(Random.Range(min, max));
     running = false;
-    Debug.Log("Coroutine finished.");        
+    //Debug.Log("Coroutine finished.");        
 }
 
 public void LoadFinalScene()
@@ -33,7 +33,7 @@ public void LoadFinalScene()
         level.FadeToNextLevel();
     } else
     {
-        Debug.Log("Level error");
+        Debug.LogError("Level error");
         return;
     }
     //SceneLoader.Load(SceneLoader.Scene.ScenaFinale);
@@ -54,9 +54,9 @@ public void ComputeDistance(Vector3 pos)
 {
     if(pos != null)
     {
-        Debug.Log("FOUND IT!!!2");
+        //Debug.Log("FOUND IT!!!2");
         float distance = Vector3.Distance (pos, character.transform.position);
-        Debug.Log("Distance: "+ distance); 
+        //Debug.Log("Distance: "+ distance); 
         if(distance <= 5)
         {
             Debug.Log("DEAD!!!");
@@ -65,7 +65,7 @@ public void ComputeDistance(Vector3 pos)
     } 
     else
     {
-        Debug.Log("NOTHING!!!2");
+        //Debug.Log("NOTHING!!!2");
         return;
     }      
 }

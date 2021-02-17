@@ -7,7 +7,6 @@ using TMPro;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
-//[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(OcclusionInteract))]
 
 public class NpcInteractable : Interattivo
@@ -173,7 +172,9 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
-        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        float length = 6.08f; //Nervously Look Around animation duration
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")){length = _animator.GetCurrentAnimatorStateInfo(0).length;Debug.Log($"ANIMATOR CORRETTO!! {length}");}
+        yield return new WaitForSeconds(length);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;

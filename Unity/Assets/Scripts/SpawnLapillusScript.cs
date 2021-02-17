@@ -57,13 +57,13 @@ public class SpawnLapillusScript : MonoBehaviour
 
         if(parentScript != null)
         {
-            Debug.Log("FOUND IT!!!");
+            //Debug.Log("FOUND IT!!!");
             Vector3 pos = position;
             parentScript.ComputeDistance(pos);
         }
         else
         {
-            Debug.Log("NOTHING!!!");
+            //Debug.Log("NOTHING!!!");
             return;
         }
     }

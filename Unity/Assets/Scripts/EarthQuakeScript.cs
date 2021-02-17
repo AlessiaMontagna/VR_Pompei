@@ -21,7 +21,7 @@ public class EarthQuakeScript : MonoBehaviour
    {
        if(other == player_collider && !first)
         {
-            Debug.Log("Entered the Trigger");
+            //Debug.Log("Entered the Trigger");
             Globals.earthquake = true;
             first = true;
             StartCoroutine(cameraShake.Shake(10f, .2f));     //(duration, magnitude)
