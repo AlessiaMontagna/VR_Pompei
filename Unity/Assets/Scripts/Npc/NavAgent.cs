@@ -14,7 +14,7 @@ public class NavAgent
     private bool _motion = false;
     private bool _waitForMotion = false;
 
-    public readonly float walkSpeed = 1.7f;
+    public readonly float walkSpeed = 2f;
     public readonly float runSpeed = 3f;
     public readonly float distanceToStop = 3f;
     public readonly float forwardAngle = 30f;
@@ -23,7 +23,7 @@ public class NavAgent
     private Dictionary<string, State> _states = new Dictionary<string, State>();
     private List<Vector3> _targets = new List<Vector3>();
 
-    public enum NavAgentStates { Idle, Path, Move, Talk, Interact, Turn, Earthquake };
+    public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
 
     public NavAgent(NpcInteractable owner)
@@ -99,13 +99,13 @@ public class NavAgent
 
     private void Move()
     {
-        if(_navMeshAgent.velocity.magnitude<2)Debug.Log($"Velocity: {_navMeshAgent.velocity.magnitude}");
+        //if(_navMeshAgent.velocity.magnitude<2)Debug.Log($"Velocity: {_navMeshAgent.velocity.magnitude}");
         _animator.SetBool(NavAgentStates.Turn.ToString(), false);
         _animator.SetFloat(NavAgentStates.Move.ToString() + animatorVariable, _navMeshAgent.velocity.magnitude);
         if(!DestinationReached()) return;
         if(_targets.Count == 0)
         {
-            if(_motion){_motion = false;return;}
+            if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Scena_1" && _motion)return;
             else {GameObject.FindObjectOfType<NavSpawner>().DestroyedAgent(_owner.character);GameObject.Destroy(_owner.gameObject);return;}
         }
         Vector3 destination;

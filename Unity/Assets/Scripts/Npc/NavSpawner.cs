@@ -63,10 +63,6 @@ public class NavSpawner : MonoBehaviour
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
-        // spawn AMICO
-        if(FindObjectOfType<NpcAmico>() == null && _stops.TryGetValue(NavSubroles.AmicoStop, out var stops) && _prefabs.TryGetValue(Characters.Amico, out var prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Amico, "Idle", item, default(Vector3), null);}
-        // spawn MYSCHIAVO
-        if(FindObjectOfType<NpcMySchiavo>() == null && _stops.TryGetValue(NavSubroles.MySchiavoStop, out stops) && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.MySchiavo, "Idle", item, default(Vector3), null);}
     }
 
     void Start()
@@ -75,8 +71,11 @@ public class NavSpawner : MonoBehaviour
         List<GameObject> stops;
         // spawn TUTORIAL
         var tutorialManager = FindObjectOfType<TutorialManager>();
-        if(tutorialManager != null && tutorialManager.enabled && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))
-            SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
+        if(tutorialManager != null && tutorialManager.enabled && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.SchiavoTutorial, "Idle", tutorialManager.gameObject, default(Vector3), null);
+        // spawn AMICO
+        if(FindObjectOfType<NpcAmico>() == null && _stops.TryGetValue(NavSubroles.AmicoStop, out stops) && _prefabs.TryGetValue(Characters.Amico, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Amico, "Idle", item, default(Vector3), null);}
+        // spawn MYSCHIAVO
+        if(FindObjectOfType<NpcMySchiavo>() == null && _stops.TryGetValue(NavSubroles.MySchiavoStop, out stops) && _prefabs.TryGetValue(Characters.Schiavo, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.MySchiavo, "Idle", item, default(Vector3), null);}
         // spawn STOPS guards
         if(_stops.TryGetValue(NavSubroles.GuardStop, out stops) && _prefabs.TryGetValue(Characters.Soldato, out prefabs))foreach (var item in stops.Where(i => i != null)){SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Idle", item, default(Vector3), null);}
         // spawn STOPS soldier
@@ -105,7 +104,7 @@ public class NavSpawner : MonoBehaviour
                 Vector3 position = item.transform.position + new Vector3(random.x, 0, random.y);
                 Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character != Characters.Guardia && character != Characters.Mercante && character != Characters.NobileM && character != Characters.NobileF);
                 if(!_prefabs.TryGetValue(character, out prefabs))Debug.LogError("PREFABS ERROR");
-                var agent = SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", item, position, null);
+                SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Talk", item, position, null);
             }
         }
         // SET agents total numbers
@@ -130,53 +129,74 @@ public class NavSpawner : MonoBehaviour
                 bird.GetComponent<RandomFlyer>().SetFlyingTarget(flockFlyingTarget);
             }
         }
-        // spawn people
-        List<Vector3> path = new List<Vector3>();
-        List<GameObject> pathGO = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;
-        foreach(var item in pathGO){path.Add(item.transform.position);}
-        if(!_prefabs.TryGetValue(Characters.Guardia, out prefabs))Debug.LogError("PREFABS ERROR");
-    }
-
-    void Update()
-    {
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli")return;
-        // SPAWN agents if there are less then defined in Start()
+        // spawn gurads
+        Debug.Log($"START _nGuards:{_nGuards}; _guards:{_guards}");
         while(_nGuards > _guards)
         {
             List<Vector3> path = new List<Vector3>();
             List<GameObject> pathGO = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;
             foreach(var item in pathGO){path.Add(item.transform.position);}
-            if(!_prefabs.TryGetValue(Characters.Guardia, out var prefabs))Debug.LogError("PREFABS ERROR");
-            SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Path", pathGO.ElementAt(Random.Range(0, pathGO.Count)), default(Vector3), path);}
+            if(!_prefabs.TryGetValue(Characters.Guardia, out prefabs))Debug.LogError("PREFABS ERROR");
+            SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Path", pathGO.ElementAt(Random.Range(0, pathGO.Count)), default(Vector3), path);
+        }
+        // spawn people
+        Debug.Log($"START _nPeople:{_nPeople}; _people:{_people}");
         while(_nPeople > _people)
         {
-            if(Random.Range(0f, 1f) < 0.2)
-            {
-                if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-                spawns = spawns.Where(i => i.transform.position.y > 5f).ToList();
-                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Soldato);
-                if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
-                var spawn = spawns.ElementAt(Random.Range(0, spawns.Count));
-                spawns.Remove(spawn);
-                SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawn, default(Vector3), new List<Vector3>{spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position});
-            }
-            else
-            {
-                List<Vector3> path = new List<Vector3>();
-                foreach(var item in _paths.ElementAt(Random.Range(0, _paths.Count)).Value){path.Add(item.transform.position);}
-                if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-                path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
-                Characters character;do{character = _prefabs.Keys.ElementAt(Random.Range(0, _prefabs.Keys.Count));}while(character == Characters.Guardia || character == Characters.Soldato);
-                if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
-                SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawns.ElementAt(Random.Range(0, spawns.Count)), default(Vector3), path);
-            }
+            SpawnUpdate(true);
         }
     }
 
-    public GameObject SpawnAgent(GameObject prefab, Characters character, string state, GameObject parent, Vector3 position, List<Vector3> targets)
+    void Update()
+    {
+        Debug.Log($"UPDATE _nPeople:{_nPeople}; _people:{_people}");
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli")return;
+        // SPAWN moving people if there are less then defined in Start()
+        if(_nPeople > _people)
+        {
+            SpawnUpdate(false);
+        }
+    }
+
+    private void SpawnUpdate(bool spawnInPath)
+    {
+        List<Vector3> path = new List<Vector3>();
+
+        if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+        
+        var characters = _prefabs.Keys.Where(i => i == Characters.Mercante || i == Characters.NobileM || i == Characters.NobileF).ToList();
+        Characters character = characters.ElementAt(Random.Range(0, characters.Count));
+        
+        GameObject spawn;
+        if(spawnInPath)
+        {
+            spawns = spawns.Where(i => i.transform.position.y < 5f).ToList();
+            var index = Random.Range(0, _paths.Count);
+            foreach(var item in _paths.ElementAt(index).Value){path.Add(item.transform.position);}
+            spawn = _paths.ElementAt(index).Value.ElementAt(Random.Range(0, _paths.ElementAt(index).Value.Count));
+            path.Remove(spawn.transform.position);
+        }
+        else
+        {
+            if(Random.Range(0f, 1f) < 0.2){spawns = spawns.Where(i => i.transform.position.y > 5f).ToList();}
+            else
+            {
+                spawns = spawns.Where(i => i.transform.position.y < 5f).ToList();
+                foreach(var item in _paths.ElementAt(Random.Range(0, _paths.Count)).Value){path.Add(item.transform.position);}
+            }
+            spawn = spawns.ElementAt(Random.Range(0, spawns.Count));
+            spawns.Remove(spawn);
+        }
+        path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
+
+        if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
+        SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawn, default(Vector3), path);
+    }
+
+    public GameObject SpawnAgent(GameObject prefab, Characters character, string statename, GameObject parent, Vector3 position, List<Vector3> targets)
     {
         if(position == default(Vector3))position = parent.transform.position - parent.transform.forward * 0.6f;
-        GameObject agent = Instantiate(prefab, position, parent.transform.rotation);
+        GameObject agent = Instantiate(prefab, position, parent.transform.rotation) as GameObject;
         agent.transform.parent = parent.transform;
         NpcInteractable component;
         switch(character)
@@ -186,24 +206,14 @@ public class NavSpawner : MonoBehaviour
             case Characters.MySchiavo: component = agent.AddComponent<NpcMySchiavo>();break;
             case Characters.Amico: component = agent.AddComponent<NpcAmico>();break;
             case Characters.Soldato: component = agent.AddComponent<NpcSoldato>();break;
+            case Characters.Guardia: goto default;
             default: component = agent.AddComponent<NpcInteractable>();break;
         }
-        component.Initialize(character, parent, state, targets);
-        if(targets != null && targets?.Count > 0)
-        {
-            if(character == Characters.Guardia)_guards++;else _people++;
-            agent.AddComponent<Rigidbody>();
-            var body = agent.GetComponent<Rigidbody>();
-            body.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-            body.mass = 100f;
-            body.drag = 0.01f;
-            body.angularDrag = 0.05f;
-            body.useGravity = true;
-            body.interpolation = RigidbodyInterpolation.None;
-            body.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        }
+        if(statename == NavAgent.NavAgentStates.Move.ToString() || statename == NavAgent.NavAgentStates.Path.ToString())SpawnedAgent(character);
+        component.Initialize(character, parent, statename, targets);
         return agent;
     }
 
-    public void DestroyedAgent(Characters character){if(character == Characters.Guardia){_guards++;}else{_people++;}}
+    public void SpawnedAgent(Characters character){if(character == Characters.Guardia){_guards++;}else{_people++;}}
+    public void DestroyedAgent(Characters character){if(character == Characters.Guardia){_guards--;}else{_people--;}}
 }

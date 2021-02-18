@@ -19,7 +19,7 @@ public class LevelChangerScript : MonoBehaviour
     {
         switch (SceneManager.GetActiveScene().name)
         {
-            case "Scena1":Globals.player = Players.Nobile;break;
+            case "Scena_1":Globals.player = Players.Nobile;break;
             case "ScenaLapilli":Globals.player = Players.Mercante;break;
             case "ScenaFinale":Globals.player = Players.Nobile;break;
             default: Debug.Log($"Starting {SceneManager.GetActiveScene().name}");break;

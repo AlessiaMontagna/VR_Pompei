@@ -59,6 +59,17 @@ public class NpcInteractable : Interattivo
         _voice = _audioSubManager.GetVoice(character);
         if(_voice == null)Debug.LogError($"GetVoice({character}) returned null");
         _talkIndex = -1;
+        if(targets != null && targets?.Count > 0)
+        {
+            var body = gameObject.AddComponent<Rigidbody>();
+            body.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            body.mass = 100f;
+            body.drag = 0.01f;
+            body.angularDrag = 0.05f;
+            body.useGravity = true;
+            body.interpolation = RigidbodyInterpolation.None;
+            body.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        }
     }
 
     void Update() => _navAgent?.Tik();
