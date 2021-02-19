@@ -14,9 +14,9 @@ public class SpawnLapillusScript : MonoBehaviour
     /*void Start()
     {                   
         var startPos = StartPoint.position;
-        GameObject objVFX = Instantiate (Vfx, startPos, Quaternion.identity) as GameObject;                
+        GameObject objVFX = Instantiate(Vfx, startPos, Quaternion.identity) as GameObject;                
         var endPos = EndPoint.position;
-        RotateTo (objVFX, endPos);
+        RotateTo(objVFX, endPos);
         Destroy(gameObject, 3);       
     }*/
 
@@ -25,7 +25,7 @@ public class SpawnLapillusScript : MonoBehaviour
         var startPos = StartPoint.position;
         GameObject objVFX = Instantiate(Vfx, startPos, Quaternion.identity) as GameObject;                
         var endPos = EndPoint.position;
-        RotateTo (objVFX, endPos);
+        RotateTo(objVFX, endPos);
         Destroy(gameObject, 3);
     }
 
@@ -35,7 +35,7 @@ public class SpawnLapillusScript : MonoBehaviour
         var startPos = StartPoint.position;
         GameObject objVFX = Instantiate(Vfx, startPos, Quaternion.identity) as GameObject;        
         var endPos = target.transform.position;
-        //RotateTo (objVFX, endPos);
+        //RotateTo(objVFX, endPos);
         objVFX.GetComponent<ProjectileMoveScript>().IsLast(target); 
         Destroy(gameObject, 10);                     
     }
