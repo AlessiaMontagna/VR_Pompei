@@ -7,7 +7,6 @@ using TMPro;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
-//[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(OcclusionInteract))]
 
 public class NpcInteractable : Interattivo
@@ -114,7 +113,6 @@ public class NpcInteractable : Interattivo
     protected virtual void UpdateInteraction()
     {
         _navAgent.CheckPlayerPosition();
-        _navAgent.SetAnimation(10);
     }
 
     protected virtual void StopInteraction()
@@ -169,16 +167,24 @@ public class NpcInteractable : Interattivo
 
     protected virtual IEnumerator Earthquake()
     {
-        _animator.SetFloat(NavAgent.NavAgentStates.Earthquake.ToString()+_navAgent.animatorVariable, (float)Random.Range(0, 2));
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
-        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        float length = 5f; //Nervously Look Around animation duration is 6.08
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")){length = _animator.GetCurrentAnimatorStateInfo(0).length;Debug.Log($"ANIMATOR CORRETTO!! {length}");}
+        yield return new WaitForSeconds(length);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;
     }
 }
+
+/*
+LapilSpawnerScript: c'è una funzione che calcola la distanza tra il player e il lapillo.
+Quando il lapillo collide con qualcosa,
+chiama una funzione del padre (ImpactAudioScript) e questo chiama quello del suo padre (LapilSpawnerScript) che calcola la distanza col player.
+Se inferiore alla soglia che ho messo -> Player = caput
+*/
 
 /* SUBCLASS EXAMPLE
 using System.Collections;

@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NpcAmico : NpcInteractable
 {
     private bool _firstTalk = true;
 
-    void Start(){if(navAgent == null) Initialize(Characters.Amico, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);}
+    void Start()
+    {
+        if(navAgent != null)return;
+        Initialize(Characters.Amico, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+        gameObject.transform.parent = FindObjectsOfType<NavElement>().Where(i => i != null && i.subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject.transform;
+    }
 
     protected override void StartInteraction()
     {
