@@ -11,14 +11,14 @@ public class LightFlickerEffect : MonoBehaviour {
     public float maxIntensity = 1f;*/
     private float minIntensity;
     private float maxIntensity;
-    [Tooltip("How much to smooth out the randomness; lower values = sparks, higher = lantern")]
+    /*[Tooltip("How much to smooth out the randomness; lower values = sparks, higher = lantern")]
     [Range(1, 50)]
-    public int smoothing = 5;
+    public int smoothing = 5;*/
 
     // Continuous average calculation via FIFO queue
     // Saves us iterating every time we update, we just change by the delta
-    Queue<float> smoothQueue;
-    float lastSum = 0;
+    //Queue<float> smoothQueue;
+    //float lastSum = 0;
 
 
     /// <summary>
@@ -26,14 +26,14 @@ public class LightFlickerEffect : MonoBehaviour {
     /// this, deactivating/reactivating is usually fine but if you want a strict
     /// restart you can do.
     /// </summary>
-    public void Reset() {
+    /*public void Reset() {
         smoothQueue.Clear();
         lastSum = 0;
-    }
+    }*/
 
     void Start() 
     {        
-        smoothQueue = new Queue<float>(smoothing);
+        //smoothQueue = new Queue<float>(smoothing);
          // External or internal light?
         if (lighty == null) 
         {
@@ -41,7 +41,7 @@ public class LightFlickerEffect : MonoBehaviour {
         }
         float intensity = lighty.intensity;
         minIntensity = intensity;
-        maxIntensity = intensity + intensity/2;
+        maxIntensity = intensity + minIntensity/4;
     }
 
     void Update() {
@@ -49,17 +49,17 @@ public class LightFlickerEffect : MonoBehaviour {
             return;
 
         // pop off an item if too big
-        while (smoothQueue.Count >= smoothing) {
+        /*while (smoothQueue.Count >= smoothing) {
             lastSum -= smoothQueue.Dequeue();
-        }
+        }*/
 
         // Generate random new item, calculate new average
         float newVal = Random.Range(minIntensity, maxIntensity);
-        smoothQueue.Enqueue(newVal);
-        lastSum += newVal;
+        //smoothQueue.Enqueue(newVal);
+        //lastSum += newVal;
 
         // Calculate new smoothed average
-        lighty.intensity = lastSum / (float)smoothQueue.Count;
+        lighty.intensity = newVal;//lastSum / (float)smoothQueue.Count;
     }
 }
 
