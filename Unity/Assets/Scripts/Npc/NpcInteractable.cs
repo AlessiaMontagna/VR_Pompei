@@ -181,7 +181,7 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
-        float length = 5f; //Nervously Look Around animation duration is 6.08
+        float length = 3f; //Nervously Look Around animation duration is 6.08
         if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")){length = _animator.GetCurrentAnimatorStateInfo(0).length;Debug.Log($"ANIMATOR CORRETTO!! {length}");}
         yield return new WaitForSeconds(length);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
