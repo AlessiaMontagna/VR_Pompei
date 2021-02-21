@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenuHolder;
-    public GameObject optionsMenuHolder;
-    public GameObject controlsMenuHolder;
+    public GameObject mainMenuHolder_it;
+    public GameObject mainMenuHolder_en;
+
+    public GameObject optionsMenuHolder_it;
+    public GameObject optionsMenuHolder_en;
+
+    public GameObject controlsMenuHolder_it;
+    public GameObject controlsMenuHolder_en;
+
+    public GameObject languageSelectHolder;
 
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
@@ -26,21 +34,45 @@ public class MainMenu : MonoBehaviour
     }
    public void OptionsMenu()
     {
-        mainMenuHolder.SetActive(false);
-        optionsMenuHolder.SetActive(true);
-        controlsMenuHolder.SetActive(false);
+        if(String.Compare(Globals.language, "it") == 0){
+            mainMenuHolder_it.SetActive(false);
+            optionsMenuHolder_it.SetActive(true);
+            controlsMenuHolder_it.SetActive(false);
+        } else if (String.Compare(Globals.language, "en") == 0) {
+            mainMenuHolder_en.SetActive(false);
+            optionsMenuHolder_en.SetActive(true);
+            controlsMenuHolder_en.SetActive(false);
+        }
+        
+        languageSelectHolder.SetActive(false);
+        
     }
     public void MainsMenu()
-    {
-        mainMenuHolder.SetActive(true);
-        optionsMenuHolder.SetActive(false);
-        controlsMenuHolder.SetActive(false);
+    {    
+        if(String.Compare(Globals.language, "it") == 0){
+            mainMenuHolder_it.SetActive(true);
+            optionsMenuHolder_it.SetActive(false);
+            controlsMenuHolder_it.SetActive(false);
+        } else if (String.Compare(Globals.language, "en") == 0) {
+            mainMenuHolder_en.SetActive(true);
+            optionsMenuHolder_en.SetActive(false);
+            controlsMenuHolder_en.SetActive(false);
+        }
+        languageSelectHolder.SetActive(false);
+       
     }
     public void ControlsMenu()
     {
-        mainMenuHolder.SetActive(false);
-        optionsMenuHolder.SetActive(false);
-        controlsMenuHolder.SetActive(true);
+        if(String.Compare(Globals.language, "it") == 0){
+            mainMenuHolder_it.SetActive(false);
+            optionsMenuHolder_it.SetActive(false);
+            controlsMenuHolder_it.SetActive(true);
+        } else if(String.Compare(Globals.language, "en") == 0) {
+            mainMenuHolder_en.SetActive(false);
+            optionsMenuHolder_en.SetActive(false);
+            controlsMenuHolder_en.SetActive(true);
+        }
+        languageSelectHolder.SetActive(false);
     }
 
     public void SetScreenResolution(int i)
@@ -52,6 +84,12 @@ public class MainMenu : MonoBehaviour
             Screen.SetResolution(screenWidths[i], (int)(screenWidths[i]/aspectRatio), false);
         }
     }
+
+    public void SetLanguage(string lang)
+    {
+        Globals.language = lang;
+    }
+
     public void SetFullScreen(bool isFullScreen)
     {
         for(int i =0; i< resolutionToggles.Length; i++)

@@ -5,14 +5,16 @@ using Newtonsoft.Json;
 
 public class AudioSubManager : MonoBehaviour
 {
-    [SerializeField] public TextAsset _textJSON;
+    [SerializeField] public TextAsset _textJSON_it;
+    [SerializeField] public TextAsset _textJSON_en;
     private Dictionary<string, List<string>> _subtitles = new Dictionary<string, List<string>>();
     private Dictionary<string, List<string>> _voices = new Dictionary<string, List<string>>();
     private Dictionary<string, List<string>> _audios = new Dictionary<string, List<string>>();
 
     public void Awake()
     {
-        _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON.text);
+        if(Globals.language == "it") _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON_it.text);
+        else if (Globals.language == "en") _subtitles = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(_textJSON_en.text);
         foreach (var character in new List<Characters>((Characters[])System.Enum.GetValues(typeof(Characters))))
         {
             var characterFiles = Resources.LoadAll<AudioClip>($"Talking/{character.ToString()}").ToList();
