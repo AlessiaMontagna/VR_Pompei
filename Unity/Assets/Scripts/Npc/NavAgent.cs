@@ -12,7 +12,7 @@ public class NavAgent
     public UnityEngine.AI.NavMeshAgent navMeshAgent => _navMeshAgent;
     public bool interaction = false;
     private bool _motion = false;
-    private bool _waitForMotion = false;
+    private bool _waitingForMotion = false;
 
     public readonly float walkSpeed = 2f;
     public readonly float runSpeed = 3f;
@@ -95,7 +95,7 @@ public class NavAgent
 
     public bool DestinationReached(){return !_navMeshAgent.pathPending && _navMeshAgent.remainingDistance != Mathf.Infinity && _navMeshAgent.pathStatus == UnityEngine.AI.NavMeshPathStatus.PathComplete && (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance || Vector3.Distance(_navMeshAgent.destination, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance);}
 
-    private void Idle(){if(!_waitForMotion && _owner?.parent != null) TurnToTarget(_owner.parent.transform.position);}
+    private void Idle(){if(!_waitingForMotion && _owner?.parent != null) TurnToTarget(_owner.parent.transform.position);}
 
     private void Move()
     {
@@ -124,7 +124,7 @@ public class NavAgent
         _navMeshAgent.SetDestination(_targets.ElementAt(Random.Range(0, _targets.Count)));
     }
 
-    private void Talk(){if(!_waitForMotion && _owner?.parent != null) TurnToTarget(_owner.parent.transform.position);}
+    private void Talk(){if(!_waitingForMotion && _owner?.parent != null) TurnToTarget(_owner.parent.transform.position);}
 
     public void CheckPlayerPosition()
     {
@@ -150,9 +150,9 @@ public class NavAgent
 
     public IEnumerator WaitForMotion(float time)
     {
-        _waitForMotion = true;
+        _waitingForMotion = true;
         yield return new WaitForSeconds(time);
         _motion = true;
-        _waitForMotion = false;
+        _waitingForMotion = false;
     }
 }
