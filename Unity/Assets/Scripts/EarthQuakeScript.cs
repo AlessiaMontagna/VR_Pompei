@@ -24,7 +24,7 @@ public class EarthQuakeScript : MonoBehaviour
             //Debug.Log("Entered the Trigger");
             Globals.earthquake = true;
             first = true;
-            StartCoroutine(cameraShake.Shake(10f, .2f));     //(duration, magnitude)
+            StartCoroutine(cameraShake.Shake(10f, .15f));     //(duration, magnitude)
         }
         else
             return;
