@@ -83,13 +83,6 @@ public class ProjectileMoveScript : MonoBehaviour
     public void IsLast(GameObject character)
     {
         target = character;
-        last = true;
-    }
-
-    void OnTriggerEnter(Collider collider)
-    {
-        if(collider?.tag != "NPC")return;
-        Debug.Log("TRIGGERED");
-
-    }
+        last = true;    
+    } 
 }

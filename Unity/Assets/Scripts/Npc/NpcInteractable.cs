@@ -29,7 +29,6 @@ public class NpcInteractable : Interattivo
     private RawImage _eButton;
     private int _talkIndex;
     public int talkIndex => _talkIndex;
-    private bool nearExplosion = false;
 
     void Awake()
     {
@@ -46,19 +45,15 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.OcclusionLayer = mask;
 
         State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => {StartCoroutine(Earthquake());}, () => {}, () => {});
-        foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
+        foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !Globals.earthquake);
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
-        State hit = _navAgent.AddState(NavAgent.NavAgentStates.Hit.ToString(), () => {}, () => {}, () => {});
-        foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => nearExplosion);
-        _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !nearExplosion);
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
     {
         _character = character;
         _parent = parent;
-        gameObject.tag = "NPC";
         _navAgent.SetInitialState(statename);
         _navAgent.SetTargets(targets);
         _voice = _audioSubManager.GetVoice(character);
@@ -156,27 +151,27 @@ public class NpcInteractable : Interattivo
         return (float)fmodLength/1000;
     }
 
-    protected virtual void OnExplosion(GameObject lapillus)
+    protected virtual void OnTriggerEnter(Collider collider)
     {
-        if(_animator == null || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
+        if(_animator == null || collider?.tag != "Player" || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
         _animator.SetTrigger("Hit");
-        _animator.SetBool("Move", false);
-        _animator.SetFloat("MoveFloat", 0f);
-        _animator.SetFloat("HitDistance", Vector3.Distance(GetComponent<Collider>().gameObject.transform.position, gameObject.transform.position));
-        float angle = Vector3.SignedAngle((GetComponent<Collider>().gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
-        if(angle > -20 && angle < 20)_animator.SetFloat("HitAngle", 0);
-        else if(angle > 20 && angle < 160)_animator.SetFloat("HitAngle", 90);
-        else if(angle > -160 && angle < -20)_animator.SetFloat("HitAngle", -90);
-        else if(angle > -160 && angle < 160)_animator.SetFloat("HitAngle", 180);
-
+        if(_animator.GetBool("Move"))
+        {
+            _animator?.SetFloat("MoveFloat", 1f);
+            if(Globals.player == Players.Schiavo){_animator?.SetFloat("HitReaction", 1f);_animator?.SetFloat("HitNobile", 0f);}
+            else {_animator?.SetFloat("HitReaction", 0f);_animator?.SetFloat("HitNobile", 1f);}
+        }
+        _animator.SetFloat("HitFloat", Vector3.SignedAngle((GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward, Vector3.up));
     }
 
     protected virtual void OnTriggerExit(Collider collider)
     {
-        if(_animator == null || _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit")) return;
+        if(_animator == null) return;
         _animator.ResetTrigger("Hit");
-        _animator.SetFloat("HitAngle", 0f);
-        _animator.SetFloat("HitDistance", 0f);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))return;
+        _animator.SetFloat("HitFloat", 0f);
+        _animator.SetFloat("HitReaction", 0f);
+        _animator.SetFloat("HitNobile", 0f);
     }
     
     public void WaitForMotion(float time) => StartCoroutine(_navAgent.WaitForMotion(time));

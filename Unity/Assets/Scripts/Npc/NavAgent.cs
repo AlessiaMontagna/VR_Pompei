@@ -23,7 +23,7 @@ public class NavAgent
     private Dictionary<string, State> _states = new Dictionary<string, State>();
     private List<Vector3> _targets = new List<Vector3>();
 
-    public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake, Hit};
+    public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
 
     public NavAgent(NpcInteractable owner)
