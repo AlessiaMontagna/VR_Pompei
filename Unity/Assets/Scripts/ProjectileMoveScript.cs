@@ -42,8 +42,10 @@ public class ProjectileMoveScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) 
     {
-        if(collision.collider.GetType() == typeof(SphereCollider))return;
         Speed = 0;   
+        
+             
+
         ContactPoint contact = collision.contacts[0]; //Quaternion.identity
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.up);//, contact.point);
         Vector3 pos = contact.point;
