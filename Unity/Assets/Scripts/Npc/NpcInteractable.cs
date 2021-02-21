@@ -48,6 +48,9 @@ public class NpcInteractable : Interattivo
         foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !Globals.earthquake);
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
+        State hit = _navAgent.AddState("Hit", () => {}, () => {}, () => {});
+        foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _animator.GetBool("Hit"));
+        _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_animator.GetBool("Hit"));
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
@@ -114,6 +117,26 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.SelectAudio = "event:/"+ _audioSubManager.GetAudio(_talkIndex, _character, _voice);
         _fmodAudioSource.enabled = true;
     }
+    
+    public IEnumerator WaitToGetUp(Vector3 position)
+    {
+        Debug.Log($"HIT: {position}");
+        float distance = Vector3.Distance(position, gameObject.transform.position);
+        if(distance < 1f)Destroy(gameObject);
+        else if(distance < 2f)Destroy(gameObject, 5f);
+        _animator.SetFloat("HitDistance", distance);
+        float angle = Vector3.SignedAngle((position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
+        if(angle > -20 && angle < 20)_animator.SetFloat("HitAngle", 0);
+        else if(angle > 20 && angle < 160)_animator.SetFloat("HitAngle", 90);
+        else if(angle > -160 && angle < -20)_animator.SetFloat("HitAngle", -90);
+        else if(angle > -160 && angle < 160)_animator.SetFloat("HitAngle", 180);
+        _animator.SetBool("Hit", true);
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        _animator.SetBool("Hit", false);
+    }
+
+    public void WaitForMotion(float time) => StartCoroutine(_navAgent.WaitForMotion(time));
 
     protected virtual void StartInteraction()
     {
@@ -121,10 +144,7 @@ public class NpcInteractable : Interattivo
         StartCoroutine(Talk(_talkIndex));
     }
 
-    protected virtual void UpdateInteraction()
-    {
-        _navAgent.CheckPlayerPosition();
-    }
+    protected virtual void UpdateInteraction(){_navAgent.CheckPlayerPosition();}
 
     protected virtual void StopInteraction()
     {
@@ -151,18 +171,6 @@ public class NpcInteractable : Interattivo
         return (float)fmodLength/1000;
     }
 
-    protected virtual void OnTriggerEnter(Collider collider)
-    {
-        
-    }
-
-    protected virtual void OnTriggerExit(Collider collider)
-    {
-
-    }
-    
-    public void WaitForMotion(float time) => StartCoroutine(_navAgent.WaitForMotion(time));
-
     protected virtual IEnumerator Earthquake()
     {
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
@@ -175,14 +183,13 @@ public class NpcInteractable : Interattivo
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;
     }
-}
 
-/*
-LapilSpawnerScript: c'è una funzione che calcola la distanza tra il player e il lapillo.
-Quando il lapillo collide con qualcosa,
-chiama una funzione del padre (ImpactAudioScript) e questo chiama quello del suo padre (LapilSpawnerScript) che calcola la distanza col player.
-Se inferiore alla soglia che ho messo -> Player = caput
-*/
+    protected virtual void OnTriggerEnter(Collider collider)
+    {
+        if(_animator.GetBool("Hit") || collider.GetType() != typeof(SphereCollider))return;
+        StartCoroutine(WaitToGetUp(collider.gameObject.transform.position));
+    }
+}
 
 /* SUBCLASS EXAMPLE
 using System.Collections;
@@ -210,14 +217,14 @@ public class NpcSubClass : NpcInteractable
         return base.Talk(index);
     }
 
+    protected virtual IEnumerator Earthquake()
+    {
+        base.Earthquake();
+    }
+
     protected override void OnTriggerEnter(Collider collider)
     {
         base.OnTriggerEnter(collider);
-    }
-
-    protected override void OnTriggerExit(Collider collider)
-    {
-        base.OnTriggerExit(collider);
     }
 }
 */
