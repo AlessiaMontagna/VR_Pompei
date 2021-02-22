@@ -194,7 +194,6 @@ public class NavSpawner : MonoBehaviour
             case Characters.SchiavoTutorial: component = agent.AddComponent<NpcTutorial>();break;
             case Characters.MySchiavo: component = agent.AddComponent<NpcMySchiavo>();break;
             case Characters.Amico: component = agent.AddComponent<NpcAmico>();break;
-            case Characters.Soldato: component = agent.AddComponent<NpcSoldato>();break;
             case Characters.Guardia: goto default;
             default: component = agent.AddComponent<NpcInteractable>();break;
         }

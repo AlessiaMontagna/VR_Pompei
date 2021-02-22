@@ -29,6 +29,7 @@ public class NpcInteractable : Interattivo
     private RawImage _eButton;
     private int _talkIndex;
     public int talkIndex => _talkIndex;
+    private bool _nearExplosion = false;
 
     void Awake()
     {
@@ -44,13 +45,16 @@ public class NpcInteractable : Interattivo
         LayerMask mask = LayerMask.GetMask("ProjectCameraLayer");
         _fmodAudioSource.OcclusionLayer = mask;
 
-        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => {StartCoroutine(Earthquake());}, () => {}, () => {});
+        // new states
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.PREVIOUSSTATE = _navAgent.getPreviousState(); _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => {}, () => {});
+        State hit = _navAgent.AddState("Hit", () => { _navAgent.navMeshAgent.isStopped = true; _animator.SetBool("Hit", true); }, () => {}, () => { _animator.SetBool("Hit", false); });
+        
+        // new transitions
         foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !Globals.earthquake);
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
-        State hit = _navAgent.AddState("Hit", () => {}, () => {}, () => {});
-        foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _animator.GetBool("Hit"));
-        _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_animator.GetBool("Hit"));
+        foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _nearExplosion);
+        _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_nearExplosion);
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
@@ -118,22 +122,15 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.enabled = true;
     }
     
-    public IEnumerator WaitToGetUp(Vector3 position)
+    public IEnumerator WaitToGetUp(float distance, float angle)
     {
-        Debug.Log($"HIT: {position}");
-        float distance = Vector3.Distance(position, gameObject.transform.position);
-        if(distance < 1f)Destroy(gameObject);
-        else if(distance < 2f)Destroy(gameObject, 5f);
-        _animator.SetFloat("HitDistance", distance);
-        float angle = Vector3.SignedAngle((position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
-        if(angle > -20 && angle < 20)_animator.SetFloat("HitAngle", 0);
-        else if(angle > 20 && angle < 160)_animator.SetFloat("HitAngle", 90);
-        else if(angle > -160 && angle < -20)_animator.SetFloat("HitAngle", -90);
-        else if(angle > -160 && angle < 160)_animator.SetFloat("HitAngle", 180);
-        _animator.SetBool("Hit", true);
-        yield return new WaitForSeconds(0.5f);
-        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
-        _animator.SetBool("Hit", false);
+        Debug.Log($"HIT: distance: {distance}m; angle: {angle}°");
+        float delay = 1f;
+        yield return new WaitForSeconds(delay);
+        delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit")?_animator.GetCurrentAnimatorStateInfo(0).length - delay : Random.Range(1.8f,3.3f);
+        Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
+        yield return new WaitForSeconds(delay + _animator.GetFloat("HitAngle") == 0 ? 2f : 0f);
+        _nearExplosion = false;
     }
 
     public void WaitForMotion(float time) => StartCoroutine(_navAgent.WaitForMotion(time));
@@ -174,11 +171,14 @@ public class NpcInteractable : Interattivo
     protected virtual IEnumerator Earthquake()
     {
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
+        _navAgent.navMeshAgent.ResetPath();
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
-        float length = 3f; //Nervously Look Around animation duration is 6.08
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")){length = _animator.GetCurrentAnimatorStateInfo(0).length;Debug.Log($"ANIMATOR CORRETTO!! {length}");}
-        yield return new WaitForSeconds(length);
+        float delay = 1f;
+        yield return new WaitForSeconds(delay);
+        delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")?_animator.GetCurrentAnimatorStateInfo(0).length - delay : 2.3f;
+        //Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
+        yield return new WaitForSeconds(delay);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;
@@ -186,8 +186,19 @@ public class NpcInteractable : Interattivo
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
-        if(_animator.GetBool("Hit") || collider.GetType() != typeof(SphereCollider))return;
-        StartCoroutine(WaitToGetUp(collider.gameObject.transform.position));
+        if(_animator.GetBool("Hit") || collider.tag != "Lapillus" || collider.GetType() != typeof(SphereCollider))return;
+        float distance = Vector3.Distance(new Vector3(collider.gameObject.transform.position.x, gameObject.transform.position.y, collider.gameObject.transform.position.z), gameObject.transform.position);
+        if(distance < 1f)Destroy(gameObject);
+        else if(distance < 3f)Destroy(gameObject, 10f);
+        _animator.SetFloat("HitDistance", distance);
+        float angle = Vector3.SignedAngle((collider.gameObject.transform.position - gameObject.transform.position), gameObject.transform.forward, Vector3.up);
+        if(angle > -30 && angle < 30)angle = 0;
+        else if(angle > 30 && angle < 150)angle = 90;
+        else if(angle > -150 && angle < -30)angle = -90;
+        else if(angle > -150 && angle < 150)angle = 180;
+        _animator.SetFloat("HitAngle", angle);
+        _nearExplosion = true;
+        StartCoroutine(WaitToGetUp(distance, angle));
     }
 }
 
