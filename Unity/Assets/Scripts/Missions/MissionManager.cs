@@ -23,7 +23,7 @@ public class MissionManager : MonoBehaviour
                                 "Nuovo obiettivo: vai al macellum e prendi il cibo indicato." };
     private string[] _textEn = { "New goal: talk to Marcus",
                                 "New goal: find your slave",
-                                "New goal: go to the Macellum and take the food." };
+                                "New goal: go to the Macellum and take the showing food." };
     private GameObject _pergamena;
     // Start is called before the first frame update
     void Start()
