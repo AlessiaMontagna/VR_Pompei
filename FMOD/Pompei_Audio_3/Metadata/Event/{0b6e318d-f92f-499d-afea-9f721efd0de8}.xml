@@ -118,23 +118,22 @@
 	<object class="MixerBusPanner" id="{59e87f59-1282-458e-bd16-3af9ca6bc22d}" />
 	<object class="SingleSound" id="{53ac8abb-5320-4a91-b00f-9f132587b514}">
 		<property name="length">
-			<value>36.075102040816326</value>
+			<value>26.075102040816326</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>10</value>
 		</property>
 		<property name="looping">
 			<value>true</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{5a4d23f5-321d-4072-9881-fd1eb8a5eb56}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{910ea4cf-404a-48af-a4c6-9f5c87eeecc7}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{52ba82ca-f677-44cd-8574-eb66a3cd6cf5}">
-		<property name="volume">
-<<<<<<< HEAD
-			<value>-8.5</value>
-=======
-			<value>-7.5</value>
->>>>>>> origin/Giorgio
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -153,7 +152,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>35.5</value>
+			<value>25.5</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{2d83d8e9-5302-4583-aa7e-e9e574af4d06}</destination>
@@ -179,6 +178,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{25c74267-f012-4d44-9387-7cfbb2f295b8}" />
 	<object class="MixerBusFader" id="{81c1e26a-78b7-45ee-878e-428f03b97c70}" />
+	<object class="FadeCurve" id="{5a4d23f5-321d-4072-9881-fd1eb8a5eb56}">
+		<relationship name="startPoint">
+			<destination>{9df5c458-df78-4b2d-8cf5-6ff175bd86e8}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{1f4446d5-47ad-4a0c-acf1-77fbba510533}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{77f04ba7-7676-42b9-9ec4-12fad25a13f3}">
 		<relationship name="effects">
 			<destination>{801ec34c-c316-45f6-9e2a-04ada8020949}</destination>
@@ -207,18 +214,34 @@
 		<property name="maximumDistance">
 			<value>30</value>
 		</property>
-<<<<<<< HEAD
-=======
 		<property name="extentMode">
 			<value>1</value>
 		</property>
 		<property name="soundSize">
-			<value>0.900000036</value>
+			<value>3.60000014</value>
 		</property>
 		<property name="minimumExtent">
 			<value>268</value>
 		</property>
->>>>>>> origin/Giorgio
+	</object>
+	<object class="AutomationPoint" id="{9df5c458-df78-4b2d-8cf5-6ff175bd86e8}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>0.289506406</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{1f4446d5-47ad-4a0c-acf1-77fbba510533}">
+		<property name="position">
+			<value>1.5</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
 	</object>
 	<object class="MixerBusFader" id="{801ec34c-c316-45f6-9e2a-04ada8020949}" />
 	<object class="AutomationPoint" id="{630f6517-de43-40c8-91af-d5a9f174fad2}">
