@@ -12,7 +12,8 @@ public class Epilogue : MonoBehaviour
     public GameObject Fire;
     public LevelChangerScript level;
     public Transform ExplosionSpot;
-    public CameraShakeScript cameraShake;    
+    public CameraShakeScript cameraShake;
+    public GameObject VolcanoExplosion; 
     public float radius;
     public float power;
     bool _first = false;    
@@ -21,7 +22,8 @@ public class Epilogue : MonoBehaviour
     {
         SmokeColumn.SetActive(false);
         Barriers.SetActive(false);
-        AudioListener.pause = false;                  
+        AudioListener.pause = false;
+        VolcanoExplosion.SetActive(false);                 
     }
    
     void OnTriggerEnter(Collider other) 
@@ -43,7 +45,9 @@ public class Epilogue : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         Barriers.SetActive(true);
-        yield return new WaitForSeconds(15.0f);  
+        yield return new WaitForSeconds(5.0f);
+        VolcanoExplosion.SetActive(true);
+        yield return new WaitForSeconds(10.0f);  
         SmokeColumn.SetActive(true);
         yield return new WaitForSeconds(11.3f);
         level.FadeToLevel(0); //torna al menu  
