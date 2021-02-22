@@ -115,7 +115,7 @@ public class NavAgent
         else destination = _targets.ElementAt(Random.Range(0, _targets.Count - 1));
         _navMeshAgent.SetDestination(destination);
         _targets.Remove(destination);
-        Debug.Log($"STATES: 2nd previous ({PREVIOUSSTATE}); previous ({GetPreviousState()}); current ({GetCurrentState()});");
+        Debug.Log($"STATES: 2nd previous ({PREVIOUSSTATE}); previous ({GetPreviousState().Name}); current ({GetCurrentState().Name});");
         //Debug.Log("Moving to: "+destination);
     }
 
