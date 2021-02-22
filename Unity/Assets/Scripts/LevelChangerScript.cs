@@ -5,21 +5,27 @@ using UnityEngine.SceneManagement;
 public class LevelChangerScript : MonoBehaviour
 {
     public Animator animator;
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
     bool AlreadyPlayed = false;
-    //bool stop = false;
     private int _levelToLoad;
     
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
         StartCoroutine("StartLevel");
     }
 
     public IEnumerator StartLevel()
     {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Scena_1":Globals.player = Players.Nobile;break;
+            case "ScenaLapilli":Globals.player = Players.Mercante;break;
+            case "ScenaFinale":Globals.player = Players.Nobile;break;
+            default: Debug.Log($"Starting {SceneManager.GetActiveScene().name}");break;
+        }
         yield return new WaitForSeconds(1.0f);
-        Debug.Log("Fading in...");
+        //Debug.Log("Fading in...");
         animator.SetTrigger("FadeIn");
     }
 
@@ -44,7 +50,7 @@ public class LevelChangerScript : MonoBehaviour
     {
         if(!AlreadyPlayed)
         {
-            audioSource.Play();
+            _audioSource.Play();
             AlreadyPlayed = true;
         }
         animator.SetTrigger("SwooshIn");

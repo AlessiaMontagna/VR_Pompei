@@ -15,8 +15,10 @@ public class NpcMySchiavo : NpcInteractable
     // Start is called before the first frame update
     void Start()
     {
-        if(navAgent == null) Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
         _swoosh = FindObjectOfType<LevelChangerScript>();
+        if(navAgent != null) return;
+        Initialize(Characters.MySchiavo, FindObjectOfType<NavSpawner>().gameObject, "Idle", null);
+        gameObject.transform.parent = FindObjectsOfType<NavElement>().Where(i => i != null && i.subrole == NavSubroles.MySchiavoStop).ElementAt(0).gameObject.transform;
     }
 
     protected override void StartInteraction()
@@ -28,7 +30,6 @@ public class NpcMySchiavo : NpcInteractable
 
     private IEnumerator Mission3Talk(int index)
     {
-       
         animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         var player = FindObjectOfType<InteractionManager>();
         var playerFirstPersonController = player.GetComponent<FirstPersonController>();

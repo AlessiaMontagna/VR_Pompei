@@ -23,7 +23,14 @@ public class TutorialManager : MonoBehaviour
         _scriptAgenda = FindObjectOfType<ShowAgenda>();
         _scriptAgenda.enabled = false;
         _missionIndex = 0;
-        _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
+        if(Globals.language == "en")
+        {
+            _tutorialText.text = "Move around with your mouse and walk using WASD keys";
+        }
+        else
+        {
+            _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
+        }
         _activateMission = FindObjectOfType<MissionManager>();
        // _activateMission.enabled = false;
 
@@ -48,22 +55,27 @@ public class TutorialManager : MonoBehaviour
             case 4:
                 PutDownMappa();
                 break;
-            case 5:
-                CheckCodex();
-                break;
-            case 6:
-                FinishTutorial();
-                break;
+            //case 5:
+            //    CheckCodex();
+            //    break;
+            //case 6:
+            //    FinishTutorial();
+            //    break;
             default: throw new System.ArgumentOutOfRangeException();
         }
     }
 
     private void CheckWalk()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        //if()
+        if(CrossPlatformInputManager.GetAxis("MoveVertical")!= 0 ||
+           CrossPlatformInputManager.GetAxis("MoveHorizontal")!= 0 ||
+           CrossPlatformInputManager.GetAxis("Horizontal") != 0 ||
+           CrossPlatformInputManager.GetAxis("Vertical") != 0)
         {
             _missionIndex = 1;
-            _tutorialText.text = "";
+            //_tutorialText.text = "";
         }
         
     }
@@ -72,7 +84,14 @@ public class TutorialManager : MonoBehaviour
     {
         if (_waitTime <= 0)
         {
-            _tutorialText.text = "Interagisci con oggetti e personaggi premendo il tasto indicato";
+            if (Globals.language == "en")
+            {
+                _tutorialText.text = "Interact with objects and people by pressing the showing button";
+            }
+            else
+            {
+                _tutorialText.text = "Interagisci con oggetti e personaggi premendo il tasto indicato";
+            }
             _missionIndex = 2;
         }
         else
@@ -90,7 +109,15 @@ public class TutorialManager : MonoBehaviour
         }
         if(_schiavo.hasTalked)
         {
-            _tutorialText.text = "Premi  <sprite index= 0> per visualizzare la mappa";
+            _collider.enabled = false;
+            if (Globals.language == "it")
+            {
+                _tutorialText.text = "Premi  <sprite index= 0> per visualizzare la mappa";
+            }
+            else
+            {
+                _tutorialText.text = "Press  <sprite index= 0> to view the map";
+            }
             _activateMission.UpdateMission(Missions.Mission1_TalkWithFriend);
             _scriptAgenda.enabled = true;
             _missionIndex = 3;
@@ -101,8 +128,15 @@ public class TutorialManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            _collider.enabled = false;
-            _tutorialText.text = "Quì vengono mostrati i punti di interesse per i vari obiettivi. Premi nuovamente <sprite index= 0> per chiudere la mappa";
+            if (Globals.language == "it")
+            {
+                _tutorialText.text = "Quì vengono mostrati i punti di interesse per i vari obiettivi. Premi nuovamente <sprite index= 0> per chiudere la mappa";
+
+            }
+            else
+            {
+                _tutorialText.text = "In this section you will see where to go for the various goals. Press again <sprite index= 0> to close the map.";
+            }
             _missionIndex = 4;
         }
     }
@@ -116,21 +150,21 @@ public class TutorialManager : MonoBehaviour
         
     }
 
-    private void CheckCodex()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _tutorialText.text = "Alcuni monumenti presenti nell'ambiente contengono informazioni storiche. Quando ci passi vicino, queste informazioni verranno salvate in questa sezione.";
-            _missionIndex = 6;
-        }
-    }
+    //private void CheckCodex()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        _tutorialText.text = "Alcuni monumenti presenti nell'ambiente contengono informazioni storiche. Quando ci passi vicino, queste informazioni verranno salvate in questa sezione.";
+    //        _missionIndex = 6;
+    //    }
+    //}
 
-    private void FinishTutorial()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _tutorialText.enabled = false;
-            this.enabled = false;
-        }
-    }
+    //private void FinishTutorial()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        _tutorialText.enabled = false;
+    //        this.enabled = false;
+    //    }
+    //}
 }

@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class CameraShakeScript : MonoBehaviour
 {    
-    public AudioSource audioSource;
-    bool AlreadyPlayed = false;
-    bool stop = false;
+    public GameObject[] Tiles;
+    private AudioSource _audioSource;    
+    private bool AlreadyPlayed = false;
+    private bool stop = false;
 
-    void Start()
+    void Awake()
     {
-        audioSource = GetComponent<AudioSource>();        
-        audioSource.Stop();        
+        _audioSource = GetComponent<AudioSource>();        
+        _audioSource.Stop();
+        if(Tiles.Length == 0) return;
+            else
+            {
+                for(int i=0; i<Tiles.Length; i++)
+                {
+                    Tiles[i].SetActive(false);
+                }
+            }                       
     }
 
     public IEnumerator Shake (float duration, float magnitude)  //public -> can access this script from external scripts
@@ -19,9 +28,18 @@ public class CameraShakeScript : MonoBehaviour
         //play
         if(!AlreadyPlayed)
         {
-            audioSource.Play();
-            audioSource.volume = 0;
+            _audioSource.Play();
+            _audioSource.volume = 0;
             AlreadyPlayed = true;
+            
+            if(Tiles.Length == 0) yield return null;
+            else
+            {
+                for(int i=0; i<Tiles.Length; i++)
+                {
+                    Tiles[i].SetActive(true);
+                }
+            }
         }
                 
         Vector3 originalPos = transform.localPosition;
@@ -41,10 +59,11 @@ public class CameraShakeScript : MonoBehaviour
 
             if(time_elapsed >= threshold) stop = true;
             //fade in
-            if(audioSource.volume <= 1f && !stop) audioSource.volume = audioSource.volume + delta;
-            if(audioSource.volume >= 0 && stop)
+            if(_audioSource.volume <= 1f && !stop) _audioSource.volume = _audioSource.volume + delta;
+            //fade out
+            if(_audioSource.volume >= 0 && stop)
             {
-                audioSource.volume = audioSource.volume - delta;
+                _audioSource.volume = _audioSource.volume - delta;
             }
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
@@ -56,7 +75,16 @@ public class CameraShakeScript : MonoBehaviour
             yield return null; // run this coroutine every time Update() is called, does 1 iteration of while per frame
         }
         //stop
-        audioSource.Stop();
+        _audioSource.Stop();
+        if(Tiles.Length == 0) yield return null;
+            else
+            {
+                for(int i=0; i<Tiles.Length; i++)
+                {
+                    Tiles[i].GetComponent<AudioSource>().Stop();
+                    Tiles[i].SetActive(false);
+                }
+            }
         AlreadyPlayed = false;
         transform.localPosition = originalPos; //restore original position
     }
