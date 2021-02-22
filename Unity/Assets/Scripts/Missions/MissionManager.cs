@@ -10,9 +10,13 @@ public class MissionManager : MonoBehaviour
     private Vector3 _mission1;
     private Vector3 _mission2;
     [SerializeField] private Transform _macellumPosition;
+    [SerializeField] private Transform _mission1Position;
+    [SerializeField] private Transform _mission2Position;
     private List<Vector3> _missions;
     private Vector3 _myPosition = new Vector3();
     private Vector3 _mission3 = new Vector3();
+
+
     private TextMeshProUGUI _obiettiviText;
     private string[] _textIt = {  "Nuovo obiettivo: parla con Marcus",
                                 "Nuovo obiettivo: trova il tuo schiavo",
@@ -27,11 +31,11 @@ public class MissionManager : MonoBehaviour
         _pergamena = FindObjectOfType<Pergamena>().gameObject;
         _pergamena.SetActive(false);
         _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>();
-        _mission1 = FindObjectOfType<NpcAmico>().transform.position;
-        _mission2 = FindObjectOfType<NpcMySchiavo>().transform.position;
+        _mission1 = _mission1Position.position;
+        _mission2 = _mission2Position.position;
         _mission3 = _macellumPosition.position;
         _missions = new List<Vector3> {_mission1, _mission2, _mission3 };
-        UpdateMission(Missions.Mission1_TalkWithFriend);
+        //UpdateMission(Missions.Mission1_TalkWithFriend);
     }
 
     public void UpdateMission(Missions missionIndex)

@@ -130,7 +130,7 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // spawn gurads
-        Debug.Log($"START _nGuards:{_nGuards}; _guards:{_guards}");
+        //Debug.Log($"START _nGuards:{_nGuards}; _guards:{_guards}");
         while(_nGuards > _guards)
         {
             List<Vector3> path = new List<Vector3>();
@@ -140,7 +140,7 @@ public class NavSpawner : MonoBehaviour
             SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Path", pathGO.ElementAt(Random.Range(0, pathGO.Count)), default(Vector3), path);
         }
         // spawn people
-        Debug.Log($"START _nPeople:{_nPeople}; _people:{_people}");
+        //Debug.Log($"START _nPeople:{_nPeople}; _people:{_people}");
         while(_nPeople > _people)
         {
             SpawnUpdate(true);
@@ -149,7 +149,7 @@ public class NavSpawner : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"UPDATE _nPeople:{_nPeople}; _people:{_people}");
+        //Debug.Log($"UPDATE _nPeople:{_nPeople}; _people:{_people}");
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli")return;
         // SPAWN moving people if there are less then defined in Start()
         if(_nPeople > _people)
