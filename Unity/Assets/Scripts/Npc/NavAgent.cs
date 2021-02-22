@@ -26,7 +26,7 @@ public class NavAgent
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
 
-    private string PREVIOUSSTATE;
+    public string PREVIOUSSTATE;
 
     public NavAgent(NpcInteractable owner)
     {
@@ -115,7 +115,7 @@ public class NavAgent
         else destination = _targets.ElementAt(Random.Range(0, _targets.Count - 1));
         _navMeshAgent.SetDestination(destination);
         _targets.Remove(destination);
-        Debug.Log($"STATES: 2nd previous ({PREVIOUSSTATE}); previous ({_navAgent.GetPreviousState()}); current ({_navAgent.GetCurrentState()});");
+        Debug.Log($"STATES: 2nd previous ({PREVIOUSSTATE}); previous ({GetPreviousState()}); current ({GetCurrentState()});");
         //Debug.Log("Moving to: "+destination);
     }
 

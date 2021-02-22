@@ -46,7 +46,7 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.OcclusionLayer = mask;
 
         // new states
-        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.PREVIOUSSTATE = _navAgent.getPreviousState(); _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => {}, () => {});
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.PREVIOUSSTATE = _navAgent.GetPreviousState(); _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => {}, () => {});
         State hit = _navAgent.AddState("Hit", () => { _navAgent.navMeshAgent.isStopped = true; _animator.SetBool("Hit", true); }, () => {}, () => { _animator.SetBool("Hit", false); });
         
         // new transitions
