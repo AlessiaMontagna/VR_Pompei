@@ -37,6 +37,15 @@ public class NpcInteractable : Interattivo
         _animator = gameObject.GetComponent<Animator>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
+        if (Globals.language == "it")
+        {
+            _talk.text = "Parla";
+        }
+        else
+        {
+            _talk.text = "Talk";
+        }
+        _talk.enabled = false;
         _audioSubManager = GameObject.FindObjectOfType<AudioSubManager>();
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;

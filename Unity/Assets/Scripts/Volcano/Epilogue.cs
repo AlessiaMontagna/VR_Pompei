@@ -7,18 +7,23 @@ public class Epilogue : MonoBehaviour
     public GameObject Player;
     public GameObject SmokeColumn;
     public GameObject Barrier;
+    public GameObject Barriers;
     public GameObject Debris;
     public GameObject Fire;
     public LevelChangerScript level;
     public Transform ExplosionSpot;
-    public CameraShakeScript cameraShake;    
+    public CameraShakeScript cameraShake;
+    public GameObject VolcanoExplosion; 
     public float radius;
     public float power;
-    bool _first = false;
+    bool _first = false;    
 
-    void Start() 
+    void Awake() 
     {
-        SmokeColumn.SetActive(false);    
+        SmokeColumn.SetActive(false);
+        Barriers.SetActive(false);
+        AudioListener.pause = false;
+        VolcanoExplosion.SetActive(false);                 
     }
    
     void OnTriggerEnter(Collider other) 
@@ -28,7 +33,8 @@ public class Epilogue : MonoBehaviour
             Debug.Log("Player entered the Trigger: Epiogue");
             _first = true;            
             Barrier.SetActive(true);
-            Explode();              
+            Vector3 explosionPos = ExplosionSpot.position;
+            Explode(explosionPos, radius, power, Debris, Fire, cameraShake);              
             StartCoroutine("Smoke");
         }
         else
@@ -37,17 +43,22 @@ public class Epilogue : MonoBehaviour
 
     public IEnumerator Smoke()
     {
-        yield return new WaitForSeconds(15.0f);  
-        SmokeColumn.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        Barriers.SetActive(true);
         yield return new WaitForSeconds(5.0f);
-        level.FadeToLevel(0); //torna al menu
+        VolcanoExplosion.SetActive(true);
+        yield return new WaitForSeconds(10.0f);  
+        SmokeColumn.SetActive(true);
+        yield return new WaitForSeconds(11.3f);
+        level.FadeToLevel(0); //torna al menu  
+        AudioListener.pause = true;      
     }
 
-    public void Explode()
+    public void Explode(Vector3 explosionPos, float radius, float power, GameObject Debris, GameObject Fire, CameraShakeScript cameraShake)
     {
-        Vector3 explosionPos = ExplosionSpot.position;
+        //Vector3 explosionPos = ExplosionSpot.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
-        var explosionVFX = Instantiate(Debris, explosionPos, Quaternion.identity);        
+        var explosionVFX = Instantiate(Debris, explosionPos, Quaternion.identity);                
         var fireVFX = Instantiate(Fire, explosionPos, Quaternion.identity);
         StartCoroutine(cameraShake.Shake(0.5f, 0.3f));
 
