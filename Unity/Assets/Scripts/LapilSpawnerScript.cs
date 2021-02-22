@@ -44,8 +44,8 @@ public class LapilSpawnerScript : MonoBehaviour
         var prefabVFX = Instantiate(last, position, Quaternion.identity);
         prefabVFX.GetComponent<SpawnLapillusScript>().Normal();    
         Destroy(prefabVFX, 5);
-        //Debug.Log("Loading Scene...");
-        //LoadFinalScene();
+        Debug.Log("Loading Scene...");
+        LoadFinalScene();
     }
 
     public void ComputeDistance(Vector3 pos)

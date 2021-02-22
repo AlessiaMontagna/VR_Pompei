@@ -52,6 +52,11 @@ public class CameraShakeScript : MonoBehaviour
             float threshold = duration/2;
             float delta = 1.0f/(frames*5.0f);//frames/(duration - threshold);
 
+            //Debug.Log("Frames: " + frames);
+            //Debug.Log("threshold: " + threshold);
+            //Debug.Log("delta: " + delta);
+            //Debug.Log("duration: " + duration);
+
             if(time_elapsed >= threshold) stop = true;
             //fade in
             if(_audioSource.volume <= 1f && !stop) _audioSource.volume = _audioSource.volume + delta;

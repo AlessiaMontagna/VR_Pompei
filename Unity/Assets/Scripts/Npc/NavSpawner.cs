@@ -130,67 +130,56 @@ public class NavSpawner : MonoBehaviour
             }
         }
         // spawn gurads
-        //Debug.Log($"START _nGuards:{_nGuards}; _guards:{_guards}");
-        while(_nGuards > _guards)
-        {
-            List<Vector3> path = new List<Vector3>();
-            List<GameObject> pathGO = _paths.ElementAt(Random.Range(0, _paths.Count)).Value;
-            foreach(var item in pathGO){path.Add(item.transform.position);}
-            if(!_prefabs.TryGetValue(Characters.Guardia, out prefabs))Debug.LogError("PREFABS ERROR");
-            SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), Characters.Guardia, "Path", pathGO.ElementAt(Random.Range(0, pathGO.Count)), default(Vector3), path);
-        }
+        while(_nGuards > _guards)SpawnUpdate(true, true);
         // spawn people
-        //Debug.Log($"START _nPeople:{_nPeople}; _people:{_people}");
-        while(_nPeople > _people)
-        {
-            SpawnUpdate(true);
-        }
+        while(_nPeople > _people)SpawnUpdate(false, true);
     }
 
     void Update()
     {
-        //Debug.Log($"UPDATE _nPeople:{_nPeople}; _people:{_people}");
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli")return;
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli") return;
         // SPAWN moving people if there are less then defined in Start()
-        if(_nPeople > _people)
-        {
-            SpawnUpdate(false);
-        }
+        if(_nPeople > _people)SpawnUpdate(false, false);
     }
 
-    private void SpawnUpdate(bool spawnInPath)
+    private void SpawnUpdate(bool guards, bool spawnInPath)
     {
         List<Vector3> path = new List<Vector3>();
-
-        if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-        
-        var characters = _prefabs.Keys.Where(i => i == Characters.Mercante || i == Characters.NobileM || i == Characters.NobileF).ToList();
-        Characters character = characters.ElementAt(Random.Range(0, characters.Count));
-        
+        Characters character;
         GameObject spawn;
-        if(spawnInPath)
+        string statename = "Move";
+        var index = Random.Range(0, _paths.Count);
+        foreach(var item in _paths.ElementAt(index).Value){path.Add(item.transform.position);}
+        if(!_spawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+
+        if(guards)
         {
-            spawns = spawns.Where(i => i.transform.position.y < 5f).ToList();
-            var index = Random.Range(0, _paths.Count);
-            foreach(var item in _paths.ElementAt(index).Value){path.Add(item.transform.position);}
+            character = Characters.Guardia;
             spawn = _paths.ElementAt(index).Value.ElementAt(Random.Range(0, _paths.ElementAt(index).Value.Count));
-            path.Remove(spawn.transform.position);
+            if(spawnInPath)statename = "Path";
+            else path.Remove(spawn.transform.position);
         }
         else
         {
-            if(Random.Range(0f, 1f) < 0.2){spawns = spawns.Where(i => i.transform.position.y > 5f).ToList();}
+            var characters = _prefabs.Keys.Where(i => i == Characters.Mercante || i == Characters.NobileM || i == Characters.NobileF).ToList();
+            character = characters.ElementAt(Random.Range(0, characters.Count));
+            if(spawnInPath)
+            {
+                spawns = spawns.Where(i => i.transform.position.y < 5f).ToList();                
+                spawn = _paths.ElementAt(index).Value.ElementAt(Random.Range(0, _paths.ElementAt(index).Value.Count));
+                path.Remove(spawn.transform.position);
+            }
             else
             {
-                spawns = spawns.Where(i => i.transform.position.y < 5f).ToList();
-                foreach(var item in _paths.ElementAt(Random.Range(0, _paths.Count)).Value){path.Add(item.transform.position);}
+                if(Random.Range(0f, 1f) < 0.2){spawns = spawns.Where(i => i.transform.position.y > 5f).ToList();}
+                else spawns = spawns.Where(i => i.transform.position.y < 5f).ToList();
+                spawn = spawns.ElementAt(Random.Range(0, spawns.Count));
+                spawns.Remove(spawn);
             }
-            spawn = spawns.ElementAt(Random.Range(0, spawns.Count));
-            spawns.Remove(spawn);
+            path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
         }
-        path.Add(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position);
-
         if(!_prefabs.TryGetValue(character, out var prefabs))Debug.LogError("PREFABS ERROR");
-        SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, "Move", spawn, default(Vector3), path);
+        SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, statename, spawn, default(Vector3), path);
     }
 
     public GameObject SpawnAgent(GameObject prefab, Characters character, string statename, GameObject parent, Vector3 position, List<Vector3> targets)
@@ -205,7 +194,6 @@ public class NavSpawner : MonoBehaviour
             case Characters.SchiavoTutorial: component = agent.AddComponent<NpcTutorial>();break;
             case Characters.MySchiavo: component = agent.AddComponent<NpcMySchiavo>();break;
             case Characters.Amico: component = agent.AddComponent<NpcAmico>();break;
-            case Characters.Soldato: component = agent.AddComponent<NpcSoldato>();break;
             case Characters.Guardia: goto default;
             default: component = agent.AddComponent<NpcInteractable>();break;
         }
