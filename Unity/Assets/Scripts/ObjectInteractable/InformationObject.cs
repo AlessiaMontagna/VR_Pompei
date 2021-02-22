@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InformationObject : ObjectInteractable
+public class InformationObject : MonoBehaviour
 {
     //[SerializeField] private TextMeshProUGUI _tutorialText;
     [SerializeField] private CodexInformation _objectName;
@@ -25,30 +25,30 @@ public class InformationObject : ObjectInteractable
         _codex = FindObjectOfType<Codex>();
     }
 
-    public override void Interact()
-    {
-    }
+    //public override void Interact()
+    //{
+    //}
 
-    public override void UITextOff()
-    {
-    }
+    //public override void UITextOff()
+    //{
+    //}
 
-    public override void UITextOn()
-    {
+    //public override void UITextOn()
+    //{
         
-        StartCoroutine(NewVoice());
-        _codex.addDiscoveryId((int)_objectName);
-        _getInformation = true;
-        _audioSource.clip = _audioClip;
-        _audioSource.Play();
-        foreach (BoxCollider b in GetComponents<BoxCollider>())
-        {
-            b.enabled = false;
-        }
+    //    StartCoroutine(NewVoice());
+    //    _codex.addDiscoveryId((int)_objectName);
+    //    _getInformation = true;
+    //    _audioSource.clip = _audioClip;
+    //    _audioSource.Play();
+    //    foreach (BoxCollider b in GetComponents<BoxCollider>())
+    //    {
+    //        b.enabled = false;
+    //    }
         
         
     
-    }
+    //}
 
     void OnTriggerEnter(Collider other)
     {
@@ -69,9 +69,17 @@ public class InformationObject : ObjectInteractable
 
     private IEnumerator NewVoice()
     {
-        _nuovaVoceText.text = "Nuova nota nel codex: " + _objectName.ToString() + "\n\npremi <sprite index= 0>  per informazioni";
+        if (Globals.language == "en")
+        {
+            _nuovaVoceText.text = "New entry in codex: " + _objectName.ToString() + "\n\npress <sprite index= 0> for more information";
+        }
+        else
+        {
+            _nuovaVoceText.text = "Nuova nota nel codex: " + _objectName.ToString() + "\n\npremi <sprite index= 0>  per informazioni";
+        }
         yield return new WaitForSeconds(5);
-        if(_nuovaVoceText.text == "Nuova nota nel codex: " + _objectName.ToString() + "\n\npremi <sprite index= 0>  per informazioni") _nuovaVoceText.text = "";
+        if(_nuovaVoceText.text == "Nuova nota nel codex: " + _objectName.ToString() + "\n\npremi <sprite index= 0>  per informazioni" ||
+             _nuovaVoceText.text == "New entry in codex: " + _objectName.ToString() + "\n\npress <sprite index= 0> for more information") _nuovaVoceText.text = "";
 
     }
 }

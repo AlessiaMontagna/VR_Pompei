@@ -21,7 +21,7 @@ public static class Globals
     public static bool someoneIsTalking = false;
     public static bool earthquake = false;
     public static bool gamePause = false;
-    public static string language = "";
+    public static string language = "en";
 }
 
 // access variables via Globals.variable

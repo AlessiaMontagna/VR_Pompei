@@ -26,6 +26,15 @@ public class FoodInteractable : ObjectInteractable
         _audioSource = FindObjectOfType<FirstPersonController>().GetComponents<AudioSource>()[1];
         _foodManager = FindObjectOfType<MercatoFoodManager>();
         pick = FindObjectOfType<Pick>().GetComponent<TextMeshProUGUI>();
+        if(Globals.language == "it")
+        {
+            pick.text = "Prendi";
+        }
+        else
+        {
+            pick.text = "Pick";
+        }
+        pick.enabled = false;
         dialogueText = FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>();
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         highlightColor = new Color(0.3962264f, 0.3962264f, 0.3962264f, 1);

@@ -14,9 +14,12 @@ public class MissionManager : MonoBehaviour
     private Vector3 _myPosition = new Vector3();
     private Vector3 _mission3 = new Vector3();
     private TextMeshProUGUI _obiettiviText;
-    private string[] _text = {  "Nuovo obiettivo: parla con Marcus",
+    private string[] _textIt = {  "Nuovo obiettivo: parla con Marcus",
                                 "Nuovo obiettivo: trova il tuo schiavo",
                                 "Nuovo obiettivo: vai al macellum e prendi il cibo indicato." };
+    private string[] _textEn = { "New goal: talk to Marcus",
+                                "New goal: find your slave",
+                                "New goal: go to the Macellum and take the food." };
     private GameObject _pergamena;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +37,15 @@ public class MissionManager : MonoBehaviour
     public void UpdateMission(Missions missionIndex)
     {
         _myPosition = _missions[(int)missionIndex];
-        _obiettiviText.text = _text[(int)missionIndex];
+        if(Globals.language == "en")
+        {
+            _obiettiviText.text = _textEn[(int)missionIndex];
+        }
+        else
+        {
+            _obiettiviText.text = _textIt[(int)missionIndex];
+        }
+        
         if((int)missionIndex == 2)
         {
             _pergamena.SetActive(true);
