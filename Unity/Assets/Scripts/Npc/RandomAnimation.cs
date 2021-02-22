@@ -14,6 +14,7 @@ public class RandomAnimation : StateMachineBehaviour
         int nextStateIndex = -1;
         if(animator.GetBool("Move") && animator.GetBool("Talk") && animator.GetBool("Turn") && animator.GetBool("Earthquake")){nextState = "Idle";nextStateIndex = Random.Range(0, idleAnimations);}
         if(animator.GetBool("Talk")){nextState = "Talk";nextStateIndex = Random.Range(0, talkAnimations);}
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaFinale")nextStateIndex = 9;
         //Debug.Log($"State: {nextState}; Animation: {nextStateIndex}");
         if(nextState != "" && nextStateIndex >= 0)animator.SetFloat($"{nextState}Float", nextStateIndex);
     }

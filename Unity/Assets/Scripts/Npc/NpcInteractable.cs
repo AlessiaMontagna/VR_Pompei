@@ -35,17 +35,14 @@ public class NpcInteractable : Interattivo
     {
         _navAgent = new NavAgent(this);
         _animator = gameObject.GetComponent<Animator>();
-        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
-        if (Globals.language == "it")
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ScenaFinale")
         {
-            _talk.text = "Parla";
+            _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+            _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
+            if(Globals.language == "it")_talk.text = "Parla";
+            else _talk.text = "Talk";
+            _talk.enabled = false;
         }
-        else
-        {
-            _talk.text = "Talk";
-        }
-        _talk.enabled = false;
         _audioSubManager = GameObject.FindObjectOfType<AudioSubManager>();
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;
@@ -72,8 +69,11 @@ public class NpcInteractable : Interattivo
         _parent = parent;
         _navAgent.SetInitialState(statename);
         _navAgent.SetTargets(targets);
-        _voice = _audioSubManager.GetVoice(character);
-        if(_voice == null)Debug.LogError($"GetVoice({character}) returned null");
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ScenaFinale")
+        {
+            _voice = _audioSubManager.GetVoice(character);
+            if(_voice == null)Debug.LogError($"GetVoice({character}) returned null");
+        }
         _talkIndex = -1;
         if(targets != null && targets?.Count > 0)
         {
