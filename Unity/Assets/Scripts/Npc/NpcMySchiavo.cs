@@ -65,7 +65,7 @@ public class NpcMySchiavo : NpcInteractable
         parent.transform.LookAt(nobile.transform);
         nobile.transform.position = playerPosition;
         nobile.transform.rotation = playerRotation;
-        nobile.GetComponent<NpcInteractable>().WaitForMotion(2f);
+        nobile.GetComponent<NpcInteractable>().WaitForMotion(5f);
 
         Globals.player = Players.Schiavo;
         GetComponent<CapsuleCollider>().enabled = false;
