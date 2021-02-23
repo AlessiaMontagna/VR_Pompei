@@ -185,7 +185,7 @@ public class NpcInteractable : Interattivo
         _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
         float delay = 1f;
         yield return new WaitForSeconds(delay);
-        delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")?_animator.GetCurrentAnimatorStateInfo(0).length - delay : 2.3f;
+        delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")? _animator.GetCurrentAnimatorStateInfo(0).length - delay : 2.3f;
         //Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
         yield return new WaitForSeconds(delay);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
