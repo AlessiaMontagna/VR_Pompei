@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
 
@@ -52,13 +53,12 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.OcclusionLayer = mask;
 
         // new states
-        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.PREVIOUSSTATE = _navAgent.GetPreviousState().Name; _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => {}, () => {});
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude); if(!Globals.earthquake && _navAgent.DestinationReached())Destroy(gameObject); }, () => {});
         State hit = _navAgent.AddState("Hit", () => { _navAgent.navMeshAgent.isStopped = true; _animator.SetBool("Hit", true); }, () => {}, () => { _animator.SetBool("Hit", false); });
         
         // new transitions
         foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
-        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !Globals.earthquake);
-        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
+        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => _navAgent.interaction);
         foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _nearExplosion);
         _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_nearExplosion);
     }
@@ -182,12 +182,17 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         _navAgent.navMeshAgent.ResetPath();
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-        _navAgent.SetTargets(new List<Vector3>{spawns.ElementAt(0).transform.position});
+        NavMeshPath path = new NavMeshPath();
+        _navAgent.navMeshAgent.CalculatePath(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position, path);
         float delay = 1f;
         yield return new WaitForSeconds(delay);
         delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")? _animator.GetCurrentAnimatorStateInfo(0).length - delay : 2.3f;
         //Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
         yield return new WaitForSeconds(delay);
+        if(path.status == NavMeshPathStatus.PathInvalid)Debug.LogError("INVALID PATH");
+        yield return new WaitUntil(() => path.status != NavMeshPathStatus.PathPartial);
+        _navAgent.navMeshAgent.SetPath(path);
+        _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;

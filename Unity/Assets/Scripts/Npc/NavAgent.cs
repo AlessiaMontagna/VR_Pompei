@@ -26,8 +26,6 @@ public class NavAgent
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
 
-    public string PREVIOUSSTATE;
-
     public NavAgent(NpcInteractable owner)
     {
         _owner = owner;
@@ -104,6 +102,7 @@ public class NavAgent
         //if(_navMeshAgent.velocity.magnitude<2)Debug.Log($"Velocity: {_navMeshAgent.velocity.magnitude}");
         _animator.SetBool(NavAgentStates.Turn.ToString(), false);
         _animator.SetFloat(NavAgentStates.Move.ToString() + animatorVariable, _navMeshAgent.velocity.magnitude);
+        //Debug.Log("check DestinationReached: "+DestinationReached());
         if(!DestinationReached()) return;
         if(_targets.Count == 0)
         {
@@ -113,10 +112,8 @@ public class NavAgent
         Vector3 destination;
         if(_targets.Count == 1) destination = _targets.FirstOrDefault();
         else destination = _targets.ElementAt(Random.Range(0, _targets.Count - 1));
-        _navMeshAgent.SetDestination(destination);
+        if(!_navMeshAgent.SetDestination(destination))Debug.LogWarning($"Failed destination setting for: {destination}");
         _targets.Remove(destination);
-        Debug.Log($"STATES: 2nd previous ({PREVIOUSSTATE}); previous ({GetPreviousState().Name}); current ({GetCurrentState().Name});");
-        //Debug.Log("Moving to: "+destination);
     }
 
     private void Path()
