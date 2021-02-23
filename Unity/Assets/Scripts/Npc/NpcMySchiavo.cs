@@ -25,7 +25,7 @@ public class NpcMySchiavo : NpcInteractable
     {
         Globals.someoneIsTalking = true;
         if(swoosh) StartCoroutine(Mission3Talk(0));
-        else base.StartInteraction();
+        else StartCoroutine(Talk(0));
     }
 
     private IEnumerator Mission3Talk(int index)
