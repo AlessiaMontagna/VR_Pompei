@@ -9,11 +9,11 @@ public class SwitchWhatIsShowing : MonoBehaviour
     private GameObject codex;
     private GameObject mappa;
     private bool m_isAxisInUse = false;
-    private ShowAgenda _mappaMode;
+    private ShowAgenda _showAgenda;
 
     void Start()
     {
-        _mappaMode = FindObjectOfType<ShowAgenda>();
+        _showAgenda = FindObjectOfType<ShowAgenda>();
         Codex cod = GameObject.FindObjectOfType<Codex>();
         codex = cod.gameObject;
         Mappa map = GameObject.FindObjectOfType<Mappa>();
@@ -30,7 +30,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
                 GetComponent<ShowAgenda>()._agendaType = agendaType.mappa;
                 Show();
                 m_isAxisInUse = true;
-                _mappaMode.MappaMode(true);
+                _showAgenda.MappaMode(true);
             }
             
         }
@@ -44,7 +44,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
                 Show();
                 FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
                 m_isAxisInUse = true;
-                _mappaMode.MappaMode(false);
+                _showAgenda.MappaMode(false);
             }
         }
         if(Input.GetAxisRaw("Arrows_v") == 0) m_isAxisInUse = false;

@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     public GameObject controlsMenuHolder_en;
 
     public GameObject languageSelectHolder;
+    public GameObject inputController;
 
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
@@ -108,5 +109,16 @@ public class MainMenu : MonoBehaviour
         {
             SetScreenResolution(activeScreenResIndex);
         }
+    }
+
+    public void SetInputController(string input)
+    {
+        Globals.input = input;
+    }
+
+    public void LanguageMenu()
+    {
+        languageSelectHolder.SetActive(true);
+        inputController.SetActive(false);
     }
 }

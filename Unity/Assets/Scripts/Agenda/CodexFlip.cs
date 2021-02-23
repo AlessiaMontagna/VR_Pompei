@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CodexFlip : MonoBehaviour
 {
@@ -16,25 +17,56 @@ public class CodexFlip : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    [SerializeField] private ShowAgenda _arrowManager;
+
     [SerializeField] private Codex codex;
 
 
     void Start()
     {
-        _audioSource = FindObjectOfType<ShowAgenda>().GetComponent<AudioSource>();
+        _audioSource = _arrowManager.GetComponent<AudioSource>();
         _agendaAnimator = GetComponent<Animator>();
     }
     void OnEnable()
     {
-        if (codex._discoveredIndex.Count > 0) UpdateDiscovered(codex._discoveredIndex);
+
+        if (codex._discoveredIndex.Count > 0)
+        {
+            UpdateDiscovered(codex._discoveredIndex);
+
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (codex._currentPage - 1 == 0)
+            {
+                _arrowManager.LeftArrow(false);
+            }
+            else
+            {
+                _arrowManager.LeftArrow(true);
+            }
             FlipLToR();
+            
+              
+        }
         if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (codex._currentPage + 1 == _discoveredPagesList.Count)
+            {
+                _arrowManager.RightArrow(false);
+            }
+            else
+            {
+                _arrowManager.RightArrow(true);
+
+            }
             FlipRToL();
+
+        }
     }
 
     public void FlipRToL()
@@ -65,7 +97,10 @@ public class CodexFlip : MonoBehaviour
     public void FlipLToR()
     {
         if (_agendaAnimator == null || codex._currentPage == 0)
+        {
             return;
+        }
+            
         _audioSource.clip = Resources.Load<AudioClip>("FeedbackSounds/Turn_Pages");
         _audioSource.Play();
         _agendaAnimator.SetBool(name: "FlipLToR", true);
@@ -93,7 +128,10 @@ public class CodexFlip : MonoBehaviour
 
     public void setPreviousLeftBG()
     {
-        if (codex._currentPage - 1 == 0) setTexture("Left_BG", _backgroundTexture);
+        if (codex._currentPage - 1 == 0)
+        {
+            setTexture("Left_BG", _backgroundTexture);
+        }
         else setTexture("Left_BG", _discoveredPagesList[codex._currentPage - 2]);
     }
     public void setPreviousRightBG()
@@ -116,7 +154,7 @@ public class CodexFlip : MonoBehaviour
 
     public void UpdateDiscovered(List<int> indexes)
     {
-
+        
         _discoveredPagesList.Clear();
 
         for (int i = 0; i < indexes.Count; i++)
@@ -126,25 +164,30 @@ public class CodexFlip : MonoBehaviour
 
         if (codex._currentPage > indexes.Count - 1)
         {
+            _arrowManager.RightArrow(true);
             setTexture("Right", _backgroundTexture);
             setTexture("Right_BG", _backgroundTexture);
         }
         else
         {
+            _arrowManager.RightArrow(false);
             setTexture("Right", _discoveredPagesList[codex._currentPage]);
             setTexture("Right_BG", _discoveredPagesList[codex._currentPage]);
         }
 
         if (codex._currentPage == 0)
         {
+            _arrowManager.LeftArrow(false);
             setTexture("Left_BG", _backgroundTexture);
             setTexture("Left", _backgroundTexture);
         }
         else
         {
+            _arrowManager.LeftArrow(true);
             setTexture("Left_BG", _discoveredPagesList[codex._currentPage - 1]);
             setTexture("Left", _discoveredPagesList[codex._currentPage - 1]);
         }
 
     }
+
 }

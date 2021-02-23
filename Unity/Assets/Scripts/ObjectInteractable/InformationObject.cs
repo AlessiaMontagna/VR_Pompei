@@ -52,7 +52,7 @@ public class InformationObject : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!_getInformation && other.gameObject == _fps)
+        if (!_getInformation && other.gameObject == _fps && FindObjectOfType<CodexFlip>().enabled == false)
         {
             StartCoroutine(NewVoice());
             _codex.addDiscoveryId((int)_objectName);

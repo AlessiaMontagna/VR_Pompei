@@ -15,6 +15,7 @@ public enum MercanteFoodTypes {None, Frutta, Pane, Pesce, Verdura, Vasi}
 public enum MaleVoices {Giorgio, Francesco, Antonio, Klajdi, Edoardo, Fabrizio, Andrea}
 public enum FemaleVoices {Alessia, Paola}
 
+public enum Inputs { Keyboard, Joystick }
 public static class Globals
 {
     public static Players player = Players.Nobile;
@@ -22,6 +23,8 @@ public static class Globals
     public static bool earthquake = false;
     public static bool gamePause = false;
     public static string language = "en";
+    public static string input = Inputs.Joystick.ToString();
+
 }
 
 // access variables via Globals.variable

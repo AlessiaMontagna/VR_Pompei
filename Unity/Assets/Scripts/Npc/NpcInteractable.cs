@@ -104,8 +104,11 @@ public class NpcInteractable : Interattivo
     {
         if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
-        _eButton.enabled = false;
-        _talk.enabled = false;
+        if(_talk!= null && _eButton!= null)
+        {
+            _eButton.enabled = false;
+            _talk.enabled = false;
+        }
     }
 
     public void Interactable() => _navAgent.interaction = true;
