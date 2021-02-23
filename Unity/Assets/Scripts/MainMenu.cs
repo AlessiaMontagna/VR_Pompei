@@ -90,6 +90,27 @@ public class MainMenu : MonoBehaviour
         Globals.language = lang;
     }
 
+    public void SetMasterVolume(float value)
+    {
+        Debug.Log("master volume set to " + value);
+        Globals.masterVolume = value;
+    }
+
+
+    public void SetVoiceVolume(float value)
+    {
+        Debug.Log("voice volume set to " + value);
+        Globals.talkVolume = value;
+    }
+
+
+    public void SetSFXVolume(float value)
+    {   
+        Debug.Log("SFX volume set to " + value);
+        Globals.sfxVolume = value;
+    }
+
+
     public void SetFullScreen(bool isFullScreen)
     {
         for(int i =0; i< resolutionToggles.Length; i++)

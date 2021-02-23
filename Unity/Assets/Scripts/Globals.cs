@@ -22,6 +22,11 @@ public static class Globals
     public static bool earthquake = false;
     public static bool gamePause = false;
     public static string language = "en";
+
+    public static float talkVolume = 1.0f;
+    public static float masterVolume = 1.0f;
+    public static float sfxVolume = 1.0f;
+
 }
 
 // access variables via Globals.variable
