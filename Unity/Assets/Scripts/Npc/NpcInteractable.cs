@@ -35,7 +35,7 @@ public class NpcInteractable : Interattivo
     {
         _navAgent = new NavAgent(this);
         _animator = gameObject.GetComponent<Animator>();
-        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        //_eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
         if (Globals.language == "it")
         {
@@ -64,6 +64,11 @@ public class NpcInteractable : Interattivo
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => !_navAgent.interaction);
         foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _nearExplosion);
         _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_nearExplosion);
+    }
+
+    private void Start()
+    {
+        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)

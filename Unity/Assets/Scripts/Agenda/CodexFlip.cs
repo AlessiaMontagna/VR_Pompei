@@ -43,11 +43,11 @@ public class CodexFlip : MonoBehaviour
         {
             if (codex._currentPage - 1 == 0)
             {
-                _arrowManager.LeftArrow(false);
+                //_arrowManager.LeftArrow(false);
             }
             else
             {
-                _arrowManager.LeftArrow(true);
+                //_arrowManager.LeftArrow(true);
             }
             FlipLToR();
             
@@ -57,11 +57,11 @@ public class CodexFlip : MonoBehaviour
         {
             if (codex._currentPage + 1 == _discoveredPagesList.Count)
             {
-                _arrowManager.RightArrow(false);
+                //_arrowManager.RightArrow(false);
             }
             else
             {
-                _arrowManager.RightArrow(true);
+                //_arrowManager.RightArrow(true);
 
             }
             FlipRToL();
@@ -115,7 +115,15 @@ public class CodexFlip : MonoBehaviour
         setTexture("Left", _discoveredPagesList[codex._currentPage]);
 
         codex._currentPage++;
-
+        _arrowManager.LeftArrow(true);
+        if (_discoveredPagesList.Count > 1 && codex._currentPage != _discoveredPagesList.Count - 1)
+        {
+            _arrowManager.RightArrow(true);
+        }
+        else
+        {
+            _arrowManager.RightArrow(false);
+        }
         if (codex._currentPage == _discoveredPagesList.Count) setTexture("Right", _backgroundTexture);
         else setTexture("Right", _discoveredPagesList[codex._currentPage]);
 
@@ -147,7 +155,23 @@ public class CodexFlip : MonoBehaviour
         setTexture("Right", _discoveredPagesList[codex._currentPage - 1]);
 
         codex._currentPage--;
+        if (codex._currentPage==0)
+        {
+            _arrowManager.LeftArrow(false);
+        }
+        else
+        {
+            _arrowManager.LeftArrow(true);
+        }
 
+        if(_discoveredPagesList.Count > 1)
+        {
+            _arrowManager.RightArrow(true);
+        }
+        else
+        {
+            _arrowManager.RightArrow(false);
+        }
         if (codex._currentPage > 0) setTexture("Left", _discoveredPagesList[codex._currentPage - 1]);
         else setTexture("Left", _discoveredPagesList[0]);
     }
@@ -161,23 +185,17 @@ public class CodexFlip : MonoBehaviour
         {
             _discoveredPagesList.Add(_totalPages[indexes[i]]);
         }
-
-        if (codex._currentPage > indexes.Count - 1)
-        {
-            _arrowManager.RightArrow(true);
-            setTexture("Right", _backgroundTexture);
-            setTexture("Right_BG", _backgroundTexture);
-        }
-        else
-        {
-            _arrowManager.RightArrow(false);
-            setTexture("Right", _discoveredPagesList[codex._currentPage]);
-            setTexture("Right_BG", _discoveredPagesList[codex._currentPage]);
-        }
-
         if (codex._currentPage == 0)
         {
             _arrowManager.LeftArrow(false);
+            if (indexes.Count > 1)
+            {
+                _arrowManager.RightArrow(true);
+            }
+            else
+            {
+                _arrowManager.RightArrow(false);
+            }
             setTexture("Left_BG", _backgroundTexture);
             setTexture("Left", _backgroundTexture);
         }
@@ -187,6 +205,29 @@ public class CodexFlip : MonoBehaviour
             setTexture("Left_BG", _discoveredPagesList[codex._currentPage - 1]);
             setTexture("Left", _discoveredPagesList[codex._currentPage - 1]);
         }
+
+        if (codex._currentPage > indexes.Count - 1)
+        {
+            _arrowManager.LeftArrow(true);
+            _arrowManager.RightArrow(false);
+            setTexture("Right", _backgroundTexture);
+            setTexture("Right_BG", _backgroundTexture);
+        }
+        else
+        {
+            if (codex._currentPage < indexes.Count - 1)
+            {
+                _arrowManager.RightArrow(true);
+            }
+            else
+            {
+                _arrowManager.RightArrow(false);
+            }
+            setTexture("Right", _discoveredPagesList[codex._currentPage]);
+            setTexture("Right_BG", _discoveredPagesList[codex._currentPage]);
+        }
+
+        
 
     }
 

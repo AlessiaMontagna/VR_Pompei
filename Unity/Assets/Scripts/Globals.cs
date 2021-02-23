@@ -8,7 +8,7 @@ public enum Characters {Guardia, Soldato, Schiavo, MySchiavo, Mercante, NobileM,
 
 public enum Players {Schiavo, Mercante, Nobile};
 
-public enum Missions {Mission1_TalkWithFriend, Mission2_FindSlave, Mission3_GetFood}
+public enum Missions {Mission1_TalkWithFriend, Mission2_FindSlave, Mission3_GetFood, Mission4_Finale}
 
 public enum MercanteFoodTypes {None, Frutta, Pane, Pesce, Verdura, Vasi}
 

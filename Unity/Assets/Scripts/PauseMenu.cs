@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private MouseLook _mouseLook;
     [SerializeField] private GameObject _ui;
 
+
+
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
@@ -20,31 +22,37 @@ public class PauseMenu : MonoBehaviour
     public Toggle[] resolutionToggles;
     public int[] screenWidhts;
     int activeScreenResIndex;
-    private ShowAgenda _agenda;
-    private SwitchWhatIsShowing _agendashow;
 
 
     public void Start()
     {
+        _ui = FindObjectOfType<UI>().gameObject;
         fps = FindObjectOfType<FirstPersonController>();
-        _agenda = FindObjectOfType<ShowAgenda>();
-        _agendashow = FindObjectOfType<SwitchWhatIsShowing>();
     }
     // Update is called once per frame
     void Update()
     { 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            if(GameIsPaused == true)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+
+            }
         }
     }
 
    public void Resume()
     {
         _ui.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        _mouseLook.m_cursorIsLocked = true;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //_mouseLook.m_cursorIsLocked = true;
+        _mouseLook.SetCursorLock(true);
         pauseMenuUI.SetActive(false);
         optionsMenuHolder.SetActive(false);
         controlsMenuHolder.SetActive(false);
@@ -57,22 +65,22 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         _ui.SetActive(false);
-        _mouseLook.m_cursorIsLocked = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        _mouseLook.SetCursorLock(false);
+        //_mouseLook.m_cursorIsLocked = false;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
         fps.enabled = false;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
         Globals.gamePause = true;
-
-        
     }
     
     public void LoadMenu()
     {
+        GameIsPaused = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene(0);
     }
     public void LoadPauseMenu()
     {
@@ -80,7 +88,6 @@ public class PauseMenu : MonoBehaviour
         optionsMenuHolder.SetActive(false);
         controlsMenuHolder.SetActive(false);
     }
-
     public void LoadOption()
     {
         pauseMenuUI.SetActive(false);

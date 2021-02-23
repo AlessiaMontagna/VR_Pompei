@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class StartGame : MonoBehaviour
     [SerializeField] private GameObject _UIJoystick;
 
     private TextMeshProUGUI _dateText;
+    private TextMeshProUGUI _obiettiviText;
+
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class StartGame : MonoBehaviour
             _UIKeyboard.SetActive(true);
         }
         _dateText = FindObjectOfType<DataInizio>().GetComponent<TextMeshProUGUI>();
+        _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>();
         StartCoroutine(Date());
     }
 
@@ -31,11 +35,39 @@ public class StartGame : MonoBehaviour
     {
         if(Globals.language == "it")
         {
-            _dateText.text = "24 Ottobre, 79 d.C. Ore 10:00";
+
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                _dateText.text = "23 Ottobre, 79 d.C. Ore 10:00";
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                _dateText.text = "24 Ottobre, 79 d.C. Ore 20:00";
+                _obiettiviText.text = "Nuovo obiettivo: Fuggi";
+            }
+            else if(SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                _dateText.text = "24 Ottobre, 79 d.C. Ore 22:00";
+                _obiettiviText.text = "Nuovo obiettivo: Trova una via di fuga";
+            }
         }
         else
         {
-            _dateText.text = "24 October, 79 AD. 10 AM";
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                _dateText.text = "79 AD, October 23th. 10 AM";
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                _dateText.text = "79 AD, October 24th. 8 PM";
+                _obiettiviText.text = "New Goal: run away";
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                _dateText.text = "79 AD, October 24th. 10 PM";
+                _obiettiviText.text = "New Goal: find an escape route";
+
+            }
 
         }
 
