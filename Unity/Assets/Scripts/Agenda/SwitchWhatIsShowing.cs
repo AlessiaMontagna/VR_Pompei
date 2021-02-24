@@ -36,7 +36,7 @@ public class SwitchWhatIsShowing : MonoBehaviour
         }
 
         //Codex case
-        if ((Input.GetKeyDown(KeyCode.C) || Input.GetAxisRaw("Arrows_v")<0) && GetComponent<ShowAgenda>()._agendaType != agendaType.codex && !Globals.gamePause)
+        if ((Input.GetKeyDown(KeyCode.C) || Input.GetAxisRaw("Arrows_v")<0) && GetComponent<ShowAgenda>()._agendaType != agendaType.codex && !Globals.gamePause && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
         {
             if(m_isAxisInUse == false)
             {

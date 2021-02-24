@@ -25,11 +25,13 @@ public class TutorialManager : MonoBehaviour
         _missionIndex = 0;
         if(Globals.language == "en")
         {
-            _tutorialText.text = "Move around with your mouse and walk using WASD keys";
+            if (Globals.input == Inputs.Keyboard.ToString()) _tutorialText.text = "Move around with your LSB and walk with RSB. Run with RT.";
+            else _tutorialText.text = "Move around with your mouse and walk using WASD button. Run with Shift button";
         }
         else
         {
-            _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
+            if (Globals.input == Inputs.Keyboard.ToString()) _tutorialText.text = "Muoviti nell'ambiente usando LSB e cammina con RSB. Corri con RT.";
+            else _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD. Corri premendo il tasto Shift.";
         }
         _activateMission = FindObjectOfType<MissionManager>();
        // _activateMission.enabled = false;
