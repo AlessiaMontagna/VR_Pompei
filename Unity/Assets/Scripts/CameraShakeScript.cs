@@ -26,9 +26,11 @@ public class CameraShakeScript : MonoBehaviour
 
     public IEnumerator Shake (float duration, float magnitude)  //public -> can access this script from external scripts
     {
+       
         //play
-        if(!AlreadyPlayed)
+        if (!AlreadyPlayed)
         {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ScenaFinale") Globals.earthquake = true;
             _audioSource.Play();
             _audioSource.volume = 0;
             AlreadyPlayed = true;

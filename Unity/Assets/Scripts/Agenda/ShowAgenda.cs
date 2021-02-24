@@ -48,7 +48,7 @@ public class ShowAgenda : MonoBehaviour
                     MoveAgendaUp();
                     _agendaType = agendaType.mappa;
                 }
-                else if (Input.GetButton("Codex") && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)/*Input.GetKeyDown(KeyCode.C)*/)
+                else if (Input.GetButton("Codex") && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
                 {
                     MappaMode(false);
                     MoveAgendaUp();

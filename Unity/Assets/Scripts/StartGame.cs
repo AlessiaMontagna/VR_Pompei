@@ -65,13 +65,13 @@ public class StartGame : MonoBehaviour
             else if (SceneManager.GetActiveScene().buildIndex == 3)
             {
                 _dateText.text = "79 AD, October 24th. 10 PM";
-                _obiettiviText.text = "New Goal: find an escape route";
+                _obiettiviText.text = "New Goal: find a getaway";
 
             }
 
         }
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3.27f);
         _dateText.text = "";
 
     }

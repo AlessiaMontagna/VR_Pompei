@@ -13,6 +13,7 @@ public class Explode1Script : MonoBehaviour
     public float power;
     public Epilogue explosion;
     bool _first = false;
+    [SerializeField] AudioSource _audioSource;
 
     void OnTriggerEnter(Collider other) 
     {        
@@ -29,7 +30,7 @@ public class Explode1Script : MonoBehaviour
 
     public IEnumerator Schiavo()
     {   //todo:
-        yield return new WaitForSeconds(1.0f);
-            Debug.LogWarning("Manca audio Schiavo: 'Padrone, l'uscita principale è bloccata, deve cercare un'altra via di fuga!'");
+        yield return new WaitForSeconds(2.57f);
+        _audioSource.Play();
     }
 }
