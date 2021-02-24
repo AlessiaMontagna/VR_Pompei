@@ -38,6 +38,7 @@ public class LevelChangerScript : MonoBehaviour
 
     public void FadeToNextLevel()
     {
+        Globals.earthquake = false;
         FadeToLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
