@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraShakeScript : MonoBehaviour
 {    
     public GameObject[] Tiles;
+    public GameObject[] Particles;
     private AudioSource _audioSource;    
     private bool AlreadyPlayed = false;
     private bool stop = false;
@@ -13,7 +14,7 @@ public class CameraShakeScript : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();        
         _audioSource.Stop();
-        if(Tiles.Length == 0) return;
+        if(Tiles.Length == 0) return;  //WARNING!
             else
             {
                 for(int i=0; i<Tiles.Length; i++)
@@ -32,12 +33,20 @@ public class CameraShakeScript : MonoBehaviour
             _audioSource.volume = 0;
             AlreadyPlayed = true;
             
-            if(Tiles.Length == 0) yield return null;
+            if(Tiles.Length == 0 || Particles.Length == 0) yield return null;
             else
             {
                 for(int i=0; i<Tiles.Length; i++)
                 {
                     Tiles[i].SetActive(true);
+                }
+                for(int i=0; i<Particles.Length; i++)   //attivo i particles di sgretolamento da terremoto
+                {                    
+                    ParticleSystem ps = Particles[i].GetComponent<ParticleSystem>();
+                    ps.Stop();
+                    var main = ps.main;
+                    main.duration = duration - 4.0f;                                   
+                    ps.Play();
                 }
             }
         }
@@ -51,11 +60,6 @@ public class CameraShakeScript : MonoBehaviour
             float frames = 1.0f/Time.deltaTime;
             float threshold = duration/2;
             float delta = 1.0f/(frames*5.0f);//frames/(duration - threshold);
-
-            //Debug.Log("Frames: " + frames);
-            //Debug.Log("threshold: " + threshold);
-            //Debug.Log("delta: " + delta);
-            //Debug.Log("duration: " + duration);
 
             if(time_elapsed >= threshold) stop = true;
             //fade in
