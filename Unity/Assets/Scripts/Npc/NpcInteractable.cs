@@ -36,7 +36,9 @@ public class NpcInteractable : Interattivo
     {
         _navAgent = new NavAgent(this);
         _animator = gameObject.GetComponent<Animator>();
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ScenaFinale")
+        //_eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
+        if (Globals.language == "it")
         {
             _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
             _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
@@ -61,6 +63,11 @@ public class NpcInteractable : Interattivo
         _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => _navAgent.interaction);
         foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _nearExplosion);
         _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_nearExplosion);
+    }
+
+    private void Start()
+    {
+        _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
@@ -104,8 +111,11 @@ public class NpcInteractable : Interattivo
     {
         if(_eButton == null) _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
         if(_talk == null) _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
-        _eButton.enabled = false;
-        _talk.enabled = false;
+        if(_talk!= null && _eButton!= null)
+        {
+            _eButton.enabled = false;
+            _talk.enabled = false;
+        }
     }
 
     public void Interactable() => _navAgent.interaction = true;

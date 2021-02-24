@@ -109,18 +109,19 @@ public class MercatoFoodManager : MonoBehaviour
         if (_fruitCounter == _maxFruit && _maxBread == _breadCounter && _fishCounter == _maxFish)
         {
             _pergamena.SetActive(false);
+            FindObjectOfType<MissionManager>().UpdateMission(Missions.Mission4_Finale);
             StartCoroutine(Wait());
-
         }
     }
 
     private IEnumerator Wait()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
+        StartCoroutine(_cameraShake.Shake(8f, .2f));
+        yield return new WaitForSeconds(3);
         _screams.SetActive(true);
-        _talk.SetActive(false);
-        StartCoroutine(_cameraShake.Shake(10f, .2f));
-        yield return new WaitForSeconds(10f);
+        //_talk.SetActive(false);
+        yield return new WaitForSeconds(7);
         FindObjectOfType<LevelChangerScript>().GetComponent<LevelChangerScript>().FadeToNextLevel();
     }
     public void CheckGetMaxFood(foodType _foodtype)

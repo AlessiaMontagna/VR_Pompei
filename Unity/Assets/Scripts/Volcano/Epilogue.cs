@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Epilogue : MonoBehaviour
@@ -30,6 +31,7 @@ public class Epilogue : MonoBehaviour
     {        
         if(other.gameObject == Player && !_first)
         {
+            FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>().text = "";
             Debug.Log("Player entered the Trigger: Epiogue");
             _first = true;            
             Barrier.SetActive(true);
@@ -51,7 +53,7 @@ public class Epilogue : MonoBehaviour
         SmokeColumn.SetActive(true);
         yield return new WaitForSeconds(11.3f);
         level.FadeToLevel(0); //torna al menu  
-        AudioListener.pause = true;      
+        //AudioListener.pause = true;      
     }
 
     public void Explode(Vector3 explosionPos, float radius, float power, GameObject Debris, GameObject Fire, CameraShakeScript cameraShake)

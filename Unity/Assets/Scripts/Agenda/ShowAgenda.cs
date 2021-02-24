@@ -19,8 +19,14 @@ public class ShowAgenda : MonoBehaviour
     public agendaType _agendaType;
     private AudioSource _audioSource;
 
+    public Image _leftArrow;
+    public Image _rightArrow;
+
     void Start()
     {
+        _leftArrow = FindObjectOfType<UILeft>().GetComponent<Image>();
+        _rightArrow = FindObjectOfType<UIRight>().GetComponent<Image>();
+
         _interactionScript = FindObjectOfType<InteractionManager>();
         MappaMode(false);
         _audioSource = GetComponent<AudioSource>();
@@ -42,12 +48,12 @@ public class ShowAgenda : MonoBehaviour
                     MoveAgendaUp();
                     _agendaType = agendaType.mappa;
                 }
-                else if (Input.GetKeyDown(KeyCode.C))
+                else if (Input.GetKeyDown(KeyCode.C) && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
                 {
                     MappaMode(false);
                     MoveAgendaUp();
                     _agendaType = agendaType.codex;
-                    FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
+                    FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = ""; // tolgo "Nuova voce nel codex"
                 }
             }
             else
@@ -98,10 +104,26 @@ public class ShowAgenda : MonoBehaviour
 
     public void enableArrow()
     {
+        
+        
     }
 
     public void disableArrow()
     {
+        if (_agendaType == agendaType.codex)
+        {
+            _leftArrow.enabled = false;
+            _rightArrow.enabled = false;
+        }
+    }
+
+    public void LeftArrow(bool value)
+    {
+        _leftArrow.enabled = value;
+    }
+    public void RightArrow(bool value)
+    {
+        _rightArrow.enabled = value;
     }
 
 }

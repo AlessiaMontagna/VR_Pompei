@@ -4,9 +4,11 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class MainMenu : MonoBehaviour
 {
+    public MouseLook _mouse;
     public GameObject mainMenuHolder_it;
     public GameObject mainMenuHolder_en;
 
@@ -17,15 +19,25 @@ public class MainMenu : MonoBehaviour
     public GameObject controlsMenuHolder_en;
 
     public GameObject languageSelectHolder;
+    public GameObject inputController;
 
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
     public int[] screenWidths;
     int activeScreenResIndex;
 
-  public void PlayGame()
+    public void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        _mouse.SetCursorLock(false);
+    }
+    public void PlayGame()
+    {
+        Globals.someoneIsTalking = false;
+        Globals.earthquake = false;
+        Globals.gamePause = false;
+
+
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
   public void QuitGame()
     {
@@ -108,5 +120,16 @@ public class MainMenu : MonoBehaviour
         {
             SetScreenResolution(activeScreenResIndex);
         }
+    }
+
+    public void SetInputController(string input)
+    {
+        Globals.input = input;
+    }
+
+    public void LanguageMenu()
+    {
+        languageSelectHolder.SetActive(true);
+        inputController.SetActive(false);
     }
 }

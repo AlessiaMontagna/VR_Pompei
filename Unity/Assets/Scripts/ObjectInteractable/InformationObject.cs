@@ -25,34 +25,9 @@ public class InformationObject : MonoBehaviour
         _codex = FindObjectOfType<Codex>();
     }
 
-    //public override void Interact()
-    //{
-    //}
-
-    //public override void UITextOff()
-    //{
-    //}
-
-    //public override void UITextOn()
-    //{
-        
-    //    StartCoroutine(NewVoice());
-    //    _codex.addDiscoveryId((int)_objectName);
-    //    _getInformation = true;
-    //    _audioSource.clip = _audioClip;
-    //    _audioSource.Play();
-    //    foreach (BoxCollider b in GetComponents<BoxCollider>())
-    //    {
-    //        b.enabled = false;
-    //    }
-        
-        
-    
-    //}
-
     void OnTriggerEnter(Collider other)
     {
-        if (!_getInformation && other.gameObject == _fps)
+        if (!_getInformation && other.gameObject == _fps && FindObjectOfType<CodexFlip>().enabled == false)
         {
             StartCoroutine(NewVoice());
             _codex.addDiscoveryId((int)_objectName);
