@@ -28,7 +28,7 @@ public class CodexFlip : MonoBehaviour
     [SerializeField] private Codex codex;
 
 
-    void Start()
+    void Awake()
     {
         if(Globals.language == "it")
         {
