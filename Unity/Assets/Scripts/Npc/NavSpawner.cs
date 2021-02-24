@@ -136,7 +136,7 @@ public class NavSpawner : MonoBehaviour
         // spawn gurads
         while(_nGuards > _guards && !scenaFinale)SpawnUpdate(true, true, scenaFinale);
         // spawn people
-        while(_nPeople > _people)SpawnUpdate(false, !scenaFinale, true);
+        while(_nPeople > _people)SpawnUpdate(false, !scenaFinale && _paths.Keys.Count > 0, true);
     }
 
     void Update()
@@ -157,10 +157,10 @@ public class NavSpawner : MonoBehaviour
         var exits = scenaFinale? list.Where(i => i.transform.position.x > 130f).ToList() : list;
         List<Vector3> path = new List<Vector3>();
         int index = Random.Range(0, _paths.Keys.Count);
-        if(spawnInPath && _paths.Keys.Count > 0)foreach(var item in _paths.ElementAt(index).Value)path.Add(item.transform.position);
+        if(spawnInPath)foreach(var item in _paths.ElementAt(index).Value)path.Add(item.transform.position);
         path.Add(exits.ElementAt(Random.Range(0, exits.Count)).transform.position);
-        GameObject spawn = (spawnInPath && _paths.Keys.Count > 0)? _paths.ElementAt(index).Value.ElementAt(Random.Range(0, _paths.ElementAt(index).Value.Count)) : spawns.ElementAt(Random.Range(0, spawns.Count));
-        string statename = (spawnInPath && _paths.Keys.Count > 0 && !destroyAtEnd)? "Path" : "Move";
+        GameObject spawn = (spawnInPath)? _paths.ElementAt(index).Value.ElementAt(Random.Range(0, _paths.ElementAt(index).Value.Count)) : spawns.ElementAt(Random.Range(0, spawns.Count));
+        string statename = (spawnInPath && !destroyAtEnd)? "Path" : "Move";
         var agent = SpawnAgent(prefabs.ElementAt(Random.Range(0, prefabs.Count)), character, statename, spawn, default(Vector3), path);
         if(scenaFinale)agent.GetComponent<NpcInteractable>().navAgent.navMeshAgent.speed = agent.GetComponent<NpcInteractable>().navAgent.runSpeed;
     }

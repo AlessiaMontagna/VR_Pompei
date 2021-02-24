@@ -36,17 +36,8 @@ public class NpcInteractable : Interattivo
     {
         _navAgent = new NavAgent(this);
         _animator = gameObject.GetComponent<Animator>();
-        //_eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-        _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
-        if (Globals.language == "it")
-        {
-            _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
-            _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
-            if(Globals.language == "it")_talk.text = "Parla";
-            else _talk.text = "Talk";
-            _talk.enabled = false;
-        }
         _audioSubManager = GameObject.FindObjectOfType<AudioSubManager>();
+
         _fmodAudioSource = gameObject.GetComponent<OcclusionInteract>();
         _fmodAudioSource.enabled = false;
         _fmodAudioSource.PlayerOcclusionWidening = 0.3f;
@@ -55,7 +46,7 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.OcclusionLayer = mask;
 
         // new states
-        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude); if(!Globals.earthquake && _navAgent.DestinationReached())Destroy(gameObject); }, () => {});
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude);}, () => {});
         State hit = _navAgent.AddState("Hit", () => { _navAgent.navMeshAgent.isStopped = true; _animator.SetBool("Hit", true); }, () => {}, () => { _animator.SetBool("Hit", false); });
         
         // new transitions
@@ -68,6 +59,15 @@ public class NpcInteractable : Interattivo
     private void Start()
     {
         _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+        _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
+        if (Globals.language == "it")
+        {
+            _eButton = FindObjectOfType<eButton>().GetComponent<RawImage>();
+            _talk = FindObjectOfType<talk>().GetComponent<TextMeshProUGUI>();
+            if(Globals.language == "it")_talk.text = "Parla";
+            else _talk.text = "Talk";
+            _talk.enabled = false;
+        }
     }
 
     public void Initialize(Characters character, GameObject parent, string statename, List<Vector3> targets)
@@ -193,19 +193,16 @@ public class NpcInteractable : Interattivo
         _navAgent.navMeshAgent.ResetPath();
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         NavMeshPath path = new NavMeshPath();
-        _navAgent.navMeshAgent.CalculatePath(spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position, path);
-        float delay = 1f;
-        yield return new WaitForSeconds(delay);
-        delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake")? _animator.GetCurrentAnimatorStateInfo(0).length - delay : 2.3f;
-        //Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
-        yield return new WaitForSeconds(delay);
-        if(path.status == NavMeshPathStatus.PathInvalid)Debug.LogError("INVALID PATH");
-        yield return new WaitUntil(() => path.status != NavMeshPathStatus.PathPartial);
-        _navAgent.navMeshAgent.SetPath(path);
-        _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
+        var dest = spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position;
+        if(!_navAgent.navMeshAgent.CalculatePath(dest, path))Debug.LogError("INVALID PATH");
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake"));
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
+        yield return new WaitUntil(() => !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake") && path.status == NavMeshPathStatus.PathComplete);
+        _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
+        if(!_navAgent.navMeshAgent.SetPath(path))Debug.LogWarning($"UNABLE TO ASSIGN PATH: {gameObject.transform.position} -> {dest}");
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
-        Globals.earthquake = false;
+        yield return new WaitUntil(() => _navAgent.navMeshAgent.destination != gameObject.transform.position && _navAgent.DestinationReached());
+        Destroy(gameObject);
     }
 
     protected virtual void OnTriggerEnter(Collider collider)
