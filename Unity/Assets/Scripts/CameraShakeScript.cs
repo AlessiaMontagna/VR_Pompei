@@ -28,7 +28,6 @@ public class CameraShakeScript : MonoBehaviour
         //play
         if(!AlreadyPlayed)
         {
-            Globals.earthquake = true;
             _audioSource.Play();
             _audioSource.volume = 0;
             AlreadyPlayed = true;

@@ -190,22 +190,19 @@ public class NpcInteractable : Interattivo
     protected virtual IEnumerator Earthquake()
     {
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ScenaLapilli")
-        {
-            _navAgent.navMeshAgent.ResetPath();
-            if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
-            NavMeshPath path = new NavMeshPath();
-            var dest = spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position;
-            if(!_navAgent.navMeshAgent.CalculatePath(dest, path))Debug.LogError("INVALID PATH");
-            yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake"));
-            _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
-            yield return new WaitUntil(() => !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake") && path.status == NavMeshPathStatus.PathComplete);
-            _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
-            if(!_navAgent.navMeshAgent.SetPath(path))Debug.LogWarning($"UNABLE TO ASSIGN PATH: {gameObject.transform.position} -> {dest}");
-            _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
-            yield return new WaitUntil(() => _navAgent.navMeshAgent.destination != gameObject.transform.position && _navAgent.DestinationReached());
-            Destroy(gameObject);
-        }
+        _navAgent.navMeshAgent.ResetPath();
+        if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+        NavMeshPath path = new NavMeshPath();
+        var dest = spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position;
+        if(!_navAgent.navMeshAgent.CalculatePath(dest, path))Debug.LogError("INVALID PATH");
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake"));
+        _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
+        yield return new WaitUntil(() => !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake") && path.status == NavMeshPathStatus.PathComplete);
+        _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
+        if(!_navAgent.navMeshAgent.SetPath(path))Debug.LogWarning($"UNABLE TO ASSIGN PATH: {gameObject.transform.position} -> {dest}");
+        _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
+        yield return new WaitUntil(() => _navAgent.navMeshAgent.destination != gameObject.transform.position && _navAgent.DestinationReached());
+        Destroy(gameObject);
     }
 
     protected virtual void OnTriggerEnter(Collider collider)
