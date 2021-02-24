@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000283FF6E1D18 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001F1CB048CD8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -15,12 +15,94 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SoundI::release                          : Environment_seagull (000001F1C8F56DF8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79DE98)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B3629898)
+[LOG] SoundI::release                          : Environment_seagull (000001F1C8F579C8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79ADD8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B3629538)
+[LOG] SoundI::release                          : Environment_seagull (000001F1C8F574B8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79DCF8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDBA58)
+[LOG] SoundI::release                          : Environment_seagull (000001F1C8F57158)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79D818)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDB6F8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B159DA28)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79AC38)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDC118)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B159E448)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79D9B8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDC478)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B159DBD8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79D4D8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDC2C8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B159E298)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79C978)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDBDB8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B159DF38)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79CB18)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDBC08)
+[LOG] SoundI::release                          : Environment_seagull (000001F15954C4C8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79A0D8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDBF68)
+[LOG] SoundI::release                          : Environment_seagull (000001F15954C828)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79BFB8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1C8DDB8A8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B35C7258)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79BC78)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B4475998)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B35C70A8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79B798)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B4475638)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B37910B8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79A8F8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B44752D8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1B3791418)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79CFF8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B4475128)
+[LOG] SoundI::release                          : Environment_seagull (000001F1BC66A0C8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79AA98)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B4475EA8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1BC66A278)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79A5B8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B4475CF8)
+[LOG] SoundI::release                          : Environment_seagull (000001F1BC66A5D8)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1BC79C158)
+[LOG] SoundI::release                          :     Environment_seagull (000001F1B4475B48)
+[LOG] SoundI::release                          : Environment_crowd (000001F1B2BAD488)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1BC79C7D8)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1B44757E8)
+[LOG] SoundI::release                          : Environment_crowd (000001F1B2BACF78)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1BC79D338)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1B4475488)
+[LOG] SoundI::release                          : Environment_crowd (000001F1B2BAD128)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1BC79C2F8)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1CBA55DF8)
+[LOG] SoundI::release                          : Environment_crowd (000001F1B2BACC18)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1BC79C638)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1CBA55A98)
+[LOG] SoundI::release                          : Environment_crowd (000001F1BC449318)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1BC79A758)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1CBA55738)
+[LOG] SoundI::release                          : Environment_crowd (000001F1BC449678)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1BC79D198)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1CBA55588)
+[LOG] SoundI::release                          : Environment_crowd (000001F1BC449B88)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1B49B5258)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1CBA553D8)
+[LOG] SoundI::release                          : Environment_crowd (000001F1BC4499D8)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1B49B7C98)
+[LOG] SoundI::release                          :     Environment_crowd (000001F1CBA55C48)
+[LOG] SoundI::release                          : Environment_fabbro (000001F1B2BAC8B8)
+[LOG] SoundI::release                          :     Environment_fabbro (000001F1BC79CE58)
+[LOG] SoundI::release                          :     Environment_fabbro (000001F1CBA558E8)
+[LOG] SoundI::release                          : Environment_fabbro (000001F1B112F238)
+[LOG] SoundI::release                          :     Environment_fabbro (000001F1B49B7138)
+[LOG] SoundI::release                          :     Environment_fabbro (000001F1CBA55078)
+[LOG] SoundI::release                          : Environment_fabbro (000001F1B112F748)
+[LOG] SoundI::release                          :     Environment_fabbro (000001F1B49B50B8)
+[LOG] SoundI::release                          :     Environment_fabbro (000001F1CBA55228)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -28,3 +110,16 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
