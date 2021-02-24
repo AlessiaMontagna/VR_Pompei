@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class FiniteStateMachine<T>
 {
-    private Npc _owner;
+    private NpcInteractable _owner;
     private State _currentState;
     private State _previousState;
     private Dictionary<string, List<Transition>> _transitions = new Dictionary<string, List<Transition>>();
     private List<Transition> _currentTransitions = new List<Transition>();
 
-    public FiniteStateMachine(Npc owner){_owner = owner;}
+    public FiniteStateMachine(NpcInteractable owner){_owner = owner;}
 
     public void Tik()
     {
@@ -24,7 +24,7 @@ public class FiniteStateMachine<T>
     public void SetState(State state)
     {
         if(state == _currentState) return;
-        //Debug.Log($"{_owner.GetComponent<MonoBehaviour>().GetType().ToString()} switching from {_currentState?.Name} to {state.Name}");
+        //Debug.Log($"{_owner.gameObject.name} switching from {_currentState?.Name} to {state.Name}");
         _previousState = _currentState;
         _currentState?.Exit();
         _currentState = state;
@@ -69,11 +69,11 @@ public class State
 {
     private string _name;
     public string Name => _name;
-    private Npc _owner;
+    private NpcInteractable _owner;
     public Action Enter { get; }
     public Action Tik { get; }
     public Action Exit { get; }
-    public State(string name, Npc owner, Action enter, Action tik, Action exit)
+    public State(string name, NpcInteractable owner, Action enter, Action tik, Action exit)
     {
         _name = name;
         _owner = owner;

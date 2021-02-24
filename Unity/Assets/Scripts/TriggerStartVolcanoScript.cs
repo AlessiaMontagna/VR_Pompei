@@ -21,7 +21,7 @@ public class TriggerStartVolcanoScript : MonoBehaviour
     {        
         if(other.gameObject == player && !first_time)
         {
-            Debug.Log("Player entered the Trigger: START Lapills");
+            //Debug.Log("Player entered the Trigger: START Lapills");
             first_time = true;                      
         }
         else

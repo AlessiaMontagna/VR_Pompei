@@ -4,15 +4,17 @@ using UnityEngine;
 
 public enum NavRoles{Spawn, Stop, Path};
 public enum NavSubroles{PeopleSpawn, FlocksSpawn, 
-    GuardStop, MercanteStop, BalconyStop, GroupStop,
+    GuardStop, SoldierStop, MercanteStop, BalconyStop, GroupStop, AmicoStop, MySchiavoStop,
     ColonnatoPath, ForoPath, ViaPath, MacellumPath, TempioPath};
 
 public class NavElement : MonoBehaviour
 {
     [SerializeField] private NavRoles _role;
+    public NavRoles role => _role;
     [SerializeField] private NavSubroles _subrole;
-    // Start is called before the first frame update
-    void Start(){}
-    public NavRoles GetRole(){return _role;}
-    public NavSubroles GetSubrole(){return _subrole;}
+    public NavSubroles subrole => _subrole;
+    [SerializeField] private MercanteFoodTypes _foodType;
+    public MercanteFoodTypes foodType => _foodType;
+
+    void Awake(){if(_subrole != NavSubroles.MercanteStop)_foodType = MercanteFoodTypes.None;}
 }

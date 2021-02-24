@@ -21,9 +21,10 @@ public class EarthQuakeScript : MonoBehaviour
    {
        if(other == player_collider && !first)
         {
-            Debug.Log("Entered the Trigger");
+            //Debug.Log("Entered the Trigger");
+            
             first = true;
-            StartCoroutine(cameraShake.Shake(10f, .2f));     //(duration, magnitude)
+            StartCoroutine(cameraShake.Shake(10f, .15f));     //(duration, magnitude)
         }
         else
             return;

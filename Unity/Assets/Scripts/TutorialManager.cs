@@ -1,32 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class TutorialManager : MonoBehaviour
 {
 
-    [SerializeField] private Text _tutorialText;
-    [SerializeField] private Text _obiettiviText;
-    [SerializeField] private SchiavoInteractable _schiavo;
     [SerializeField] private BoxCollider _collider;
-    [SerializeField] private ShowAgenda _scriptAgenda;
-    [SerializeField] private SwitchWhatIsShowing _mco_text;
-    private float _waitTime = 5f;
+
+    private TextMeshProUGUI _tutorialText;
+    private NpcTutorial _schiavo;
+    private ShowAgenda _scriptAgenda;
+    private float _waitTime = 1f;
     private int _missionIndex;
-    [SerializeField] private Text _agendaText;
+    private MissionManager _activateMission;
 
     private void Start()
     {
+        _tutorialText = FindObjectOfType<TutorialText>().GetComponent<TextMeshProUGUI>();
+        _schiavo = FindObjectOfType<NpcTutorial>();
+        _scriptAgenda = FindObjectOfType<ShowAgenda>();
         _scriptAgenda.enabled = false;
         _missionIndex = 0;
-        _obiettiviText.text = "";
-        _agendaText.text = "";
-        _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD";
+        if(Globals.language == "en")
+        {
+            if (Globals.input == Inputs.Keyboard.ToString()) _tutorialText.text = "Move around with your LSB and walk with RSB. Run with RT.";
+            else _tutorialText.text = "Move around with your mouse and walk using WASD button. Run with Shift button";
+        }
+        else
+        {
+            if (Globals.input == Inputs.Keyboard.ToString()) _tutorialText.text = "Muoviti nell'ambiente usando LSB e cammina con RSB. Corri con RT.";
+            else _tutorialText.text = "Muoviti nell'ambiente usando il mouse e cammina usando i tasti WASD. Corri premendo il tasto Shift.";
+        }
+        _activateMission = FindObjectOfType<MissionManager>();
+       // _activateMission.enabled = false;
+
     }
     private void Update()
     {
+        if(_schiavo == null) _schiavo = FindObjectOfType<NpcTutorial>();
         switch(_missionIndex)
         {
             case 0:
@@ -42,94 +55,118 @@ public class TutorialManager : MonoBehaviour
                 CheckMappa();
                 break;
             case 4:
-                MCOText();
+                PutDownMappa();
                 break;
-            case 5:
-                FinishTutorial();
-                break;
+            //case 5:
+            //    CheckCodex();
+            //    break;
+            //case 6:
+            //    FinishTutorial();
+            //    break;
+            default: throw new System.ArgumentOutOfRangeException();
         }
     }
 
     private void CheckWalk()
     {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        //if()
+        if(CrossPlatformInputManager.GetAxis("MoveVertical")!= 0 ||
+           CrossPlatformInputManager.GetAxis("MoveHorizontal")!= 0 ||
+           CrossPlatformInputManager.GetAxis("Horizontal") != 0 ||
+           CrossPlatformInputManager.GetAxis("Vertical") != 0)
         {
             _missionIndex = 1;
-            _tutorialText.text = "";
+            //_tutorialText.text = "";
         }
         
     }
 
     private void CheckPointing()
     {
-        if (_schiavo.pointingSchiavo)
+        if (_waitTime <= 0)
         {
-            _tutorialText.text = "Interagisci con oggetti e personaggi premendo il tasto indicato";
-            _missionIndex = 2;
-        }
-    }
-
-    private void CheckInteraction()
-    {
-        if(_schiavo.index == 2)
-        {
-            _tutorialText.text = "Buongiorno Signore. Il mio padrone la sta aspettando";
-            if(_waitTime <= 0)
+            if (Globals.language == "en")
             {
-                _obiettiviText.text = "Nuovo obiettivo: Raggiungi i tuoi amici al foro";
-                _tutorialText.text = "Premi TAB per aprire la mappa";
-                _scriptAgenda.enabled = true;
-                _missionIndex = 3;
-                _waitTime = 5f;
+                _tutorialText.text = "Interact with objects and people by pressing the showing button";
             }
             else
             {
-                _waitTime -= Time.deltaTime;
+                _tutorialText.text = "Interagisci con oggetti e personaggi premendo il tasto indicato";
             }
-        }
-    }
-    
-    private void CheckMappa()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            _tutorialText.text = "Quì puoi visualizzare mappa, codex e obiettivi da completare. Utilizza i pulsanti mostrati per muoverti tra le varie componenti, premi nuovamente tab per chiudere";
-            _missionIndex = 4;
-        }
-    }
-    private void MCOText()
-    {
-        if (_mco_text.indexAgenda == (byte)0)
-        {
-            _agendaText.text = "Il simbolo della freccia rappresenta la tua posizione, il simbolo rosso lampeggiante rappresenta la direzione verso cui devi andare";
-        }else if(_mco_text.indexAgenda == (byte)1)
-        {
-            _agendaText.text = "IN questa sezione potrai visualizzare le informazioni storiche raccolte durante l'esperienza di gioco. ";
-        }else if (_mco_text.indexAgenda == (byte)2)
-        {
-            _agendaText.text = "Quì potrai visualizzare la tua lista di obiettivi da completare";
-        }
-        if (CrossPlatformInputManager.GetButtonDown("Agenda"))
-        {
-            _agendaText.text = "";
-            _missionIndex = 5;
-        }
-    }
-    private void FinishTutorial()
-    {
-        
-        _tutorialText.text = "Adesso sai tutto. Completa gli obiettivi che ti vengono mostrati in alto a destra. Buona fortuna!";
-        _collider.enabled = false;
-        if (_waitTime <= 0)
-        {
-            _tutorialText.enabled = false;
-            this.enabled = false;
+            _missionIndex = 2;
         }
         else
         {
             _waitTime -= Time.deltaTime;
         }
-
         
     }
+
+    private void CheckInteraction()
+    {
+        if (_schiavo.pointingSchiavo && !_schiavo.hasTalked)
+        {
+            _tutorialText.text = "";
+        }
+        if(_schiavo.hasTalked)
+        {
+            _collider.enabled = false;
+            if (Globals.language == "it")
+            {
+                _tutorialText.text = "Premi  <sprite index= 0> per visualizzare la mappa";
+            }
+            else
+            {
+                _tutorialText.text = "Press  <sprite index= 0> to view the map";
+            }
+            _activateMission.UpdateMission(Missions.Mission1_TalkWithFriend);
+            _scriptAgenda.enabled = true;
+            _missionIndex = 3;
+        }
+    }
+    
+    private void CheckMappa()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            if (Globals.language == "it")
+            {
+                _tutorialText.text = "Quì vengono mostrati i punti di interesse per i vari obiettivi. Premi nuovamente <sprite index= 0> per chiudere la mappa";
+
+            }
+            else
+            {
+                _tutorialText.text = "In this section you will see where to go for the various goals. Press again <sprite index= 0> to close the map.";
+            }
+            _missionIndex = 4;
+        }
+    }
+    private void PutDownMappa()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            _tutorialText.enabled = false;
+            this.enabled = false;
+        }
+        
+    }
+
+    //private void CheckCodex()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        _tutorialText.text = "Alcuni monumenti presenti nell'ambiente contengono informazioni storiche. Quando ci passi vicino, queste informazioni verranno salvate in questa sezione.";
+    //        _missionIndex = 6;
+    //    }
+    //}
+
+    //private void FinishTutorial()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        _tutorialText.enabled = false;
+    //        this.enabled = false;
+    //    }
+    //}
 }
