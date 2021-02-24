@@ -7,7 +7,7 @@
 [LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0x7f92ba3d0808 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0x7f92aa7a7c08 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,74 +18,132 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] SystemI::createSound                     : filename = ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0x7f92aadb5ef8 : node = 0x7f92aadb1f20
-[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92aaff5ab8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92aadb5ef8
+[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ae2b08e8 : node = 0x7f92ac65c350
+[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92ae64b218.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ae2b08e8
 [LOG] SystemI::createSoundInternal             :     Create name='../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 9392352
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 356864
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92aadb2030
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ac65c460
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_urla3', format=5, channels=2, frequency=48000, lengthbytes=101312, lengthpcm=482742, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.384521.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92aadb5ef8
-[LOG] SoundI::release                          : Environment_urla3 (0x7f92c6c6fce8)
-[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ac31cd08)
-[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ac3909f8)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ae2b08e8
+[LOG] SoundI::release                          : Environment_urla3 (0x7f92ae64ade8)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92c62856c8)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92b9f52cd8)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] SystemI::createSound                     : filename = ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ac6076c8 : node = 0x7f92ac607880
-[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92aaff5ab8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ac6076c8
+[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ac289028 : node = 0x7f92ae44dc40
+[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92ae64b218.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ac289028
 [LOG] SystemI::createSoundInternal             :     Create name='../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 9392352
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 356864
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ac607990
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ae44dd50
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2000
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_urla2', format=5, channels=2, frequency=48000, lengthbytes=194976, lengthpcm=771134, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.920776.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ac6076c8
-[LOG] SoundI::release                          : Environment_urla2 (0x7f92aaf3bc68)
-[LOG] SoundI::release                          :     Environment_urla2 (0x7f92b9f95988)
-[LOG] SoundI::release                          :     Environment_urla2 (0x7f92c68e0cb8)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ac289028
+[LOG] SoundI::release                          : Environment_urla2 (0x7f92ae653008)
+[LOG] SoundI::release                          :     Environment_urla2 (0x7f92ae6578a8)
+[LOG] SoundI::release                          :     Environment_urla2 (0x7f92ae657a38)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] SystemI::createSound                     : filename = ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ac6180f8 : node = 0x7f92ac610e60
-[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92aaff5ab8.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ac6180f8
+[LOG] SystemI::createSound                     : setdata soundi = 0x7f92c6f3d428 : node = 0x7f92ae496ec0
+[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92ae64b218.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92c6f3d428
 [LOG] SystemI::createSoundInternal             :     Create name='../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 9392352
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 356864
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ac610f70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ae496fd0
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_urla3', format=5, channels=2, frequency=48000, lengthbytes=101312, lengthpcm=482742, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.384521.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ac6180f8
-[LOG] SoundI::release                          : Environment_urla3 (0x7f92aadb5ef8)
-[LOG] SoundI::release                          :     Environment_urla3 (0x7f92aada4218)
-[LOG] SoundI::release                          :     Environment_urla3 (0x7f92aade4e18)
-[LOG] SoundI::release                          : Environment_urla3 (0x7f92ac6180f8)
-[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ac618498)
-[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ac60f3d8)
-[LOG] SoundI::release                          : Environment_urla2 (0x7f92ac6076c8)
-[LOG] SoundI::release                          :     Environment_urla2 (0x7f92ac64ab48)
-[LOG] SoundI::release                          :     Environment_urla2 (0x7f92ac64acd8)
-[LOG] SoundI::release                          : Environment_urla1 (0x7f92aaf2da08)
-[LOG] SoundI::release                          :     Environment_urla1 (0x7f92ac3186d8)
-[LOG] SoundI::release                          :     Environment_urla1 (0x7f92c6864dd8)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92c6f3d428
+[LOG] SoundI::release                          : Environment_urla3 (0x7f92ae2b08e8)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92c78d9648)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92b9f95f78)
+[LOG] SystemI::createSound                     : filename = ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ac6397b8 : node = 0x7f92ac6a0860
+[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92ae64b218.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ac6397b8
+[LOG] SystemI::createSoundInternal             :     Create name='../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9392352
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 356864
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ac6a0970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_urla2', format=5, channels=2, frequency=48000, lengthbytes=194976, lengthpcm=771134, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.920776.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ac6397b8
+[LOG] SoundI::release                          : Environment_urla2 (0x7f92ac289028)
+[LOG] SoundI::release                          :     Environment_urla2 (0x7f92ae6f9f08)
+[LOG] SoundI::release                          :     Environment_urla2 (0x7f92ae6f5998)
+[LOG] SystemI::createSound                     : filename = ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ac289028 : node = 0x7f92ac21e2f0
+[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92ae64b218.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ac289028
+[LOG] SystemI::createSoundInternal             :     Create name='../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9392352
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 356864
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ac21e400
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_urla3', format=5, channels=2, frequency=48000, lengthbytes=101312, lengthpcm=482742, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.384521.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ac289028
+[LOG] SoundI::release                          : Environment_urla3 (0x7f92c6f3d428)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92c6fdd178)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ae6e6428)
+[LOG] SystemI::createSound                     : filename = ../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0x7f92ae6e6428 : node = 0x7f92ae44dc40
+[LOG] SystemI::createSound                     : add node to async list : head = 0x7f92ae64b218.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x7f92ae6e6428
+[LOG] SystemI::createSoundInternal             :     Create name='../FMOD/Pompei_Audio_3/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 9392352
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 356864
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x7f92ae44dd50
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Environment_urla1', format=5, channels=2, frequency=48000, lengthbytes=316320, lengthpcm=1586155, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.422119.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x7f92ae6e6428
+[LOG] SoundI::release                          : Environment_urla1 (0x7f92ae64eb48)
+[LOG] SoundI::release                          :     Environment_urla1 (0x7f92ae656b08)
+[LOG] SoundI::release                          :     Environment_urla1 (0x7f92ae656c98)
+[LOG] SoundI::release                          : Environment_urla2 (0x7f92ac6397b8)
+[LOG] SoundI::release                          :     Environment_urla2 (0x7f92c7860048)
+[LOG] SoundI::release                          :     Environment_urla2 (0x7f92c7879708)
+[LOG] SoundI::release                          : Environment_urla1 (0x7f92ae6e6428)
+[LOG] SoundI::release                          :     Environment_urla1 (0x7f92ae266418)
+[LOG] SoundI::release                          :     Environment_urla1 (0x7f92ae2af218)
+[LOG] SoundI::release                          : Environment_urla3 (0x7f92ac289028)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ae6f9f08)
+[LOG] SoundI::release                          :     Environment_urla3 (0x7f92ae451eb8)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.

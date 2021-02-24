@@ -191,6 +191,7 @@ public class NpcInteractable : Interattivo
     {
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         _navAgent.navMeshAgent.ResetPath();
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ScenaLapilli")yield break;
         if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
         NavMeshPath path = new NavMeshPath();
         var dest = spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position;
