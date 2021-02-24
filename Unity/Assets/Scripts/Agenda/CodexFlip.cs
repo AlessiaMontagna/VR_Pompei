@@ -7,13 +7,19 @@ public class CodexFlip : MonoBehaviour
 {
     private Animator _agendaAnimator;
 
-    public Texture[] _totalPages;
+    public Texture[] _totalPagesIT;
+    public Texture[] _totalPagesEN;
+    private Texture[] _totalPages;
+
 
     public List<Texture> _discoveredPagesList;
 
     public Texture[] _discoveredPages;
 
-    public Texture _backgroundTexture;
+    public Texture _backgroundTextureIT;
+    public Texture _backgroundTextureEN;
+
+    private Texture _backgroundTexture;
 
     private AudioSource _audioSource;
 
@@ -24,6 +30,17 @@ public class CodexFlip : MonoBehaviour
 
     void Start()
     {
+        if(Globals.language == "it")
+        {
+            _totalPages = _totalPagesIT;
+            _backgroundTexture = _backgroundTextureIT;
+        }
+        else
+        {
+            _totalPages = _totalPagesEN;
+            _backgroundTexture = _backgroundTextureEN;
+
+        }
         _audioSource = _arrowManager.GetComponent<AudioSource>();
         _agendaAnimator = GetComponent<Animator>();
     }
@@ -41,29 +58,12 @@ public class CodexFlip : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (codex._currentPage - 1 == 0)
-            {
-                //_arrowManager.LeftArrow(false);
-            }
-            else
-            {
-                //_arrowManager.LeftArrow(true);
-            }
             FlipLToR();
             
               
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (codex._currentPage + 1 == _discoveredPagesList.Count)
-            {
-                //_arrowManager.RightArrow(false);
-            }
-            else
-            {
-                //_arrowManager.RightArrow(true);
-
-            }
             FlipRToL();
 
         }

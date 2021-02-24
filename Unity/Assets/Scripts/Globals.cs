@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CodexInformation {Foro , Santuario , Macellum , ArchiOnorari , TempioDiGiove}
+public enum CodexInformation {Foro , Santuario , Macellum , ArchiOnorari , TempioDiGiove, TempioDiVespasiano}
 
 public enum Characters {Guardia, Soldato, Schiavo, MySchiavo, Mercante, NobileM, NobileF, Amico, SchiavoTutorial};
 
