@@ -15,7 +15,7 @@ public class NavAgent
     private bool _waitingForMotion = false;
 
     public readonly float walkSpeed = 2f;
-    public readonly float runSpeed = 3f;
+    public readonly float runSpeed = 4f;
     public readonly float distanceToStop = 3f;
     public readonly float forwardAngle = 30f;
     public readonly float maxInteractionDistance = 10f;
@@ -25,8 +25,6 @@ public class NavAgent
 
     public enum NavAgentStates{Idle, Path, Move, Talk, Interact, Turn, Earthquake};
     public readonly string animatorVariable = "Float";
-
-    public string PREVIOUSSTATE;
 
     public NavAgent(NpcInteractable owner)
     {
@@ -104,6 +102,7 @@ public class NavAgent
         //if(_navMeshAgent.velocity.magnitude<2)Debug.Log($"Velocity: {_navMeshAgent.velocity.magnitude}");
         _animator.SetBool(NavAgentStates.Turn.ToString(), false);
         _animator.SetFloat(NavAgentStates.Move.ToString() + animatorVariable, _navMeshAgent.velocity.magnitude);
+        //Debug.Log("check DestinationReached: "+DestinationReached());
         if(!DestinationReached()) return;
         if(_targets.Count == 0)
         {
@@ -113,10 +112,8 @@ public class NavAgent
         Vector3 destination;
         if(_targets.Count == 1) destination = _targets.FirstOrDefault();
         else destination = _targets.ElementAt(Random.Range(0, _targets.Count - 1));
-        _navMeshAgent.SetDestination(destination);
+        if(!_navMeshAgent.SetDestination(destination))Debug.LogWarning($"Failed destination setting for: {destination}");
         _targets.Remove(destination);
-        Debug.Log($"STATES: 2nd previous ({PREVIOUSSTATE}); previous ({GetPreviousState()}); current ({GetCurrentState()});");
-        //Debug.Log("Moving to: "+destination);
     }
 
     private void Path()
@@ -134,7 +131,7 @@ public class NavAgent
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
         if(Vector3.Distance(player, _owner.gameObject.transform.position) > maxInteractionDistance) _owner.Interaction(-1);
-        else if(Vector3.Distance(player, _owner.gameObject.transform.position) > 1.3f)TurnToTarget(player);
+        else if(Vector3.Distance(player, _owner.gameObject.transform.position) > 1.35f)TurnToTarget(player);
         else TurnToTarget(_owner.gameObject.transform.position + _owner.gameObject.transform.forward * 2f);
     }
 
@@ -151,10 +148,10 @@ public class NavAgent
         _owner.Interaction(1);
     }
 
-    public IEnumerator WaitForMotion(float time)
+    public IEnumerator WaitForMotion(float seconds)
     {
         _waitingForMotion = true;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(seconds);
         _motion = true;
         _waitingForMotion = false;
     }
