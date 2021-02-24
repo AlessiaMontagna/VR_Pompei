@@ -46,7 +46,7 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.OcclusionLayer = mask;
 
         // new states
-        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude);}, () => {});
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude); if(_navAgent.navMeshAgent.destination != gameObject.transform.position && _navAgent.DestinationReached())Destroy(gameObject); }, () => {});
         State hit = _navAgent.AddState("Hit", () => { _navAgent.navMeshAgent.isStopped = true; _animator.SetBool("Hit", true); }, () => {}, () => { _animator.SetBool("Hit", false); });
         
         // new transitions
@@ -202,8 +202,6 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
         if(!_navAgent.navMeshAgent.SetPath(path))Debug.LogWarning($"UNABLE TO ASSIGN PATH: {gameObject.transform.position} -> {dest}");
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
-        yield return new WaitUntil(() => _navAgent.navMeshAgent.destination != gameObject.transform.position && _navAgent.DestinationReached());
-        Destroy(gameObject);
     }
 
     protected virtual void OnTriggerEnter(Collider collider)
