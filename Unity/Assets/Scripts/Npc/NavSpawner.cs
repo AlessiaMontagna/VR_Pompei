@@ -31,6 +31,7 @@ public class NavSpawner : MonoBehaviour
     private Dictionary<Characters, List<GameObject>> _prefabs = new Dictionary<Characters, List<GameObject>>();
     public Dictionary<Characters, List<GameObject>> prefabs => _prefabs;
     private Dictionary<NavSubroles, List<GameObject>> _stops = new Dictionary<NavSubroles, List<GameObject>>();
+    public Dictionary<NavSubroles, List<GameObject>> stops => _stops;
     private Dictionary<NavSubroles, List<GameObject>> _paths = new Dictionary<NavSubroles, List<GameObject>>();
     private Dictionary<NavSubroles, List<GameObject>> _spawns = new Dictionary<NavSubroles, List<GameObject>>();
     public Dictionary<NavSubroles, List<GameObject>> navspawns => _spawns;
@@ -177,7 +178,6 @@ public class NavSpawner : MonoBehaviour
             case Characters.SchiavoTutorial: component = agent.AddComponent<NpcTutorial>();break;
             case Characters.MySchiavo: component = agent.AddComponent<NpcMySchiavo>();break;
             case Characters.Amico: component = agent.AddComponent<NpcAmico>();break;
-            case Characters.Guardia: goto default;
             default: component = agent.AddComponent<NpcInteractable>();break;
         }
         if(statename == NavAgent.NavAgentStates.Move.ToString() || statename == NavAgent.NavAgentStates.Path.ToString())SpawnedAgent(character);

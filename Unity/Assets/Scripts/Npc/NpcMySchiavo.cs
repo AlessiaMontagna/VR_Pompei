@@ -59,9 +59,11 @@ public class NpcMySchiavo : NpcInteractable
         var playerPosition = player.gameObject.transform.position;
         var playerRotation = player.gameObject.transform.rotation;
         var spawner = FindObjectOfType<NavSpawner>();
-        var parent = GameObject.FindObjectsOfType<NavElement>().ToList().Where(i => i != null && i.GetComponent<NavElement>().subrole == NavSubroles.AmicoStop).ElementAt(0).gameObject;
+        if(!spawner.stops.TryGetValue(NavSubroles.AmicoStop, out var stop))Debug.LogWarning("Amico stop not found");
+        var parent = stop.FirstOrDefault();
         if(!spawner.prefabs.TryGetValue(Characters.Amico, out var prefabs))Debug.LogError("PREFAB ERROR");
         var nobile = spawner.SpawnAgent(prefabs.ElementAt(0), Characters.NobileM, "Idle", parent, playerPosition, new List<Vector3>{parent.transform.position});
+        if(!nobile.GetComponent<NpcInteractable>().ChangeVoice("Edoardo"))Debug.LogWarning("'Edoardo' was NOT set as nobile voice");
         parent.transform.LookAt(nobile.transform);
         nobile.transform.position = playerPosition;
         nobile.transform.rotation = playerRotation;
@@ -81,6 +83,7 @@ public class NpcMySchiavo : NpcInteractable
         player.GetComponent<InteractionManager>().enabled = true;
         FindObjectOfType<ShowAgenda>().enabled = true;
         StopInteraction();
+        if(nobile.GetComponent<NpcInteractable>().voice != "Edoardo")Debug.LogWarning("'Edoardo' was NOT set as nobile voice");
         Destroy(gameObject);
     }
 }

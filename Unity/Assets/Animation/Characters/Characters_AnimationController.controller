@@ -704,9 +704,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Move
-    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Earthquake
     m_EventTreshold: 0
@@ -910,9 +907,18 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 5fc40c66094234f7fbc2bf905e42adaa,
+      type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleFloat
+    m_Mirror: 0
+  - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: ed4b6738e8a2bc149870831da925c81d,
       type: 3}
-    m_Threshold: 2
+    m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -929,7 +935,7 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: MoveFloat
   m_BlendParameterY: MoveSpeed
-  m_MinThreshold: 2
+  m_MinThreshold: 0
   m_MaxThreshold: 4
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0

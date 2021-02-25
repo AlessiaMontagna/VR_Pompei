@@ -121,6 +121,13 @@ public class NpcInteractable : Interattivo
         else StopInteraction();
     }
 
+    public bool ChangeVoice(string voice)
+    {
+        if(_audioSubManager.GetMaxAudios(_character, voice) <= 0)return false;
+        _voice = voice;
+        return true;
+    }
+
     public void SetSubtitles(int index)
     {
         if(index < 0) GameObject.FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>().text = "";
