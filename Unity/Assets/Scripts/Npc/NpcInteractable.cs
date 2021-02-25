@@ -58,7 +58,7 @@ public class NpcInteractable : Interattivo
         
         // new transitions
         foreach (var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), earthquake, () => Globals.earthquake);
-        _navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => _navAgent.interaction);
+        //_navAgent.AddTransition(earthquake, _navAgent.GetState(NavAgent.NavAgentStates.Interact.ToString()), () => _navAgent.interaction);
         foreach(var statename in _navAgent.GetAllStates())_navAgent.AddTransition(_navAgent.GetState(statename), hit, () => _nearExplosion);
         _navAgent.AddTransition(hit, _navAgent.GetState(NavAgent.NavAgentStates.Move.ToString()), () => !_nearExplosion);
     }
@@ -109,10 +109,13 @@ public class NpcInteractable : Interattivo
             _eButton.enabled = false;
             _talk.enabled = false;
         }
-       
     }
 
-    public void Interactable() => _navAgent.interaction = true;
+    public void Interactable()
+    {
+        if(Globals.earthquake)Interaction(1);
+        else _navAgent.interaction = true;
+    }
 
     public void Interaction(int phase)
     {
@@ -148,7 +151,7 @@ public class NpcInteractable : Interattivo
         float delay = 1f;
         yield return new WaitForSeconds(delay);
         delay = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit")?_animator.GetCurrentAnimatorStateInfo(0).length - delay : Random.Range(1.8f,3.3f);
-        Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
+        //Debug.Log($"{_navAgent.GetCurrentState().Name} ANIMATION: {delay}s");
         yield return new WaitForSeconds(delay + _animator.GetFloat("HitAngle") == 0 ? 2f : 0f);
         _nearExplosion = false;
     }
@@ -175,7 +178,7 @@ public class NpcInteractable : Interattivo
     }
     protected virtual IEnumerator Talk(int index)
     {
-        _animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
+        if(!Globals.earthquake)_animator.SetBool(NavAgent.NavAgentStates.Talk.ToString(), true);
         SetAudio(index);
         SetSubtitles(_talkIndex);
         yield return new WaitForSeconds(GetAudioLength());
@@ -207,7 +210,6 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
-        Globals.earthquake = false;
         /*
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
         _navAgent.navMeshAgent.ResetPath();
