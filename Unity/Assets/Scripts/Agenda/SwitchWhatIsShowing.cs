@@ -8,7 +8,6 @@ public class SwitchWhatIsShowing : MonoBehaviour
 {
     private GameObject codex;
     private GameObject mappa;
-    private bool m_isAxisInUse = false;
     private ShowAgenda _showAgenda;
 
     void Start()
@@ -23,30 +22,20 @@ public class SwitchWhatIsShowing : MonoBehaviour
     void Update()
     {
         //Map case
-        if ((Input.GetButton("Map")/*Input.GetKeyDown(KeyCode.V)*/ || Input.GetAxisRaw("Arrows_v")>0) && GetComponent<ShowAgenda>()._agendaType!= agendaType.mappa && !Globals.gamePause)
+        if ((Input.GetButtonDown("Map") ) && GetComponent<ShowAgenda>()._agendaType!= agendaType.mappa && !Globals.gamePause)
         {
-            if(m_isAxisInUse == false)  //serve per prendere l'input della freccia del joystick solo 1 volta (es.: keydown)
-            {
-                GetComponent<ShowAgenda>()._agendaType = agendaType.mappa;
-                Show();
-                m_isAxisInUse = true;
-                _showAgenda.MappaMode(true);
-            }
-            
+            GetComponent<ShowAgenda>()._agendaType = agendaType.mappa;
+            Show();
+            _showAgenda.MappaMode(true);
         }
 
-        if ((Input.GetButton("Codex") || Input.GetAxisRaw("Arrows_v")<0) && GetComponent<ShowAgenda>()._agendaType != agendaType.codex && !Globals.gamePause && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
+        if ((Input.GetButtonDown("Codex") ) && GetComponent<ShowAgenda>()._agendaType != agendaType.codex && !Globals.gamePause && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
         {
-            if(m_isAxisInUse == false)
-            {
-                GetComponent<ShowAgenda>()._agendaType = agendaType.codex;
-                Show();
-                FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
-                m_isAxisInUse = true;
-                _showAgenda.MappaMode(false);
-            }
+            GetComponent<ShowAgenda>()._agendaType = agendaType.codex;
+            Show();
+            FindObjectOfType<CodexText>().GetComponent<TextMeshProUGUI>().text = "";
+            _showAgenda.MappaMode(false);
         }
-        if(Input.GetAxisRaw("Arrows_v") == 0) m_isAxisInUse = false;
     }
 
     private void Show()

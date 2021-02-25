@@ -20,6 +20,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject controlsMenuHolder;
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
+    public Toggle fullscreenToggle;
     public int[] screenWidhts;
     int activeScreenResIndex;
 
@@ -28,11 +29,20 @@ public class PauseMenu : MonoBehaviour
     {
         _ui = FindObjectOfType<UI>().gameObject;
         fps = FindObjectOfType<FirstPersonController>();
+
+        activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
+        bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
+
+        for (int i = 0; i < resolutionToggles.Length; i++)
+        {
+            resolutionToggles[i].isOn = i == activeScreenResIndex;
+        }
+        fullscreenToggle.isOn = isFullscreen;
     }
     // Update is called once per frame
     void Update()
     { 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetButtonDown("Escape"))
         {
             if(GameIsPaused == true)
             {
@@ -112,6 +122,8 @@ public class PauseMenu : MonoBehaviour
             activeScreenResIndex = i;
             float aspectRatio = 16 / 9f;
             Screen.SetResolution(screenWidhts[i], (int)(screenWidhts[i] / aspectRatio), false);
+            PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
+            PlayerPrefs.Save();
         }
     }
     public void SetFullScreen(bool isFullScreen)
@@ -132,6 +144,7 @@ public class PauseMenu : MonoBehaviour
         {
             SetScreenResolution(activeScreenResIndex);
         }
+        PlayerPrefs.SetInt("fullscreen", ((isFullScreen) ? 1 : 0));
     }
     public void SetMasterVolume(float value)
     {

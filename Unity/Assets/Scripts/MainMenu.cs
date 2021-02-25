@@ -21,13 +21,33 @@ public class MainMenu : MonoBehaviour
     public GameObject languageSelectHolder;
     public GameObject inputController;
     public Slider[] volumeSliders;
+
+    public Toggle fullscreenToggle;
+    public Toggle fullscreenToggle_en;
     public Toggle[] resolutionToggles;
+    public Toggle[] resolutionToggles_en;
+
     public int[] screenWidths;
     int activeScreenResIndex;
 
     public void Start()
     {
         _mouse.SetCursorLock(false);
+        activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
+        bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
+
+        for (int i = 0; i < resolutionToggles.Length; i++)
+        {
+            resolutionToggles[i].isOn = i == activeScreenResIndex;
+        }
+        if (String.Compare(Globals.language, "it") == 0)
+        {
+            fullscreenToggle.isOn = isFullscreen;
+        }
+        if (String.Compare(Globals.language, "en") == 0)
+        {
+            fullscreenToggle_en.isOn = isFullscreen;
+        }
     }
     public void PlayGame()
     {
@@ -88,11 +108,27 @@ public class MainMenu : MonoBehaviour
 
     public void SetScreenResolution(int i)
     {
-        if(resolutionToggles[i].isOn)
+        if (String.Compare(Globals.language, "it") == 0)
         {
-            activeScreenResIndex = i;
-            float aspectRatio = 16 / 9f;
-            Screen.SetResolution(screenWidths[i], (int)(screenWidths[i]/aspectRatio), false);
+            if (resolutionToggles[i].isOn)
+            {
+                activeScreenResIndex = i;
+                float aspectRatio = 16 / 9f;
+                Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
+                PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
+                PlayerPrefs.Save();
+            }
+        }
+        else if (String.Compare(Globals.language, "en") == 0)
+        {
+            if (resolutionToggles_en[i].isOn)
+            {
+                activeScreenResIndex = i;
+                float aspectRatio = 16 / 9f;
+                Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
+                PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
+                PlayerPrefs.Save();
+            }
         }
     }
 
@@ -124,21 +160,46 @@ public class MainMenu : MonoBehaviour
 
     public void SetFullScreen(bool isFullScreen)
     {
-        for(int i =0; i< resolutionToggles.Length; i++)
+        if (String.Compare(Globals.language, "it") == 0)
         {
-            resolutionToggles[i].interactable = !isFullScreen;
-           
+            for (int i = 0; i < resolutionToggles.Length; i++)
+            {
+                resolutionToggles[i].interactable = !isFullScreen;
+
+            }
+
+            if (isFullScreen)
+            {
+                Resolution[] allResolutions = Screen.resolutions;
+                Resolution maxResolution = allResolutions[allResolutions.Length - 1];
+                Screen.SetResolution(maxResolution.width, maxResolution.height, true);
+            }
+            else
+            {
+                SetScreenResolution(activeScreenResIndex);
+            }
+            PlayerPrefs.SetInt("fullscreen", ((isFullScreen) ? 1 : 0));
         }
 
-        if(isFullScreen)
+        else if (String.Compare(Globals.language, "en") == 0)
         {
-            Resolution[] allResolutions = Screen.resolutions;
-            Resolution maxResolution = allResolutions[allResolutions.Length - 1];
-            Screen.SetResolution(maxResolution.width, maxResolution.height, true);
-        }
-        else
-        {
-            SetScreenResolution(activeScreenResIndex);
+            for (int i = 0; i < resolutionToggles_en.Length; i++)
+            {
+                resolutionToggles_en[i].interactable = !isFullScreen;
+
+            }
+
+            if (isFullScreen)
+            {
+                Resolution[] allResolutions = Screen.resolutions;
+                Resolution maxResolution = allResolutions[allResolutions.Length - 1];
+                Screen.SetResolution(maxResolution.width, maxResolution.height, true);
+            }
+            else
+            {
+                SetScreenResolution(activeScreenResIndex);
+            }
+            PlayerPrefs.SetInt("fullscreen", ((isFullScreen) ? 1 : 0));
         }
     }
 

@@ -42,13 +42,13 @@ public class ShowAgenda : MonoBehaviour
         {
             if (!GetComponent<SwitchWhatIsShowing>().enabled)
             {
-                if (Input.GetButton("Map")/*Input.GetKeyDown(KeyCode.V)*/)
+                if (Input.GetButtonDown("Map"))
                 {
                     MappaMode(true);
                     MoveAgendaUp();
                     _agendaType = agendaType.mappa;
                 }
-                else if (Input.GetButton("Codex") && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
+                else if (Input.GetButtonDown("Codex") && GetComponentInChildren<Codex>()._discoveredIndex.Count > 0)
                 {
                     MappaMode(false);
                     MoveAgendaUp();
@@ -58,7 +58,7 @@ public class ShowAgenda : MonoBehaviour
             }
             else
             {
-                if ((Input.GetButton("Map")/*Input.GetKeyDown(KeyCode.V)*/ && _agendaType == agendaType.mappa) || Input.GetButton("Codex")/*Input.GetKeyDown(KeyCode.C)*/ && _agendaType == agendaType.codex)
+                if ((Input.GetButtonDown("Map")/*Input.GetKeyDown(KeyCode.V)*/ && _agendaType == agendaType.mappa) || Input.GetButtonDown("Codex")/*Input.GetKeyDown(KeyCode.C)*/ && _agendaType == agendaType.codex)
                 {
                     MoveAgendaDown();
                     MappaMode(false);
