@@ -53,7 +53,7 @@ public class NpcInteractable : Interattivo
         _fmodAudioSource.OcclusionLayer = mask;
 
         // new states
-        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude); if(!Globals.earthquake && _navAgent.DestinationReached())Destroy(gameObject); }, () => {});
+        State earthquake = _navAgent.AddState(NavAgent.NavAgentStates.Earthquake.ToString(), () => { _navAgent.navMeshAgent.isStopped = true; StartCoroutine(Earthquake()); }, () => { _animator.SetBool(NavAgent.NavAgentStates.Turn.ToString(), false); _animator.SetFloat(NavAgent.NavAgentStates.Move.ToString() + _navAgent.animatorVariable, _navAgent.navMeshAgent.velocity.magnitude); if(_navAgent.navMeshAgent.destination != gameObject.transform.position && _navAgent.DestinationReached())Destroy(gameObject); }, () => {});
         State hit = _navAgent.AddState("Hit", () => { _navAgent.navMeshAgent.isStopped = true; _animator.SetBool("Hit", true); }, () => {}, () => { _animator.SetBool("Hit", false); });
         
         // new transitions
@@ -208,6 +208,21 @@ public class NpcInteractable : Interattivo
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
         Globals.earthquake = false;
+        /*
+        _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), true);
+        _navAgent.navMeshAgent.ResetPath();
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ScenaLapilli")yield break;
+        if(!GameObject.FindObjectOfType<NavSpawner>().navspawns.TryGetValue(NavSubroles.PeopleSpawn, out var spawns))Debug.LogError("SPAWN ERROR");
+        NavMeshPath path = new NavMeshPath();
+        var dest = spawns.ElementAt(Random.Range(0, spawns.Count)).transform.position;
+        if(!_navAgent.navMeshAgent.CalculatePath(dest, path))Debug.LogError("INVALID PATH");
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake"));
+        _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
+        yield return new WaitUntil(() => !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Earthquake") && path.status == NavMeshPathStatus.PathComplete);
+        _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
+        if(!_navAgent.navMeshAgent.SetPath(path))Debug.LogWarning($"UNABLE TO ASSIGN PATH: {gameObject.transform.position} -> {dest}");
+        _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
+        */
     }
 
     protected virtual void OnTriggerEnter(Collider collider)

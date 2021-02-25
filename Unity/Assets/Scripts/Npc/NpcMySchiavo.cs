@@ -83,7 +83,6 @@ public class NpcMySchiavo : NpcInteractable
         player.GetComponent<InteractionManager>().enabled = true;
         FindObjectOfType<ShowAgenda>().enabled = true;
         StopInteraction();
-        if(nobile.GetComponent<NpcInteractable>().voice != "Edoardo")Debug.LogWarning("'Edoardo' was NOT set as nobile voice");
         Destroy(gameObject);
     }
 }
