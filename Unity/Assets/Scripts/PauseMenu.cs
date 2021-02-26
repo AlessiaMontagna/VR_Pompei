@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject controlsMenuHolder;
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
-    public Toggle fullscreenToggle;
+    public Toggle fullscreenToogle;
     public int[] screenWidhts;
     int activeScreenResIndex;
 
@@ -31,18 +31,19 @@ public class PauseMenu : MonoBehaviour
         fps = FindObjectOfType<FirstPersonController>();
 
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
-        bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
+        bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1)?true:false ;
 
-        for (int i = 0; i < resolutionToggles.Length; i++)
+        for(int i = 0; i < resolutionToggles.Length; i++)
         {
-            resolutionToggles[i].isOn = i == activeScreenResIndex;
+            resolutionToggles [i].isOn = i == activeScreenResIndex;
         }
-        fullscreenToggle.isOn = isFullscreen;
+        fullscreenToogle.isOn = isFullscreen;
+
     }
     // Update is called once per frame
     void Update()
     { 
-        if(Input.GetButtonDown("Escape"))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameIsPaused == true)
             {
@@ -117,6 +118,8 @@ public class PauseMenu : MonoBehaviour
     }
     public void SetScreenResolution(int i)
     {
+       
+       
         if (resolutionToggles[i].isOn)
         {
             activeScreenResIndex = i;
@@ -125,13 +128,21 @@ public class PauseMenu : MonoBehaviour
             PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
             PlayerPrefs.Save();
         }
+        for(int j = 0; j<resolutionToggles.Length; j++)
+        {
+            if (j != i)
+            {
+                resolutionToggles[j].isOn = false;
+            }
+        }
+       
     }
     public void SetFullScreen(bool isFullScreen)
     {
         for (int i = 0; i < resolutionToggles.Length; i++)
         {
             resolutionToggles[i].interactable = !isFullScreen;
-
+            resolutionToggles[i].isOn = false;
         }
 
         if (isFullScreen)
@@ -145,6 +156,7 @@ public class PauseMenu : MonoBehaviour
             SetScreenResolution(activeScreenResIndex);
         }
         PlayerPrefs.SetInt("fullscreen", ((isFullScreen) ? 1 : 0));
+        PlayerPrefs.Save();
     }
     public void SetMasterVolume(float value)
     {

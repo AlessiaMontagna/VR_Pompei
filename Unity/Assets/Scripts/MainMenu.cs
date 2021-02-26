@@ -21,12 +21,10 @@ public class MainMenu : MonoBehaviour
     public GameObject languageSelectHolder;
     public GameObject inputController;
     public Slider[] volumeSliders;
-
-    public Toggle fullscreenToggle;
-    public Toggle fullscreenToggle_en;
     public Toggle[] resolutionToggles;
     public Toggle[] resolutionToggles_en;
-
+    public Toggle fullscreenToggle;
+    public Toggle fullscreenToggle_en;
     public int[] screenWidths;
     int activeScreenResIndex;
 
@@ -36,7 +34,7 @@ public class MainMenu : MonoBehaviour
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
 
-        for (int i = 0; i < resolutionToggles.Length; i++)
+        for (int i = 0; i<resolutionToggles.Length; i++)
         {
             resolutionToggles[i].isOn = i == activeScreenResIndex;
         }
@@ -118,8 +116,15 @@ public class MainMenu : MonoBehaviour
                 PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
                 PlayerPrefs.Save();
             }
+            for (int j = 0; j < resolutionToggles.Length; j++)
+            {
+                if (j != i)
+                {
+                    resolutionToggles[j].isOn = false;
+                }
+            }
         }
-        else if (String.Compare(Globals.language, "en") == 0)
+        else if (String.Compare(Globals.language,"en") == 0)
         {
             if (resolutionToggles_en[i].isOn)
             {
@@ -128,6 +133,13 @@ public class MainMenu : MonoBehaviour
                 Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
                 PlayerPrefs.SetInt("screen res index", activeScreenResIndex);
                 PlayerPrefs.Save();
+            }
+            for (int j = 0; j < resolutionToggles_en.Length; j++)
+            {
+                if (j != i)
+                {
+                    resolutionToggles_en[j].isOn = false;
+                }
             }
         }
     }
@@ -165,7 +177,7 @@ public class MainMenu : MonoBehaviour
             for (int i = 0; i < resolutionToggles.Length; i++)
             {
                 resolutionToggles[i].interactable = !isFullScreen;
-
+                resolutionToggles[i].isOn = false;
             }
 
             if (isFullScreen)
@@ -186,7 +198,7 @@ public class MainMenu : MonoBehaviour
             for (int i = 0; i < resolutionToggles_en.Length; i++)
             {
                 resolutionToggles_en[i].interactable = !isFullScreen;
-
+                resolutionToggles[i].isOn = false;
             }
 
             if (isFullScreen)
@@ -201,6 +213,7 @@ public class MainMenu : MonoBehaviour
             }
             PlayerPrefs.SetInt("fullscreen", ((isFullScreen) ? 1 : 0));
         }
+
     }
 
     public void SetInputController(string input)

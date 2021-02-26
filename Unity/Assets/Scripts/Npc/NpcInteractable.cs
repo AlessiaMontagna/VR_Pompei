@@ -203,7 +203,7 @@ public class NpcInteractable : Interattivo
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
         //yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsTag("Move")); // non so perché non posso mettere waituntil per controllare lo stato dell'animator
         yield return new WaitUntil(() => path.status != NavMeshPathStatus.PathPartial);
-        if(!_navAgent.navMeshAgent.SetPath(path))Debug.LogWarning($"PATH NOT ASSIGNED FOR {gameObject.transform.position}");
+        if(!_navAgent.navMeshAgent.SetPath(path)) Destroy(gameObject);
         _animator.SetBool(NavAgent.NavAgentStates.Move.ToString(), true);
         _animator.SetBool(NavAgent.NavAgentStates.Earthquake.ToString(), false);
         _navAgent.navMeshAgent.speed = _navAgent.runSpeed;
