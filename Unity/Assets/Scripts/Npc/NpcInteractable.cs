@@ -211,7 +211,9 @@ public class NpcInteractable : Interattivo
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
-        if(_animator.GetBool("Hit") || collider.tag != "Lapillus" || collider.GetType() != typeof(SphereCollider))return;
+        if (_animator.GetBool("Hit") || collider.tag != "Lapillus" || collider.GetType() != typeof(SphereCollider)) return;
+        Destroy(gameObject);
+        /* LAPILLUS HIT ANIMATION REACTION (future feature)
         float distance = Vector3.Distance(new Vector3(collider.gameObject.transform.position.x, gameObject.transform.position.y, collider.gameObject.transform.position.z), gameObject.transform.position);
         if(distance < 1f)Destroy(gameObject);
         else if(distance < 3f)Destroy(gameObject, 10f);
@@ -224,6 +226,7 @@ public class NpcInteractable : Interattivo
         _animator.SetFloat("HitAngle", angle);
         _nearExplosion = true;
         StartCoroutine(WaitToGetUp(distance, angle));
+        */
     }
 }
 

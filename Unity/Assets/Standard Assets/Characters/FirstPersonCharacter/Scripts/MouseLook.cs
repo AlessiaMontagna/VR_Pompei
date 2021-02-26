@@ -37,7 +37,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // Read looking input
             if (CrossPlatformInputManager.GetAxis("LookHorizontal") != 0)    //joystick
             {
-                yRot = CrossPlatformInputManager.GetAxis("LookHorizontal") * YSensitivity;
+                yRot = CrossPlatformInputManager.GetAxis("LookHorizontal") * YSensitivity * 1.5f;
             }
             else
             {                                                           //keyboard
@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             if (CrossPlatformInputManager.GetAxis("LookVertical") != 0)
             {
-                xRot = CrossPlatformInputManager.GetAxis("LookVertical") * XSensitivity;
+                xRot = CrossPlatformInputManager.GetAxis("LookVertical") * XSensitivity * 1.5f;
             }
             else
             {

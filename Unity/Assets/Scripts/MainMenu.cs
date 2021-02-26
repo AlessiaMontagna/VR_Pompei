@@ -34,18 +34,24 @@ public class MainMenu : MonoBehaviour
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
 
-        for (int i = 0; i<resolutionToggles.Length; i++)
+        if (String.Compare(Globals.language, "it") == 0)  
+        {  
+            for (int i = 0; i<resolutionToggles.Length; i++)
         {
             resolutionToggles[i].isOn = i == activeScreenResIndex;
         }
-        if (String.Compare(Globals.language, "it") == 0)
-        {
             fullscreenToggle.isOn = isFullscreen;
         }
         if (String.Compare(Globals.language, "en") == 0)
-        {
-            fullscreenToggle_en.isOn = isFullscreen;
-        }
+            {
+                for(int i = 0; i < resolutionToggles_en.Length;i++)
+            {
+                resolutionToggles_en[i].isOn = i == activeScreenResIndex;
+            }
+                
+                    fullscreenToggle_en.isOn = isFullscreen;
+                
+            }
     }
     public void PlayGame()
     {

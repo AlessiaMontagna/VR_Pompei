@@ -46,7 +46,15 @@ public class FoodInteractable : ObjectInteractable
     {
         if(_foodType == foodType.NonInteractable)
         {
-            StartCoroutine(startDialogue("Non devo prendere queste cose"));
+            if (Globals.language == "it")
+            {
+                StartCoroutine(startDialogue("Non devo prendere queste cose"));
+            }
+            else
+            {
+                StartCoroutine(startDialogue("I don't have to take this stuff"));
+            }
+            
             return;
         }
         if (_foodManager.getCounter(_foodType) < _foodManager.getMax(_foodType))
@@ -61,8 +69,15 @@ public class FoodInteractable : ObjectInteractable
         }
         else
         {
-            StartCoroutine(startDialogue("Ho finito di prendere questo cibo."));
-            //TODO: Play audio tizio
+            if(Globals.language == "it")
+            {
+                StartCoroutine(startDialogue("Ho finito di prendere questo cibo."));
+            }
+            else
+            {
+                StartCoroutine(startDialogue("I'm done with this food"));
+            }
+
         }
 
     }

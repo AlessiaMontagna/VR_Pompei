@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Explode1Script : MonoBehaviour
@@ -14,6 +15,7 @@ public class Explode1Script : MonoBehaviour
     public Epilogue explosion;
     bool _first = false;
     [SerializeField] AudioSource _audioSource;
+    private TextMeshProUGUI _sub;
 
     void OnTriggerEnter(Collider other) 
     {        
@@ -28,9 +30,26 @@ public class Explode1Script : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        _sub = FindObjectOfType<sottotitoli>().GetComponent<TextMeshProUGUI>();
+    }
     public IEnumerator Schiavo()
-    {   //todo:
+    {   
         yield return new WaitForSeconds(2.57f);
         _audioSource.Play();
+        if(_sub!= null)
+        {
+            if(Globals.language == "it")
+            {
+                _sub.text = "Padrone, l'uscita principale è bloccata, deve cercare un'altra via di fuga";
+            }
+            else
+            {
+                _sub.text = "Master, the main exit is blocked, you must look for another escape route";
+            }
+        }
+        yield return new WaitForSeconds(_audioSource.clip.length);
+        _sub.text = "";
     }
 }
