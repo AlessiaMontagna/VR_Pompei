@@ -131,7 +131,7 @@ public class NavAgent
     {
         var player = GameObject.FindObjectOfType<InteractionManager>().gameObject.transform.position;
         if(Vector3.Distance(player, _owner.gameObject.transform.position) > maxInteractionDistance) _owner.Interaction(-1);
-        else if(Vector3.Distance(player, _owner.gameObject.transform.position) > 1.35f)TurnToTarget(player);
+        else if(Vector3.Distance(player, _owner.gameObject.transform.position) > 1.4f)TurnToTarget(player);
         else TurnToTarget(_owner.gameObject.transform.position + _owner.gameObject.transform.forward * 2f);
     }
 
