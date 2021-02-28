@@ -60,12 +60,17 @@ public class SwitchWhatIsShowing : MonoBehaviour
             {
                 codex.transform.GetChild(i).GetComponent<Renderer>().enabled = false;
             }
+
+            _showAgenda.RightArrow(false);
+            _showAgenda.LeftArrow(false);
         }
     }
 
     private void OnDisable()
     {
         codex.GetComponent<CodexFlip>().enabled = false;
+        _showAgenda.LeftArrow(false);
+        _showAgenda.RightArrow(false);
         for (int i = 0; i < codex.transform.childCount; i++)
         {
             codex.transform.GetChild(i).GetComponent<Renderer>().enabled = false;

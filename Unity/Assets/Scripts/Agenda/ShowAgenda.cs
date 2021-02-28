@@ -119,11 +119,18 @@ public class ShowAgenda : MonoBehaviour
 
     public void LeftArrow(bool value)
     {
-        _leftArrow.enabled = value;
+        if(_leftArrow != null)
+        {
+            _leftArrow.enabled = value;
+        }
+       
     }
     public void RightArrow(bool value)
     {
-        _rightArrow.enabled = value;
+        if (_rightArrow != null)
+        {
+            _rightArrow.enabled = value;
+        }
     }
 
 }
