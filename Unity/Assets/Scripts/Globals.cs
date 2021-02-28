@@ -18,6 +18,7 @@ public enum FemaleVoices {Alessia, Paola}
 public enum Inputs { Keyboard, Joystick }
 public static class Globals
 {
+    public static bool hasPlayed = false;
     public static Players player = Players.Nobile;
     public static bool someoneIsTalking = false;
     public static bool earthquake = false;

@@ -30,27 +30,44 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        int max = transform.childCount;
+        for (int i = 0; i < max; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        if (!Globals.hasPlayed)
+        {
+            inputController.SetActive(true);
+        }
+        else
+        {
+            if(Globals.language == "it")
+            {
+                mainMenuHolder_it.SetActive(true);
+            }
+            else
+            {
+                mainMenuHolder_en.SetActive(true);
+            }
+        }
         _mouse.SetCursorLock(false);
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
-        bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
-
+        //bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
+        bool isFullscreen = true;
         if (String.Compare(Globals.language, "it") == 0)  
         {  
             for (int i = 0; i<resolutionToggles.Length; i++)
-        {
-            resolutionToggles[i].isOn = i == activeScreenResIndex;
-        }
+                resolutionToggles[i].isOn = i == activeScreenResIndex;
+        
             fullscreenToggle.isOn = isFullscreen;
         }
         if (String.Compare(Globals.language, "en") == 0)
             {
                 for(int i = 0; i < resolutionToggles_en.Length;i++)
-            {
-                resolutionToggles_en[i].isOn = i == activeScreenResIndex;
-            }
-                
-                    fullscreenToggle_en.isOn = isFullscreen;
-                
+                    resolutionToggles_en[i].isOn = i == activeScreenResIndex;
+
+                fullscreenToggle_en.isOn = isFullscreen;
             }
     }
     public void PlayGame()
@@ -58,6 +75,7 @@ public class MainMenu : MonoBehaviour
         Globals.someoneIsTalking = false;
         Globals.earthquake = false;
         Globals.gamePause = false;
+        Globals.hasPlayed = true;
 
 
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -229,7 +247,11 @@ public class MainMenu : MonoBehaviour
 
     public void LanguageMenu()
     {
+        int max = transform.childCount;
+        for (int i = 0; i < max; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
         languageSelectHolder.SetActive(true);
-        inputController.SetActive(false);
     }
 }
