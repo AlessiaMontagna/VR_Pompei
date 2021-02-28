@@ -90,8 +90,8 @@ public class CodexFlip : MonoBehaviour
         //TODO cambiare anche normal map se si fa il testo inciso
         gameObject
                 .transform.Find(child)
-                .gameObject.GetComponent<Renderer>()
-                .materials[1].mainTexture = texture;
+                .gameObject.GetComponent<Renderer>().materials[1].SetTexture("_BaseMap", texture);
+                //.materials[1].mainTexture = texture;
     }
 
     public void FlipLToR()
