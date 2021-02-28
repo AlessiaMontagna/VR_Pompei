@@ -10,6 +10,9 @@ public class StartGame : MonoBehaviour
     [SerializeField] private GameObject _UIKeyboard;
     [SerializeField] private GameObject _UIJoystick;
 
+    [SerializeField] private GameObject _UIPauseIt;
+    [SerializeField] private GameObject _UIPauseEng;
+
     private TextMeshProUGUI _dateText;
     private TextMeshProUGUI _obiettiviText;
 
@@ -25,6 +28,15 @@ public class StartGame : MonoBehaviour
         {
             _UIJoystick.SetActive(false);
             _UIKeyboard.SetActive(true);
+        }
+
+        if(Globals.language == "it")
+        {
+            _UIPauseEng.SetActive(false);
+        }
+        else
+        {
+            _UIPauseIt.SetActive(false);
         }
         _dateText = FindObjectOfType<DataInizio>().GetComponent<TextMeshProUGUI>();
         _obiettiviText = FindObjectOfType<ObiettiviText>().GetComponent<TextMeshProUGUI>();
